@@ -1,3 +1,4 @@
+import { constructor } from 'process';
 
 export class Education{
 
@@ -11,3 +12,7 @@ export class Education{
     description: string;
     
 }
+/**
+ *
+ */
+constructor()
