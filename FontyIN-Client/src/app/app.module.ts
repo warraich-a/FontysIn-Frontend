@@ -6,17 +6,23 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 
+import { FormsModule} from '@angular/forms';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { PostComponent } from './post/post.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    HomeComponent
+    HomeComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],
