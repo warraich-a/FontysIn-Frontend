@@ -1,0 +1,90 @@
+<p>profile works!</p>
+
+<div class="container-fluid">
+    <div class="container p-3 my-3 bg-dark text-white">
+    <h1> About </h1>
+    <ul id="test"  *ngFor="let p of about">
+      {{p.content}} 
+    </ul>
+</div>
+
+<div class="container p-3 my-3 border">
+    <h1>Experience</h1>
+    <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
+    <button type="button" (click)="CreateExperience()" class="btn btn-dark" id="buttonAdd">+</button>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Job Type</th>
+            <th>From</th>
+            <th>Until</th>
+            <th>Description Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="test"  *ngFor="let p of experiences">
+           
+            <td>{{p.title}}</td>
+            <td>{{p.company}}</td>
+            <td>{{p.employmentType}}</td>
+            <td>{{p.startDateExperience}}</td>
+            <td>{{p.endDateExperience}}</td>
+            <td>{{p.descriptionExperience}}</td>
+          </tr>
+          
+        </tbody>
+    </table>
+</div>
+
+<div class="container p-3 my-3 border">
+        <h1>Educations</h1>
+        <button type="button" (click)="CreateEducation()" class="btn btn-dark" id="buttonAdd">+</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">From</th>
+                    <th scope="col">Until</th>
+                    <th scope="col">degree</th>
+                    <th scope="col">Field</th>
+                    <th scope="col">Experience</th>
+                </tr>
+            </thead>
+        <tbody>
+                <tr id="test"  *ngFor="let p of educations">
+                <td>{{p.startYearEducation}}</td>
+                <td>{{p.endYearEducation}}</td>
+                <td>{{p.degreeEducation}}</td>
+                <td>{{p.fieldStudy}}</td>
+                <td>{{p.descriptionEducation}}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
+    <div class="container p-3 my-3 border">
+    <h1>Skills</h1>
+    <button type="button" (click)="CreateSkill()" class="btn btn-dark" id="buttonAdd">+</button>
+    <li id="test"  *ngFor="let p of skills">
+        {{p.name}} 
+      </li>
+</div>
+
+
+
+</div>
+
+
+<!-- <div class="Experience">
+    <h1> Experience </h1>
+    {{p?.company}}
+</div>
+<div class="Education">
+    <h1> Education </h1>
+    {{p?.degree}}
+</div>
+<div class="Skills">
+    <h1> Skills </h1>
+    {{p?.name}}
+</div> -->
