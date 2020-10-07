@@ -135,7 +135,7 @@ export class ProfileComponent implements OnInit {
   }
 
   //deleting skill data
-  onSkillDelete(){
+  deleteSkill(){
     this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
     {
       this.skills=<Skill>data;
@@ -144,7 +144,7 @@ export class ProfileComponent implements OnInit {
   }
 
   //deleting experience data
-  onEducationDelete(userid: number){
+  deleteEducation(){
     this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
     {
       this.educations=<Education>data;
@@ -153,7 +153,7 @@ export class ProfileComponent implements OnInit {
   }
 
   //deleting experience data
-  onExperienceDelete(userid: number){
+  deleteExperience(){
     this.profileService.deleteExperience(this.profile.userId, this.experience.profileId, this.experience.id).subscribe((data)=>
     {
       this.experiences=<Experience>data;

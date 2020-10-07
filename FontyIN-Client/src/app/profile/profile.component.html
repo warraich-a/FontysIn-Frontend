@@ -34,7 +34,7 @@
 
     </table>
 
-    <!-- <button id="" (click)="deleteExperience()">-</button> -->
+    <button class="btn btn-danger" id="" (click)="deleteExperience()">-</button>
 
 </div>
 
@@ -58,6 +58,9 @@
         </tr>
         
         </table>
+
+        <button class="btn btn-danger" id="" (click)="deleteEducation()">-</button>
+
     </div>
 
 <div class="block-profile">
@@ -67,6 +70,8 @@
     <li id="test"  *ngFor="let p of skills">
         {{p.name}} 
       </li>
+
+      <button class="btn btn-danger" id="" (click)="deleteSkill()">-</button>
 </div>
 
 
