@@ -124,11 +124,36 @@ export class ProfileComponent implements OnInit {
       this.about=<About>data;
       console.log(this.about);
     });
-    
-
-   
-    
+  
   }
+
+  //deleting skill data
+  onSkillDelete(userid: number, profileId: number, skillId: number){
+    this.profileService.deleteSkill(userid, profileId, skillId).subscribe((data)=>
+    {
+      this.skills=<Skill>data;
+      console.log(this.skills);
+    });
+  }
+
+  //deleting experience data
+  onEducationDelete(userid: number, profileId: number, skillId: number){
+    this.profileService.deleteEducation(userid, profileId, skillId).subscribe((data)=>
+    {
+      this.educations=<Education>data;
+      console.log(this.educations);
+    });
+  }
+
+  //deleting experience data
+  onExperienceDelete(userid: number, profileId: number, skillId: number){
+    this.profileService.deleteExperience(userid, profileId, skillId).subscribe((data)=>
+    {
+      this.experiences=<Experience>data;
+      console.log(this.experiences);
+    });
+  }
+
 
 //  constructor(private route: ActivatedRoute) {
 //     this.route.params.subscribe(params => console.log(params))
