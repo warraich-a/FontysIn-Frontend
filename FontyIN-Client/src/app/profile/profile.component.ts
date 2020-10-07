@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
-import { userInfo } from 'os';
+// import { userInfo } from 'os';
 
 
 // export interface profileList{
