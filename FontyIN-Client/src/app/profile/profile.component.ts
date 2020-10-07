@@ -62,9 +62,9 @@ export class ProfileComponent implements OnInit {
   {
     
    this.skillToAdd = {
-        "id": 12,
+        "id": 17,
         "name": "angular",
-        "profileId": 2
+        "profileId": 1
     }
      this.profileService.addSkill(<JSON>this.skillToAdd)
   }
