@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   profileData: Object;
   educations: Object[];
   experiences: Experience[];
-  skills : Skill[];
+  skills : Object[];
   about: About[];
   educationToAdd = {};
   experienceToAdd = {};
@@ -46,7 +46,7 @@ export class ProfileComponent implements OnInit {
      "descriptionEducation": "Got good grades",
      "endYearEducation": "2020-01-01",
      "fieldStudy": "ICT",
-     "id": 10,
+     "id": 15,
      "profileId": 1,
      "school": "Fontys",
      "startYearEducation": "2018-01-01"
@@ -62,7 +62,7 @@ export class ProfileComponent implements OnInit {
     "descriptionExperience": "I love it",
     "employmentType": "FreeLancer",
     "endDateExperience": "2000-01-01",
-    "id": 10,
+    "id": 29,
     "locationId": 1,
     "profileId": 1,
     "startDateExperience": "1998-01-01",
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
   {
     
    this.skillToAdd = {
-        "id": 12,
+        "id": 89,
         "name": "angular",
         "profileId": 2
     }
@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit {
     });
     this.profileService.getSkillsById().subscribe((data)=>
     {
-      this.skills=<Skill[]>data;
+      this.skills=<Object[]>data;
       console.log(this.skills);
     });
     this.profileService.getAboutById().subscribe((data)=>
