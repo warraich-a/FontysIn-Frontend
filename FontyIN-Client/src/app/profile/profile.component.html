@@ -1,0 +1,102 @@
+<p>profile works!</p>
+
+<button mat-button
+    id="contact"
+    *ngIf="loggedInUser != profileUser && isConnected && isRequestSent"
+    >Connected
+</button>
+<button mat-button
+    id="contact"
+    *ngIf="loggedInUser != profileUser && !isConnected && isRequestSent"
+    >Request sent
+</button>
+<button mat-button
+        id="contact"
+        *ngIf="loggedInUser != profileUser && !isConnected && !isRequestSent"
+        (click)="createContact()">Connect
+</button>
+
+    
+<div class="block-profile">
+    <h1> About </h1>
+    <button id="buttonAdd" (click)="CreateEducation()">+</button>
+    <li id="test"  *ngFor="let p of about">
+      {{p.content}} 
+    </li>
+</div>
+
+<div class="block-profile">
+
+    <h1>Experience</h1>
+    <button id="buttonAdd" (click)="CreateEducation()">+</button>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Company</th>
+            <th>Job Type</th>
+            <th>From</th>
+            <th>Until</th>
+            <th>Description Type</th>
+          </tr>
+          <tr id="test"  *ngFor="let p of experiences">
+           
+            <td>{{p.title}}</td>
+            <td>{{p.company}}</td>
+            <td>{{p.employmentType}}</td>
+            <td>{{p.startDateExperience}}</td>
+            <td>{{p.endDateExperience}}</td>
+            <td>{{p.descriptionExperience}}</td>
+          </tr>
+          
+
+    </table>
+</div>
+
+    <div class="block-profile">
+        <h1>Educations</h1>
+        <button id="buttonAdd" (click)="CreateEducation()">+</button>
+        <table>
+            <tr>
+                <th>From</th>
+                <th>Until</th>
+                <th>degree</th>
+                <th>Field</th>
+                <th>Experience</th>
+              </tr>
+        <tr id="test"  *ngFor="let p of educations">
+            <td>{{p.startYearEducation}}</td>
+            <td>{{p.endYearEducation}}</td>
+            <td>{{p.degreeEducation}}</td>
+            <td>{{p.fieldStudy}}</td>
+            <td>{{p.descriptionEducation}}</td>
+        </tr>
+        
+        </table>
+    </div>
+
+<div class="block-profile">
+    <h1>Skills</h1>
+    <button id="buttonAdd" (click)="CreateEducation()">+</button>
+
+    <li id="test"  *ngFor="let p of skills">
+        {{p.name}} 
+      </li>
+</div>
+
+
+
+
+
+
+<!-- <div class="Experience">
+    <h1> Experience </h1>
+    {{p?.company}}
+</div>
+<div class="Education">
+    <h1> Education </h1>
+    {{p?.degree}}
+</div>
+<div class="Skills">
+    <h1> Skills </h1>
+    {{p?.name}}
+</div> -->

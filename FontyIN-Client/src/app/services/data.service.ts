@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 
@@ -7,6 +7,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataService {
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
 
   constructor(private url: string, private http: HttpClient) { }
 
@@ -20,7 +23,8 @@ export class DataService {
 
 
   create(resource: {}) {
-    return this.http.post(this.url, JSON.stringify(resource))
+    console.log(this.url);
+    return this.http.post(this.url, JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)
       )
@@ -36,7 +40,7 @@ export class DataService {
 
 
   delete(id) {
-    return this.http.delete(this.url + "/" + id)
+    return this.http.delete(this.url + '/' + id)
       .pipe(
         map(response => response)
       )
