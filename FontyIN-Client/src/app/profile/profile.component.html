@@ -1,7 +1,23 @@
-<p>profile works!</p>
+<button mat-button
+    id="contact"
+    *ngIf="loggedInUser != profileUser && isConnected && isRequestSent"
+    >Connected
+</button>
+<button mat-button
+    id="contact"
+    *ngIf="loggedInUser != profileUser && !isConnected && isRequestSent"
+    >Request sent
+</button>
+<button mat-button
+        id="contact"
+        *ngIf="loggedInUser != profileUser && !isConnected && !isRequestSent"
+        (click)="createContact()">Connect
+</button>
 
-<div class="container-fluid">
+    
+<div class="block-profile"><div class="container-fluid">
     <div class="container p-3 my-3 bg-dark text-white">
+
     <h1> About </h1>
     <ul id="test"  *ngFor="let p of about">
       {{p.content}} 

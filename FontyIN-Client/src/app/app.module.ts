@@ -1,3 +1,5 @@
+import { DataService } from './services/data.service';
+import { ContactService } from './services/contact/contact.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -11,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -28,8 +33,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MDBBootstrapModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MatButtonModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    DataService,
+    ContactService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
