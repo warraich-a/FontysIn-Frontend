@@ -9,13 +9,16 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HttpClientModule } from '@angular/common/http';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { PostComponent } from './post/post.component';
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,10 +26,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserComponent,
     HomeComponent,
     ProfileComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     HttpClientModule,
     RouterModule,
@@ -39,7 +44,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     DataService,
-    ContactService
+    ContactService,
+    FormsModule,
+    
   ],
   bootstrap: [AppComponent]
 })

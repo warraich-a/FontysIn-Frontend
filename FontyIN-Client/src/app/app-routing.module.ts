@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {UserComponent} from './user/user.component';
 import {UpdateProfileComponent} from './update-profile/update-profile.component';
 
+import {PostComponent} from './post/post.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,6 +22,9 @@ const routes: Routes = [{
 {
   path: 'users/:id/profiles/:profileId', 
   component: ProfileComponent
+},{
+  path: 'posts', 
+  component: PostComponent
 }]
 
 
