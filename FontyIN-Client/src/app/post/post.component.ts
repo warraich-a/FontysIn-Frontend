@@ -30,6 +30,11 @@ export class PostComponent implements OnInit {
     window.location.reload()
   }
 
+  deletePost(id){
+    this.postService.deletePost(id);
+    window.location.reload()
+  }
+
   ngOnInit(): void {
     this.postService.getPosts()
      .subscribe((data)=>{

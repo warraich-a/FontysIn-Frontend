@@ -12,6 +12,7 @@
 
 .p-date {
     float:right;
+    font-size: 14px;
 }
 
 textarea {
@@ -43,4 +44,14 @@ textarea {
 }
 .postBtn:hover{
     background-color: #d09fd7;
+}
+.deleteBtn{
+    float:right;
+    border:none;
+    background-color: #f5f5f5;
+    font-size: 13px;
+    transition-duration: 0.3s;
+}
+.deleteBtn:hover{
+    color:#663366 ;
 }

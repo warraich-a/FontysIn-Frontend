@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
+import { PostComponent } from './post/post.component';
 
 import { FormsModule} from '@angular/forms';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { PostComponent } from './post/post.component';
+
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
