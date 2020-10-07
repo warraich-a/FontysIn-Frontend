@@ -1,10 +1,12 @@
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
+import { Skill } from './../classes/Profile/Skill';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
-import { Skill } from '../classes/Profile/Skill';
+import { Profile } from '../classes/Profile/Profile';
+//import { Skill } from '../classes/Profile/Skill';
 // import { userInfo } from 'os';
 
 
@@ -35,7 +37,6 @@ import { Skill } from '../classes/Profile/Skill';
 //   startYear: Date;
 //   endYear: Date;
 //   description: string;
-
 // }
 
 // export interface Skill{
@@ -70,11 +71,17 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService) { }
 
   profileData: Object;
- educations: Education;
- experiences: Experience;
- skills : Skill;
- about: About;
+  educations: Education;
+  experiences: Experience;
+  skills : Skill;
+  about: About;
   data = {};
+
+  //these are needed to get ids fior deleting data
+  education: Education;
+  skill: Skill;
+  experience: Experience;
+  profile: Profile;
 
 
   CreateEducation()
@@ -92,7 +99,7 @@ export class ProfileComponent implements OnInit {
      this.profileService.addEducation(<JSON>this.data)
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     // this.profileService.getProfile().subscribe((data)=>
     // {
      
@@ -128,8 +135,8 @@ export class ProfileComponent implements OnInit {
   }
 
   //deleting skill data
-  onSkillDelete(userid: number, profileId: number, skillId: number){
-    this.profileService.deleteSkill(userid, profileId, skillId).subscribe((data)=>
+  onSkillDelete(){
+    this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
     {
       this.skills=<Skill>data;
       console.log(this.skills);
@@ -137,8 +144,8 @@ export class ProfileComponent implements OnInit {
   }
 
   //deleting experience data
-  onEducationDelete(userid: number, profileId: number, skillId: number){
-    this.profileService.deleteEducation(userid, profileId, skillId).subscribe((data)=>
+  onEducationDelete(userid: number){
+    this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
     {
       this.educations=<Education>data;
       console.log(this.educations);
@@ -146,8 +153,8 @@ export class ProfileComponent implements OnInit {
   }
 
   //deleting experience data
-  onExperienceDelete(userid: number, profileId: number, skillId: number){
-    this.profileService.deleteExperience(userid, profileId, skillId).subscribe((data)=>
+  onExperienceDelete(userid: number){
+    this.profileService.deleteExperience(this.profile.userId, this.experience.profileId, this.experience.id).subscribe((data)=>
     {
       this.experiences=<Experience>data;
       console.log(this.experiences);
