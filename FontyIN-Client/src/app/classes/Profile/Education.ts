@@ -10,9 +10,7 @@ export class Education{
     degree: string;
     fieldStudy: string;
     description: string;
-    
+ 
 }
-/**
- *
- */
-constructor()
+
+

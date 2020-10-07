@@ -29,6 +29,16 @@ export class ProfileService {
       console.log(data);
     })
   }
+  public addExperience(data){
+    return this.httpClient.post('http://localhost:9099/users/1/profiles/1/experiences/new', data).toPromise().then(data => {
+      console.log(data);
+    })
+  }
+  public addSkill(data){
+    return this.httpClient.post('http://localhost:9099/users/1/profiles/1/skills/new', data).toPromise().then(data => {
+      console.log(data);
+    })
+  }
 
 
 }
