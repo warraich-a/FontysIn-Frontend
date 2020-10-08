@@ -12,7 +12,7 @@ h1{
     margin-bottom: 7%;
 }
 .block-profile{
-    background-color: gray;
+    /* background-color: gray; */
     margin-left: 5% ;
     margin-right: 5%;
     padding-left: 2%;
@@ -45,7 +45,7 @@ h1{
 
 
 #contact {
-    margin: 2% 0% 2% 88%;
+    margin: 2% 0% 2% 80%;
     background-color: #0075db;
     color: white;
 }
