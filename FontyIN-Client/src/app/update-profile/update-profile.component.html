@@ -62,10 +62,15 @@
                         #company="ngModel">
                     </div>
                     <div class="col-md-12"><label class="labels">Employment type</label>
-                        <input type="text" class="form-control" id="employmentType"
-                        required
-                        [(ngModel)]="experience.employmentType" name="employmentType"
-                        #employmentType="ngModel">
+                        <select id="employmentType" name="employmentType" [(ngModel)]="experience.employmentType"
+                        class="form-control">
+                  <option *ngFor="let types of typeOfEmployment" [value]="types.type">
+                    {{types.type}}
+                  </option>
+                </select>
+
+
+                
                     </div>
                     <div class="col-md-12"><label class="labels">Location</label>
                         <input type="text" class="form-control" id="locationId"

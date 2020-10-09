@@ -4,17 +4,24 @@ import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
+import { employmentType } from './../classes/Profile/EmploymentType';
 
-interface year {
-  year:number;
-}
+
+
+
+
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.component.html',
   styleUrls: ['./update-profile.component.css']
 })
 export class UpdateProfileComponent implements OnInit {
+  typeOfEmployment: employmentType[] = [
+    { type:  'FullTime'}, {type: 'PartTime'}, {type: 'FreeLancer'}];
   
+  
+
+
   constructor(  private service: ProfileService) { }
   about = new About(1, 1, "hello");
   education = new Education(1,1,"fontys", "1999", "2000","ICT", "It", "Description idk");
