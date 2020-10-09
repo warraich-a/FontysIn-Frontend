@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { JsonPipe } from '@angular/common';
+import { Education } from 'src/app/classes/Profile/Education';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +55,35 @@ export class ProfileService {
     public deleteSkill(userId, profileId, skillId){
       return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/' + skillId);
     }
+
+    public GetOneEducation(){
+      return this.httpClient.get('http://localhost:9099/users/profile/education/1')
+    }
+
+    public GetOneExperience(){
+      return this.httpClient.get('http://localhost:9099/users/profile/experience/1')
+      
+    }
+    public GetOneAbout(){
+      return this.httpClient.get('http://localhost:9099/users/profile/about/1')
+      
+    }
+
+    updateEducation(model, id) {
+      const url = 'http://localhost:9099/users/profile/education/' + id
+      return this.httpClient.put(url, model);
+    }
+
+  
+    updateExperience(model, id) {
+      const url = 'http://localhost:9099/users/profile/experience/' + id;
+      return this.httpClient.put(url, model);
+    }
+    
+  updateAbout(model, id) {
+    const url = 'http://localhost:9099/users/profile/about/' + id;
+    return this.httpClient.put(url, model);
+  }
 
 
 }

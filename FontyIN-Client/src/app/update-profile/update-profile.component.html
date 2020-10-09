@@ -14,24 +14,24 @@
                     #school="ngModel">
                 </div>
                 <div class="col-md-12"><label class="labels">Start year</label>
-                    <input type="text" class="form-control" id="startYear"
+                    <input type="text" class="form-control" id="startYearEducation"
                     required
-                    [(ngModel)]="education.startYear" name="startYear"
-                    #startYear="ngModel">
+                    [(ngModel)]="education.startYearEducation" name="startYearEducation"
+                    #startYearEducation="ngModel">
                 </div>
                 <div class="col-md-12"><label class="labels">End year</label>
-                    <input type="text" class="form-control" id="endYear"
+                    <input type="text" class="form-control" id="endYearEducation"
                     required
-                    [(ngModel)]="education.endYear" name="endYear"
-                    #endYear="ngModel">
+                    [(ngModel)]="education.endYearEducation" name="endYearEducation"
+                    #endYearEducation="ngModel">
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-md-12"><label class="labels">Degree</label>
-                    <input type="text" class="form-control" id="degree"
+                    <input type="text" class="form-control" id="degreeEducation"
                     required
-                    [(ngModel)]="education.degree" name="degree"
-                    #degree="ngModel">
+                    [(ngModel)]="education.degreeEducation" name="degreeEducation"
+                    #degreeEducation="ngModel">
                 </div>
                 <div class="col-md-12"><label class="labels">Field of study</label>
                     <input type="text" class="form-control" id="fieldStudy"
@@ -40,13 +40,13 @@
                     #fieldStudy="ngModel">
                 </div>
                 <div class="col-md-12"><label class="labels">Description</label>
-                    <input type="text" class="form-control" id="description"
+                    <input type="text" class="form-control" id="descriptionEducation"
                     required
-                    [(ngModel)]="education.description" name="description"
-                    #description="ngModel">
+                    [(ngModel)]="education.descriptionEducation" name="descriptionEducation"
+                    #descriptionEducation="ngModel">
                 </div>
             </div>
-            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Education</button></div>
+            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save Education</button></div>
         </form>
         </div>
         <div class="col-md-4 border-right">
@@ -76,16 +76,17 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Start year</label>
-                        <input type="text" class="form-control" id="startYear"
+                        <input type="text" class="form-control" id="startDateExperience"
                         required
-                        [(ngModel)]="experience.startYear" name="startYear"
-                        #startYear="ngModel">
+                        [(ngModel)]="experience.startDateExperience" name="startDateExperience"
+                        #startDateExperience="ngModel">
+                        
                     </div>
                     <div class="col-md-12"><label class="labels">End year</label>
-                        <input type="text" class="form-control" id="endYear"
+                        <input type="text" class="form-control" id="endDateExperience"
                     required
-                    [(ngModel)]="experience.endYear" name="endYear"
-                    #endYear="ngModel">
+                    [(ngModel)]="experience.endDateExperience" name="endDateExperience"
+                    #endDateExperience="ngModel">
                     </div>
                     <div class="col-md-12"><label class="labels">Title</label>
                         <input type="text" class="form-control" id="title"
@@ -94,13 +95,13 @@
                         #title="ngModel">
                     </div>
                     <div class="col-md-12"><label class="labels">Description</label>
-                        <input type="text" class="form-control" id="description"
+                        <input type="text" class="form-control" id="descriptionExperience"
                     required
-                    [(ngModel)]="experience.description" name="description"
-                    #description="ngModel">
+                    [(ngModel)]="experience.descriptionExperience" name="descriptionExperience"
+                    #descriptionExperience="ngModel">
                     </div>
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Experience</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save Experience</button></div>
             </form>
         </div>
         <div class="col-md-4">
@@ -118,7 +119,7 @@
                     </div>
                 </div>
                 
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save About you</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save About you</button></div>
             </form>
             
         </div>
