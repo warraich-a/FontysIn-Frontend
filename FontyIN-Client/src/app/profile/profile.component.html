@@ -1,18 +1,27 @@
-<button mat-button
-    id="contact"
-    *ngIf="loggedInUser != profileUser && isConnected && isRequestSent"
-    >Connected
-</button>
-<button mat-button
-    id="contact"
-    *ngIf="loggedInUser != profileUser && !isConnected && isRequestSent"
-    >Request sent
-</button>
-<button mat-button
-        id="contact"
-        *ngIf="loggedInUser != profileUser && !isConnected && !isRequestSent"
-        (click)="createContact()">Connect
-</button>
+<div class="container py-3 my-3 clearfix">
+    <ng-container *ngIf="loggedInUser != profileUser">
+        <button mat-raised-button
+            id="contact"
+            *ngIf="isConnected && isRequestSent"
+            class="float-right"
+            >Connected
+        </button>
+        <button mat-raised-button
+            id="contact"
+            *ngIf="!isConnected && isRequestSent"
+            class="float-right"
+            >Request sent
+        </button>
+        <button mat-raised-button
+                id="contact"
+                *ngIf="!isConnected && !isRequestSent"
+                (click)="createContact()"
+                class="float-right"
+                >Connect
+        </button>
+    </ng-container>
+</div>
+
 
     
 <div class="container-fluid">

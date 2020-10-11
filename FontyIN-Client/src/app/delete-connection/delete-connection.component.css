@@ -1,0 +1,22 @@
+#question > p {
+    margin: 5%;
+}
+
+.mat-dialog-actions .mat-button-base {
+    margin-left: 0;
+}
+
+.mat-dialog-actions .mat-raised-button {
+    min-width: 40%;
+    margin: 15% 5%;
+}
+
+
+
+@media screen and (max-width: 1130px) {
+    .mat-dialog-actions .mat-raised-button {
+        min-width: 90%;
+        margin: 5%;
+    }
+    
+}

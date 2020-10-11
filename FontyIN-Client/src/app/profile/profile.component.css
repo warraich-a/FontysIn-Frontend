@@ -44,8 +44,19 @@ h1{
 
 
 
+/* Contact */
 #contact {
-    margin: 2% 0% 2% 75%;
-    background-color: #0075db;
-    color: white;
+  background-color: #0075db;
+  color: white;
+  height: 3em;
+  width: 10em;
+  /* border-radius: 5px; */
 }
+
+
+#contact:hover {
+  background: white;
+  color: #0075db;
+  border: 1px solid #0075db;
+}
+

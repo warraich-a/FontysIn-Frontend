@@ -236,6 +236,7 @@ export class ProfileComponent implements OnInit {
         newContact => {
           console.log(newContact);
           //this.isConnected = true;
+          this.isRequestSent = true;
         }
       )
   }

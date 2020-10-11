@@ -7,11 +7,15 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataService {
+  http: HttpClient;
+
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
 
-  constructor(private url: string, private http: HttpClient) { }
+  constructor(private url: string, http: HttpClient) {
+    this.http = http;
+   }
 
   getAll() {
     return this.http.get(this.url)

@@ -15,10 +15,19 @@ import { PostComponent } from './post/post.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { ConnectionComponent } from './connection/connection.component';
+import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +36,9 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     ProfileComponent,
     UpdateProfileComponent,
-    PostComponent
+    PostComponent,
+    ConnectionComponent,
+    DeleteConnectionComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +51,13 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatListModule,
+    MatDividerModule,
+    MatGridListModule,
+    MatInputModule,
+    MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
     BrowserAnimationsModule
   ],
   providers: [

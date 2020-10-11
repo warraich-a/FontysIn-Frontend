@@ -1,3 +1,4 @@
+import { ConnectionComponent } from './connection/connection.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -25,7 +26,16 @@ const routes: Routes = [{
 },{
   path: 'posts', 
   component: PostComponent
-}]
+},
+  {
+    path: 'users/:id/connections',
+    component: ConnectionComponent
+  },
+  {
+    path: 'users/:id/messages',
+    component: HomeComponent // MessageComponent
+  }
+]
 
 
 @NgModule({
