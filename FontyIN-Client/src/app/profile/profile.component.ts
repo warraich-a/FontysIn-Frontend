@@ -91,6 +91,22 @@ export class ProfileComponent implements OnInit {
      this.profileService.addSkill(<JSON>this.skillToAdd)
   }
 
+  onSubmitExperience(data){
+   
+    this.experienceToAdd = {
+      "company": data.company,
+      "descriptionExperience": data.descriptionExperience,
+      "employmentType":data.employementType,
+      "endDateExperience": data.endDateExperience,
+      "id":63,
+      "locationId": data.locationId,
+      "profileId": this.profileId,
+      "startDateExperience": data.startDateExperience,
+      "title": data.title
+       }
+       console.warn(this.experienceToAdd);
+       this.profileService.addExperience(<JSON>this.experienceToAdd)
+  }
 
   ngOnInit(): void {
     this.profileUser = +this.route.snapshot.paramMap.get('id');
