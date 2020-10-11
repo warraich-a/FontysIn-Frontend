@@ -19,7 +19,7 @@
     <div class="container p-3 my-3 bg-dark text-white">
 
     <h1> About </h1>
-    <ul id="test"  *ngFor="let p of about">
+    <ul id="test"  *ngFor="let p of aboutList">
       {{p.content}} 
     </ul>
 </div>
@@ -42,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr id="test"  *ngFor="let p of experiences">
+          <tr id="test"  *ngFor="let p of experiencesList">
            
             <td>{{p.title}}</td>
             <td>{{p.company}}</td>
@@ -64,6 +64,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th scope="col">School</th>
                     <th scope="col">From</th>
                     <th scope="col">Until</th>
                     <th scope="col">degree</th>
@@ -72,7 +73,8 @@
                 </tr>
             </thead>
         <tbody>
-                <tr id="test"  *ngFor="let p of educations">
+                <tr id="test"  *ngFor="let p of educationsList">
+                <td>{{p.school}}</td>
                 <td>{{p.startYearEducation}}</td>
                 <td>{{p.endYearEducation}}</td>
                 <td>{{p.degreeEducation}}</td>
@@ -88,7 +90,7 @@
     <button type="button" (click)="CreateSkill()" class="btn btn-dark" id="buttonAdd">+</button>
     <button class="btn btn-danger" id="" (click)="deleteSkill()">-</button>
 
-    <li id="test"  *ngFor="let p of skills">
+    <li id="test"  *ngFor="let p of skillsList">
         {{p.name}} 
       </li>
 </div>

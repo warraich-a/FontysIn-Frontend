@@ -25,15 +25,18 @@ export class ProfileComponent implements OnInit {
   isRequestSent: boolean = false;
   contacts: Contact[];
 
+  userId:number;
+  profileId: number;
+
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
                private route: ActivatedRoute) { }
 
   profileData: Object;
-  educations: Object[];
-  experiences: Experience[];
-  skills : Object[];
-  about: About[];
+  educationsList: Object[];
+  experiencesList: Object[];
+  skillsList : Object[];
+  aboutList: Object[];
   educationToAdd = {};
   experienceToAdd = {};
   skillToAdd = {};
@@ -81,11 +84,7 @@ export class ProfileComponent implements OnInit {
   {
     
    this.skillToAdd = {
-<<<<<<< HEAD
         "id": 17,
-=======
-        "id": 89,
->>>>>>> Development
         "name": "angular",
         "profileId": 1
     }
@@ -93,10 +92,15 @@ export class ProfileComponent implements OnInit {
   }
 
 
-
-
   ngOnInit(): void {
     this.profileUser = +this.route.snapshot.paramMap.get('id');
+
+    this.userId = +this.route.snapshot.paramMap.get('id');
+    this.profileId = +this.route.snapshot.paramMap.get('profileId');
+
+    console.log(this.profileId);
+    console.log(this.userId);
+
     console.log(this.profileUser);
     // this.profileService.getProfile().subscribe((data)=>
     // {
@@ -107,27 +111,27 @@ export class ProfileComponent implements OnInit {
       
 
     // });
-    this.profileService.getEducationsById().subscribe((data)=>
+    this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
     {
      
-      this.educations=<Object[]>data;
-      console.log(this.educations);
+      this.educationsList=<Object[]>data;
+      console.log(this.educationsList);
       
     });
-    this.profileService.getExperienceById().subscribe((data)=>
+    this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
-      this.experiences=<Experience[]>data;
-      console.log(this.experiences);
+      this.experiencesList=<Object[]>data;
+      console.log(this.experiencesList);
     });
-    this.profileService.getSkillsById().subscribe((data)=>
+    this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
     {
-      this.skills=<Object[]>data;
-      console.log(this.skills);
+      this.skillsList=<Object[]>data;
+      console.log(this.skillsList);
     });
-    this.profileService.getAboutById().subscribe((data)=>
+    this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
-      this.about=<About[]>data;
-      console.log(this.about);
+      this.aboutList=<Object[]>data;
+      console.log(this.aboutList);
     }); 
 
     // GET ALL CONTACTS
@@ -184,8 +188,8 @@ export class ProfileComponent implements OnInit {
     deleteSkill(){
       this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
       {
-        this.skills = <Skill[]>data;
-        console.log(this.skills);
+        this.skillsList = <Object[]>data;
+        console.log(this.skillsList);
       });
     }
   
@@ -193,8 +197,8 @@ export class ProfileComponent implements OnInit {
     deleteEducation(){
       this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
       {
-        this.educations = <Education[]>data;
-        console.log(this.educations);
+        this.educationsList = <Object[]>data;
+        console.log(this.educationsList);
       });
     }
   
@@ -202,8 +206,8 @@ export class ProfileComponent implements OnInit {
     deleteExperience(){
       this.profileService.deleteExperience(this.profile.userId, this.experience.profileId, this.experience.id).subscribe((data)=>
       {
-        this.experiences = <Experience []>data;
-        console.log(this.experiences);
+        this.experiencesList = <Object []>data;
+        console.log(this.experiencesList);
       });
     }
 

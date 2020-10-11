@@ -11,18 +11,19 @@ export class ProfileService {
   public getProfile(){
     return this.httpClient.get('http://localhost:9099/users/1/profiles/1')
   }
-  public getExperienceById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/experiences')
-  }
-  public getEducationsById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/educations')
+  public getExperienceById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences')
   }
 
-  public getSkillsById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/skills')
+  public getEducationsById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations')
   }
-  public getAboutById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/abouts')
+
+  public getSkillsById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills')
+  }
+  public getAboutById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts')
   }
   public addEducation(data){
     return this.httpClient.post('http://localhost:9099/users/1/profiles/1/educations/new', data).toPromise().then(data => {
