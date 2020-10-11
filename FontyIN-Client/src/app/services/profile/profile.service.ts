@@ -40,5 +40,18 @@ export class ProfileService {
     })
   }
 
+    //delete data in profile page
+    public deleteEducation(userId, profileId, educationId){
+      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/' + educationId);
+    }
+  
+    public deleteExperience(userId, profileId, experienceId){
+      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/' + experienceId);
+    }
+  
+    public deleteSkill(userId, profileId, skillId){
+      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/' + skillId);
+    }
+
 
 }
