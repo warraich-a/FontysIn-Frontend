@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -58,6 +60,7 @@ import { DeleteConnectionComponent } from './delete-connection/delete-connection
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatAutocompleteModule,
     BrowserAnimationsModule
   ],
   providers: [

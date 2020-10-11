@@ -1,19 +1,25 @@
 <div class="container border my-5">
-    <h1 id="heading">My Connections</h1>
+    <h1 id="heading">My Connections ({{ contacts?.length }})</h1>
+
     
     <form class="example-form">
         <mat-form-field class="example-full-width">
           <mat-label>Search</mat-label>
-          <input matInput #message maxlength="256" placeholder="Connection Name">
+          <input type="text" name="" matInput [formControl]="searchForm" [matAutocomplete]="auto" placeholder="Connection's Name">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <!-- <mat-option *ngFor="let contact of filteredContacts | async" [value]="contact">
+              {{ contact.firstName }} {{ contact.lastName }}
+            </mat-option> -->
+          </mat-autocomplete>
         </mat-form-field>
-    </form>
-      
+      </form>
+
     <hr id="headingLine">
     
-    <div *ngFor="let contact of contacts" class="connection">
+    <div *ngFor="let contact of (filteredContactsArr.length == 0 ? contacts: filteredContactsArr)" class="connection">
         <img class="item" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
         <div class="item connectionDesc">
-            <h3 class="connectionName">{{ contact.firstName }}</h3>
+            <h3 class="connectionName">{{ contact.firstName }} {{ contact.lastName }}</h3>
             <h4>Student at Fontys of Applied Sciences</h4>
             <hr class="dividerConnections">
 

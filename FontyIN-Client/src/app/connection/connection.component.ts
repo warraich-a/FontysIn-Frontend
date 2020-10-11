@@ -4,6 +4,9 @@ import { ContactService } from './../services/contact/contact.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -12,11 +15,12 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./connection.component.css']
 })
 export class ConnectionComponent implements OnInit {
-  loggedInUser: number = 1;
-  profileUser: number;
-  isConnected: boolean = false;
-  isRequestSent: boolean = false;
+  searchForm = new FormControl();
   contacts: User[];
+  filteredContacts: Observable<User[]>;
+  filteredContactsArr: User[] = [];
+
+
   constructor(private contactService: ContactService,
               private dialog: MatDialog
     ) { }
@@ -25,81 +29,72 @@ export class ConnectionComponent implements OnInit {
     
     // GET ALL CONTACTS
     this.getAll();
-
  
   }
 
-
+  // GO TO MESSAGES
   message() {
     // navigate to message with query param username
   }
 
 
-  // delete(id: number) {
-  //   console.log("ID: " + id);
-  //   this.contactService.deleteContactList(id)
-  //   .subscribe(()=>{
-  //     this.getAll();
-  //   });
-
-  // }
-
+  // GET CONTACTS
   getAll() {
     this.contactService.getContactsList()
     .subscribe(
       contacts => {
         this.contacts = <User[]>contacts;
 
-        console.log("contacts");
+        // FILTER
+        this.filteredContacts = this.searchForm.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => typeof value === 'string' && value != null ? value : value.name),
+          map(name => name ? this._filter(name) : this.contacts.slice())
+        );
 
-        console.log(contacts);
-
-        // this.contacts.forEach(contact => {
-        //   // if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser))) {
-        //   //   this.isConnected = true;
-        //   // }
-        //   // Logged in user sent request or other user sent request, status isAccepted true
-        //   // if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser)) && contact.isAccepted == true) {
-        //   //   console.log("first if statement")
-        //   //   this.isRequestSent = true;
-        //   //   this.isConnected = true;
-        //   //   return;
-        //   // }
-        //   // // Logged in user sent request, status isAccepted false, status isAccepted false
-        //   // if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) && !contact.isAccepted)) {
-        //   //   console.log("second if statement")
-
-        //   //   this.isRequestSent = true;
-        //   //   this.isConnected = false;
-        //   //   return
-        //   // }
-
-
-          
-        // });
-
-
-
+        this.filteredContacts
+        .subscribe((data)=>{
+          // this.filteredContactsArr = [];
+          this.filteredContactsArr = data;
+        });
+  
       }
     )
   }
 
 
+  // DELETE DIALOG
   openDialog(connection: User): void {
     const dialogRef = this.dialog.open(DeleteConnectionComponent, {
-      // width: '20%',
       maxWidth: '50%',
-      // height: '200px',
       data: {connection: connection}
     });
 
     dialogRef.afterClosed()
       .subscribe(result => {
-      console.log('The dialog was closed');
-      // console.log(result);
-      // this.animal = result;
-      this.getAll();
+        // empty input
+        this.searchForm.reset('');
+
+        this.getAll();  
     });
+  }
+
+
+  // FILTER CONTACTS
+  displayFn(user: User): string {
+    return user && user.firstName ? user.firstName + user.lastName : '';
+  }
+
+  private _filter(name: string): User[] {
+    const filterValue = name.toLowerCase();
+
+    console.log("filterValue " + filterValue);
+    let fullName;
+
+    return this.contacts.filter(option => 
+      (option.firstName + ' ' + option.lastName).toLowerCase().indexOf(filterValue) === 0
+    )
   }
 
 }
