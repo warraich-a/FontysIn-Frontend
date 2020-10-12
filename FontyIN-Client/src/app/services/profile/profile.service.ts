@@ -68,6 +68,14 @@ export class ProfileService {
       return this.httpClient.get('http://localhost:9099/users/profile/about/1')
       
     }
+    public GetOneAddress(){
+      return this.httpClient.get('http://localhost:9099/users/address/1')
+      
+    }
+    public GetOneUser(){
+      return this.httpClient.get('http://localhost:9099/users/user/1')
+      
+    }
 
     updateEducation(model, id) {
       const url = 'http://localhost:9099/users/profile/education/' + id
@@ -82,6 +90,15 @@ export class ProfileService {
     
   updateAbout(model, id) {
     const url = 'http://localhost:9099/users/profile/about/' + id;
+    return this.httpClient.put(url, model);
+  }
+
+  updateAddress(model, id) {
+    const url = 'http://localhost:9099/users/address/' + id;
+    return this.httpClient.put(url, model);
+  }
+  updatePhoneNumber(model, id) {
+    const url = 'http://localhost:9099/users/' + id;
     return this.httpClient.put(url, model);
   }
 

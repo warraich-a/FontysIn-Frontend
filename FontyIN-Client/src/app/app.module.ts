@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     ProfileComponent,
     UpdateProfileComponent,
-    PostComponent
+    PostComponent,
+    HeaderComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,

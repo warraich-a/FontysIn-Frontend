@@ -7,6 +7,9 @@ import {UpdateProfileComponent} from './update-profile/update-profile.component'
 
 import {PostComponent} from './post/post.component';
 
+import {UserSettingsComponent} from './user-settings/user-settings.component';
+
+
 const routes: Routes = [{
   path: '',
   component: HomeComponent
@@ -25,7 +28,11 @@ const routes: Routes = [{
 },{
   path: 'posts', 
   component: PostComponent
-}]
+},
+{
+  path: 'settings',
+  component: UserSettingsComponent
+},]
 
 
 @NgModule({
