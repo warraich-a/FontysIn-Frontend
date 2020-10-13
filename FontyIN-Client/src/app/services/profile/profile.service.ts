@@ -25,13 +25,13 @@ export class ProfileService {
   public getAboutById(userId, profileId){
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts')
   }
-  public addEducation(data){
-    return this.httpClient.post('http://localhost:9099/users/1/profiles/1/educations/new', data).toPromise().then(data => {
+  public addEducation(data, userId, profileId){
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
       console.log(data);
     })
   }
-  public addExperience(data){
-    return this.httpClient.post('http://localhost:9099/users/1/profiles/1/experiences/new', data).toPromise().then(data => {
+  public addExperience(data, userId, profileId){
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/new', data).toPromise().then(data => {
       console.log(data);
     })
   }

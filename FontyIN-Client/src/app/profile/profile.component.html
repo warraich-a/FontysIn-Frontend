@@ -25,12 +25,16 @@
 </div>
 
 <div class="container p-3 my-3 border">
-    <h1>Experience</h1>
-    <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
-    
-      <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="buttonAdd">+</button>
+    <!-- <h1>Experience</h1> -->
+    <!-- <div *ngFor="let p of dataToAdd">
 
+        <p>{{p.company}}</p>
+    </div> -->
+    <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
+  
+      <!-- Button to Open the Modal -->
+            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="buttonAdd">+</button> -->
+ 
             <!-- The Modal -->
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog">
@@ -43,8 +47,10 @@
                     </div>
                     
                     <!-- Modal body -->
-                    <div class="modal-body">
-                        <form #userExperience="ngForm" (ngSubmit)="onSubmitExperience(userExperience.value)">
+                    <div class="modal-body"> 
+                                                                    <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
+                                                                    used to send the data in onSubmitExperience which is created it in profile.component.ts-->
+                        <form  class="text-center border border-silver" #userExperience="ngForm" (ngSubmit)="onSubmitExperience(userExperience.value)"> 
                             <label ><h3>Company</h3> </label> <br>
                                 <input type="text" name="company" ngModel placeholder="Company"> <br>
                            
@@ -76,13 +82,9 @@
                             <input type="date" name="endDateExperience" ngModel placeholder="endDateExperience"> <br>
                             <label ><h3> description </h3></label> <br>
                             <input type="text" name="descriptionExperience" ngModel placeholder="descriptionExperience"> <br> <br>
-                            <button type="submit" id="submitButton"> submit </button>
+                            <button type="submit" id="submitButton" > submit </button>
                             
                         </form>
-<!-- 
-
-                    Modal body..
-                    <button type="button" (click)="CreateExperience()" class="btn btn-dark" id="buttonAdd">+</button> -->
                     </div>
                     
                     <!-- Modal footer -->
@@ -93,28 +95,33 @@
                 </div>
                 </div>
             </div>
-    <button class="btn btn-danger" id="" (click)="deleteExperience()">-</button>
+    <!-- <button class="btn btn-danger" id="" (click)="deleteExperience()">-</button> -->
 
     <table class="table table-striped">
         <thead>
+            
         <tr>
-            <th>Title</th>
-            <th>Company</th>
+            <th> <h1>Experience</h1> 
+
+            </th>
+            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal" id="buttonAdd">+</button>
+
+            <!-- <th>Company</th>
             <th>Job Type</th>
             <th>From</th>
             <th>Until</th>
-            <th>Description Type</th>
+            <th>Description Type</th> -->
           </tr>
         </thead>
-        <tbody>
+        <tbody >
           <tr id="test"  *ngFor="let p of experiencesList">
            
-            <td>{{p.title}}</td>
-            <td>{{p.company}}</td>
-            <td>{{p.employmentType}}</td>
-            <td>{{p.startDateExperience}}</td>
-            <td>{{p.endDateExperience}}</td>
-            <td>{{p.descriptionExperience}}</td>
+            <td class="font-italic"> <h3>{{p.title | uppercase}} </h3> 
+            {{p.company}} . {{p.employmentType}} <br>
+            {{p.startDateExperience}} - {{p.endDateExperience}} <br>
+            {{p.descriptionExperience}} </td>
+            <button class="btn btn-danger float-right" id="" (click)="deleteExperience(p.id)"> Delete</button>
+
           </tr>
           
         </tbody>
@@ -123,7 +130,56 @@
 
 <div class="container p-3 my-3 border">
         <h1>Educations</h1>
-        <button type="button" (click)="CreateEducation()" class="btn btn-dark" id="buttonAdd">+</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#educationModal" id="buttonAdd">+</button>
+ 
+            <!-- The Modal -->
+            <div class="modal fade" id="educationModal">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">Add Experience</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body"> 
+                                                                    <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
+                                                                    used to send the data in onSubmitExperience which is created it in profile.component.ts-->
+                        <form  class="text-center border border-silver" #userEducation="ngForm" (ngSubmit)="onSubmitEducation(userEducation.value)"> 
+                            <label ><h3>School</h3> </label> <br>
+                                <input type="text" name="school" ngModel > <br>
+                           
+                           
+                            <label ><h3>From</h3></label> <br>
+                            <input type="date" name="startYearEducation" ngModel > <br>
+                           
+                            <label ><h3>Until</h3></label>  <br>
+                                <input type="date" name="endYearEducation" ngModel > <br>
+                            
+                            <br>
+                            <label> <h3>Degree </h3> </label> <br>
+                            <input type="text" name="degreeEducation" ngModel> <br> 
+    
+                            <label> <h3> Field</h3></label> <br>
+                            <input type="text" name="fieldStudy" ngModel > <br>
+                            <label ><h3> Description </h3></label> <br>
+                            <input type="text" name="descriptionEducation" ngModel> <br>
+                            <br><br>
+                            <button type="submit" id="submitButton" > submit </button>
+                            
+                        </form>
+                    </div>
+                    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
         <button class="btn btn-danger" id="" (click)="deleteEducation()">-</button>
 
         <table class="table table-striped">

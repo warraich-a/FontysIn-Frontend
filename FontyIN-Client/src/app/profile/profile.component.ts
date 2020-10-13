@@ -3,12 +3,13 @@ import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
+
 
 
 
@@ -27,7 +28,10 @@ export class ProfileComponent implements OnInit {
 
   userId:number;
   profileId: number;
+  
+  @Input() expToAdd={};
 
+  // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
                private route: ActivatedRoute) { }
@@ -47,38 +51,39 @@ export class ProfileComponent implements OnInit {
   experience: Experience;
   profile: Profile; 
 
-  CreateEducation()
+  
+  onSubmitEducation(data)
   {
     
    this.educationToAdd = {
-     "degreeEducation": "High School",
-     "descriptionEducation": "Got good grades",
-     "endYearEducation": "2020-01-01",
-     "fieldStudy": "ICT",
-     "id": 15,
-     "profileId": 1,
-     "school": "Fontys",
-     "startYearEducation": "2018-01-01"
+     "degreeEducation": data.degreeEducation,
+     "descriptionEducation": data.descriptionEducation,
+     "endYearEducation": data.startYearEducation,
+     "fieldStudy": data.fieldStudy,
+     "id": 97,
+     "profileId": this.profileId,
+     "school": data.school,
+     "startYearEducation": data.endYearEducation
      }
-     this.profileService.addEducation(<JSON>this.educationToAdd)
+     this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
   }
 
-  CreateExperience()
-  {
+  // CreateExperience()
+  // {
     
-   this.experienceToAdd = {
-    "company": "Fontys",
-    "descriptionExperience": "I love it",
-    "employmentType": "FreeLancer",
-    "endDateExperience": "2000-01-01",
-    "id": 29,
-    "locationId": 1,
-    "profileId": 1,
-    "startDateExperience": "1998-01-01",
-    "title": "Manager"
-     }
-     this.profileService.addExperience(<JSON>this.experienceToAdd)
-  }
+  //  this.experienceToAdd = {
+  //   "company": "Fontys",
+  //   "descriptionExperience": "I love it",
+  //   "employmentType": "FreeLancer",
+  //   "endDateExperience": "2000-01-01",
+  //   "id": 29,
+  //   "locationId": 1,
+  //   "profileId": 1,
+  //   "startDateExperience": "1998-01-01",
+  //   "title": "Manager"
+  //    }
+  //    this.profileService.addExperience(<JSON>this.experienceToAdd)
+  // }
 
   CreateSkill()
   {
@@ -98,15 +103,21 @@ export class ProfileComponent implements OnInit {
       "descriptionExperience": data.descriptionExperience,
       "employmentType":data.employementType,
       "endDateExperience": data.endDateExperience,
-      "id":63,
+      "id":453,
       "locationId": data.locationId,
       "profileId": this.profileId,
       "startDateExperience": data.startDateExperience,
       "title": data.title
        }
        console.warn(this.experienceToAdd);
-       this.profileService.addExperience(<JSON>this.experienceToAdd)
+       this.profileService.addExperience(<JSON>this.experienceToAdd, this.userId, this.profileId)
+       
   }
+  
+  addEvent(){
+    this.profileService.addExperience(<JSON>this.expToAdd, this.userId, this.profileId)
+  }
+  
 
   ngOnInit(): void {
     this.profileUser = +this.route.snapshot.paramMap.get('id');
@@ -219,11 +230,9 @@ export class ProfileComponent implements OnInit {
     }
   
     //deleting experience data
-    deleteExperience(){
-      this.profileService.deleteExperience(this.profile.userId, this.experience.profileId, this.experience.id).subscribe((data)=>
-      {
-        this.experiencesList = <Object []>data;
-        console.log(this.experiencesList);
+    deleteExperience(experineceId){
+      this.profileService.deleteExperience(this.userId, this.profileId, experineceId).subscribe(data => {
+        console.log(data);
       });
     }
 

@@ -1,3 +1,4 @@
+import { AddInformationComponent } from './profile/add-information/add-information.component';
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     ProfileComponent,
     UpdateProfileComponent,
-    PostComponent
+    PostComponent,
+    AddInformationComponent
+ 
   ],
   imports: [
     BrowserModule,

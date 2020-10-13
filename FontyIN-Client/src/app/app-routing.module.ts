@@ -1,3 +1,4 @@
+import { AddInformationComponent } from './profile/add-information/add-information.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -25,6 +26,9 @@ const routes: Routes = [{
 },{
   path: 'posts', 
   component: PostComponent
+},{
+  path: 'users/:id/profiles/:profileId/experience/add', 
+  component: AddInformationComponent
 }]
 
 
