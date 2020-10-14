@@ -27,7 +27,6 @@ export class DataService {
 
 
   create(resource: {}) {
-    console.log(this.url);
     return this.http.post(this.url, JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)
@@ -36,7 +35,13 @@ export class DataService {
 
   
   update(resource) {
-    return this.http.patch(this.url + '/' + resource.id, JSON.stringify(resource))
+    console.log("Service id " + resource.id)
+    console.log("Service user " + resource.user)
+
+    console.log("Service friend " + resource.friend)
+
+    console.log("Service isAccepted " + resource.isAccepted)
+    return this.http.patch(this.url + '/' + resource.id, JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)
       )

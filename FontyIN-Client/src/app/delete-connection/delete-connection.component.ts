@@ -10,6 +10,7 @@ import { ContactService } from '../services/contact/contact.service';
   styleUrls: ['./delete-connection.component.css']
 })
 export class DeleteConnectionComponent {
+  loggedInUser = 1;
 
   constructor(
     private contactService: ContactService,
@@ -29,14 +30,11 @@ export class DeleteConnectionComponent {
     console.log("ID: " + this.data.connection);
     console.log("ID: " + this.data.connection.firstName);
 
-    this.contactService.deleteContactList(this.data.connection.id)
-    .subscribe(()=>{
-      // this.getAll();
-    });
+    this.contactService.delete(this.data.connection.id)
+    .subscribe();
 
     // Close dialog
     this.dialogRef.close();
-
   }
 
   

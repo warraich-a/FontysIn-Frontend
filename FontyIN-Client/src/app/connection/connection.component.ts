@@ -1,3 +1,5 @@
+import { FilterPipe } from './../pipes/filter.pipe';
+import { Contact } from './../classes/Profile/Contact';
 import { DeleteConnectionComponent } from './../delete-connection/delete-connection.component';
 import { HomeComponent } from './../home/home.component';
 import { ContactService } from './../services/contact/contact.service';
@@ -5,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-
+import {TooltipPosition} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-connection',
@@ -15,10 +15,17 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./connection.component.css']
 })
 export class ConnectionComponent implements OnInit {
-  searchForm = new FormControl();
-  contacts: User[];
-  filteredContacts: Observable<User[]>;
-  filteredContactsArr: User[] = [];
+  searchText = '';
+
+  loggedInUser = 1;
+  contacts: Contact[];
+  requests: Contact[];
+
+  position = new FormControl('below');
+
+  defaultElevation = 3;
+  raisedElevation = 5;
+
 
 
   constructor(private contactService: ContactService,
@@ -26,9 +33,11 @@ export class ConnectionComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    
-    // GET ALL CONTACTS
+    // GET ACCEPTED CONTACTS
     this.getAll();
+
+    // GET REQUESTS
+    this.getRequests();
  
   }
 
@@ -40,27 +49,52 @@ export class ConnectionComponent implements OnInit {
 
   // GET CONTACTS
   getAll() {
-    this.contactService.getContactsList()
+    this.contactService.getAll()
     .subscribe(
       contacts => {
-        this.contacts = <User[]>contacts;
-
-        // FILTER
-        this.filteredContacts = this.searchForm.valueChanges
-        .pipe(
-          startWith(''),
-          map(value => typeof value === 'string' && value != null ? value : value.name),
-          map(name => name ? this._filter(name) : this.contacts.slice())
-        );
-
-        this.filteredContacts
-        .subscribe((data)=>{
-          // this.filteredContactsArr = [];
-          this.filteredContactsArr = data;
-        });
-  
+        this.contacts = <Contact[]>contacts;
       }
     )
+  }
+
+
+  // GET REQUESTS
+  getRequests() {
+      this.contactService.getContactRequests()
+      .subscribe(requests => {
+        this.requests = <Contact[]>requests;
+      })
+  }
+
+  // ACCEPT REQUEST
+  accept(contact: Contact) {
+    contact.isAccepted = true;
+
+
+    console.log("Contact " + contact.isAccepted)
+    this.contactService.update(contact)
+      .subscribe(
+        updatedContact => {
+          // console.log("Updated contact " + updatedContact);
+
+          this.getRequests();
+          this.getAll();
+        }
+      )
+  }
+
+
+  // REJECT REQUEST
+  reject(contact: Contact) {
+
+    this.contactService.delete(contact.id)
+      .subscribe(
+        updatedContact => {
+          console.log(updatedContact);
+
+          this.getRequests();
+        }
+      )
   }
 
 
@@ -74,27 +108,11 @@ export class ConnectionComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(result => {
         // empty input
-        this.searchForm.reset('');
+        // this.searchForm.reset('');
 
         this.getAll();  
     });
   }
 
-
-  // FILTER CONTACTS
-  displayFn(user: User): string {
-    return user && user.firstName ? user.firstName + user.lastName : '';
-  }
-
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
-
-    console.log("filterValue " + filterValue);
-    let fullName;
-
-    return this.contacts.filter(option => 
-      (option.firstName + ' ' + option.lastName).toLowerCase().indexOf(filterValue) === 0
-    )
-  }
 
 }

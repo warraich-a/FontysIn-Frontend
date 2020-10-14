@@ -142,14 +142,14 @@ export class ProfileComponent implements OnInit {
           //   this.isConnected = true;
           // }
           // Logged in user sent request or other user sent request, status isAccepted true
-          if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser)) && contact.isAccepted == true) {
+          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser) || (contact.user.id == this.profileUser && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
             console.log("first if statement")
             this.isRequestSent = true;
             this.isConnected = true;
             return;
           }
           // Logged in user sent request, status isAccepted false, status isAccepted false
-          if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) && !contact.isAccepted)) {
+          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser) && !contact.isAccepted)) {
             console.log("second if statement")
 
             this.isRequestSent = true;

@@ -24,12 +24,18 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { HttpClientModule } from '@angular/common/http';
 import { ConnectionComponent } from './connection/connection.component';
 import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
+
+import { FilterPipe } from './pipes/filter.pipe';
+import { MaterialElevationDirective } from './directives/material-elevation.directive'; // -> imported filter pipe
+
 
 @NgModule({
   declarations: [
@@ -40,7 +46,9 @@ import { DeleteConnectionComponent } from './delete-connection/delete-connection
     UpdateProfileComponent,
     PostComponent,
     ConnectionComponent,
-    DeleteConnectionComponent
+    DeleteConnectionComponent,
+    FilterPipe, // -> added filter pipe to use it inside the component
+    MaterialElevationDirective  // -> adds shadow
   ],
   imports: [
     BrowserModule,
@@ -60,9 +68,12 @@ import { DeleteConnectionComponent } from './delete-connection/delete-connection
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatAutocompleteModule,
-    BrowserAnimationsModule
-  ],
+    // MatAutocompleteModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatBadgeModule,
+    BrowserAnimationsModule,
+    ],
   providers: [
     DataService,
     ContactService,
