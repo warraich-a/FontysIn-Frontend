@@ -9,9 +9,7 @@ import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
-
-
-
+//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -34,6 +32,7 @@ export class ProfileComponent implements OnInit {
   // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
+              //public dialogRef: MatDialogRef<ProfileComponent>,
                private route: ActivatedRoute) { }
 
   profileData: Object;
@@ -211,18 +210,28 @@ export class ProfileComponent implements OnInit {
     
   }
 
+    noClick(): void {
+      // Close dialog
+      //this.dialogRef.close();
+    }
+
+
     //deleting skill data
-    deleteSkill(){
-      this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
+    deleteSkill(skillId){
+      this.profileService.deleteSkill(this.userId, this.profileId, skillId).subscribe((data)=>
       {
         this.skillsList = <Object[]>data;
         console.log(this.skillsList);
       });
+
+    //   // Close dialog
+    // this.dialogRef.close();
+
     }
   
-    //deleting experience data
-    deleteEducation(){
-      this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
+    //deleting education data
+    deleteEducation(educationId){
+      this.profileService.deleteEducation(this.userId, this.profileId, educationId).subscribe((data)=>
       {
         this.educationsList = <Object[]>data;
         console.log(this.educationsList);

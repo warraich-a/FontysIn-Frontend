@@ -120,7 +120,7 @@
             {{p.company}} . {{p.employmentType}} <br>
             {{p.startDateExperience}} - {{p.endDateExperience}} <br>
             {{p.descriptionExperience}} </td>
-            <button class="btn btn-danger float-right" id="" (click)="deleteExperience(p.id)"> Delete</button>
+            <button class="btn btn-danger float-right" id="" (click)="deleteExperience(p.id)">-</button>
 
           </tr>
           
@@ -180,7 +180,6 @@
                 </div>
                 </div>
             </div>
-        <button class="btn btn-danger" id="" (click)="deleteEducation()">-</button>
 
         <table class="table table-striped">
             <thead>
@@ -201,6 +200,7 @@
                 <td>{{p.degreeEducation}}</td>
                 <td>{{p.fieldStudy}}</td>
                 <td>{{p.descriptionEducation}}</td>
+                <button class="btn btn-danger float-right" id="" (click)="deleteEducation(p.id)">-</button>
             </tr>
         </tbody>
         </table>
@@ -208,12 +208,26 @@
 
     <div class="container p-3 my-3 border">
     <h1>Skills</h1>
-    <button type="button" (click)="CreateSkill()" class="btn btn-dark" id="buttonAdd">+</button>
-    <button class="btn btn-danger" id="" (click)="deleteSkill()">-</button>
+    <button type="button" (click)="CreateSkill()" class="btn btn-primary" id="buttonAdd">+</button>
+    <table class="table table-striped">
+        <tbody>
+            <tr id="test"  *ngFor="let p of skillsList">
 
-    <li id="test"  *ngFor="let p of skillsList">
-        {{p.name}} 
-      </li>
+                <td>{{p.name}}</td> 
+                <button class="btn btn-danger float-right" id="" (click)="deleteSkill(p.id)">-</button>
+
+                <!-- <div id="confirm" mat-dialog-content>
+                    <p>Are you sure you want to delete {{ p.name }}?</p>
+                </div>
+                <div mat-dialog-actions>
+                    <button mat-raised-button cdkFocusInitial (click)="deleteSkill(p.id)">Yes</button>
+                    <button mat-raised-button (click)="noClick()">No</button>
+                </div> -->
+
+            </tr>
+            
+        </tbody>
+    </table>
 </div>
 
 
