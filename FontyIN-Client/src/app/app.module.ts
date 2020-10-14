@@ -20,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     ProfileComponent,
     UpdateProfileComponent,
     PostComponent,
-    AddInformationComponent
+    AddInformationComponent,
+    DeleteConfirmationComponent
  
   ],
   imports: [
@@ -44,7 +47,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
   ],
   providers: [
     DataService,
@@ -52,6 +56,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DeleteConfirmationComponent]
+  
 })
 export class AppModule { }

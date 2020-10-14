@@ -1,3 +1,4 @@
+import { DialogService } from './../services/dialog/dialog.service';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
@@ -9,7 +10,6 @@ import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
-//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -32,8 +32,9 @@ export class ProfileComponent implements OnInit {
   // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
-              //public dialogRef: MatDialogRef<ProfileComponent>,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute,
+              //  private dialogService: DialogService
+              ) { }
 
   profileData: Object;
   educationsList: Object[];
@@ -67,22 +68,6 @@ export class ProfileComponent implements OnInit {
      this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
   }
 
-  // CreateExperience()
-  // {
-    
-  //  this.experienceToAdd = {
-  //   "company": "Fontys",
-  //   "descriptionExperience": "I love it",
-  //   "employmentType": "FreeLancer",
-  //   "endDateExperience": "2000-01-01",
-  //   "id": 29,
-  //   "locationId": 1,
-  //   "profileId": 1,
-  //   "startDateExperience": "1998-01-01",
-  //   "title": "Manager"
-  //    }
-  //    this.profileService.addExperience(<JSON>this.experienceToAdd)
-  // }
 
   CreateSkill()
   {
@@ -128,15 +113,7 @@ export class ProfileComponent implements OnInit {
     console.log(this.userId);
 
     console.log(this.profileUser);
-    // this.profileService.getProfile().subscribe((data)=>
-    // {
-     
-    //   this.profileData=<Object>data;
-
-    //   console.log(this.profileData);
-      
-
-    // });
+    
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
     {
      
@@ -198,22 +175,11 @@ export class ProfileComponent implements OnInit {
         console.log("isConnected " + this.isConnected);
         console.log("isRequestsent " + this.isRequestSent);
 
-        // if(!found) {
-          
-        // }
-
-
-
       }
     )
    
     
   }
-
-    noClick(): void {
-      // Close dialog
-      //this.dialogRef.close();
-    }
 
 
     //deleting skill data
@@ -224,8 +190,15 @@ export class ProfileComponent implements OnInit {
         console.log(this.skillsList);
       });
 
-    //   // Close dialog
-    // this.dialogRef.close();
+      // this.dialogService.openConfirmDialog("Are you sure to delete?").afterClosed().subscribe(res => {
+      //   if(res){
+      //     this.profileService.deleteSkill(this.userId, this.profileId, skillId).subscribe((data)=>
+      //     {
+      //       this.skillsList = <Object[]>data;
+      //       console.log(this.skillsList);
+      //     });
+      //   }
+      // });
 
     }
   
@@ -244,19 +217,6 @@ export class ProfileComponent implements OnInit {
         console.log(data);
       });
     }
-
-//  constructor(private route: ActivatedRoute) {
-//     this.route.params.subscribe(params => console.log(params))
-//    }
-
-//  // educations: Education[];
-//   ngOnInit(): void {
-//     // this.profileService.getProfile().subscribe((data)=>
-//     // {
-//     //   console.log(data);
-//     //   t his.educations=<Education[]>data;
-//   // });
-
 
 
           /*------------------------------------------------------ CONTACTS -------------------------------------------------------- */
