@@ -1,0 +1,29 @@
+<div class="container">
+    <br>
+    <div id="creatPostBlock">
+    <textarea [(ngModel)] = "content" placeholder="Your awesome post..." id = "newPostText"></textarea> <br>
+    <button (click) ="createPost()" class = "postBtn">Post</button>
+    <br>
+    <br>
+    
+    </div>
+    
+<hr>
+</div>
+<div class="container">
+    <div *ngFor="let post of posts">
+        
+        <div class="post-block">
+        
+        <button (click)="deletePost(post.id)" class="deleteBtn">x</button>
+        <h2>{{post.content}}</h2>
+        <p class="p-date">{{post.date}}</p>
+        <br>
+        
+        </div>
+        
+      
+      </div>
+</div>
+
+  

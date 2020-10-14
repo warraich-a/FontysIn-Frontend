@@ -1,64 +1,17 @@
+import { Contact } from './../classes/Profile/Contact';
+import { Profile } from './../classes/Profile/Profile';
+import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
-import { Skill } from './../classes/Profile/Skill';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
-import { Profile } from '../classes/Profile/Profile';
-//import { Skill } from '../classes/Profile/Skill';
-// import { userInfo } from 'os';
+import { Skill } from '../classes/Profile/Skill';
+import { HttpHeaders } from '@angular/common/http';
 
 
-// export interface profileList{
 
-//   educations: Education[];
-//   experience: Experience[];
-//   abouts: About[];
-//   skills: Skill[];
-  
-// }
-
-// export interface About{
-
-//   id: number;
-//   profileId: number;
-//   content: string;
-  
-// }
-
-// export interface Experience{
-//   id: number;
-//   profileId: number;
-//   title: string;
-//   company:string;
-//   employmentType : string;
-//   locationId: number;
-//   startYear: Date;
-//   endYear: Date;
-//   description: string;
-// }
-
-// export interface Skill{
-
-//   id: number;
-//   profileId: number;
-//   skillName: string;
-  
-// }
-
-// export interface Education{
-
-//   id: number;
-//   profileId: number;
-//   school: string;
-//   startYear: Date;
-//   endYear: Date;
-//   degree: string;
-//   fieldStudy: string;
-//   description: string;
-  
-// }
 
 
 @Component({
@@ -67,39 +20,115 @@ import { Profile } from '../classes/Profile/Profile';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  loggedInUser: number = 1;
+  profileUser: number;
+  isConnected: boolean = false;
+  isRequestSent: boolean = false;
+  contacts: Contact[];
 
-  constructor(private profileService: ProfileService) { }
+  userId:number;
+  profileId: number;
+  
+  @Input() expToAdd={};
+
+  // console.log(dataToAdd);
+  constructor(private profileService: ProfileService,
+              private contactService: ContactService,
+               private route: ActivatedRoute) { }
 
   profileData: Object;
-  educations: Education;
-  experiences: Experience;
-  skills : Skill;
-  about: About;
-  data = {};
+  educationsList: Object[];
+  experiencesList: Object[];
+  skillsList : Object[];
+  aboutList: Object[];
+  educationToAdd = {};
+  experienceToAdd = {};
+  skillToAdd = {};
 
   //these are needed to get ids fior deleting data
   education: Education;
   skill: Skill;
   experience: Experience;
-  profile: Profile;
+  profile: Profile; 
 
-
-  CreateEducation()
+  
+  onSubmitEducation(data)
   {
-   this.data = {
-     "degreeEducation": "High School",
-     "descriptionEducation": "Got good grades",
-     "endYearEducation": "2020-01-01",
-     "fieldStudy": "ICT",
-     "id": 9,
-     "profileId": 1,
-     "school": "Fontys",
-     "startYearEducation": "2018-01-01"
+    
+   this.educationToAdd = {
+     "degreeEducation": data.degreeEducation,
+     "descriptionEducation": data.descriptionEducation,
+     "endYearEducation": data.startYearEducation,
+     "fieldStudy": data.fieldStudy,
+     "id": 97,
+     "profileId": this.profileId,
+     "school": data.school,
+     "startYearEducation": data.endYearEducation
      }
-     this.profileService.addEducation(<JSON>this.data)
+     this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
   }
 
-  ngOnInit(): void { 
+  // CreateExperience()
+  // {
+    
+  //  this.experienceToAdd = {
+  //   "company": "Fontys",
+  //   "descriptionExperience": "I love it",
+  //   "employmentType": "FreeLancer",
+  //   "endDateExperience": "2000-01-01",
+  //   "id": 29,
+  //   "locationId": 1,
+  //   "profileId": 1,
+  //   "startDateExperience": "1998-01-01",
+  //   "title": "Manager"
+  //    }
+  //    this.profileService.addExperience(<JSON>this.experienceToAdd)
+  // }
+
+  CreateSkill()
+  {
+    
+   this.skillToAdd = {
+        "id": 17,
+        "name": "angular",
+        "profileId": 1
+    }
+     this.profileService.addSkill(<JSON>this.skillToAdd)
+  }
+
+  onSubmitExperience(data){
+   
+    this.experienceToAdd = {
+      "company": data.company,
+      "descriptionExperience": data.descriptionExperience,
+      "employmentType":data.employementType,
+      "endDateExperience": data.endDateExperience,
+      "id":453,
+      "locationId": data.locationId,
+      "profileId": this.profileId,
+      "startDateExperience": data.startDateExperience,
+      "title": data.title
+       }
+       console.warn(this.experienceToAdd);
+       this.profileService.addExperience(<JSON>this.experienceToAdd, this.userId, this.profileId)
+       
+  }
+  
+  addEvent(){
+    this.profileService.addExperience(<JSON>this.expToAdd, this.userId, this.profileId)
+  }
+  
+
+  ngOnInit(): void {
+    this.profileUser = +this.route.snapshot.paramMap.get('id');
+
+    this.userId = +this.route.snapshot.paramMap.get('id');
+    this.profileId = +this.route.snapshot.paramMap.get('profileId');
+
+    console.log(this.profileId);
+    console.log(this.userId);
+
+    console.log(this.profileUser);
     // this.profileService.getProfile().subscribe((data)=>
     // {
      
@@ -109,58 +138,103 @@ export class ProfileComponent implements OnInit {
       
 
     // });
-    this.profileService.getEducationsById().subscribe((data)=>
+    this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
     {
      
-      this.educations=<Education>data;
-      console.log(this.educations);
+      this.educationsList=<Object[]>data;
+      console.log(this.educationsList);
       
     });
-    this.profileService.getExperienceById().subscribe((data)=>
+    this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
-      this.experiences=<Experience>data;
-      console.log(this.experiences);
+      this.experiencesList=<Object[]>data;
+      console.log(this.experiencesList);
     });
-    this.profileService.getSkillsById().subscribe((data)=>
+    this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
     {
-      this.skills=<Skill>data;
-      console.log(this.skills);
+      this.skillsList=<Object[]>data;
+      console.log(this.skillsList);
     });
-    this.profileService.getAboutById().subscribe((data)=>
+    this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
-      this.about=<About>data;
-      console.log(this.about);
-    });
+      this.aboutList=<Object[]>data;
+      console.log(this.aboutList);
+    }); 
+
+    // GET ALL CONTACTS
+
+    this.contactService.getAll()
+    .subscribe(
+      contacts => {
+        this.contacts = <Contact[]>contacts;
+
+        console.log("contacts");
+
+        console.log(contacts);
+
+        this.contacts.forEach(contact => {
+          // if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser))) {
+          //   this.isConnected = true;
+          // }
+          // Logged in user sent request or other user sent request, status isAccepted true
+          if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser)) && contact.isAccepted == true) {
+            console.log("first if statement")
+            this.isRequestSent = true;
+            this.isConnected = true;
+            return;
+          }
+          // Logged in user sent request, status isAccepted false, status isAccepted false
+          if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) && !contact.isAccepted)) {
+            console.log("second if statement")
+
+            this.isRequestSent = true;
+            this.isConnected = false;
+            return
+          }
+
+
+          
+        });
+
+        console.log("isConnected " + this.isConnected);
+        console.log("isRequestsent " + this.isRequestSent);
+
+        // if(!found) {
+          
+        // }
+
+
+
+      }
+    )
+   
+    
+  }
+
+    //deleting skill data
+    deleteSkill(){
+      this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
+      {
+        this.skillsList = <Object[]>data;
+        console.log(this.skillsList);
+      });
+    }
   
-  }
-
-  //deleting skill data
-  deleteSkill(){
-    this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
-    {
-      this.skills=<Skill>data;
-      console.log(this.skills);
-    });
-  }
-
-  //deleting experience data
-  deleteEducation(){
-    this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
-    {
-      this.educations=<Education>data;
-      console.log(this.educations);
-    });
-  }
-
-  //deleting experience data
-  deleteExperience(){
-    this.profileService.deleteExperience(this.profile.userId, this.experience.profileId, this.experience.id).subscribe((data)=>
-    {
-      this.experiences=<Experience>data;
-      console.log(this.experiences);
-    });
-  }
-
+    //deleting experience data
+    deleteEducation(){
+      this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
+      {
+        this.educationsList = <Object[]>data;
+        console.log(this.educationsList);
+      });
+    }
+  
+    //deleting experience data
+    deleteExperience(experineceId){
+      this.profileService.deleteExperience(this.userId, this.profileId, experineceId).subscribe(data => {
+        console.log(data);
+      });
+    }
 
 //  constructor(private route: ActivatedRoute) {
 //     this.route.params.subscribe(params => console.log(params))
@@ -174,6 +248,62 @@ export class ProfileComponent implements OnInit {
 //     //   t his.educations=<Education[]>data;
 //   // });
 
+
+
+          /*------------------------------------------------------ CONTACTS -------------------------------------------------------- */
+  getContacts() {
+    this.contactService.getAll()
+      .subscribe(
+        contacts => {
+          this.contacts = <Contact[]>contacts;
+        }
+      )
+  }
   
+
+  createContact() {
+    // get logged in user id from auth and friendId from url
+    let contact : {} = { userId: this.loggedInUser, friendId: this.profileUser, isAccepted: false};
+    this.contactService.create(contact)
+      .subscribe(
+        newContact => {
+          console.log(newContact);
+          //this.isConnected = true;
+        }
+      )
+  }
+
+  deleteContact() {
+    // get logged in user id from auth and contatcId from link
+    this.contactService.delete(1)
+      .subscribe();
+  }
+
+
+  
+  // isContact() {
+  //   //let contacts;
+
+  //   this.contactService.getAll()
+  //   .subscribe(
+  //     contacts => {
+  //       this.contacts = <Contact[]>contacts;
+  //       console.log("contacts");
+
+  //       console.log(contacts);
+
+  //       this.contacts.forEach(contact => {
+  //         if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && contact.isAccepted) {
+  //           this.isConnected = true;
+  //         }
+  //         else if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && !contact.isAccepted) {
+  //           this.isConnected = false;
+  //         }
+  //       });
+  //     }
+  //   )
+  // }
+
+
 
 }

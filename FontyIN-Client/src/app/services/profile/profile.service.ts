@@ -11,36 +11,48 @@ export class ProfileService {
   public getProfile(){
     return this.httpClient.get('http://localhost:9099/users/1/profiles/1')
   }
-  public getExperienceById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/experiences')
-  }
-  public getEducationsById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/educations')
+  public getExperienceById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences')
   }
 
-  public getSkillsById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/skills')
+  public getEducationsById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations')
   }
-  public getAboutById(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1/abouts')
+
+  public getSkillsById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills')
   }
-  public addEducation(data){
-    return this.httpClient.post('http://localhost:9099/users/1/profiles/1/educations/new', data).toPromise().then(data => {
+  public getAboutById(userId, profileId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts')
+  }
+  public addEducation(data, userId, profileId){
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
+      console.log(data);
+    })
+  }
+  public addExperience(data, userId, profileId){
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/new', data).toPromise().then(data => {
+      console.log(data);
+    })
+  }
+  public addSkill(data){
+    return this.httpClient.post('http://localhost:9099/users/1/profiles/1/skills/new', data).toPromise().then(data => {
       console.log(data);
     })
   }
 
-  //delete data in profile page
-  public deleteEducation(userId, profileId, educationId){
-    return this.httpClient.delete('http://localhost:9090/users/' + userId + '/profile/' + profileId + '/education/' + educationId);
-  }
+    //delete data in profile page
+    public deleteEducation(userId, profileId, educationId){
+      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/' + educationId);
+    }
+  
+    public deleteExperience(userId, profileId, experienceId){
+      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/' + experienceId);
+    }
+  
+    public deleteSkill(userId, profileId, skillId){
+      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/' + skillId);
+    }
 
-  public deleteExperience(userId, profileId, experienceId){
-    return this.httpClient.delete('http://localhost:9090/users/' + userId + '/profile/' + profileId + '/experience/' + experienceId);
-  }
-
-  public deleteSkill(userId, profileId, skillId){
-    return this.httpClient.delete('http://localhost:9090/users/' + userId + '/profile/' + profileId + '/skill/' + skillId);
-  }
 
 }
