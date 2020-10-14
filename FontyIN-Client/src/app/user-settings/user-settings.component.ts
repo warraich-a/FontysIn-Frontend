@@ -17,15 +17,15 @@ export class UserSettingsComponent implements OnInit {
   user = new User(1, "0348348");
 
   ngOnInit(): void {
-    this.service.GetOneAddress()
+    this.service.GetOneAddress(1)
     .subscribe((data)=>{
       console.log(data);
-     this.address = <Address>data;
+    this.address = <Address>data;
     });
-    this.service.GetOneUser()
+    this.service.GetOneUser(1)
     .subscribe((data)=>{
       console.log(data);
-     this.user = <User>data;
+    this.user = <User>data;
     });
   }
 

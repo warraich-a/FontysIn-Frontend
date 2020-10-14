@@ -56,29 +56,34 @@ export class ProfileService {
       return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/' + skillId);
     }
 
-    public GetOneEducation(){
-      return this.httpClient.get('http://localhost:9099/users/profile/education/1')
+    public GetOneEducation(id){
+      const url = 'http://localhost:9099/users/profile/education/' + id;
+      return this.httpClient.get(url);
     }
 
-    public GetOneExperience(){
-      return this.httpClient.get('http://localhost:9099/users/profile/experience/1')
+    public GetOneExperience(id){
+      const url = 'http://localhost:9099/users/profile/experience/' + id;
+      return this.httpClient.get(url);
       
     }
-    public GetOneAbout(){
-      return this.httpClient.get('http://localhost:9099/users/profile/about/1')
+    public GetOneAbout(id){
+      const url = 'http://localhost:9099/users/profile/about/' + id;
+      return this.httpClient.get(url);
       
     }
-    public GetOneAddress(){
-      return this.httpClient.get('http://localhost:9099/users/address/1')
+    public GetOneAddress(id){
+      const url = 'http://localhost:9099/users/address/' + id;
+      return this.httpClient.get(url);
       
     }
-    public GetOneUser(){
-      return this.httpClient.get('http://localhost:9099/users/user/1')
+    public GetOneUser(id){
+      const url = 'http://localhost:9099/users/user/' + id;
+      return this.httpClient.get(url);
       
     }
 
     updateEducation(model, id) {
-      const url = 'http://localhost:9099/users/profile/education/' + id
+      const url = 'http://localhost:9099/users/profile/education/' + id;
       return this.httpClient.put(url, model);
     }
 

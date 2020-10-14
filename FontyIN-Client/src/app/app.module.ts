@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PostComponent } from './post/post.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -21,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { UpdateProfileEducationComponent } from './update-profile-education/update-profile-education.component';
+import { UpdateProfileExperienceComponent } from './update-profile-experience/update-profile-experience.component';
+import { UpdateProfileAboutComponent } from './update-profile-about/update-profile-about.component';
 
 @NgModule({
   declarations: [
@@ -28,10 +30,12 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
     UserComponent,
     HomeComponent,
     ProfileComponent,
-    UpdateProfileComponent,
     PostComponent,
     HeaderComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    UpdateProfileEducationComponent,
+    UpdateProfileExperienceComponent,
+    UpdateProfileAboutComponent
   ],
   imports: [
     BrowserModule,
