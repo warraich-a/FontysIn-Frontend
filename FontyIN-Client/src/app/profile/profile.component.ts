@@ -1,3 +1,4 @@
+import { UserDTO } from './../classes/Profile/UserDTO';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
@@ -20,10 +21,12 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
   loggedInUser: number = 1;
-  profileUser: number;
+  profileUser: UserDTO;
   isConnected: boolean = false;
   isRequestSent: boolean = false;
+  isRequestReceived: boolean = false;
   contacts: Contact[];
+  contact: Contact;
 
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
@@ -92,8 +95,13 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.profileUser = +this.route.snapshot.paramMap.get('id');
-    console.log(this.profileUser);
+    let profileUserId: number = +this.route.snapshot.paramMap.get('id');
+    console.log(profileUserId)
+    this.profileService.getUser(profileUserId)
+      .subscribe((data)=> {
+        console.log(data);
+        this.profileUser = <UserDTO>data;
+      })
     // this.profileService.getProfile().subscribe((data)=>
     // {
      
@@ -127,47 +135,51 @@ export class ProfileComponent implements OnInit {
     }); 
 
     // GET ALL CONTACTS
-
     this.contactService.getAll()
     .subscribe(
       contacts => {
         this.contacts = <Contact[]>contacts;
 
+        console.log("HELLO")
         console.log("contacts");
 
         console.log(contacts);
+        
 
         this.contacts.forEach(contact => {
-          // if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser))) {
-          //   this.isConnected = true;
-          // }
+          console.log(contact);
           // Logged in user sent request or other user sent request, status isAccepted true
-          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser) || (contact.user.id == this.profileUser && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
-            console.log("first if statement")
+          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser.id) || (contact.user.id == this.profileUser.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
             this.isRequestSent = true;
             this.isConnected = true;
+            this.contact = contact;
             return;
           }
           // Logged in user sent request, status isAccepted false, status isAccepted false
-          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser) && !contact.isAccepted)) {
-            console.log("second if statement")
-
+          else if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser.id) && !contact.isAccepted)) {
             this.isRequestSent = true;
             this.isConnected = false;
-            return
+            console.log("second else if")
+            console.log(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser.id) && !contact.isAccepted));
+            this.contact = contact;
+
+            return;
+          }
+          else if(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser.id) && !contact.isAccepted)){
+            this.isRequestReceived = true;
+            this.isConnected = false;
+            console.log("second else if")
+            console.log(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser.id) && !contact.isAccepted));
+            this.contact = contact;
+
+            return;
           }
 
-
-          
         });
 
-        console.log("isConnected " + this.isConnected);
-        console.log("isRequestsent " + this.isRequestSent);
-
-        // if(!found) {
-          
-        // }
-
+        console.log(this.isConnected);
+        console.log(this.isRequestSent);
+        console.log(this.isRequestReceived);
 
 
       }
@@ -229,49 +241,48 @@ export class ProfileComponent implements OnInit {
   
 
   createContact() {
+    let user: UserDTO;
+
+    this.contacts.forEach(contact => {
+      if(contact.user.id == this.loggedInUser) {
+        user = contact.user;
+      }
+    });
+
+
     // get logged in user id from auth and friendId from url
-    let contact : {} = { userId: this.loggedInUser, friendId: this.profileUser, isAccepted: false};
+    let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};
+
+    console.log(contact);
     this.contactService.create(contact)
       .subscribe(
         newContact => {
           console.log(newContact);
+          console.log("newContact");
+
           //this.isConnected = true;
           this.isRequestSent = true;
         }
       )
   }
 
-  deleteContact() {
-    // get logged in user id from auth and contatcId from link
-    this.contactService.delete(1)
-      .subscribe();
-  }
-
-
-  
-  // isContact() {
-  //   //let contacts;
-
-  //   this.contactService.getAll()
-  //   .subscribe(
-  //     contacts => {
-  //       this.contacts = <Contact[]>contacts;
-  //       console.log("contacts");
-
-  //       console.log(contacts);
-
-  //       this.contacts.forEach(contact => {
-  //         if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && contact.isAccepted) {
-  //           this.isConnected = true;
-  //         }
-  //         else if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && !contact.isAccepted) {
-  //           this.isConnected = false;
-  //         }
-  //       });
-  //     }
-  //   )
+  // deleteContact() {
+  //   // get logged in user id from auth and contatcId from link
+  //   this.contactService.delete(1)
+  //     .subscribe();
   // }
 
-
+    // ACCEPT REQUEST
+    acceptContact() {
+      this.contact.isAccepted = true;
+  
+      this.contactService.update(this.contact)
+        .subscribe(
+          updatedContact => {
+  
+            this.isConnected = true;
+          }
+        )
+    }
 
 }

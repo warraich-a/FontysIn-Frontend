@@ -1,13 +1,10 @@
-import { FilterPipe } from './../pipes/filter.pipe';
 import { Contact } from './../classes/Profile/Contact';
 import { DeleteConnectionComponent } from './../delete-connection/delete-connection.component';
-import { HomeComponent } from './../home/home.component';
 import { ContactService } from './../services/contact/contact.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
-import {TooltipPosition} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-connection',
@@ -34,7 +31,7 @@ export class ConnectionComponent implements OnInit {
 
   ngOnInit(): void {
     // GET ACCEPTED CONTACTS
-    this.getAll();
+    this.getAcceptedContacts();
 
     // GET REQUESTS
     this.getRequests();
@@ -48,10 +45,12 @@ export class ConnectionComponent implements OnInit {
 
 
   // GET CONTACTS
-  getAll() {
-    this.contactService.getAll()
+  getAcceptedContacts() {
+    this.contactService.getAcceptedContacts()
     .subscribe(
       contacts => {
+        console.log("All connections")
+        console.log(contacts);
         this.contacts = <Contact[]>contacts;
       }
     )
@@ -70,15 +69,12 @@ export class ConnectionComponent implements OnInit {
   accept(contact: Contact) {
     contact.isAccepted = true;
 
-
-    console.log("Contact " + contact.isAccepted)
     this.contactService.update(contact)
       .subscribe(
-        updatedContact => {
-          // console.log("Updated contact " + updatedContact);
+        () => {
 
           this.getRequests();
-          this.getAll();
+          this.getAcceptedContacts();
         }
       )
   }
@@ -110,7 +106,7 @@ export class ConnectionComponent implements OnInit {
         // empty input
         // this.searchForm.reset('');
 
-        this.getAll();  
+        this.getAcceptedContacts();  
     });
   }
 

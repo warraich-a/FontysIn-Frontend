@@ -1,8 +1,8 @@
-import { User } from './User';
+import { UserDTO } from './UserDTO';
 
 export class Contact {
     id: number;
-    user: User;
-    friend: User;
-    isAccepted: boolean;    
+    user: UserDTO;
+    friend: UserDTO;
+    isAccepted: boolean;  
 }

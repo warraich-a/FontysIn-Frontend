@@ -21,4 +21,11 @@ export class ContactService extends DataService {
         map(response => response)
       )
   }
+
+  	getAcceptedContacts() {
+		return this.http.get('http://localhost:9090/users/1/acceptedContacts')
+		.pipe(
+		  map(response => response)
+		)
+	}
 }

@@ -1,8 +1,8 @@
 <div class="container py-3 my-3 clearfix">
-    <ng-container *ngIf="loggedInUser != profileUser">
+    <ng-container *ngIf="loggedInUser != profileUser.id">
         <button mat-raised-button
             id="contact"
-            *ngIf="isConnected && isRequestSent"
+            *ngIf="isConnected"
             class="float-right"
             >Connected
         </button>
@@ -14,10 +14,17 @@
         </button>
         <button mat-raised-button
                 id="contact"
-                *ngIf="!isConnected && !isRequestSent"
+                *ngIf="!isConnected && !isRequestSent && !isRequestReceived"
                 (click)="createContact()"
                 class="float-right"
                 >Connect
+        </button>
+        <button mat-raised-button
+                id="contact"
+                *ngIf="!isConnected && isRequestReceived"
+                (click)="acceptContact()"
+                class="float-right"
+                >Accept
         </button>
     </ng-container>
 </div>
