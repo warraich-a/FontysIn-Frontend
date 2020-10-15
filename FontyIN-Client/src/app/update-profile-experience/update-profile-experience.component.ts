@@ -14,7 +14,7 @@ export class UpdateProfileExperienceComponent implements OnInit {
     { type:  'FullTime'}, {type: 'PartTime'}, {type: 'FreeLancer'}];
   
   id: number;
-
+  notification = null; 
   constructor( private service: ProfileService, private route: ActivatedRoute) { }
   experience = new Experience(1, 1, "Kassa medewerker", "Shell", "Fulltime", 1, "2000", "2019", "Working at gas station" )
   ngOnInit(): void {
@@ -28,12 +28,16 @@ export class UpdateProfileExperienceComponent implements OnInit {
   }
 
   updateExperience(){
-    this.service.updateExperience(this.experience, 1).subscribe(
+    this.service.updateExperience(this.experience, this.id).subscribe(
       (res: any) => {
-        console.log("updated");
+         this.showNotification();
       });
 
   }
 
+  showNotification() {
+    this.notification = { class: 'text-primary', message: 'updated!' };
+  
+  }
 
 }

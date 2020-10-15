@@ -9,6 +9,7 @@ import { About } from '../classes/Profile/About';
 })
 export class UpdateProfileAboutComponent implements OnInit {
   id: number;
+  notification = null; 
   constructor(  private service: ProfileService, private route: ActivatedRoute) { }
   about = new About(1, 1, "hello");
   ngOnInit(): void {
@@ -25,9 +26,16 @@ export class UpdateProfileAboutComponent implements OnInit {
   
   updateAbout(){
     console.log("updated");
-    this.service.updateAbout(this.about, 1).subscribe(
+    this.service.updateAbout(this.about, this.id).subscribe(
       (res: any) => {
-        console.log("updated");
+        this.showNotification();
       });
 }
+
+
+showNotification() {
+  this.notification = { class: 'text-primary', message: 'updated!' };
+
+}
+
 }

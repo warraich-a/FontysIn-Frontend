@@ -10,6 +10,7 @@ import { Education } from './../classes/Profile/Education';
 })
 export class UpdateProfileEducationComponent implements OnInit {
   id: number;
+  notification = null; 
   constructor( private service: ProfileService, private route: ActivatedRoute) { }
   date1: Date = new Date();
   date2: Date = new Date();
@@ -26,10 +27,14 @@ export class UpdateProfileEducationComponent implements OnInit {
   }
   updateEducation(){
     console.log("updated");
-    this.service.updateEducation(this.education, 1).subscribe(
+    this.service.updateEducation(this.education, this.id).subscribe(
       (res: any) => {
-        console.log("updated");
+        this.showNotification();
       });
     }
 
+    showNotification() {
+      this.notification = { class: 'text-primary', message: 'updated!' };
+    
+    }
 }
