@@ -12,16 +12,17 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PostComponent } from './post/post.component';
+import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
-import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { MatIconModule } from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -33,8 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
     UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,
-    DeleteConfirmationComponent
- 
+    DeleteSkillComponent 
   ],
   imports: [
     BrowserModule,
@@ -43,12 +43,16 @@ import { MatIconModule } from '@angular/material/icon';
     HttpClientModule,
     RouterModule,
     MDBBootstrapModule.forRoot(),
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
     BrowserAnimationsModule,
     MatIconModule,
+    MatDialogModule,
+    FormsModule,
+    MatListModule,
+    MatFormFieldModule
+    
   ],
   providers: [
     DataService,
@@ -56,8 +60,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [DeleteConfirmationComponent]
+  bootstrap: [AppComponent]
   
 })
 export class AppModule { }

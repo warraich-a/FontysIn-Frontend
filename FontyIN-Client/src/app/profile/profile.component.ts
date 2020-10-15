@@ -1,15 +1,17 @@
-import { DialogService } from './../services/dialog/dialog.service';
+import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Inject} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 
 @Component({
@@ -33,7 +35,7 @@ export class ProfileComponent implements OnInit {
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
                private route: ActivatedRoute,
-              //  private dialogService: DialogService
+               public dialog: MatDialog
               ) { }
 
   profileData: Object;
@@ -181,24 +183,29 @@ export class ProfileComponent implements OnInit {
     
   }
 
+    // get all skills
+    getAllSkills() {
+      this.profileService.getSkillsById(this.loggedInUser, this.profileId)
+      .subscribe(
+        data => {
+          this.skillsList = <Object[]>data;
+        }
+      )
+    }
 
-    //deleting skill data
-    deleteSkill(skillId){
-      this.profileService.deleteSkill(this.userId, this.profileId, skillId).subscribe((data)=>
-      {
-        this.skillsList = <Object[]>data;
-        console.log(this.skillsList);
+ 
+    //open dialog
+    openDialog(skill: Skill): void {
+      console.log(skill);
+      const dialogRef = this.dialog.open(DeleteSkillComponent, {
+        maxWidth: '50%',
+        data: {skill: skill}
+      }); 
+      dialogRef.afterClosed()
+        .subscribe(res => {
+
+          this.getAllSkills();  
       });
-
-      // this.dialogService.openConfirmDialog("Are you sure to delete?").afterClosed().subscribe(res => {
-      //   if(res){
-      //     this.profileService.deleteSkill(this.userId, this.profileId, skillId).subscribe((data)=>
-      //     {
-      //       this.skillsList = <Object[]>data;
-      //       console.log(this.skillsList);
-      //     });
-      //   }
-      // });
 
     }
   
@@ -247,31 +254,6 @@ export class ProfileComponent implements OnInit {
     this.contactService.delete(1)
       .subscribe();
   }
-
-
-  
-  // isContact() {
-  //   //let contacts;
-
-  //   this.contactService.getAll()
-  //   .subscribe(
-  //     contacts => {
-  //       this.contacts = <Contact[]>contacts;
-  //       console.log("contacts");
-
-  //       console.log(contacts);
-
-  //       this.contacts.forEach(contact => {
-  //         if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && contact.isAccepted) {
-  //           this.isConnected = true;
-  //         }
-  //         else if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && !contact.isAccepted) {
-  //           this.isConnected = false;
-  //         }
-  //       });
-  //     }
-  //   )
-  // }
 
 
 
