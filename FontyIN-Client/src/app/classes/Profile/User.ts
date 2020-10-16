@@ -11,4 +11,9 @@ export class User {
     userNumber: string;; 
     img: string;; 
     //UserType userType;
+    constructor(
+        public id: number,
+        public userPhoneNumber: string,
+    ) {  }
+
 }

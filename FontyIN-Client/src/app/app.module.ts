@@ -53,7 +53,6 @@ import { MaterialElevationDirective } from './directives/material-elevation.dire
     UpdateProfileEducationComponent,
     UpdateProfileExperienceComponent,
     UpdateProfileAboutComponent,
-    UpdateProfileComponent,
     PostComponent,
     ConnectionComponent,
     DeleteConnectionComponent,
