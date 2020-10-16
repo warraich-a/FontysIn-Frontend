@@ -75,7 +75,6 @@
 <div class="container p-3 my-3 border">
         <h1>Educations</h1>
         <button type="button" (click)="CreateEducation()" class="btn btn-dark" id="buttonAdd">+</button>
-        <button class="btn btn-danger" id="" (click)="deleteEducation()">-</button>
 
         <table class="table table-striped">
             <thead>
@@ -88,12 +87,15 @@
                 </tr>
             </thead>
         <tbody>
-                <tr id="test"  *ngFor="let p of educations">
-                <td>{{p.startYearEducation}}</td>
-                <td>{{p.endYearEducation}}</td>
-                <td>{{p.degreeEducation}}</td>
-                <td>{{p.fieldStudy}}</td>
-                <td>{{p.descriptionEducation}}</td>
+            <tr id="test"  *ngFor="let edu of educations">
+                <td>{{edu.school}}</td>
+                <td>{{edu.startYearEducation}}</td>
+                <td>{{edu.endYearEducation}}</td>
+                <td>{{edu.degreeEducation}}</td>
+                <td>{{edu.fieldStudy}}</td>
+                <td>{{edu.descriptionEducation}}</td>
+
+                <button class="btn btn-danger float-right" id="" (click)="openDialogEdu(edu)">-</button>
             </tr>
         </tbody>
         </table>
@@ -108,7 +110,7 @@
 
                 <td>{{s.name}}</td>  
 
-                <button class="btn btn-danger float-right" (click)="openDialog(s)">-</button>
+                <button class="btn btn-danger float-right" (click)="openDialogSkill(s)">-</button>
 
             </tr>
             

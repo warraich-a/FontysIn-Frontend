@@ -1,3 +1,4 @@
+import { DeleteEducationComponent } from './delete-education/delete-education.component';
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -60,7 +61,8 @@ import { MaterialElevationDirective } from './directives/material-elevation.dire
     DeleteConnectionComponent,
     FilterPipe, // -> added filter pipe to use it inside the component
     MaterialElevationDirective,  // -> adds shadow
-    DeleteSkillComponent
+    DeleteSkillComponent,
+    DeleteEducationComponent
   ],
   imports: [
     BrowserModule,

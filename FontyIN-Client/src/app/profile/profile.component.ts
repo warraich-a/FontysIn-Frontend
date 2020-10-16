@@ -1,3 +1,4 @@
+import { DeleteEducationComponent } from './../delete-education/delete-education.component';
 import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { Contact } from './../classes/Profile/Contact';
@@ -12,7 +13,6 @@ import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
 
 
 @Component({
@@ -201,7 +201,7 @@ export class ProfileComponent implements OnInit {
   }
 
   //open dialog for skills
-  openDialog(skill: Skill): void {
+  openDialogSkill(skill: Skill): void {
     console.log(skill);
     const dialogRef = this.dialog.open(DeleteSkillComponent, {
       maxWidth: '50%',
@@ -215,23 +215,31 @@ export class ProfileComponent implements OnInit {
 
   }
 
-    //deleting skill data
-    deleteSkill(){
-      this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
-      {
-        this.skills = <Skill[]>data;
-        console.log(this.skills);
-      });
-    }
-  
-    //deleting experience data
-    deleteEducation(){
-      this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
-      {
-        this.educations = <Education[]>data;
-        console.log(this.educations);
-      });
-    }
+  // get all Education
+  getAllEducation() {
+    this.profileService.getEducationsById()
+    .subscribe(
+      data => {
+        this.educations = <Object[]>data;
+      }
+    )
+  }
+
+  //open dialog for education
+  openDialogEdu(education: Education): void {
+    console.log(education);
+    const dialogRef = this.dialog.open(DeleteEducationComponent, {
+      maxWidth: '50%',
+      data: {education: education}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllEducation();  
+    });
+
+  }
+
   
     //deleting experience data
     deleteExperience(){
