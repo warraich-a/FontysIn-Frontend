@@ -1,3 +1,4 @@
+import { DeleteExperienceComponent } from './../delete-experience/delete-experience.component';
 import { DeleteEducationComponent } from './../delete-education/delete-education.component';
 import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
 import { Contact } from './../classes/Profile/Contact';
@@ -222,7 +223,7 @@ export class ProfileComponent implements OnInit {
     }
 
     //open dialog
-    openDialogE(education: Education): void {
+    openDialogEdu(education: Education): void {
       console.log(education);
       const dialogRef = this.dialog.open(DeleteEducationComponent, {
         maxWidth: '50%',
@@ -235,12 +236,30 @@ export class ProfileComponent implements OnInit {
       });
 
     }
-  
-    //deleting experience data
-    deleteExperience(experineceId){
-      this.profileService.deleteExperience(this.userId, this.profileId, experineceId).subscribe(data => {
-        console.log(data);
+
+    // get all Experience
+    getAllExperience() {
+      this.profileService.getExperienceById(this.loggedInUser, this.profileId)
+      .subscribe(
+        data => {
+          this.experiencesList = <Object[]>data;
+        }
+      )
+    }
+
+    //open dialog
+    openDialogExp(experience: Experience): void {
+      console.log(experience);
+      const dialogRef = this.dialog.open(DeleteExperienceComponent, {
+        maxWidth: '50%',
+        data: {experience: experience}
+      }); 
+      dialogRef.afterClosed()
+        .subscribe(res => {
+
+          this.getAllExperience();  
       });
+
     }
 
 

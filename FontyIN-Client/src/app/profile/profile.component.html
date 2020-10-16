@@ -114,13 +114,14 @@
           </tr>
         </thead>
         <tbody >
-          <tr id="test"  *ngFor="let p of experiencesList">
+          <tr id="test"  *ngFor="let exp of experiencesList">
            
-            <td class="font-italic"> <h3>{{p.title | uppercase}} </h3> 
-            {{p.company}} . {{p.employmentType}} <br>
-            {{p.startDateExperience}} - {{p.endDateExperience}} <br>
-            {{p.descriptionExperience}} </td>
-            <button class="btn btn-danger float-right" id="" (click)="deleteExperience(p.id)">-</button>
+            <td class="font-italic"> <h3>{{exp.title | uppercase}} </h3> 
+            {{exp.company}} . {{exp.employmentType}} <br>
+            {{exp.startDateExperience}} - {{exp.endDateExperience}} <br>
+            {{exp.descriptionExperience}} </td>
+
+            <button class="btn btn-danger float-right" id="" (click)="openDialogExp(exp)">-</button>
 
           </tr>
           
@@ -193,15 +194,15 @@
                 </tr>
             </thead>
         <tbody>
-                <tr id="test"  *ngFor="let p of educationsList">
-                <td>{{p.school}}</td>
-                <td>{{p.startYearEducation}}</td>
-                <td>{{p.endYearEducation}}</td>
-                <td>{{p.degreeEducation}}</td>
-                <td>{{p.fieldStudy}}</td>
-                <td>{{p.descriptionEducation}}</td>
+                <tr id="test"  *ngFor="let edu of educationsList">
+                <td>{{edu.school}}</td>
+                <td>{{edu.startYearEducation}}</td>
+                <td>{{edu.endYearEducation}}</td>
+                <td>{{edu.degreeEducation}}</td>
+                <td>{{edu.fieldStudy}}</td>
+                <td>{{edu.descriptionEducation}}</td>
 
-                <button class="btn btn-danger float-right" id="" (click)="openDialogE(p)">-</button>
+                <button class="btn btn-danger float-right" id="" (click)="openDialogEdu(edu)">-</button>
 
             </tr>
         </tbody>

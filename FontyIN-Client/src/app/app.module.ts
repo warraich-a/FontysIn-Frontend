@@ -24,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DeleteEducationComponent } from './delete-education/delete-education.component';
+import { DeleteExperienceComponent } from './delete-experience/delete-experience.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DeleteEducationComponent } from './delete-education/delete-education.co
     PostComponent,
     AddInformationComponent,
     DeleteSkillComponent,
-    DeleteEducationComponent
+    DeleteEducationComponent,
+    DeleteExperienceComponent
   ],
   imports: [
     BrowserModule,
