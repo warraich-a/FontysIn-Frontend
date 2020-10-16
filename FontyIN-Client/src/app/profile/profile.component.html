@@ -44,8 +44,7 @@
     <h1>Experience</h1>
     <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
     <button type="button" (click)="CreateExperience()" class="btn btn-dark" id="buttonAdd">+</button>
-    <button class="btn btn-danger" id="" (click)="deleteExperience()">-</button>
-
+    
     <table class="table table-striped">
         <thead>
         <tr>
@@ -66,6 +65,9 @@
             <td>{{p.startDateExperience}}</td>
             <td>{{p.endDateExperience}}</td>
             <td>{{p.descriptionExperience}}</td>
+
+            <button class="btn btn-danger float-right" id="" (click)="openDialogExp(p)">-</button>
+
           </tr>
           
         </tbody>

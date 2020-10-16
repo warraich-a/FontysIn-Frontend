@@ -1,4 +1,3 @@
-import { DeleteEducationComponent } from './delete-education/delete-education.component';
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,6 +37,8 @@ import { UpdateProfileAboutComponent } from './update-profile-about/update-profi
 import { ConnectionComponent } from './connection/connection.component';
 import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
 import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
+import { DeleteExperienceComponent } from './delete-experience/delete-experience.component';
+import { DeleteEducationComponent } from './delete-education/delete-education.component';
 
 
 import { FilterPipe } from './pipes/filter.pipe';
@@ -62,7 +63,8 @@ import { MaterialElevationDirective } from './directives/material-elevation.dire
     FilterPipe, // -> added filter pipe to use it inside the component
     MaterialElevationDirective,  // -> adds shadow
     DeleteSkillComponent,
-    DeleteEducationComponent
+    DeleteEducationComponent,
+    DeleteExperienceComponent
   ],
   imports: [
     BrowserModule,

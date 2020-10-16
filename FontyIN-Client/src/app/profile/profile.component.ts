@@ -1,3 +1,4 @@
+import { DeleteExperienceComponent } from './../delete-experience/delete-experience.component';
 import { DeleteEducationComponent } from './../delete-education/delete-education.component';
 import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
@@ -240,15 +241,31 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  // get all Experience
+  getAllExperience() {
+    this.profileService.getExperienceById()
+    .subscribe(
+      data => {
+        this.experiences = <Experience[]>data;
+      }
+    )
+  } 
+
+  //open dialog for experience
+  openDialogExp(experience: Experience): void {
+    console.log(experience);
+    const dialogRef = this.dialog.open(DeleteExperienceComponent, {
+      maxWidth: '50%',
+      data: {experience: experience}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllExperience();  
+    });
+
+  }
   
-    //deleting experience data
-    deleteExperience(){
-      this.profileService.deleteExperience(this.profile.userId, this.experience.profileId, this.experience.id).subscribe((data)=>
-      {
-        this.experiences = <Experience []>data;
-        console.log(this.experiences);
-      });
-    }
 
 //  constructor(private route: ActivatedRoute) {
 //     this.route.params.subscribe(params => console.log(params))
