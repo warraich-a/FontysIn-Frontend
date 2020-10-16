@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
   educationsList: Object[];
   experiencesList: Object[];
   skillsList : Object[];
-  aboutList: Object[];
+  aboutList: Object[]; 
   educationToAdd = {};
   experienceToAdd = {};
   skillToAdd = {};
@@ -245,7 +245,7 @@ export class ProfileComponent implements OnInit {
           this.experiencesList = <Object[]>data;
         }
       )
-    }
+    } 
 
     //open dialog
     openDialogExp(experience: Experience): void {

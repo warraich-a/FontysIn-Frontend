@@ -1,3 +1,4 @@
+import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { AddInformationComponent } from './profile/add-information/add-information.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -29,7 +30,12 @@ const routes: Routes = [{
 },{
   path: 'users/:id/profiles/:profileId/experience/add', 
   component: AddInformationComponent
-}]
+},
+  {
+    path: 'userType',
+    component: FilterUsersComponent
+  }
+]
 
 
 @NgModule({
