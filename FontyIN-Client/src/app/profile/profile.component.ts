@@ -1,3 +1,4 @@
+import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
@@ -10,7 +11,7 @@ import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 
@@ -30,7 +31,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute,
+               public dialog: MatDialog) { }
 
   profileData: Object;
   educations: Object[];
@@ -186,6 +188,31 @@ export class ProfileComponent implements OnInit {
     )
    
     
+  }
+
+  // get all skills
+  getAllSkills() {
+    this.profileService.getSkillsById()
+    .subscribe(
+      data => {
+        this.skills = <Object[]>data;
+      }
+    )
+  }
+
+  //open dialog for skills
+  openDialog(skill: Skill): void {
+    console.log(skill);
+    const dialogRef = this.dialog.open(DeleteSkillComponent, {
+      maxWidth: '50%',
+      data: {skill: skill}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllSkills();  
+    });
+
   }
 
     //deleting skill data

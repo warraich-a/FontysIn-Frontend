@@ -36,6 +36,8 @@ import { UpdateProfileExperienceComponent } from './update-profile-experience/up
 import { UpdateProfileAboutComponent } from './update-profile-about/update-profile-about.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
+import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
+
 
 import { FilterPipe } from './pipes/filter.pipe';
 import { MaterialElevationDirective } from './directives/material-elevation.directive'; // -> imported filter pipe
@@ -57,7 +59,8 @@ import { MaterialElevationDirective } from './directives/material-elevation.dire
     ConnectionComponent,
     DeleteConnectionComponent,
     FilterPipe, // -> added filter pipe to use it inside the component
-    MaterialElevationDirective  // -> adds shadow
+    MaterialElevationDirective,  // -> adds shadow
+    DeleteSkillComponent
   ],
   imports: [
     BrowserModule,
