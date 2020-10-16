@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PostComponent } from './post/post.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -30,6 +29,11 @@ import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { UpdateProfileEducationComponent } from './update-profile-education/update-profile-education.component';
+import { UpdateProfileExperienceComponent } from './update-profile-experience/update-profile-experience.component';
+import { UpdateProfileAboutComponent } from './update-profile-about/update-profile-about.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
 
@@ -43,6 +47,12 @@ import { MaterialElevationDirective } from './directives/material-elevation.dire
     UserComponent,
     HomeComponent,
     ProfileComponent,
+    PostComponent,
+    HeaderComponent,
+    UserSettingsComponent,
+    UpdateProfileEducationComponent,
+    UpdateProfileExperienceComponent,
+    UpdateProfileAboutComponent,
     UpdateProfileComponent,
     PostComponent,
     ConnectionComponent,

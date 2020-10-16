@@ -1,16 +1,16 @@
 import { constructor } from 'process';
 
 export class Education{
-
-    id: number;
-    profileId: number;
-    school: string;
-    startYear: Date;
-    endYear: Date;
-    degree: string;
-    fieldStudy: string;
-    description: string;
- 
+    constructor( 
+        public id: number,
+        public   profileId: number,
+        public  school: string,
+        public  startYearEducation: Date,
+        public  endYearEducation: Date,
+        public   degreeEducation: string,
+        public   fieldStudy: string,
+        public   descriptionEducation: string,
+      ) {  }
 }
 
 

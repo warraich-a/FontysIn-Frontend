@@ -1,0 +1,49 @@
+
+<div class="container h-100 d-flex justify-content-center">
+    <form (ngSubmit)="updateEducation()" #EducationForm="ngForm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h6 >Edit your Education</h6>
+    </div>
+    
+    <div class="row mt-3">
+        <div class="col-md-12"><label class="labels">School</label>
+            <input type="text" class="form-control" id="school"
+            required
+            [(ngModel)]="education.school" name="school"
+            #school="ngModel">
+        </div>
+        <div class="col-md-12"><label class="labels">Start year</label>
+        
+            <input type="date" class="form-control" name="startYearEducation" ngModel placeholder="education.startYearEducation"  #startYearEducation="ngModel"> <br>
+        </div>
+        <div class="col-md-12"><label class="labels">End year</label>
+            <input type="date" class="form-control" name="endYearEducation" ngModel placeholder="education.endYearEducation"  #endYearEducation="ngModel"> <br>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12"><label class="labels">Degree</label>
+            <input type="text" class="form-control" id="degreeEducation"
+            required
+            [(ngModel)]="education.degreeEducation" name="degreeEducation"
+            #degreeEducation="ngModel">
+        </div>
+        <div class="col-md-12"><label class="labels">Field of study</label>
+            <input type="text" class="form-control" id="fieldStudy"
+            required
+            [(ngModel)]="education.fieldStudy" name="fieldStudy"
+            #fieldStudy="ngModel">
+        </div>
+        <div class="col-md-12"><label class="labels">Description</label>
+            <input type="text" class="form-control" id="descriptionEducation"
+            required
+            [(ngModel)]="education.descriptionEducation" name="descriptionEducation"
+            #descriptionEducation="ngModel">
+        </div>
+    </div>
+    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save Education</button></div>
+    <div class="mt-5 text-center"><span *ngIf="notification" class="elementToFadeInAndOut">
+        <i class="fas fa-check-circle {{notification.class}}"></i>
+        {{notification.message}}
+    </span>
+</div>
+</form>
