@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DeleteEducationComponent } from './delete-education/delete-education.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,
-    DeleteSkillComponent 
+    DeleteSkillComponent,
+    DeleteEducationComponent
   ],
   imports: [
     BrowserModule,

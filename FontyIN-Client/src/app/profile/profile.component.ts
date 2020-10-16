@@ -1,3 +1,4 @@
+import { DeleteEducationComponent } from './../delete-education/delete-education.component';
 import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
@@ -208,14 +209,31 @@ export class ProfileComponent implements OnInit {
       });
 
     }
-  
-    //deleting education data
-    deleteEducation(educationId){
-      this.profileService.deleteEducation(this.userId, this.profileId, educationId).subscribe((data)=>
-      {
-        this.educationsList = <Object[]>data;
-        console.log(this.educationsList);
+
+
+    // get all Education
+    getAllEducation() {
+      this.profileService.getEducationsById(this.loggedInUser, this.profileId)
+      .subscribe(
+        data => {
+          this.educationsList = <Object[]>data;
+        }
+      )
+    }
+
+    //open dialog
+    openDialogE(education: Education): void {
+      console.log(education);
+      const dialogRef = this.dialog.open(DeleteEducationComponent, {
+        maxWidth: '50%',
+        data: {education: education}
+      }); 
+      dialogRef.afterClosed()
+        .subscribe(res => {
+
+          this.getAllEducation();  
       });
+
     }
   
     //deleting experience data
