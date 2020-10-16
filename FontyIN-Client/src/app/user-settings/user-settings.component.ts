@@ -12,7 +12,7 @@ import { ProfileService } from '../services/profile/profile.service';
 export class UserSettingsComponent implements OnInit {
 
   constructor( private service: ProfileService) { }
-
+  notification = null; 
   address = new Address(1, "test1", "test2", "test3", "test4");
   user = new User(1, "0348348");
 
@@ -33,7 +33,7 @@ export class UserSettingsComponent implements OnInit {
     console.log(this.address);
     this.service.updateAddress(this.address, 1).subscribe(
       (res: any) => {
-        console.log("updated address");
+        this.showNotification();
       });
       
       this.service.updatePhoneNumber(this.user, 1).subscribe(
@@ -42,4 +42,8 @@ export class UserSettingsComponent implements OnInit {
         });
 }
 
+showNotification() {
+  this.notification = { class: 'text-primary', message: 'updated!' };
+
+}
 }
