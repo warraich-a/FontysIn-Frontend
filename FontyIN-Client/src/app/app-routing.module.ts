@@ -32,9 +32,9 @@ const routes: Routes = [{
   component: AddInformationComponent
 },
   {
-    path: 'userType',
+    path: 'users/filter',
     component: FilterUsersComponent
-  }
+  },
 ]
 
 
