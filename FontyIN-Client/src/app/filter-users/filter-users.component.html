@@ -70,6 +70,8 @@
 
 </mat-card> -->
 
+
+<!-- DIFFERENT FILTER TYPES -->
 <div class="container">
   <div class="row">
     
@@ -86,7 +88,7 @@
               <br>
               <label>User Type</label>
               <br>
-              <mat-radio-button value="1">Student</mat-radio-button>
+              <mat-radio-button type="radio" name="filter" value="Student" (click)="getUsersByStudentType()" ngModel>Student</mat-radio-button>
               <mat-radio-button value="2">Teacher</mat-radio-button>
               <mat-radio-button value="3">Employee</mat-radio-button>
               <br>
@@ -130,6 +132,8 @@
       </mat-card>
     </div>
 
+
+    <!-- FOUND USERS -->
     <div class="col-sm">
       <mat-card class="found-card">
 
@@ -138,7 +142,7 @@
         </mat-card-header>
 
         <mat-card-content>
-
+          
 
         </mat-card-content>
 
