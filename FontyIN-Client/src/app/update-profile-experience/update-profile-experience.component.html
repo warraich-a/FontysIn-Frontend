@@ -23,10 +23,10 @@
     
         </div>
         <div class="col-md-12"><label class="labels">Location</label>
-            <input type="text" class="form-control" id="locationId"
+            <input type="text" class="form-control" id="location"
         required
-        [(ngModel)]="experience.locationId" name="locationId"
-        #locationId="ngModel">
+        [(ngModel)]="experience.location" name="location"
+        #location="ngModel">
         </div>
     </div>
     <div class="row mt-3">
@@ -56,11 +56,7 @@
         #descriptionExperience="ngModel">
         </div>
     </div>
-    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save Experience</button></div>
-    <div class="mt-5 text-center"><span *ngIf="notification" class="elementToFadeInAndOut">
-        <i class="fas fa-check-circle {{notification.class}}"></i>
-        {{notification.message}}
-    </span>
-</div>
+    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit"  [disabled]="!ExperienceForm.valid">Save Experience</button></div>
+    
 </form>
 </div>

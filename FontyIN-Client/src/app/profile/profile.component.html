@@ -37,7 +37,11 @@
     <h1> About </h1>
     <ul id="test"  *ngFor="let p of about">
       {{p.content}} 
+      <button mat-icon-button ria-label="" (click)="openDialogAbout(p)">
+        <mat-icon>border_color</mat-icon>
+    </button>
     </ul>
+ 
 </div>
 
 <div class="container p-3 my-3 border">
@@ -65,9 +69,13 @@
             <td>{{p.startDateExperience}}</td>
             <td>{{p.endDateExperience}}</td>
             <td>{{p.descriptionExperience}}</td>
-
-            <button class="btn btn-danger float-right" id="" (click)="openDialogExp(p)">-</button>
-
+           
+            
+            <td> <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
+                <mat-icon>border_color</mat-icon>
+            </button></td>
+          <td><button class="btn btn-danger" id="" (click)="openDialogExp(p)">-</button></td>
+          
           </tr>
           
         </tbody>
@@ -96,10 +104,16 @@
                 <td>{{edu.degreeEducation}}</td>
                 <td>{{edu.fieldStudy}}</td>
                 <td>{{edu.descriptionEducation}}</td>
-
-                <button class="btn btn-danger float-right" id="" (click)="openDialogEdu(edu)">-</button>
+                
+                <td> <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(edu)">
+                    <mat-icon>border_color</mat-icon>
+                </button></td>
+              <td><button class="btn btn-danger" id="" (click)="openDialogEdu(edu)">-</button></td>
+               
             </tr>
+            
         </tbody>
+      
         </table>
     </div>
 

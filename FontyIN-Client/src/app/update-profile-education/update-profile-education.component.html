@@ -17,6 +17,7 @@
             required
             [(ngModel)]="education.startYearEducation" name="startYearEducation"
             #startYearEducation="ngModel">
+            
         </div>
         <div class="col-md-12"><label class="labels">End year</label>
             <input type="text" class="form-control" id="endYearEducation"
@@ -45,10 +46,6 @@
             #descriptionEducation="ngModel">
         </div>
     </div>
-    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save Education</button></div>
-    <div class="mt-5 text-center"><span *ngIf="notification" class="elementToFadeInAndOut">
-        <i class="fas fa-check-circle {{notification.class}}"></i>
-        {{notification.message}}
-    </span>
-</div>
+    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" [disabled]="!EducationForm.valid" >Save Education</button></div>
+
 </form>

@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, InjectionToken } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-update-profile-about',
   templateUrl: './update-profile-about.component.html',
   styleUrls: ['./update-profile-about.component.css']
 })
-export class UpdateProfileAboutComponent implements OnInit {
+export class UpdateProfileAboutComponent {
   id: number;
   notification = null; 
-  constructor(  private service: ProfileService, private route: ActivatedRoute) { }
+  constructor(  private service: ProfileService, public dialogRef: MatDialogRef<UpdateProfileAboutComponent>,@Inject(MAT_DIALOG_DATA) public data: any) { }
   about = new About(1, 1, "hello");
   ngOnInit(): void {
-
-    this.id = +this.route.snapshot.paramMap.get('id');
-
+console.log(this.data.about.id);
+    this.id = this.data.about.id
     this.service.GetOneAbout(this.id)
     .subscribe((data)=>{
       console.log(data);
@@ -25,17 +25,12 @@ export class UpdateProfileAboutComponent implements OnInit {
   }
   
   updateAbout(){
-    console.log("updated");
+  
     this.service.updateAbout(this.about, this.id).subscribe(
       (res: any) => {
-        this.showNotification();
+        console.log("updated");
       });
-}
-
-
-showNotification() {
-  this.notification = { class: 'text-primary', message: 'updated!' };
-
+      this.dialogRef.close();
 }
 
 }

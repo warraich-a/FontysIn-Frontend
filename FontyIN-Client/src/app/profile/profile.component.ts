@@ -1,6 +1,9 @@
 import { DeleteExperienceComponent } from './../delete-experience/delete-experience.component';
 import { DeleteEducationComponent } from './../delete-education/delete-education.component';
 import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
+import { UpdateProfileAboutComponent} from './../update-profile-about/update-profile-about.component';
+import { UpdateProfileEducationComponent} from './../update-profile-education/update-profile-education.component';
+import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
@@ -265,7 +268,55 @@ export class ProfileComponent implements OnInit {
     });
 
   }
+
+  GetAllAbout(){
+    this.profileService.getAboutById().subscribe((data)=>
+    {
+      this.about=<About[]>data;
+      console.log(this.about);
+    }); 
+  }
+
+  openDialogAbout(about: About): void {
   
+    const dialogRef = this.dialog.open(UpdateProfileAboutComponent, {
+      maxWidth: '50%',
+      data: {about: about}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.GetAllAbout();
+    });
+
+  }
+  
+  openDialogUpdateEdu(education: Education): void {
+  
+    const dialogRef = this.dialog.open(UpdateProfileEducationComponent, {
+      maxWidth: '50%',
+      data: {education: education}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllEducation();  
+    });
+
+  }
+  openDialogUpdateExp(experience: Experience): void {
+  
+    const dialogRef = this.dialog.open(UpdateProfileExperienceComponent, {
+      maxWidth: '50%',
+      data: {experience: experience}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllExperience();  
+    });
+
+  }
 
 //  constructor(private route: ActivatedRoute) {
 //     this.route.params.subscribe(params => console.log(params))
@@ -336,5 +387,6 @@ export class ProfileComponent implements OnInit {
           }
         )
     }
+
 
 }

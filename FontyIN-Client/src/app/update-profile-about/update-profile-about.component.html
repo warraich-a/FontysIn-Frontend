@@ -16,12 +16,8 @@
             </div>
         </div>
         
-        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save About you</button></div>
-        <div class="mt-5 text-center"><span *ngIf="notification" class="elementToFadeInAndOut">
-            <i class="fas fa-check-circle {{notification.class}}"></i>
-            {{notification.message}}
-        </span>
-    </div>
+        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" [disabled]="!AboutForm.valid">Save About you</button></div>
+        
     </form>
     
 </div>

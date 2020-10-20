@@ -13,9 +13,9 @@ export class Experience{
         public  title: string,
         public  company:string,
         public  employmentType : string,
-        public  locationId: number,
-        public  startDateExperience: string,
-        public  endDateExperience: string,
+        public  location: string,
+        public  startDateExperience: number,
+        public  endDateExperience: number,
         public  descriptionExperience: string,
       ) {  }
 }

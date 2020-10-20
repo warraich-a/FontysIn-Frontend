@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, InjectionToken } from '@angular/core';
 import { ProfileService } from '../services/profile/profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { employmentType } from './../classes/Profile/EmploymentType';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Experience } from './../classes/Profile/Experience';
 @Component({
@@ -9,16 +10,17 @@ import { Experience } from './../classes/Profile/Experience';
   templateUrl: './update-profile-experience.component.html',
   styleUrls: ['./update-profile-experience.component.css']
 })
-export class UpdateProfileExperienceComponent implements OnInit {
+export class UpdateProfileExperienceComponent  {
   typeOfEmployment: employmentType[] = [
     { type:  'FullTime'}, {type: 'PartTime'}, {type: 'FreeLancer'}];
   
   id: number;
   notification = null; 
-  constructor( private service: ProfileService, private route: ActivatedRoute) { }
-  experience = new Experience(1, 1, "Kassa medewerker", "Shell", "Fulltime", 1, "2000", "2019", "Working at gas station" )
+  constructor( private service: ProfileService,  public dialogRef: MatDialogRef<UpdateProfileExperienceComponent>,@Inject(MAT_DIALOG_DATA) public data: any) { }
+  experience = new Experience(1, 1, "Kassa medewerker", "Shell", "Fulltime", "Idk", 1999, 2000,  "Working at gas station" )
   ngOnInit(): void {
-    this.id = +this.route.snapshot.paramMap.get('id');
+
+    this.id = this.data.experience.id;
     
     this.service.GetOneExperience(this.id)
     .subscribe((data)=>{
@@ -30,14 +32,9 @@ export class UpdateProfileExperienceComponent implements OnInit {
   updateExperience(){
     this.service.updateExperience(this.experience, this.id).subscribe(
       (res: any) => {
-         this.showNotification();
+         console.log("updated");
       });
-
-  }
-
-  showNotification() {
-    this.notification = { class: 'text-primary', message: 'updated!' };
-  
+      this.dialogRef.close();
   }
 
 }
