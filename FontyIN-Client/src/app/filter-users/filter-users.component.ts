@@ -10,6 +10,8 @@ import { FilterService } from '../services/filter/filter.service';
   styleUrls: ['./filter-users.component.css']
 })
 export class FilterUsersComponent implements OnInit {
+  realm: string;
+
 
   years: Object[] = [
     {value: '1995-0', viewValue: '1995'}, 
@@ -41,34 +43,57 @@ export class FilterUsersComponent implements OnInit {
   ];
 
   departments: Object[] = [
-    {value: 'ICT-0', viewValue: 'ICT'},
-    {value: 'Pedagogy-1', viewValue: 'Pedagogy'},
-    {value: 'Economie-2', viewValue: 'Economie'},
-    {value: 'Buisniss-3', viewValue: 'Buisniss'}
+    {value: '1', viewValue: 'ICT'},
+    {value: '2', viewValue: 'Pedagogy'},
+    {value: '3', viewValue: 'Economie'},
+    {value: '4', viewValue: 'Buisniss'}
   ];
 
   locations: Object[] = [
-    {value: 'Venlo-0', viewValue: 'Venlo'},
-    {value: 'Eindhoven-1', viewValue: 'Eindhoven'},
-    {value: 'Tilburg-2', viewValue: 'Tilburg'}
+    {value: '1', viewValue: 'Venlo'},
+    {value: '2', viewValue: 'Eindhoven'},
+    {value: '3', viewValue: 'Tilburg'}
   ];
 
+  
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { }
 
 
   ngOnInit(): void { 
-    
-  }
+   }
+
+  locationId=1;
 
   users: User[]; 
   user: User;
+
 
   getUsersByStudentType(){ //method('Student') string is working but UserType.Student not....
     this.filterService.filterByUserTypeStudent('Student').subscribe((data)=>
     {
       this.users=<User[]>data;
       console.log(this.users);      
+    });
+    
+  }
+  modo(){
+    return this.realm;
+  }
+
+  getUsersByLocation(location){
+    this.filterService.filterByUserLocation(location).subscribe((data)=>
+    {
+      this.users=<User[]>data; 
+      console.log(this.users);      
+    });
+  }
+
+  getUsersByStudyYear(year){
+    this.filterService.filterUsersByStartStudyYear(year).subscribe((data)=>
+    {
+     this.users=<User[]>data;
+      console.log(this.users);     
     });
   }
 

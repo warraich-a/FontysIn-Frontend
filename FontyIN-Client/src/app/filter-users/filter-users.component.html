@@ -84,24 +84,26 @@
         <mat-card-content>
     
           <p>
-            <mat-radio-group aria-label="Select an option">
+            <mat-radio-group aria-label="Select an option" ng-init="selectedUserType" [(ngModel)]="realm" (ngModelChange)="modo()">
               <br>
               <label>User Type</label>
               <br>
-              <mat-radio-button type="radio" name="filter" value="Student" (click)="getUsersByStudentType()" ngModel>Student</mat-radio-button>
-              <mat-radio-button value="2">Teacher</mat-radio-button>
-              <mat-radio-button value="3">Employee</mat-radio-button>
-              <br>
-            </mat-radio-group>
+              
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByStudentType()"  value="Student">Student</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"   value="Teacher">Teacher</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"   value="Employee">Employee</mat-radio-button>
+
+            </mat-radio-group> 
           </p>
     
           <br>
           <h4>Start Study Year</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let y of years" [value]="y.value">
+            <mat-select ng-model>
+              <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
                 {{y.viewValue}}
+                
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -115,14 +117,14 @@
                 {{d.viewValue}}
               </mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> 
     
           <br>
           <h4>Location</h4>
           <mat-form-field appearance="fill">
             <mat-label>Location</mat-label>
             <mat-select>
-              <mat-option *ngFor="let l of locations" [value]="l.value">
+              <mat-option *ngFor="let l of locations" name="filter" [value]="l.value" (click)="getUsersByLocation(l.value)">
                 {{l.viewValue}}
               </mat-option>
             </mat-select>
@@ -138,11 +140,27 @@
       <mat-card class="found-card">
 
         <mat-card-header>
-          <mat-card-title>Users:</mat-card-title>
+          <mat-card-title>Found Users:</mat-card-title>
         </mat-card-header>
 
+          <mat-list>
+            
+            <div *ngIf="modo() == 'Student'" >  
+               
+              <tr id="test"  *ngFor="let user of users">
+            
+                <td class="font-italic"> 
+                  {{user.firstName}} - {{user.lastName}} <br>
+                  Fontys University of Applied Sciences
+                </td>
+
+              </tr>
+
+            </div>
+            
+          </mat-list>
+
         <mat-card-content>
-          
 
         </mat-card-content>
 
