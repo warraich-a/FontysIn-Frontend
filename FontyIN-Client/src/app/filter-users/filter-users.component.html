@@ -121,7 +121,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Location</mat-label>
             <mat-select>
-              <mat-option *ngFor="let l of locations" [value]="l.value">
+              <mat-option *ngFor="let l of locations" name="filter" [value]="l.value" (click)="getUsersByLocation(l.value)">
                 {{l.viewValue}}
               </mat-option>
             </mat-select>

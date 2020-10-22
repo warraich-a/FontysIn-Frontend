@@ -17,4 +17,8 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9099/users?studyYear=' + year);
   }
 
+  public filterByUserLocation(location){
+    return this.httpClient.get('http://localhost:9099/users?location=' + location);
+  }
+
 }

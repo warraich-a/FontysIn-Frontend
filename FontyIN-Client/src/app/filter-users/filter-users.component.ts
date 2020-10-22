@@ -47,9 +47,9 @@ export class FilterUsersComponent implements OnInit {
   ];
 
   locations: Object[] = [
-    {value: 'Venlo-0', viewValue: 'Venlo'},
-    {value: 'Eindhoven-1', viewValue: 'Eindhoven'},
-    {value: 'Tilburg-2', viewValue: 'Tilburg'}
+    {value: '1', viewValue: 'Venlo'},
+    {value: '2', viewValue: 'Eindhoven'},
+    {value: '3', viewValue: 'Tilburg'}
   ];
 
   constructor(private filterService: FilterService,
@@ -78,6 +78,14 @@ export class FilterUsersComponent implements OnInit {
     {
      this.users=<User[]>data;
       console.log(this.users);     
+    });
+  }
+
+  getUsersByLocation(location){
+    this.filterService.filterByUserLocation(location).subscribe((data)=>
+    {
+      this.users=<User[]>data; 
+      console.log(this.users);      
     });
   }
 
