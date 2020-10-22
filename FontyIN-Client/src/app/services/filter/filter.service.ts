@@ -9,12 +9,16 @@ export class FilterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public filterByUserTypeStudent(userType){
+  public filterByUserType(userType){
     return this.httpClient.get('http://localhost:9099/users?type=' + userType);
   }
 
-  public filterByUserLocation(location){
+  public filterUserByLocation(location){
     return this.httpClient.get('http://localhost:9099/users?location=' + location);
+  }
+
+  public filterUserByDepartment(department){
+    return this.httpClient.get('http://localhost:9099/users?department=' + department);
   }
 
   public filterUsersByStartStudyYear(year){

@@ -90,8 +90,8 @@
               <br>
               
               <mat-radio-button type="radio" name="filter"  (click)="getUsersByStudentType()"  value="Student">Student</mat-radio-button>
-              <mat-radio-button type="radio" name="filter"   value="Teacher">Teacher</mat-radio-button>
-              <mat-radio-button type="radio" name="filter"   value="Employee">Employee</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByTeacherType()" value="Teacher">Teacher</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByEmployeeType()" value="Employee">Employee</mat-radio-button>
 
             </mat-radio-group> 
           </p>
@@ -100,7 +100,7 @@
           <h4>Start Study Year</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select ng-model>
+            <mat-select ng-model [(ngModel)]="realm" (ngModelChange)="modo()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
                 {{y.viewValue}}
                 
@@ -113,7 +113,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Department</mat-label>
             <mat-select>
-              <mat-option *ngFor="let d of departments" [value]="d.value">
+              <mat-option *ngFor="let d of departments" name="filter" [value]="d.value"  (click)="getUsersByDepartment(d.value)">
                 {{d.viewValue}}
               </mat-option>
             </mat-select>
@@ -143,20 +143,47 @@
           <mat-card-title>Found Users:</mat-card-title>
         </mat-card-header>
 
-          <mat-list>
-            
-            <div *ngIf="modo() == 'Student'" >  
+          <mat-list>  
                
               <tr id="test"  *ngFor="let user of users">
             
-                <td class="font-italic"> 
-                  {{user.firstName}} - {{user.lastName}} <br>
-                  Fontys University of Applied Sciences
-                </td>
+                <div *ngIf="modo() == 'Student'" >
+                  <td class="font-italic"> 
+                    <mat-icon> account_circle </mat-icon>
+                    {{user.firstName}} - {{user.lastName}} <br>
+                    Fontys University of Applied Sciences
+                    <br>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                  </td>
+                </div>
+
+                <div *ngIf="modo() == 'Teacher'" >
+                  <td class="font-italic"> 
+                    <mat-icon> account_circle </mat-icon>
+                    {{user.firstName}} - {{user.lastName}} <br>
+                    Fontys University of Applied Sciences
+                    <br>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                  </td>
+                </div>
+
+                <div *ngIf="modo() == 'Employee'" >
+                  <td class="font-italic"> 
+                    <mat-icon> account_circle </mat-icon>
+                    {{user.firstName}} - {{user.lastName}} <br>
+                    Fontys University of Applied Sciences
+                    <br>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                  </td>
+                </div>
 
               </tr>
-
-            </div>
             
           </mat-list>
 

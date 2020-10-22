@@ -45,8 +45,8 @@ export class FilterUsersComponent implements OnInit {
   departments: Object[] = [
     {value: '1', viewValue: 'ICT'},
     {value: '2', viewValue: 'Pedagogy'},
-    {value: '3', viewValue: 'Economie'},
-    {value: '4', viewValue: 'Buisniss'}
+    {value: '3', viewValue: 'Buisness'},
+    {value: '4', viewValue: 'Economy'}
   ];
 
   locations: Object[] = [
@@ -69,20 +69,47 @@ export class FilterUsersComponent implements OnInit {
   user: User;
 
 
-  getUsersByStudentType(){ //method('Student') string is working but UserType.Student not....
-    this.filterService.filterByUserTypeStudent('Student').subscribe((data)=>
+  getUsersByStudentType(){ 
+    this.filterService.filterByUserType('Student').subscribe((data)=>
     {
       this.users=<User[]>data;
       console.log(this.users);      
     });
     
   }
+
+  getUsersByTeacherType(){ 
+    this.filterService.filterByUserType('Teacher').subscribe((data)=>
+    {
+      this.users=<User[]>data;
+      console.log(this.users);      
+    });
+    
+  }
+
+  getUsersByEmployeeType(){ 
+    this.filterService.filterByUserType('Employee').subscribe((data)=>
+    {
+      this.users=<User[]>data;
+      console.log(this.users);      
+    });
+    
+  }
+
   modo(){
     return this.realm;
   }
 
   getUsersByLocation(location){
-    this.filterService.filterByUserLocation(location).subscribe((data)=>
+    this.filterService.filterUserByLocation(location).subscribe((data)=>
+    {
+      this.users=<User[]>data; 
+      console.log(this.users);      
+    });
+  }
+
+  getUsersByDepartment(department){
+    this.filterService.filterUserByDepartment(department).subscribe((data)=>
     {
       this.users=<User[]>data; 
       console.log(this.users);      
