@@ -50,14 +50,18 @@ h1{
     color: white;
 }
 
-.modal-body {
-  background-color: grey;
+/* .modal-body {
+  
+} */
+.modal-body input{
+  width: 100%;
+  /* margin: 10px; */
  
   
 }
-.modal-body input{
-  width: 80%;
-  margin: 10px;
+.modal-body label{
+ float: left;
+ padding-top: 25px;
 }
 
 
@@ -70,3 +74,13 @@ h1{
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.modal-header{
+  background-color: #623165;
+  color: white;
+}
+
+.hide{
+  display: none!important;
+}
+

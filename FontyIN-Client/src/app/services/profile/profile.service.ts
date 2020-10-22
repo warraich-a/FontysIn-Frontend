@@ -8,8 +8,11 @@ export class ProfileService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProfile(){
-    return this.httpClient.get('http://localhost:9099/users/1/profiles/1')
+  public getProfile(userId){
+    return this.httpClient.get( 'http://localhost:9099/users/'+ userId + '/profiles')
+  }
+  public getUser(userId){
+    return this.httpClient.get('http://localhost:9099/users/' + userId)
   }
   public getExperienceById(userId, profileId){
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences')
@@ -25,6 +28,11 @@ export class ProfileService {
   public getAboutById(userId, profileId){
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts')
   }
+  public addAbout(data, userId, profileId){
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
+      console.log(data);
+    })
+  }
   public addEducation(data, userId, profileId){
     return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
       console.log(data);
@@ -35,8 +43,13 @@ export class ProfileService {
       console.log(data);
     })
   }
-  public addSkill(data){
-    return this.httpClient.post('http://localhost:9099/users/1/profiles/1/skills/new', data).toPromise().then(data => {
+  public addSkill(data, userId, profileId){
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/new', data).toPromise().then(data => {
+      console.log(data);
+    })
+  }
+  public addProfile(data, userId){
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/new', data).toPromise().then(data => {
       console.log(data);
     })
   }

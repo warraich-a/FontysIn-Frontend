@@ -1,3 +1,5 @@
+import { DialogAddProfileComponent } from './dialog-add-profile/dialog-add-profile.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
@@ -9,9 +11,15 @@ import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
-
-
-
+import { User } from '../classes/Profile/User';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, interval, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -20,6 +28,8 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+
   loggedInUser: number = 1;
   profileUser: number;
   isConnected: boolean = false;
@@ -34,17 +44,28 @@ export class ProfileComponent implements OnInit {
   // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute, 
+               public dialog:MatDialog,
+               private _snackBar: MatSnackBar) { }
 
-  profileData: Object;
+      
+  profileData: Profile[];
   educationsList: Object[];
   experiencesList: Object[];
   skillsList : Object[];
   aboutList: Object[];
+  foundUser: User;
   educationToAdd = {};
   experienceToAdd = {};
   skillToAdd = {};
+  profileToAdd: {};
+  profileWithLangauge: {};
+  aboutToAdd: {};
 
+  userFirstName:string;
+  userLastName:string;
+ 
+  
   //these are needed to get ids fior deleting data
   education: Education;
   skill: Skill;
@@ -68,32 +89,16 @@ export class ProfileComponent implements OnInit {
      this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
   }
 
-  // CreateExperience()
-  // {
-    
-  //  this.experienceToAdd = {
-  //   "company": "Fontys",
-  //   "descriptionExperience": "I love it",
-  //   "employmentType": "FreeLancer",
-  //   "endDateExperience": "2000-01-01",
-  //   "id": 29,
-  //   "locationId": 1,
-  //   "profileId": 1,
-  //   "startDateExperience": "1998-01-01",
-  //   "title": "Manager"
-  //    }
-  //    this.profileService.addExperience(<JSON>this.experienceToAdd)
-  // }
 
-  CreateSkill()
+  onSubmitSkill(data)
   {
     
    this.skillToAdd = {
         "id": 17,
-        "name": "angular",
-        "profileId": 1
+        "name": data.skill,
+        "profileId": this.profileId
     }
-     this.profileService.addSkill(<JSON>this.skillToAdd)
+     this.profileService.addSkill(<JSON>this.skillToAdd, this.userId, this.profileId)
   }
 
   onSubmitExperience(data){
@@ -103,7 +108,7 @@ export class ProfileComponent implements OnInit {
       "descriptionExperience": data.descriptionExperience,
       "employmentType":data.employementType,
       "endDateExperience": data.endDateExperience,
-      "id":453,
+      // "id":453,
       "locationId": data.locationId,
       "profileId": this.profileId,
       "startDateExperience": data.startDateExperience,
@@ -114,10 +119,105 @@ export class ProfileComponent implements OnInit {
        
   }
   
-  addEvent(){
-    this.profileService.addExperience(<JSON>this.expToAdd, this.userId, this.profileId)
+  onSubmitProfile(data){
+    this.profileToAdd = {
+      "language": data.language,
+      "userId": this.userId
+    }
+    this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
+   
+    this.ngOnInit();
+
+
   }
-  
+
+  clickMethod(name: string) {
+    if(confirm("Are you sure to delete "+name)) {
+      console.log("Implement delete functionality here");
+    }
+  }
+  refreshProfile(){
+    
+    this.profileService.getProfile(this.userId).
+    subscribe(
+      data=> {
+      this.profileData=<Profile[]>data;
+      console.log("Total profiles are")
+      console.log(this.profileData);
+    });
+    this.profileService.getUser(this.userId).subscribe((data)=>
+    {
+     
+      this.foundUser=<User>data;
+      this.userFirstName = this.foundUser.userFirstName;
+      this.userLastName = this.foundUser.userLastName;
+      console.log(this.profileId);
+
+    });
+    this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
+    {
+     
+      this.educationsList=<Object[]>data;
+      console.log(this.educationsList);
+      console.log("profile id");
+      console.log(this.profileId);
+    },
+    (error: Response) => {
+      if(error.status === 404){
+        this._snackBar.open('Id is wrong!!', 'End now', {
+          duration: 1000,
+         });
+        } 
+        else 
+        {
+          alert('error')
+        }
+    });
+    this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
+    {
+      this.experiencesList=<Object[]>data;
+      console.log(this.experiencesList);
+    },
+    (error: Response) => {
+      if(error.status === 404){
+        this._snackBar.open('Id is wrong!!', 'End now', {
+          duration: 1000,
+         });
+       } else {
+          alert('error')
+        }
+    });
+    this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
+    {
+      this.skillsList=<Object[]>data;
+      console.log(this.skillsList);
+    },
+    (error: Response) => {
+      if(error.status === 404){
+        this._snackBar.open('Id is wrong!!', 'End now', {
+          duration: 1000,
+         });
+       } else {
+          alert('error')
+        }
+    });
+    this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
+    {
+      this.aboutList=<Object[]>data;
+      console.log(this.aboutList);
+    },
+    (error: Response) => {
+      if(error.status === 404){
+        this._snackBar.open('Id is wrong!!', 'End now', {
+          duration: 1000,
+         });
+       } else {
+          alert('error')
+        }
+    });
+    
+    
+  }
 
   ngOnInit(): void {
     this.profileUser = +this.route.snapshot.paramMap.get('id');
@@ -129,37 +229,10 @@ export class ProfileComponent implements OnInit {
     console.log(this.userId);
 
     console.log(this.profileUser);
-    // this.profileService.getProfile().subscribe((data)=>
-    // {
-     
-    //   this.profileData=<Object>data;
 
-    //   console.log(this.profileData);
-      
 
-    // });
-    this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
-    {
-     
-      this.educationsList=<Object[]>data;
-      console.log(this.educationsList);
-      
-    });
-    this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
-    {
-      this.experiencesList=<Object[]>data;
-      console.log(this.experiencesList);
-    });
-    this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
-    {
-      this.skillsList=<Object[]>data;
-      console.log(this.skillsList);
-    });
-    this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
-    {
-      this.aboutList=<Object[]>data;
-      console.log(this.aboutList);
-    }); 
+    this.refreshProfile();
+    
 
     // GET ALL CONTACTS
 

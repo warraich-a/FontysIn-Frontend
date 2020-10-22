@@ -17,10 +17,17 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -30,9 +37,11 @@ import { HttpClientModule } from '@angular/common/http';
     ProfileComponent,
     UpdateProfileComponent,
     PostComponent,
-    AddInformationComponent
+    AddInformationComponent,
+    DialogAddProfileComponent
  
   ],
+  entryComponents:[DialogAddProfileComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -44,7 +53,15 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     MatButtonModule,
-    BrowserAnimationsModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [
     DataService,
