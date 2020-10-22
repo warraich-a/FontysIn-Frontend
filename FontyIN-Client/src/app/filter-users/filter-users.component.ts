@@ -126,9 +126,14 @@ export class FilterUsersComponent implements OnInit {
   }
 
   real: string;
+  departmentSelection: string;
 
   modoe(){
     return this.real;
+  }
+
+  foundDataByDepartment(){
+    return this.departmentSelection;
   }
 
 }

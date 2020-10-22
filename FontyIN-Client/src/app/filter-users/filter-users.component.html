@@ -112,7 +112,7 @@
           <h4>Department</h4>
           <mat-form-field appearance="fill">
             <mat-label>Department</mat-label>
-            <mat-select>
+            <mat-select ng-model [(ngModel)]="departmentSelection" (ngModelChange)="foundDataByDepartment()">
               <mat-option *ngFor="let d of departments" name="filter" [value]="d.value"  (click)="getUsersByDepartment(d.value)">
                 {{d.viewValue}}
               </mat-option>
@@ -186,6 +186,22 @@
                 <tr id="tests" *ngFor="let y of years">
 
                   <div *ngIf="modoe() == 'y.value'" >
+                    <td class="font-italic"> 
+                      <mat-icon> account_circle </mat-icon>
+                      {{user.firstName}} - {{user.lastName}} <br>
+                      Fontys University of Applied Sciences
+                      <br>
+                      <br>
+                      <mat-divider></mat-divider>
+                      <br>
+                    </td>
+                  </div>
+
+                </tr>
+
+                <tr id="testss" *ngFor="let d of departments">
+
+                  <div *ngIf="modoe() == 'd.value'" >
                     <td class="font-italic"> 
                       <mat-icon> account_circle </mat-icon>
                       {{user.firstName}} - {{user.lastName}} <br>
