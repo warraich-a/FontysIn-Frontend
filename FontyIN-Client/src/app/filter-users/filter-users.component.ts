@@ -127,6 +127,7 @@ export class FilterUsersComponent implements OnInit {
 
   real: string;
   departmentSelection: string;
+  locationSelection: string;
 
   modoe(){
     return this.real;
@@ -134,6 +135,10 @@ export class FilterUsersComponent implements OnInit {
 
   foundDataByDepartment(){
     return this.departmentSelection;
+  }
+
+  foundDataByLocation(){
+    return this.locationSelection;
   }
 
 }
