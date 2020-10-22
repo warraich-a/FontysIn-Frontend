@@ -9,8 +9,8 @@ export class FilterService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public filterByUserType(userType){
-    return this.httpClient.delete('http://localhost:9099/users?type=' + userType);
+  public filterByUserTypeStudent(userType){
+    return this.httpClient.get('http://localhost:9099/users?type=' + userType);
   }
 
 }

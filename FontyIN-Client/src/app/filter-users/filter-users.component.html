@@ -82,11 +82,11 @@
         <mat-card-content>
     
           <p>
-            <mat-radio-group aria-label="Select an option">
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="selection" (ngModelChange)="foundData()"> 
               <br>
-              <label>User Type</label>
+              <label>User Type</label> 
               <br>
-              <mat-radio-button value="1">Student</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByStudentType()"  value="Student">Student</mat-radio-button>
               <mat-radio-button value="2">Teacher</mat-radio-button>
               <mat-radio-button value="3">Employee</mat-radio-button>
               <br>
@@ -136,6 +136,23 @@
         <mat-card-header>
           <mat-card-title>Users:</mat-card-title>
         </mat-card-header>
+
+        <mat-list>
+            
+          <div *ngIf="foundData() == 'Student'" >  
+             
+            <tr id="test"  *ngFor="let user of users">
+          
+              <td class="font-italic"> 
+                {{user.firstName}} - {{user.lastName}} <br>
+                Fontys University of Applied Sciences
+              </td>
+
+            </tr>
+
+          </div>
+          
+        </mat-list>
 
         <mat-card-content>
 
