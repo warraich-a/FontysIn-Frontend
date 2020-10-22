@@ -73,6 +73,14 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
+  getUsersByStudyYear(year){
+    this.filterService.filterUsersByStartStudyYear(year).subscribe((data)=>
+    {
+     this.users=<User[]>data;
+      console.log(this.users);     
+    });
+  }
+
   foundData(){
     return this.selection;
   }

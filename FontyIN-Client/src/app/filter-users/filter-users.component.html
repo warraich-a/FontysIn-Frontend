@@ -98,8 +98,9 @@
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
             <mat-select>
-              <mat-option *ngFor="let y of years" [value]="y.value">
+              <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
                 {{y.viewValue}}
+                
               </mat-option>
             </mat-select>
           </mat-form-field>

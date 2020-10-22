@@ -13,4 +13,8 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9099/users?type=' + userType);
   }
 
+  public filterUsersByStartStudyYear(year){
+    return this.httpClient.get('http://localhost:9099/users?studyYear=' + year);
+  }
+
 }
