@@ -40,10 +40,10 @@ export class FilterUsersComponent implements OnInit {
   ];
 
   departments: Object[] = [
-    {value: 'ICT-0', viewValue: 'ICT'},
-    {value: 'Pedagogy-1', viewValue: 'Pedagogy'},
-    {value: 'Economie-2', viewValue: 'Economie'},
-    {value: 'Buisniss-3', viewValue: 'Buisniss'}
+    {value: '1', viewValue: 'ICT'},
+    {value: '2', viewValue: 'Pedagogy'},
+    {value: '3', viewValue: 'Buisness'},
+    {value: '4', viewValue: 'Economy'}
   ];
 
   locations: Object[] = [
@@ -82,7 +82,15 @@ export class FilterUsersComponent implements OnInit {
   }
 
   getUsersByLocation(location){
-    this.filterService.filterByUserLocation(location).subscribe((data)=>
+    this.filterService.filterUserByLocation(location).subscribe((data)=>
+    {
+      this.users=<User[]>data; 
+      console.log(this.users);      
+    });
+  }
+
+  getUsersByDepartment(department){
+    this.filterService.filterUserByDepartment(department).subscribe((data)=>
     {
       this.users=<User[]>data; 
       console.log(this.users);      

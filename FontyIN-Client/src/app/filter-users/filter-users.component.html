@@ -110,7 +110,7 @@
           <mat-form-field appearance="fill">
             <mat-label>Department</mat-label>
             <mat-select>
-              <mat-option *ngFor="let d of departments" [value]="d.value">
+              <mat-option *ngFor="let d of departments" [value]="d.value"  name="filter" (click)="getUsersByDepartment(d.value)">
                 {{d.viewValue}}
               </mat-option>
             </mat-select>
