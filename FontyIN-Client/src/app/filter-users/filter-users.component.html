@@ -100,7 +100,7 @@
           <h4>Start Study Year</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select ng-model [(ngModel)]="realm" (ngModelChange)="modo()">
+            <mat-select ng-model [(ngModel)]="real" (ngModelChange)="modoe()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
                 {{y.viewValue}}
                 
@@ -183,9 +183,29 @@
                   </td>
                 </div>
 
-              </tr>
+                <tr id="tests" *ngFor="let y of years">
+
+                  <div *ngIf="modoe() == 'y.value'" >
+                    <td class="font-italic"> 
+                      <mat-icon> account_circle </mat-icon>
+                      {{user.firstName}} - {{user.lastName}} <br>
+                      Fontys University of Applied Sciences
+                      <br>
+                      <br>
+                      <mat-divider></mat-divider>
+                      <br>
+                    </td>
+                  </div>
+
+                </tr>
             
           </mat-list>
+
+          <!-- <mat-list>
+            <tr id="tests" *ngFor="let y of years">
+
+            </tr>
+          </mat-list> -->
 
         <mat-card-content>
 
