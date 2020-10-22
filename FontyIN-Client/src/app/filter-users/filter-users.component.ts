@@ -60,7 +60,8 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
-  selection: String;
+  radioSelection: String;
+  yearSelection: String;
   users: User[]; 
   user: User;
 
@@ -115,7 +116,11 @@ export class FilterUsersComponent implements OnInit {
     });
   }
 
-  foundData(){
-    return this.selection;
+  foundDataByUserType(){
+    return this.radioSelection;
+  }
+
+  foundDataByYear(){
+    return this.radioSelection;
   }
 }

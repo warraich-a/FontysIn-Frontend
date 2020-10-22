@@ -82,7 +82,7 @@
         <mat-card-content>
     
           <p>
-            <mat-radio-group aria-label="Select an option" [(ngModel)]="selection" (ngModelChange)="foundData()"> 
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="radioSelection" (ngModelChange)="foundDataByUserType()"> 
               <br>
               <label>User Type</label> 
               <br>
@@ -97,7 +97,7 @@
           <h4>Start Study Year</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select>
+            <mat-select ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByYear()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
                 {{y.viewValue}}
                 
@@ -143,7 +143,7 @@
                
               <tr id="test"  *ngFor="let user of users">
             
-                <div *ngIf="foundData() == 'Student'" >
+                <div *ngIf="foundDataByUserType() == 'Student'" >
                   <td class="font-italic"> 
                     <mat-icon> account_circle </mat-icon>
                     {{user.firstName}} - {{user.lastName}} <br>
@@ -155,7 +155,7 @@
                   </td>
                 </div>
 
-                <div *ngIf="foundData() == 'Teacher'" >
+                <div *ngIf="foundDataByUserType() == 'Teacher'" >
                   <td class="font-italic"> 
                     <mat-icon> account_circle </mat-icon>
                     {{user.firstName}} - {{user.lastName}} <br>
@@ -167,7 +167,7 @@
                   </td>
                 </div>
 
-                <div *ngIf="foundData() == 'Employee'" >
+                <div *ngIf="foundDataByUserType() == 'Employee'" >
                   <td class="font-italic"> 
                     <mat-icon> account_circle </mat-icon>
                     {{user.firstName}} - {{user.lastName}} <br>
@@ -178,6 +178,20 @@
                     <br>
                   </td>
                 </div>
+
+                <tr id="tests" *ngFor="let y of years">
+
+                  <div *ngIf="foundDataByYear() == 'y.value'" >
+                    <td class="font-italic"> 
+                      <mat-icon> account_circle </mat-icon>
+                      {{user.firstName}} - {{user.lastName}} <br>
+                      Fontys University of Applied Sciences
+                      <br>
+                      <br>
+                      <mat-divider></mat-divider>
+                      <br>
+                    </td>
+                  </div>
 
               </tr>
             
