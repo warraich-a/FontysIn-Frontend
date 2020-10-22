@@ -87,8 +87,8 @@
               <label>User Type</label> 
               <br>
               <mat-radio-button type="radio" name="filter"  (click)="getUsersByStudentType()"  value="Student">Student</mat-radio-button>
-              <mat-radio-button value="2">Teacher</mat-radio-button>
-              <mat-radio-button value="3">Employee</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByTeacherType()"  value="Teacher">Teacher</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByEmployeeType()"  value="Employee">Employee</mat-radio-button>
               <br>
             </mat-radio-group>
           </p>
@@ -138,22 +138,50 @@
           <mat-card-title>Users:</mat-card-title>
         </mat-card-header>
 
-        <mat-list>
+
+          <mat-list>  
+               
+              <tr id="test"  *ngFor="let user of users">
             
-          <div *ngIf="foundData() == 'Student'" >  
-             
-            <tr id="test"  *ngFor="let user of users">
-          
-              <td class="font-italic"> 
-                {{user.firstName}} - {{user.lastName}} <br>
-                Fontys University of Applied Sciences
-              </td>
+                <div *ngIf="foundData() == 'Student'" >
+                  <td class="font-italic"> 
+                    <mat-icon> account_circle </mat-icon>
+                    {{user.firstName}} - {{user.lastName}} <br>
+                    Fontys University of Applied Sciences
+                    <br>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                  </td>
+                </div>
 
-            </tr>
+                <div *ngIf="foundData() == 'Teacher'" >
+                  <td class="font-italic"> 
+                    <mat-icon> account_circle </mat-icon>
+                    {{user.firstName}} - {{user.lastName}} <br>
+                    Fontys University of Applied Sciences
+                    <br>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                  </td>
+                </div>
 
-          </div>
-          
-        </mat-list>
+                <div *ngIf="foundData() == 'Employee'" >
+                  <td class="font-italic"> 
+                    <mat-icon> account_circle </mat-icon>
+                    {{user.firstName}} - {{user.lastName}} <br>
+                    Fontys University of Applied Sciences
+                    <br>
+                    <br>
+                    <mat-divider></mat-divider>
+                    <br>
+                  </td>
+                </div>
+
+              </tr>
+            
+          </mat-list>
 
         <mat-card-content>
 

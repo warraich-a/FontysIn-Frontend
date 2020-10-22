@@ -64,8 +64,26 @@ export class FilterUsersComponent implements OnInit {
   users: User[]; 
   user: User;
 
-  getUsersByStudentType(){ //method('Student') string is working but UserType.Student not....
-    this.filterService.filterByUserTypeStudent('Student').subscribe((data)=>
+  getUsersByStudentType(){
+    this.filterService.filterByUserType('Student').subscribe((data)=>
+    {
+      this.users=<User[]>data;
+      console.log(this.users);      
+    });
+    
+  }
+
+  getUsersByTeacherType(){ 
+    this.filterService.filterByUserType('Teacher').subscribe((data)=>
+    {
+      this.users=<User[]>data;
+      console.log(this.users);      
+    });
+    
+  }
+
+  getUsersByEmployeeType(){ 
+    this.filterService.filterByUserType('Employee').subscribe((data)=>
     {
       this.users=<User[]>data;
       console.log(this.users);      
