@@ -61,6 +61,9 @@ export class ProfileComponent implements OnInit {
   profileToAdd: {};
   profileWithLangauge: {};
   aboutToAdd: {};
+  newProfileId : number;
+ 
+  
 
   userFirstName:string;
   userLastName:string;
@@ -87,6 +90,7 @@ export class ProfileComponent implements OnInit {
      "startYearEducation": data.endYearEducation
      }
      this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
+     this.ngOnInit();
   }
 
 
@@ -99,6 +103,7 @@ export class ProfileComponent implements OnInit {
         "profileId": this.profileId
     }
      this.profileService.addSkill(<JSON>this.skillToAdd, this.userId, this.profileId)
+     this.ngOnInit();
   }
 
   onSubmitExperience(data){
@@ -116,18 +121,52 @@ export class ProfileComponent implements OnInit {
        }
        console.warn(this.experienceToAdd);
        this.profileService.addExperience(<JSON>this.experienceToAdd, this.userId, this.profileId)
+       this.ngOnInit();
        
   }
   
+  
   onSubmitProfile(data){
+    
+  
     this.profileToAdd = {
       "language": data.language,
       "userId": this.userId
     }
     this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
-   
-    this.ngOnInit();
+      .subscribe(
+        newProfile => {
+          
+          console.log("New Profile Added ----------------");
+          console.log(newProfile);
 
+          this.aboutToAdd = {
+            "content": data.about,
+            "profileId": newProfile
+          }
+
+          this.profileService.addAbout(<JSON>this.aboutToAdd,  this.userId, newProfile)
+          console.log("test about");
+          console.log(this.aboutToAdd);
+          //this.isConnected = true;
+        }
+      )
+
+     
+      this.ngOnInit();
+
+
+    // console.log("---sdfdsf---");
+    // this.profileToAdd = {
+    //   "language": data.language,
+    //   "userId": this.userId
+    // }
+    // this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
+    // this.ngOnInit();
+
+    // this.profileData.forEach(function (value) {
+    //   console.log(value);
+    // }); 
 
   }
 
@@ -144,6 +183,7 @@ export class ProfileComponent implements OnInit {
       this.profileData=<Profile[]>data;
       console.log("Total profiles are")
       console.log(this.profileData);
+
     });
     this.profileService.getUser(this.userId).subscribe((data)=>
     {
@@ -154,25 +194,25 @@ export class ProfileComponent implements OnInit {
       console.log(this.profileId);
 
     });
-    this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
-    {
-     
-      this.educationsList=<Object[]>data;
-      console.log(this.educationsList);
-      console.log("profile id");
-      console.log(this.profileId);
-    },
-    (error: Response) => {
-      if(error.status === 404){
-        this._snackBar.open('Id is wrong!!', 'End now', {
-          duration: 1000,
-         });
-        } 
-        else 
-        {
-          alert('error')
-        }
-    });
+      this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
+      {
+      
+        this.educationsList=<Object[]>data;
+        console.log(this.educationsList);
+        console.log("profile id");
+        console.log(this.profileId);
+      },
+      (error: Response) => {
+        if(error.status === 404){
+          this._snackBar.open('Id is wrong!!', 'End now', {
+            duration: 1000,
+          });
+          } 
+          else 
+          {
+            alert('error')
+          }
+      });
     this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
       this.experiencesList=<Object[]>data;
@@ -220,6 +260,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
     this.profileUser = +this.route.snapshot.paramMap.get('id');
 
     this.userId = +this.route.snapshot.paramMap.get('id');

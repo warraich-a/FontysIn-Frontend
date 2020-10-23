@@ -15,6 +15,9 @@
         (click)="createContact()">Connect
 </button>
 
+<!-- <li *ngFor="let p of profileData">
+    {{p.language}}
+</li> -->
 
 <div class="container" style="margin:30px;">
 
@@ -52,7 +55,7 @@
                             </div>
                         </div>
                       
-                       <!-- <div class="form-group">
+                       <div class="form-group">
                            <label for="about">About </label>
                            <textarea 
                                 required 
@@ -76,7 +79,7 @@
                                     minimum length is  {{about.errors.minlength.requiredLength}}
                                 </div>
                            </div>
-                        </div> --> 
+                        </div> 
                         <button 
                             mdbBtn 
                             type="submit"  
@@ -98,9 +101,18 @@
 </div>   
 <div class="container-fluid">
     <div class="container p-3 my-3 border" >
-        <div class="dropdown" mdbDropdown style="float: right;">
+       
+        <div class="dropdown" style="float: right;">
+            <button class="dropbtn">Switch Language</button>
+            <div class="dropdown-content">
+                <li *ngFor="let p of profileData">
+                    <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
+                </li>
+            </div>
+          </div>
+        <!-- <div class="dropdown" mdbDropdown style="float: right;">
 
-            <button Toggle mdbBtn color="primary" class="dropdown-toggle waves-light" type="button" 
+            <button type="button"  Toggle mdbBtn color="primary" class="dropdown-toggle waves-light" 
               mdbWavesEffect>
               Switch Profile
             </button>
@@ -110,7 +122,7 @@
                 <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
                 </li>
             </div>
-          </div>
+          </div> -->
         <div ng-controller="userFirstName, userLastName">
                 <h1> {{userFirstName}} {{userLastName}} </h1>  
         </div>
@@ -173,7 +185,12 @@
                             <input type="date" name="endDateExperience" ngModel placeholder="ex: 02/02/2003"> <br>
                             <label ><h3> description </h3></label> <br>
                             <input type="text" name="descriptionExperience" ngModel placeholder="ex: I have had a very good experience"> <br> <br>
-                            <button type="submit" id="submitButton" > submit </button>
+                            <button 
+                                type="submit" 
+                                id="submitButton"   
+                                onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
+                                submit 
+                            </button>
                             
                         </form>
                     </div>
@@ -246,7 +263,11 @@
                             <label ><h3> Description </h3></label> <br>
                             <input type="text" name="descriptionEducation" ngModel> <br>
                             <br><br>
-                            <button type="submit" id="submitButton" > submit </button>
+                            <button type="submit" 
+                                id="submitButton"   
+                                onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
+                                submit 
+                            </button>
                             
                         </form>
                     </div>
@@ -302,7 +323,12 @@
                 <label ><h3>Skill</h3> </label> <br>
                     <input type="text" name="skill" ngModel> <br>
 
-                <button type="submit" id="submitButton" > submit </button>
+                <button 
+                    type="submit" 
+                    id="submitButton"    
+                    onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()"  > 
+                    submit 
+                </button>
                 
             </form>
         </div>

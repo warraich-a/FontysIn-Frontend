@@ -1,12 +1,20 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor(private httpClient: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
+
+  constructor(private httpClient: HttpClient, 
+    private _snackBar: MatSnackBar) { }
 
   public getProfile(userId){
     return this.httpClient.get( 'http://localhost:9099/users/'+ userId + '/profiles')
@@ -29,7 +37,7 @@ export class ProfileService {
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts')
   }
   public addAbout(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts/new', data).toPromise().then(data => {
       console.log(data);
     })
   }
@@ -44,15 +52,49 @@ export class ProfileService {
     })
   }
   public addSkill(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/new', data).toPromise().then(data => {
-      console.log(data);
-    })
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/new', data).subscribe((data)=>
+    {
+     
+    },
+    (error: Response) => {
+      if(error.status === 409){
+        this._snackBar.open('Already Exist!!', 'End now', {
+          duration: 1000,
+        });
+        } 
+        else 
+        {
+          alert('error')
+        }
+    });
+      
   }
-  public addProfile(data, userId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/new', data).toPromise().then(data => {
-      console.log(data);
-    })
+
+  public addProfile(resource: {}, userId) {
+    //console.log(this.url);
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/new', JSON.stringify(resource), this.httpOptions)
+      .pipe(
+        map(response => response)
+      )
   }
+
+  // public addProfile(data, userId){
+  //   return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/new', data).subscribe((data)=>
+  //   {
+     
+  //   },
+  //   (error: Response) => {
+  //     if(error.status === 409){
+  //       this._snackBar.open('Already Exist!!', 'End now', {
+  //         duration: 1000,
+  //       });
+  //       } 
+  //       else 
+  //       {
+  //         alert('error')
+  //       }
+  //   });
+  // }
 
     //delete data in profile page
     public deleteEducation(userId, profileId, educationId){

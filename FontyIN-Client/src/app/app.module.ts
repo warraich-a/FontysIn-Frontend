@@ -34,7 +34,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AppComponent,
     UserComponent,
     HomeComponent,
-    ProfileComponent,
+   ProfileComponent, 
     UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,
