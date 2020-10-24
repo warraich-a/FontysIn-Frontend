@@ -47,9 +47,23 @@ export class ProfileService {
     })
   }
   public addExperience(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/new', data).toPromise().then(data => {
-      console.log(data);
-    })
+    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/new', data).subscribe((data)=>
+    {
+     
+    },
+    (error: Response) => {
+      
+      if(error.status === 409){
+        this._snackBar.open('Already Exist!!', 'End now', {
+          duration: 1000,
+        });
+        } 
+        else 
+        {
+          alert(error.status)
+        }
+    });
+      
   }
   public addSkill(data, userId, profileId){
     return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/new', data).subscribe((data)=>

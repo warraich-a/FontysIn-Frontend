@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { PostComponent } from './post/post.component';
 
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
@@ -34,7 +35,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AppComponent,
     UserComponent,
     HomeComponent,
-   ProfileComponent, 
+    ProfileComponent, 
     UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,

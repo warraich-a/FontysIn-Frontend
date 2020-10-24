@@ -41,18 +41,13 @@
                    <form class="text-center" #userProfile="ngForm" (ngSubmit)="onSubmitProfile(userProfile.value)">
                        <div class="form-group">
                             <label for="language"> Language</label>
-                            <input 
-                                required 
-                                ngModel 
-                                name="language" 
-                                id="language" 
-                                type="text" 
-                                #language ="ngModel" 
-                                class="form-control">
-                            <div class="alert alert-danger" 
-                            *ngIf="language.touched && !language.valid">
-                                Not valid
-                            </div>
+
+                            <mat-select name="language" ngModel>
+                                <mat-option value="" disabled>Choose a language</mat-option>
+                                <mat-option *ngFor = "let l of languages" [value]="l.name">
+                                    {{l.name}}
+                                </mat-option>
+                              </mat-select>
                         </div>
                       
                        <div class="form-group">
@@ -154,37 +149,60 @@
                                                                     <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
                                                                     used to send the data in onSubmitExperience which is created it in profile.component.ts-->
                         <form  class="text-center border border-silver" #userExperience="ngForm" (ngSubmit)="onSubmitExperience(userExperience.value)"> 
-                            <label ><h3>Company</h3> </label> <br>
-                                <input type="text" name="company" ngModel placeholder="Company"> <br>
-                           
-                           
-                            <label ><h3>Title</h3></label> <br>
-                            <input type="text" name="title" ngModel placeholder="title"> <br>
-                           
-                            <!-- <label>
-                                Employement Type
-                            </label> <br>
-                            <input list="employementTypes" name="employementType">
-                                <datalist id="employementTypes">
-                                    <option value="FullTime">
-                                    <option value="PartTime">
-                                    <option value="FreeLancer">
-                                </datalist>    -->
-                                
+                            <mat-form-field class="input-full-width">
+                            <input matInput type="text" name="company" ngModel placeholder="Company"> 
+                            </mat-form-field>
                                
-                            <label ><h3>Job Type</h3></label>  <br>
-                                <input type="text" name="employementType" ngModel placeholder="ex: Fulltime, PartTime, FreeLancer"> <br>
-                                
                             <br>
-                            <label> <h3>Location Id </h3> </label> <br>
-                            <input type="text" name="locationId" ngModel placeholder="locationId"> <br> 
-    
-                            <label> <h3> Start Date </h3></label> <br>
-                            <input type="date" name="startDateExperience" ngModel placeholder="ex: 02/02/2003"> <br>
-                            <label ><h3> End Date </h3></label> <br>
-                            <input type="date" name="endDateExperience" ngModel placeholder="ex: 02/02/2003"> <br>
-                            <label ><h3> description </h3></label> <br>
-                            <input type="text" name="descriptionExperience" ngModel placeholder="ex: I have had a very good experience"> <br> <br>
+                           
+                            <mat-form-field class="input-full-width">
+                            <input matInput type="text" name="title" ngModel placeholder="Title"> 
+                            </mat-form-field><br>
+                
+                            <mat-form-field class="input-full-width">     
+                            <mat-select name="employementType" ngModel>
+                                <mat-option value="" disabled>Job Type </mat-option>
+                                <mat-option *ngFor = "let l of jobType" [value]="l.name">
+                                    {{l.name}}
+                                </mat-option>
+                            </mat-select>
+                           </mat-form-field>  
+                            <br>
+
+                            <mat-form-field class="input-full-width"> 
+                            <input matInput type="text" name="locationId" ngModel placeholder="London, United Kingdom"> 
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="input-full-width">
+                                <mat-select name="startDateExperience" ngModel>
+                                    <mat-option value="" disabled>Starting Year </mat-option>
+                                    <mat-option *ngFor = "let l of years" [value]="l.year">
+                                        {{l.year}}
+                                    </mat-option>
+                                </mat-select>
+
+                            <!-- <input matInput type="text" name="startDateExperience" ngModel placeholder="ex: 2016"> -->
+                            </mat-form-field>
+                            <br>
+
+                            
+                            <mat-form-field class="input-full-width">
+
+                                <mat-select name="endDateExperience" ngModel>
+                                    <mat-option value="" disabled>Ending Year </mat-option>
+                                    <mat-option *ngFor = "let l of years" [value]="l.year">
+                                        {{l.year}}
+                                    </mat-option>
+                                </mat-select>
+
+                            <!-- <input matInput type="text" name="endDateExperience" ngModel placeholder="ex: 2020">  -->
+                            </mat-form-field>
+                            <br>
+
+                            <mat-form-field class="input-full-width">
+                            <input matInput type="text" name="descriptionExperience" ngModel placeholder="Ex: I have had a very good experience"> 
+                            </mat-form-field>
+                            <br>
                             <button 
                                 type="submit" 
                                 id="submitButton"   
@@ -215,7 +233,9 @@
             <td class="font-italic"> <h3>{{p.title | uppercase}} </h3> 
             {{p.company}} . {{p.employmentType}} <br>
             {{p.startDateExperience}} - {{p.endDateExperience}} <br>
-            {{p.descriptionExperience}} </td>
+            {{p.descriptionExperience}} <br>
+            {{p.location}}  <br>
+            </td>
             <button class="btn btn-danger float-right" id="" (click)="deleteExperience(p.id)">Delete</button>
 
           </tr>
@@ -244,25 +264,45 @@
                                                                     <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
                                                                     used to send the data in onSubmitExperience which is created it in profile.component.ts-->
                         <form  class="text-center border border-silver" #userEducation="ngForm" (ngSubmit)="onSubmitEducation(userEducation.value)"> 
-                            <label ><h3>School</h3> </label> <br>
-                                <input type="text" name="school" ngModel > <br>
                            
+                            <mat-form-field class="input-full-width">
+                            <input matInput type="text" name="school" ngModel placeholder="School/University" > 
+                            </mat-form-field>
                            
-                            <label ><h3>From</h3></label> <br>
-                            <input type="date" name="startYearEducation" ngModel > <br>
-                           
-                            <label ><h3>Until</h3></label>  <br>
-                                <input type="date" name="endYearEducation" ngModel > <br>
-                            
+                            <mat-form-field class="input-full-width">
+                                <mat-select name="startYearEducation" ngModel>
+                                    <mat-option value="" disabled>Starting Year </mat-option>
+                                    <mat-option *ngFor = "let l of years" [value]="l.year">
+                                        {{l.year}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="input-full-width">
+                                <mat-select name="endYearEducation" ngModel>
+                                    <mat-option value="" disabled>Ending Year </mat-option>
+                                    <mat-option *ngFor = "let l of years" [value]="l.year">
+                                        {{l.year}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                             <br>
-                            <label> <h3>Degree </h3> </label> <br>
-                            <input type="text" name="degreeEducation" ngModel> <br> 
+                            
+  
+                            <mat-form-field class="input-full-width">
+                            <input matInput type="text" name="degreeEducation" ngModel placeholder="Degree">
+                            </mat-form-field>
+                            <br> 
     
-                            <label> <h3> Field</h3></label> <br>
-                            <input type="text" name="fieldStudy" ngModel > <br>
-                            <label ><h3> Description </h3></label> <br>
-                            <input type="text" name="descriptionEducation" ngModel> <br>
-                            <br><br>
+                            <mat-form-field class="input-full-width">
+                            <input matInput type="text" name="fieldStudy" ngModel  placeholder="Field"> 
+                            </mat-form-field>
+                            <br>
+
+                            <mat-form-field class="input-full-width">
+                            <input matInput type="text" name="descriptionEducation" ngModel placeholder="ex: I have had a very good experience"> 
+                            </mat-form-field>
+                            <br>
                             <button type="submit" 
                                 id="submitButton"   
                                 onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
@@ -320,9 +360,10 @@
                                                         <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
                                                         used to send the data in onSubmitExperience which is created it in profile.component.ts-->
             <form  class="text-center border border-silver" #userSkill="ngForm" (ngSubmit)= "onSubmitSkill(userSkill.value)"> 
-                <label ><h3>Skill</h3> </label> <br>
-                    <input type="text" name="skill" ngModel> <br>
-
+                <label ><h3>Skill</h3> </label> 
+                <mat-form-field class="input-full-width">
+                    <input matInput type="text" name="skill" ngModel placeholder="C#"> 
+                </mat-form-field>
                 <button 
                     type="submit" 
                     id="submitButton"    

@@ -124,3 +124,6 @@ h1{
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+.input-full-width {
+  width: 100%;
+}

@@ -68,7 +68,6 @@ export class ProfileComponent implements OnInit {
   userFirstName:string;
   userLastName:string;
  
-  
   //these are needed to get ids fior deleting data
   education: Education;
   skill: Skill;
@@ -76,18 +75,39 @@ export class ProfileComponent implements OnInit {
   profile: Profile; 
 
   
+  years = [
+    {year : 2010},
+    {year : 2011},
+    {year : 2012},
+    {year : 2013},
+    {year : 2014},
+    {year : 2015}
+    
+
+  ]
+  languages = [
+    {name: "English"},
+    {name: "French"},
+    {name: "Spanish"},
+    {name: "Urdu"}
+  ]
+
+  jobType = [
+    {name: "FullTime"},
+    {name: "Parttime"},
+    {name: "FreeLancer"}
+  ]
   onSubmitEducation(data)
   {
     
    this.educationToAdd = {
      "degreeEducation": data.degreeEducation,
      "descriptionEducation": data.descriptionEducation,
-     "endYearEducation": data.startYearEducation,
+     "endYearEducation": parseInt(data.startYearEducation),
      "fieldStudy": data.fieldStudy,
-     "id": 97,
      "profileId": this.profileId,
      "school": data.school,
-     "startYearEducation": data.endYearEducation
+     "startYearEducation": parseInt(data.endYearEducation)
      }
      this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
      this.ngOnInit();
@@ -112,11 +132,11 @@ export class ProfileComponent implements OnInit {
       "company": data.company,
       "descriptionExperience": data.descriptionExperience,
       "employmentType":data.employementType,
-      "endDateExperience": data.endDateExperience,
+      "endDateExperience": parseInt(data.endDateExperience),
       // "id":453,
-      "locationId": data.locationId,
+      "location": data.locationId,
       "profileId": this.profileId,
-      "startDateExperience": data.startDateExperience,
+      "startDateExperience": parseInt(data.startDateExperience),
       "title": data.title
        }
        console.warn(this.experienceToAdd);
@@ -169,6 +189,8 @@ export class ProfileComponent implements OnInit {
     // }); 
 
   }
+
+
 
   clickMethod(name: string) {
     if(confirm("Are you sure to delete "+name)) {
@@ -260,6 +282,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  
    
     this.profileUser = +this.route.snapshot.paramMap.get('id');
 
