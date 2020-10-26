@@ -122,6 +122,7 @@ export class ProfileService {
     public deleteSkill(userId, profileId, skillId){
       return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/' + skillId);
     }
+    
 
 
 }

@@ -67,6 +67,7 @@ export class ProfileComponent implements OnInit {
 
   userFirstName:string;
   userLastName:string;
+  userImage: string;
  
   //these are needed to get ids fior deleting data
   education: Education;
@@ -171,9 +172,10 @@ export class ProfileComponent implements OnInit {
           //this.isConnected = true;
         }
       )
-
+     // window.location.reload();
      
-      this.ngOnInit();
+     this.refresh();
+      // this.ngOnInit();
 
 
     // console.log("---sdfdsf---");
@@ -190,7 +192,9 @@ export class ProfileComponent implements OnInit {
 
   }
 
-
+  refresh(): void {
+    window.location.reload();
+}
 
   clickMethod(name: string) {
     if(confirm("Are you sure to delete "+name)) {
@@ -213,10 +217,12 @@ export class ProfileComponent implements OnInit {
       this.foundUser=<User>data;
       this.userFirstName = this.foundUser.userFirstName;
       this.userLastName = this.foundUser.userLastName;
-      console.log(this.profileId);
+      this.userImage = this.foundUser.userImage;
+      // console.log(this.profilePicture);
 
     });
-      this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
+    
+    this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
       
         this.educationsList=<Object[]>data;
@@ -277,9 +283,22 @@ export class ProfileComponent implements OnInit {
           alert('error')
         }
     });
-    
-    
   }
+
+  url: string;
+    onSelectFile(event) { // called each time file input changes
+        if (event.target.files && event.target.files[0]) {
+          var reader = new FileReader();
+
+          reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+          reader.onload = (event: any) => { // called once readAsDataURL is completed
+            this.url = <string>event.target.result;
+            console.log("text for image");
+            console.log(this.url);
+          }
+        }
+    }
 
   ngOnInit(): void {
   

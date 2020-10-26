@@ -87,7 +87,8 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>           
+                   
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>         
                 </div>
             </div>
         </div>
@@ -96,7 +97,10 @@
 </div>   
 <div class="container-fluid">
     <div class="container p-3 my-3 border" >
-       
+    
+       <!-- <img [src]="url" height="200"> <br/>
+        <input type='file' (change)="onSelectFile($event)"> -->
+
         <div class="dropdown" style="float: right;">
             <button class="dropbtn">Switch Language</button>
             <div class="dropdown-content">
@@ -118,8 +122,9 @@
                 </li>
             </div>
           </div> -->
-        <div ng-controller="userFirstName, userLastName">
-                <h1> {{userFirstName}} {{userLastName}} </h1>  
+        <div ng-controller="userImage, userFirstName, userLastName">
+            <!-- {{userImage}}    -->
+            <h1> {{userFirstName}} {{userLastName}} </h1>  
         </div>
     </div>
     <div class="container p-3 bg-dark my-3 border text-white">
