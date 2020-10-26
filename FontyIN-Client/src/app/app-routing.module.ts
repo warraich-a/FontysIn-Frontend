@@ -55,7 +55,8 @@ const routes: Routes = [{
 {
   path: 'users/filter',
   component: FilterUsersComponent
-},]
+},
+]
 
 
 @NgModule({

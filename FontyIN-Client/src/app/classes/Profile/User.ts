@@ -1,8 +1,9 @@
+
 export class User {
     id: number;
-    firstName: string; 
-    lastName: string; 
-    email: string;; 
+    userFirstName: string;
+    userLastName: string;
+    userEmail: string;
     password: string;; 
     phoneNumbar: string;; 
     addressId: number;
@@ -15,5 +16,4 @@ export class User {
         public id: number,
         public userPhoneNumber: string,
     ) {  }
-
 }

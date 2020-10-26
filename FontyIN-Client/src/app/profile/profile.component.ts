@@ -5,18 +5,28 @@ import { UpdateProfileAboutComponent} from './../update-profile-about/update-pro
 import { UpdateProfileEducationComponent} from './../update-profile-education/update-profile-education.component';
 import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
+import { DialogAddProfileComponent } from './dialog-add-profile/dialog-add-profile.component';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { User } from '../classes/Profile/User';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, interval, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -25,6 +35,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+
   loggedInUser: number = 1;
   profileUser: UserDTO;
   isConnected: boolean = false;
@@ -33,71 +45,273 @@ export class ProfileComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
 
+  userId:number;
+  profileId: number;
+  
+  @Input() expToAdd={};
+
+  // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
                private route: ActivatedRoute,
-               public dialog: MatDialog) { }
+               public dialog: MatDialog,
+               private _snackBar: MatSnackBar) { }
+            
 
-  profileData: Object;
-  educations: Object[];
-  experiences: Experience[];
-  skills : Object[];
-  about: About[];
+      
+  profileData: Profile[];
+  educationsList: Object[];
+  experiencesList: Object[];
+  skillsList : Object[];
+  aboutList: Object[];
+  foundUser: User;
   educationToAdd = {};
   experienceToAdd = {};
   skillToAdd = {};
+  profileToAdd: {};
+  profileWithLangauge: {};
+  aboutToAdd: {};
+  newProfileId : number;
+ 
+  
 
+  userFirstName:string;
+  userLastName:string;
+  userImage: string;
+ 
   //these are needed to get ids fior deleting data
   education: Education;
   skill: Skill;
   experience: Experience;
   profile: Profile; 
 
-  CreateEducation()
+  
+  years = [
+    {year : 2010},
+    {year : 2011},
+    {year : 2012},
+    {year : 2013},
+    {year : 2014},
+    {year : 2015}
+    
+
+  ]
+  languages = [
+    {name: "English"},
+    {name: "French"},
+    {name: "Spanish"},
+    {name: "Urdu"}
+  ]
+
+  jobType = [
+    {name: "FullTime"},
+    {name: "Parttime"},
+    {name: "FreeLancer"}
+  ]
+  onSubmitEducation(data)
   {
     
    this.educationToAdd = {
-     "degreeEducation": "High School",
-     "descriptionEducation": "Got good grades",
-     "endYearEducation": "2020-01-01",
-     "fieldStudy": "ICT",
-     "id": 15,
-     "profileId": 1,
-     "school": "Fontys",
-     "startYearEducation": "2018-01-01"
+     "degreeEducation": data.degreeEducation,
+     "descriptionEducation": data.descriptionEducation,
+     "endYearEducation": parseInt(data.startYearEducation),
+     "fieldStudy": data.fieldStudy,
+     "profileId": this.profileId,
+     "school": data.school,
+     "startYearEducation": parseInt(data.endYearEducation)
      }
-     this.profileService.addEducation(<JSON>this.educationToAdd)
+     this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
+     this.ngOnInit();
   }
 
-  CreateExperience()
-  {
-    
-   this.experienceToAdd = {
-    "company": "Fontys",
-    "descriptionExperience": "I love it",
-    "employmentType": "FreeLancer",
-    "endDateExperience": "2000-01-01",
-    "id": 29,
-    "locationId": 1,
-    "profileId": 1,
-    "startDateExperience": "1998-01-01",
-    "title": "Manager"
-     }
-     this.profileService.addExperience(<JSON>this.experienceToAdd)
-  }
 
-  CreateSkill()
+  onSubmitSkill(data)
   {
     
    this.skillToAdd = {
-        "id": 89,
-        "name": "angular",
-        "profileId": 1
+        "id": 17,
+        "name": data.skill,
+        "profileId": this.profileId
     }
-     this.profileService.addSkill(<JSON>this.skillToAdd)
+     this.profileService.addSkill(<JSON>this.skillToAdd, this.userId, this.profileId)
+     this.ngOnInit();
   }
 
+  onSubmitExperience(data){
+   
+    this.experienceToAdd = {
+      "company": data.company,
+      "descriptionExperience": data.descriptionExperience,
+      "employmentType":data.employementType,
+      "endDateExperience": parseInt(data.endDateExperience),
+      // "id":453,
+      "location": data.locationId,
+      "profileId": this.profileId,
+      "startDateExperience": parseInt(data.startDateExperience),
+      "title": data.title
+       }
+       console.warn(this.experienceToAdd);
+       this.profileService.addExperience(<JSON>this.experienceToAdd, this.userId, this.profileId)
+       this.ngOnInit();
+       
+  }
+  
+  
+  onSubmitProfile(data){
+    
+  
+    this.profileToAdd = {
+      "language": data.language,
+      "userId": this.userId
+    }
+    this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
+      .subscribe(
+        newProfile => {
+          
+          console.log("New Profile Added ----------------");
+          console.log(newProfile);
 
+          this.aboutToAdd = {
+            "content": data.about,
+            "profileId": newProfile
+          }
+          
+          this.profileService.addAbout(<JSON>this.aboutToAdd,  this.userId, newProfile)
+          console.log("test about");
+          console.log(this.aboutToAdd);
+          //this.isConnected = true;
+        }
+      )
+ // window.location.reload();
+ 
+ this.refresh();
+  // this.ngOnInit();
+
+
+// console.log("---sdfdsf---");
+// this.profileToAdd = {
+//   "language": data.language,
+//   "userId": this.userId
+// }
+// this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
+// this.ngOnInit();
+
+// this.profileData.forEach(function (value) {
+//   console.log(value);
+// }); 
+
+}
+
+refresh(): void {
+window.location.reload();
+}
+
+ 
+       
+
+  clickMethod(name: string) {
+    if(confirm("Are you sure to delete "+name)) {
+      console.log("Implement delete functionality here");
+    }
+  }
+  refreshProfile(){
+    
+    this.profileService.getProfile(this.userId).
+    subscribe(
+      data=> {
+      this.profileData=<Profile[]>data;
+      console.log("Total profiles are")
+      console.log(this.profileData);
+
+    });
+    this.profileService.getUser(this.userId).subscribe((data)=>
+    {
+     
+      this.foundUser=<User>data;
+      this.userFirstName = this.foundUser.userFirstName;
+      this.userLastName = this.foundUser.userLastName;
+      // this.userImage = this.foundUser.userImage;
+      // console.log(this.profilePicture);
+
+    });
+    
+    this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
+      {
+      
+        this.educationsList=<Object[]>data;
+        console.log(this.educationsList);
+        console.log("profile id");
+        console.log(this.profileId);
+      },
+      (error: Response) => {
+        if(error.status === 404){
+          this._snackBar.open('Id is wrong!!', 'End now', {
+            duration: 1000,
+          });
+          } 
+          else 
+          {
+            alert('error')
+          }
+      });
+    this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
+    {
+      this.experiencesList=<Object[]>data;
+      console.log(this.experiencesList);
+    },
+    (error: Response) => {
+      if(error.status === 404){
+        this._snackBar.open('Id is wrong!!', 'End now', {
+          duration: 1000,
+         });
+       } else {
+          alert('error')
+        }
+    });
+    this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
+    {
+      this.skillsList=<Object[]>data;
+      console.log(this.skillsList);
+    },
+    (error: Response) => {
+      if(error.status === 404){
+        this._snackBar.open('Id is wrong!!', 'End now', {
+          duration: 1000,
+         });
+       } else {
+          alert('error')
+        }
+    });
+    this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
+    {
+      this.aboutList=<Object[]>data;
+      console.log(this.aboutList);
+    },
+    (error: Response) => {
+      if(error.status === 404){
+        this._snackBar.open('Id is wrong!!', 'End now', {
+          duration: 1000,
+         });
+       } else {
+          alert('error')
+        }
+    });
+  }
+
+  url: string;
+    onSelectFile(event) { // called each time file input changes
+        if (event.target.files && event.target.files[0]) {
+          var reader = new FileReader();
+
+          reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+          reader.onload = (event: any) => { // called once readAsDataURL is completed
+            this.url = <string>event.target.result;
+            console.log("text for image");
+            console.log(this.url);
+          }
+        }
+    }
 
 
   ngOnInit(): void {
@@ -108,37 +322,20 @@ export class ProfileComponent implements OnInit {
         console.log(data);
         this.profileUser = <UserDTO>data;
       })
-    // this.profileService.getProfile().subscribe((data)=>
-    // {
-     
-    //   this.profileData=<Object>data;
+   
+    // this.profileUser = +this.route.snapshot.paramMap.get('id');
 
-    //   console.log(this.profileData);
-      
+    this.userId = +this.route.snapshot.paramMap.get('id');
+    this.profileId = +this.route.snapshot.paramMap.get('profileId');
 
-    // });
-    this.profileService.getEducationsById().subscribe((data)=>
-    {
-     
-      this.educations=<Object[]>data;
-      console.log(this.educations);
-      
-    });
-    this.profileService.getExperienceById().subscribe((data)=>
-    {
-      this.experiences=<Experience[]>data;
-      console.log(this.experiences);
-    });
-    this.profileService.getSkillsById().subscribe((data)=>
-    {
-      this.skills=<Object[]>data;
-      console.log(this.skills);
-    });
-    this.profileService.getAboutById().subscribe((data)=>
-    {
-      this.about=<About[]>data;
-      console.log(this.about);
-    }); 
+    console.log(this.profileId);
+    console.log(this.userId);
+
+    console.log(this.profileUser);
+
+
+    this.refreshProfile();
+    
 
     // GET ALL CONTACTS
     this.contactService.getAll()
@@ -194,129 +391,30 @@ export class ProfileComponent implements OnInit {
     
   }
 
-  // get all skills
-  getAllSkills() {
-    this.profileService.getSkillsById()
-    .subscribe(
-      data => {
-        this.skills = <Object[]>data;
-      }
-    )
-  }
-
-  //open dialog for skills
-  openDialogSkill(skill: Skill): void {
-    console.log(skill);
-    const dialogRef = this.dialog.open(DeleteSkillComponent, {
-      maxWidth: '50%',
-      data: {skill: skill}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
-
-        this.getAllSkills();  
-    });
-
-  }
-
-  // get all Education
-  getAllEducation() {
-    this.profileService.getEducationsById()
-    .subscribe(
-      data => {
-        this.educations = <Object[]>data;
-      }
-    )
-  }
-
-  //open dialog for education
-  openDialogEdu(education: Education): void {
-    console.log(education);
-    const dialogRef = this.dialog.open(DeleteEducationComponent, {
-      maxWidth: '50%',
-      data: {education: education}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
-
-        this.getAllEducation();  
-    });
-
-  }
-
-  // get all Experience
-  getAllExperience() {
-    this.profileService.getExperienceById()
-    .subscribe(
-      data => {
-        this.experiences = <Experience[]>data;
-      }
-    )
-  } 
-
-  //open dialog for experience
-  openDialogExp(experience: Experience): void {
-    console.log(experience);
-    const dialogRef = this.dialog.open(DeleteExperienceComponent, {
-      maxWidth: '50%',
-      data: {experience: experience}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
-
-        this.getAllExperience();  
-    });
-
-  }
-
-  GetAllAbout(){
-    this.profileService.getAboutById().subscribe((data)=>
-    {
-      this.about=<About[]>data;
-      console.log(this.about);
-    }); 
-  }
-
-  openDialogAbout(about: About): void {
+    //deleting skill data
+    deleteSkill(){
+      this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
+      {
+        this.skillsList = <Object[]>data;
+        console.log(this.skillsList);
+      });
+    }
   
-    const dialogRef = this.dialog.open(UpdateProfileAboutComponent, {
-      maxWidth: '50%',
-      data: {about: about}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
-
-        this.GetAllAbout();
-    });
-
-  }
+    //deleting experience data
+    deleteEducation(){
+      this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
+      {
+        this.educationsList = <Object[]>data;
+        console.log(this.educationsList);
+      });
+    }
   
-  openDialogUpdateEdu(education: Education): void {
-  
-    const dialogRef = this.dialog.open(UpdateProfileEducationComponent, {
-      maxWidth: '50%',
-      data: {education: education}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
-
-        this.getAllEducation();  
-    });
-
-  }
-  openDialogUpdateExp(experience: Experience): void {
-  
-    const dialogRef = this.dialog.open(UpdateProfileExperienceComponent, {
-      maxWidth: '50%',
-      data: {experience: experience}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
-
-        this.getAllExperience();  
-    });
-
-  }
+    //deleting experience data
+    deleteExperience(experineceId){
+      this.profileService.deleteExperience(this.userId, this.profileId, experineceId).subscribe(data => {
+        console.log(data);
+      });
+    }
 
 //  constructor(private route: ActivatedRoute) {
 //     this.route.params.subscribe(params => console.log(params))

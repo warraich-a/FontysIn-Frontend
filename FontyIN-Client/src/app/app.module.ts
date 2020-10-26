@@ -1,3 +1,4 @@
+import { AddInformationComponent } from './profile/add-information/add-information.component';
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
 
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
@@ -19,9 +21,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material/input';
-import {MatDialogModule} from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -41,26 +40,21 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {MatMenuModule} from '@angular/material/menu';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSortModule} from '@angular/material/sort';
-import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 
 
 
-import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { UpdateProfileEducationComponent } from './update-profile-education/update-profile-education.component';
@@ -78,6 +72,17 @@ import { MaterialElevationDirective } from './directives/material-elevation.dire
 import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { A11yModule } from '@angular/cdk/a11y';
 
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
+import { HttpClientModule } from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -99,8 +104,15 @@ import { A11yModule } from '@angular/cdk/a11y';
     DeleteSkillComponent,
     DeleteEducationComponent,
     DeleteExperienceComponent,
-    FilterUsersComponent
+    FilterUsersComponent,
+    ProfileComponent, 
+    // UpdateProfileComponent,
+    PostComponent,
+    AddInformationComponent,
+    DialogAddProfileComponent
+ 
   ],
+  entryComponents:[DialogAddProfileComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -161,8 +173,17 @@ import { A11yModule } from '@angular/cdk/a11y';
     MatTreeModule,
     OverlayModule,
     PortalModule,
-    ScrollingModule
-    ],
+    ScrollingModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    NgbModule
+  ],
   providers: [
     DataService,
     ContactService,
