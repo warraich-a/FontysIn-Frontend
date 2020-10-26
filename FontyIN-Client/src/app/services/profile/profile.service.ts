@@ -33,7 +33,7 @@ export class ProfileService {
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations')
   }
 
-  public getSkillsById(userId, profileId){
+  public getSkillsById(userId, profileId){ 
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills')
   }
   public getAboutById(userId, profileId){

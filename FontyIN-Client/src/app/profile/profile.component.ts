@@ -192,7 +192,7 @@ export class ProfileComponent implements OnInit {
  this.refresh();
 }
 
-  // get all skills
+  // get all skills 
   getAllSkills() {
     this.profileService.getSkillsById(this.userId, this.profileId)
     .subscribe(
@@ -222,7 +222,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getEducationsById(this.userId, this.profileId)
     .subscribe(
       data => {
-        this.educations = <Object[]>data;
+        this.educations = <Education[]>data;
       }
     )
   }

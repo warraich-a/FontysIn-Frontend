@@ -260,7 +260,12 @@
                 <mat-icon>border_color</mat-icon>
             </button>
             </td>
-             <td><button class="btn btn-danger" id="" (click)="openDialogExp(p)">-</button></td>
+
+             <td> 
+                 <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                 </button>
+             </td>
 
           </tr>
           
@@ -360,8 +365,11 @@
                     <mat-icon>border_color</mat-icon>
                     </button>
                 </td>
-              <td>
-                  <button class="btn btn-danger" id="" (click)="openDialogEdu(edu)">-</button>
+
+              <td> 
+                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
+                   <mat-icon>remove_circle_outline</mat-icon>
+                </button>
               </td>
 
             </tr>
@@ -374,12 +382,23 @@
     <div class="container p-3 my-3 border">
         <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#skillModal" id="buttonAdd">+</button>
     <h1>Skills</h1>
-    
 
-    <li style="list-style-type: none;" id="test"  *ngFor="let p of skillsList">
-        {{p.name}} 
-        <button class="btn btn-danger float-right" (click)="openDialogSkill(s)">-</button>
-      </li>
+    <table class="table table-striped">
+        <tbody>
+            <tr id="test"  *ngFor="let s of skillsList">
+
+                <td>{{s.name}}</td>  
+
+                <td> 
+                    <button class="float-right" mat-icon-button ria-label="" (click)="openDialogSkill(s)">
+                       <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                </td>
+
+            </tr>
+            
+        </tbody>
+    </table>
 </div>
 <div class="modal fade" id="skillModal">
     <div class="modal-dialog">
