@@ -57,7 +57,12 @@ export class ProfileComponent implements OnInit {
                public dialog: MatDialog,
                private _snackBar: MatSnackBar) { }
             
-
+    
+  educations: Object[];
+  experiences: Experience[];
+  skills : Object[];
+  about: About[];
+             
       
   profileData: Profile[];
   educationsList: Object[];
@@ -185,22 +190,130 @@ export class ProfileComponent implements OnInit {
  // window.location.reload();
  
  this.refresh();
-  // this.ngOnInit();
-
-
-// console.log("---sdfdsf---");
-// this.profileToAdd = {
-//   "language": data.language,
-//   "userId": this.userId
-// }
-// this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
-// this.ngOnInit();
-
-// this.profileData.forEach(function (value) {
-//   console.log(value);
-// }); 
-
 }
+
+  // get all skills
+  getAllSkills() {
+    this.profileService.getSkillsById(this.userId, this.profileId)
+    .subscribe(
+      data => {
+        this.skills = <Object[]>data;
+      }
+    )
+  }
+
+  //open dialog for skills
+  openDialogSkill(skill: Skill): void {
+    console.log(skill);
+    const dialogRef = this.dialog.open(DeleteSkillComponent, {
+      maxWidth: '50%',
+      data: {skill: skill}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllSkills();  
+    });
+
+  }
+
+  // get all Education
+  getAllEducation() {
+    this.profileService.getEducationsById(this.userId, this.profileId)
+    .subscribe(
+      data => {
+        this.educations = <Object[]>data;
+      }
+    )
+  }
+
+  //open dialog for education
+  openDialogEdu(education: Education): void {
+    console.log(education);
+    const dialogRef = this.dialog.open(DeleteEducationComponent, {
+      maxWidth: '50%',
+      data: {education: education}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllEducation();  
+    });
+
+  }
+
+  // get all Experience
+  getAllExperience() {
+    this.profileService.getExperienceById(this.userId, this.profileId)
+    .subscribe(
+      data => {
+        this.experiences = <Experience[]>data;
+      }
+    )
+  } 
+
+  //open dialog for experience
+  openDialogExp(experience: Experience): void {
+    console.log(experience);
+    const dialogRef = this.dialog.open(DeleteExperienceComponent, {
+      maxWidth: '50%',
+      data: {experience: experience}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllExperience();  
+    });
+
+  }
+
+  GetAllAbout(){
+    this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
+    {
+      this.about=<About[]>data;
+      console.log(this.about);
+    }); 
+  }
+
+  openDialogAbout(about: About): void {
+  
+    const dialogRef = this.dialog.open(UpdateProfileAboutComponent, {
+      maxWidth: '50%',
+      data: {about: about}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.GetAllAbout();
+    });
+
+  }
+  
+  openDialogUpdateEdu(education: Education): void {
+
+    const dialogRef = this.dialog.open(UpdateProfileEducationComponent, {
+      maxWidth: '50%',
+      data: {education: education}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllEducation();  
+    });
+
+  }
+  openDialogUpdateExp(experience: Experience): void {
+    const dialogRef = this.dialog.open(UpdateProfileExperienceComponent, {
+      maxWidth: '50%',
+      data: {experience: experience}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllExperience();  
+    });
+
+  }
 
 refresh(): void {
 window.location.reload();

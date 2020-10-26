@@ -139,10 +139,14 @@
     </div>
     <div class="container p-3 bg-dark my-3 border text-white">
                 
+        
     <h1> About </h1>
     <ul id="test"  *ngFor="let p of aboutList">
         {{p.content}} 
-      </ul>
+        <button mat-icon-button ria-label="" (click)="openDialogAbout(p)">
+            <mat-icon>border_color</mat-icon>
+        </button>
+    </ul>
   
 </div>
 
@@ -251,7 +255,12 @@
             {{p.descriptionExperience}} <br>
             {{p.location}}  <br>
             </td>
-            <button class="btn btn-danger float-right" id="" (click)="deleteExperience(p.id)">Delete</button>
+
+            <td> <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
+                <mat-icon>border_color</mat-icon>
+            </button>
+            </td>
+             <td><button class="btn btn-danger" id="" (click)="openDialogExp(p)">-</button></td>
 
           </tr>
           
@@ -346,6 +355,15 @@
                 {{p.degreeEducation}}, {{p.fieldStudy}} <br>
                 {{p.startYearEducation}} - {{p.endYearEducation}} <br>
                 {{p.descriptionEducation}} </td>
+                <td> 
+                    <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(edu)">
+                    <mat-icon>border_color</mat-icon>
+                    </button>
+                </td>
+              <td>
+                  <button class="btn btn-danger" id="" (click)="openDialogEdu(edu)">-</button>
+              </td>
+
             </tr>
             
         </tbody>
@@ -360,6 +378,7 @@
 
     <li style="list-style-type: none;" id="test"  *ngFor="let p of skillsList">
         {{p.name}} 
+        <button class="btn btn-danger float-right" (click)="openDialogSkill(s)">-</button>
       </li>
 </div>
 <div class="modal fade" id="skillModal">
