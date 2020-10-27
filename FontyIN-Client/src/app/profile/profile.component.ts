@@ -364,6 +364,8 @@ export class ProfileComponent implements OnInit {
           this._snackBar.open('Id is wrong!!', 'End now', {
             duration: 1000,
           });
+          }  else if(error.status === 401){
+            console.log("sorry not sorry");
           } 
           else 
           {
@@ -380,7 +382,9 @@ export class ProfileComponent implements OnInit {
         this._snackBar.open('Id is wrong!!', 'End now', {
           duration: 1000,
          });
-       } else {
+       } else if(error.status === 401){
+        console.log("sorry not sorry");
+      }  else {
           alert('error')
         }
     });
@@ -394,6 +398,9 @@ export class ProfileComponent implements OnInit {
         this._snackBar.open('Id is wrong!!', 'End now', {
           duration: 1000,
          });
+       }
+       else if(error.status === 401){
+         console.log("sorry not sorry");
        } else {
           alert('error')
         }

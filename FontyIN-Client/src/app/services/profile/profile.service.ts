@@ -30,16 +30,22 @@ export class ProfileService {
     return this.httpClient.get('http://localhost:9099/users/p/' + userId)
   }
 
-  public getExperienceById(userId, profileId){
-    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences')
+  public getExperienceById(userId, profileId){  
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '1');
+    console.log(this.httpOptions.headers);
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences', this.httpOptions)
   }
 
   public getEducationsById(userId, profileId){
-    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations')
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '1');
+    console.log(this.httpOptions.headers);
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations', this.httpOptions)
   }
 
   public getSkillsById(userId, profileId){ 
-    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills')
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '1');
+    console.log(this.httpOptions.headers);
+    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills', this.httpOptions)
   }
   public getAboutById(userId, profileId){
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts')
