@@ -177,6 +177,16 @@ export class ProfileService {
     const url = 'http://localhost:9099/users/' + id;
     return this.httpClient.put(url, model);
   }
+  public GetOnePrivacy(id){
+    const url = 'http://localhost:9099/users/privacy/' + id;
+    return this.httpClient.get(url);
+    
+  }
+
+  updatePrivacy(model, id) {
+    const url = 'http://localhost:9099/users/privacy/' + id;
+    return this.httpClient.put(url, model);
+  }
 
 
 }
