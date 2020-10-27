@@ -15,9 +15,11 @@
         
         <div class="post-block">
         
-        <button (click)="deletePost(post.id)" class="deleteBtn">x</button>
-        <h2>{{post.content}}</h2>
+        <a (click)="deletePost(post.id)" class="deleteBtn"></a>
+        <a [routerLink]="['/update-post', post.id]" class="editBtn"></a>
+        <h2><a [routerLink]="['/post', post.id]">{{post.content}}</a></h2>
         <p class="p-date">{{post.date}}</p>
+        
         <br>
         
         </div>
