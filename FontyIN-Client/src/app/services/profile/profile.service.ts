@@ -20,37 +20,42 @@ export class ProfileService {
     private _snackBar: MatSnackBar) { }
 
   public getProfile(userId){
-    return this.httpClient.get( 'http://localhost:9099/users/'+ userId + '/profiles')
+    return this.httpClient.get( 'http://localhost:9090/users/'+ userId + '/profiles')
   }
   public getUser(userId){
-    return this.httpClient.get('http://localhost:9099/users/' + userId)
+    return this.httpClient.get('http://localhost:9090/users/' + userId)
   }
+
+  public getUserById(userId){
+    return this.httpClient.get('http://localhost:9090/users/p/' + userId)
+  }
+
   public getExperienceById(userId, profileId){
-    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences')
+    return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/experiences')
   }
 
   public getEducationsById(userId, profileId){
-    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations')
+    return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/educations')
   }
 
   public getSkillsById(userId, profileId){ 
-    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills')
+    return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/skills')
   }
   public getAboutById(userId, profileId){
-    return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts')
+    return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/abouts')
   }
   public addAbout(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/abouts/new', data).toPromise().then(data => {
+    return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/abouts/new', data).toPromise().then(data => {
       console.log(data);
     })
   }
   public addEducation(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
+    return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
       console.log(data);
     })
   }
   public addExperience(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/new', data).subscribe((data)=>
+    return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/experiences/new', data).subscribe((data)=>
     {
      
     },
@@ -69,7 +74,7 @@ export class ProfileService {
       
   }
   public addSkill(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/new', data).subscribe((data)=>
+    return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/skills/new', data).subscribe((data)=>
     {
      
     },
@@ -89,14 +94,14 @@ export class ProfileService {
 
   public addProfile(resource: {}, userId) {
     //console.log(this.url);
-    return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/new', JSON.stringify(resource), this.httpOptions)
+    return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/new', JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)
       )
   }
 
   // public addProfile(data, userId){
-  //   return this.httpClient.post('http://localhost:9099/users/' + userId + '/profiles/new', data).subscribe((data)=>
+  //   return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/new', data).subscribe((data)=>
   //   {
      
   //   },
@@ -115,66 +120,66 @@ export class ProfileService {
 
     //delete data in profile page
     public deleteEducation(userId, profileId, educationId){
-      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations/' + educationId);
+      return this.httpClient.delete('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/educations/' + educationId);
     }
   
     public deleteExperience(userId, profileId, experienceId){
-      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences/' + experienceId);
+      return this.httpClient.delete('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/experiences/' + experienceId);
     }
   
     public deleteSkill(userId, profileId, skillId){
-      return this.httpClient.delete('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills/' + skillId);
+      return this.httpClient.delete('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/skills/' + skillId);
     }
     
 
     public GetOneEducation(id){
-      const url = 'http://localhost:9099/users/profile/education/' + id;
+      const url = 'http://localhost:9090/users/profile/education/' + id;
       return this.httpClient.get(url);
     }
 
     public GetOneExperience(id){
-      const url = 'http://localhost:9099/users/profile/experience/' + id;
+      const url = 'http://localhost:9090/users/profile/experience/' + id;
       return this.httpClient.get(url);
       
     }
     public GetOneAbout(id){
-      const url = 'http://localhost:9099/users/profile/about/' + id;
+      const url = 'http://localhost:9090/users/profile/about/' + id;
       return this.httpClient.get(url);
       
     }
     public GetOneAddress(id){
-      const url = 'http://localhost:9099/users/address/' + id;
+      const url = 'http://localhost:9090/users/address/' + id;
       return this.httpClient.get(url);
       
     }
     public GetOneUser(id){
-      const url = 'http://localhost:9099/users/user/' + id;
+      const url = 'http://localhost:9090/users/user/' + id;
       return this.httpClient.get(url);
       
     }
 
     updateEducation(model, id) {
-      const url = 'http://localhost:9099/users/profile/education/' + id;
+      const url = 'http://localhost:9090/users/profile/education/' + id;
       return this.httpClient.put(url, model);
     }
 
   
     updateExperience(model, id) {
-      const url = 'http://localhost:9099/users/profile/experience/' + id;
+      const url = 'http://localhost:9090/users/profile/experience/' + id;
       return this.httpClient.put(url, model);
     }
     
   updateAbout(model, id) {
-    const url = 'http://localhost:9099/users/profile/about/' + id;
+    const url = 'http://localhost:9090/users/profile/about/' + id;
     return this.httpClient.put(url, model);
   }
 
   updateAddress(model, id) {
-    const url = 'http://localhost:9099/users/address/' + id;
+    const url = 'http://localhost:9090/users/address/' + id;
     return this.httpClient.put(url, model);
   }
   updatePhoneNumber(model, id) {
-    const url = 'http://localhost:9099/users/' + id;
+    const url = 'http://localhost:9090/users/' + id;
     return this.httpClient.put(url, model);
   }
   public GetOnePrivacy(id){

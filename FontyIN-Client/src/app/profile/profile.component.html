@@ -1,5 +1,5 @@
 <div class="container py-3 my-3 clearfix">
-    <ng-container *ngIf="loggedInUser != profileUser.id">
+    <ng-container *ngIf="loggedInUser != profileUser?.id">
         <button mat-raised-button
             id="contact"
             *ngIf="isConnected"
