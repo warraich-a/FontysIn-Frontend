@@ -91,6 +91,7 @@
                     
 
                 </div>
+                
                 <div class="tab-pane fade show active" id="privacy" role="tabpanel">
 
                     <div class="card">
@@ -102,32 +103,40 @@
                             </div>
                             <h5 class="card-title mb-0">Privacy</h5>
                         </div>
+                        <form (ngSubmit)="updatePrivacy()" #PrivacyForm="ngForm">
                         <div class="card-body">
-                            <div class="col-md-12"><label class="labels">Education setting</label>
-                            <mat-select [(ngModel)]="privacy.EducationSetting" name="EducationSetting">
-                                <mat-option *ngFor="let types of privacySetting" [value]="types.type">
-                                  {{types.type}}
-                                </mat-option>
-                              </mat-select>
-                              <!-- <select id="EducationSetting" name="EducationSetting" [(ngModel)]="experience.EducationSetting"
-            class="form-control">
-      <option *ngFor="let types of privacySetting" [value]="types.type">
-        {{types.type}}
-      </option>
-    </select> -->
+                         
+                           <label class="labels">Education setting</label>
+                            
+                                                <select id="educationSetting" name="educationSetting" [(ngModel)]="privacy.educationSetting"
+                                class="form-control">
+                        <option *ngFor="let types of privacySetting" [value]="types.type">
+                            {{types.type}}
+                        </option>
+                        </select>
 
-                              <!-- <mat-select [(ngModel)]="selectedValue" name="food">
-                                <mat-option *ngFor="let food of privacySetting" [value]="privacy.value">
-                                  {{privacy.viewValue}}
-                                </mat-option>
-                              </mat-select>
-                              <mat-select [(ngModel)]="selectedValue" name="food">
-                                <mat-option *ngFor="let food of privacySetting" [value]="privacy.value">
-                                  {{privacy.viewValue}}
-                                </mat-option>
-                              </mat-select>   -->
+                        <label class="labels">Experience setting</label>
+                                                
+                            <select id="experienceSetting" name="experienceSetting" [(ngModel)]="privacy.experienceSetting"
+                    class="form-control">
+                    <option *ngFor="let types of privacySetting" [value]="types.type">
+                    {{types.type}}
+                    </option>
+                    </select>
+                    <label class="labels">Skills setting</label>
+                                                
+                        <select id="skillSetting" name="skillSetting" [(ngModel)]="privacy.skillSetting"
+                    class="form-control">
+                    <option *ngFor="let types of privacySetting" [value]="types.type">
+                    {{types.type}}
+                    </option>
+                    </select>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Experience</button></div>
+
+                          
                               
                         </div>
+                    </form>
                     </div>
 
                     

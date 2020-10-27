@@ -1,10 +1,10 @@
   
-export class Privacy{
+export class privacy{
     constructor(
         public id: number,
         public userId: number,
-        public EducationSetting: string,
-        public ExperienceSetting: string,
-        public SkillSetting: string,
+        public educationSetting: string,
+        public experienceSetting: string,
+        public skillSetting: string,
     ) {  }
 }
