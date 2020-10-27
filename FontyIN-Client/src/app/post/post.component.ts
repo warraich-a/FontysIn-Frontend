@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostsService} from '../services/posts.service';
 
 export interface Post {
@@ -34,6 +35,8 @@ export class PostComponent implements OnInit {
     this.postService.deletePost(id);
     window.location.reload()
   }
+
+  
 
   ngOnInit(): void {
     this.postService.getPosts()

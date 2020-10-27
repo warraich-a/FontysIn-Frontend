@@ -6,6 +6,9 @@ import {HomeComponent} from './home/home.component';
 import {UserComponent} from './user/user.component';
 
 import {PostComponent} from './post/post.component';
+import {UpdatePostComponent} from './update-post/update-post.component';
+import {PostDetailsComponent} from './post-details/post-details.component'
+
 
 import {UserSettingsComponent} from './user-settings/user-settings.component';
 import { UpdateProfileEducationComponent} from './update-profile-education/update-profile-education.component';
@@ -39,6 +42,14 @@ const routes: Routes = [{
 },{
   path: 'posts', 
   component: PostComponent
+},
+{
+  path: 'update-post/:id',
+  component: UpdatePostComponent
+},
+{
+  path: 'post/:id',
+  component: PostDetailsComponent
 },
   {
     path: 'users/:id/connections',

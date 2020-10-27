@@ -11,7 +11,8 @@ import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PostComponent } from './post/post.component';
-
+import { UpdatePostComponent } from './update-post/update-post.component';
+import { PostDetailsComponent } from './post-details/post-details.component';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -90,13 +91,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     UserComponent,
     HomeComponent,
     ProfileComponent,
-    PostComponent,
+    UpdatePostComponent,
+    PostDetailsComponent,
     HeaderComponent,
     UserSettingsComponent,
     UpdateProfileEducationComponent,
     UpdateProfileExperienceComponent,
     UpdateProfileAboutComponent,
-    PostComponent,
     ConnectionComponent,
     DeleteConnectionComponent,
     FilterPipe, // -> added filter pipe to use it inside the component
