@@ -110,7 +110,7 @@ export class ProfileComponent implements OnInit {
 
   jobType = [
     {name: "FullTime"},
-    {name: "Parttime"},
+    {name: "PartTime"},
     {name: "FreeLancer"}
   ]
   onSubmitEducation(data)
@@ -198,6 +198,7 @@ export class ProfileComponent implements OnInit {
     .subscribe(
       data => {
         this.skills = <Object[]>data;
+        this.ngOnInit();
       }
     )
   }
@@ -223,6 +224,7 @@ export class ProfileComponent implements OnInit {
     .subscribe(
       data => {
         this.educations = <Education[]>data;
+        this.ngOnInit();
       }
     )
   }
@@ -272,6 +274,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
       this.about=<About[]>data;
+      this.ngOnInit();
       console.log(this.about);
     }); 
   }
