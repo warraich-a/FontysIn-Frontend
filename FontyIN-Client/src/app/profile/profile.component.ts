@@ -57,14 +57,14 @@ export class ProfileComponent implements OnInit {
                public dialog: MatDialog,
                private _snackBar: MatSnackBar) { }
             
-    
+  profileData: Object; 
   educations: Object[];
   experiences: Experience[];
   skills : Object[];
   about: About[];
              
-      
-  profileData: Profile[];
+
+  //profileData: Profile[];
   educationsList: Object[];
   experiencesList: Object[];
   skillsList : Object[];
@@ -248,6 +248,7 @@ export class ProfileComponent implements OnInit {
     .subscribe(
       data => {
         this.experiences = <Experience[]>data;
+        this.ngOnInit();
       }
     )
   } 
@@ -315,9 +316,9 @@ export class ProfileComponent implements OnInit {
 
   }
 
-refresh(): void {
-window.location.reload();
-}
+  refresh(): void {
+  window.location.reload();
+  }
 
  
        
@@ -337,14 +338,16 @@ window.location.reload();
       console.log(this.profileData);
 
     });
-    this.profileService.getUser(this.userId).subscribe((data)=>
+    this.profileService.getUserById(this.userId)
+    .subscribe((data)=>
     {
      
       this.foundUser=<User>data;
-      this.userFirstName = this.foundUser.userFirstName;
-      this.userLastName = this.foundUser.userLastName;
+      this.userFirstName = this.foundUser.firstName;
+      this.userLastName = this.foundUser.lastName;
       // this.userImage = this.foundUser.userImage;
-      // console.log(this.profilePicture);
+      console.log("Found User");
+      console.log(this.foundUser);
 
     });
     
@@ -432,11 +435,15 @@ window.location.reload();
     console.log(profileUserId)
     this.profileService.getUser(profileUserId)
       .subscribe((data)=> {
-        console.log(data);
+        console.log("-------------------------");
+        
         this.profileUser = <UserDTO>data;
-      })
+        console.log(this.profileUser.id);
+        console.log("-------------------------");
+        
+      });
    
-    // this.profileUser = +this.route.snapshot.paramMap.get('id');
+   //this.profileUser = +this.route.snapshot.paramMap.get('id');
 
     this.userId = +this.route.snapshot.paramMap.get('id');
     this.profileId = +this.route.snapshot.paramMap.get('profileId');
