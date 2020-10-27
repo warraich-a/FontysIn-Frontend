@@ -84,6 +84,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PrivacySettingsComponent } from './privacy-settings/privacy-settings.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     // UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,
-    DialogAddProfileComponent
+    DialogAddProfileComponent,
+    PrivacySettingsComponent
  
   ],
   entryComponents:[DialogAddProfileComponent],

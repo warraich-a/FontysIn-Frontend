@@ -9,12 +9,13 @@ import {PostComponent} from './post/post.component';
 import {UpdatePostComponent} from './update-post/update-post.component';
 import {PostDetailsComponent} from './post-details/post-details.component'
 
-
+import {PrivacySettingsComponent} from './privacy-settings/privacy-settings.component';
 import {UserSettingsComponent} from './user-settings/user-settings.component';
 import { UpdateProfileEducationComponent} from './update-profile-education/update-profile-education.component';
 import { UpdateProfileExperienceComponent} from './update-profile-experience/update-profile-experience.component';
 import { UpdateProfileAboutComponent} from './update-profile-about/update-profile-about.component';
 import { FilterUsersComponent } from './filter-users/filter-users.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -62,6 +63,10 @@ const routes: Routes = [{
 {
   path: 'settings',
   component: UserSettingsComponent
+},
+{
+  path: 'privacy',
+  component: PrivacySettingsComponent
 },
 {
   path: 'users/filter',
