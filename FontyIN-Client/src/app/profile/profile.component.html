@@ -1,18 +1,34 @@
-<button mat-button
-    id="contact"
-    *ngIf="loggedInUser != profileUser && isConnected && isRequestSent"
-    >Connected
-</button>
-<button mat-button
-    id="contact"
-    *ngIf="loggedInUser != profileUser && !isConnected && isRequestSent"
-    >Request sent
-</button>
-<button mat-button
-        id="contact"
-        *ngIf="loggedInUser != profileUser && !isConnected && !isRequestSent"
-        (click)="createContact()">Connect
-</button>
+<div class="container py-3 my-3 clearfix">
+    <ng-container *ngIf="loggedInUser != profileUser.id">
+        <button mat-raised-button
+            id="contact"
+            *ngIf="isConnected"
+            class="float-right"
+            >Connected
+        </button>
+        <button mat-raised-button
+            id="contact"
+            *ngIf="!isConnected && isRequestSent"
+            class="float-right"
+            >Request sent
+        </button>
+        <button mat-raised-button
+                id="contact"
+                *ngIf="!isConnected && !isRequestSent && !isRequestReceived"
+                (click)="createContact()"
+                class="float-right"
+                >Connect
+        </button>
+        <button mat-raised-button
+                id="contact"
+                *ngIf="!isConnected && isRequestReceived"
+                (click)="acceptContact()"
+                class="float-right"
+                >Accept
+        </button>
+    </ng-container>
+</div>
+
 
     
 <div class="container-fluid">
@@ -21,15 +37,18 @@
     <h1> About </h1>
     <ul id="test"  *ngFor="let p of about">
       {{p.content}} 
+      <button mat-icon-button ria-label="" (click)="openDialogAbout(p)">
+        <mat-icon>border_color</mat-icon>
+    </button>
     </ul>
+ 
 </div>
 
 <div class="container p-3 my-3 border">
     <h1>Experience</h1>
     <!-- <button id="buttonAdd" (click)="CreateExperience()">+</button> -->
     <button type="button" (click)="CreateExperience()" class="btn btn-dark" id="buttonAdd">+</button>
-    <button class="btn btn-danger" id="" (click)="deleteExperience()">-</button>
-
+    
     <table class="table table-striped">
         <thead>
         <tr>
@@ -50,6 +69,13 @@
             <td>{{p.startDateExperience}}</td>
             <td>{{p.endDateExperience}}</td>
             <td>{{p.descriptionExperience}}</td>
+           
+            
+            <td> <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
+                <mat-icon>border_color</mat-icon>
+            </button></td>
+          <td><button class="btn btn-danger" id="" (click)="openDialogExp(p)">-</button></td>
+          
           </tr>
           
         </tbody>
@@ -59,7 +85,6 @@
 <div class="container p-3 my-3 border">
         <h1>Educations</h1>
         <button type="button" (click)="CreateEducation()" class="btn btn-dark" id="buttonAdd">+</button>
-        <button class="btn btn-danger" id="" (click)="deleteEducation()">-</button>
 
         <table class="table table-striped">
             <thead>
@@ -72,25 +97,41 @@
                 </tr>
             </thead>
         <tbody>
-                <tr id="test"  *ngFor="let p of educations">
-                <td>{{p.startYearEducation}}</td>
-                <td>{{p.endYearEducation}}</td>
-                <td>{{p.degreeEducation}}</td>
-                <td>{{p.fieldStudy}}</td>
-                <td>{{p.descriptionEducation}}</td>
+            <tr id="test"  *ngFor="let edu of educations">
+                <td>{{edu.school}}</td>
+                <td>{{edu.startYearEducation}}</td>
+                <td>{{edu.endYearEducation}}</td>
+                <td>{{edu.degreeEducation}}</td>
+                <td>{{edu.fieldStudy}}</td>
+                <td>{{edu.descriptionEducation}}</td>
+                
+                <td> <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(edu)">
+                    <mat-icon>border_color</mat-icon>
+                </button></td>
+              <td><button class="btn btn-danger" id="" (click)="openDialogEdu(edu)">-</button></td>
+               
             </tr>
+            
         </tbody>
+      
         </table>
     </div>
 
     <div class="container p-3 my-3 border">
     <h1>Skills</h1>
     <button type="button" (click)="CreateSkill()" class="btn btn-dark" id="buttonAdd">+</button>
-    <button class="btn btn-danger" id="" (click)="deleteSkill()">-</button>
+    <table class="table table-striped">
+        <tbody>
+            <tr id="test"  *ngFor="let s of skills">
 
-    <li id="test"  *ngFor="let p of skills">
-        {{p.name}} 
-      </li>
+                <td>{{s.name}}</td>  
+
+                <button class="btn btn-danger float-right" (click)="openDialogSkill(s)">-</button>
+
+            </tr>
+            
+        </tbody>
+    </table>
 </div>
 
 

@@ -7,14 +7,15 @@ enum EmplymentType {
 }
 
 export class Experience{
-    id: number;
-    profileId: number;
-    title: string;
-    company:string;
-    employmentType : string;
-    locationId: number;
-    startYear: Date;
-    endYear: Date;
-    description: string;
-
+    constructor( 
+        public id: number,
+        public  profileId: number,
+        public  title: string,
+        public  company:string,
+        public  employmentType : string,
+        public  location: string,
+        public  startDateExperience: number,
+        public  endDateExperience: number,
+        public  descriptionExperience: string,
+      ) {  }
 }

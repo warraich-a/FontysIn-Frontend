@@ -1,3 +1,10 @@
+import { DeleteExperienceComponent } from './../delete-experience/delete-experience.component';
+import { DeleteEducationComponent } from './../delete-education/delete-education.component';
+import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
+import { UpdateProfileAboutComponent} from './../update-profile-about/update-profile-about.component';
+import { UpdateProfileEducationComponent} from './../update-profile-education/update-profile-education.component';
+import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
+import { UserDTO } from './../classes/Profile/UserDTO';
 import { Contact } from './../classes/Profile/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
@@ -9,8 +16,7 @@ import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
 import { HttpHeaders } from '@angular/common/http';
-
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
 @Component({
@@ -20,14 +26,17 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class ProfileComponent implements OnInit {
   loggedInUser: number = 1;
-  profileUser: number;
+  profileUser: UserDTO;
   isConnected: boolean = false;
   isRequestSent: boolean = false;
+  isRequestReceived: boolean = false;
   contacts: Contact[];
+  contact: Contact;
 
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute,
+               public dialog: MatDialog) { }
 
   profileData: Object;
   educations: Object[];
@@ -92,8 +101,13 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.profileUser = +this.route.snapshot.paramMap.get('id');
-    console.log(this.profileUser);
+    let profileUserId: number = +this.route.snapshot.paramMap.get('id');
+    console.log(profileUserId)
+    this.profileService.getUser(profileUserId)
+      .subscribe((data)=> {
+        console.log(data);
+        this.profileUser = <UserDTO>data;
+      })
     // this.profileService.getProfile().subscribe((data)=>
     // {
      
@@ -127,47 +141,51 @@ export class ProfileComponent implements OnInit {
     }); 
 
     // GET ALL CONTACTS
-
     this.contactService.getAll()
     .subscribe(
       contacts => {
         this.contacts = <Contact[]>contacts;
 
+        console.log("HELLO")
         console.log("contacts");
 
         console.log(contacts);
+        
 
         this.contacts.forEach(contact => {
-          // if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser))) {
-          //   this.isConnected = true;
-          // }
+          console.log(contact);
           // Logged in user sent request or other user sent request, status isAccepted true
-          if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) || (contact.userId == this.profileUser && contact.friendId == this.loggedInUser)) && contact.isAccepted == true) {
-            console.log("first if statement")
+          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser.id) || (contact.user.id == this.profileUser.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
             this.isRequestSent = true;
             this.isConnected = true;
+            this.contact = contact;
             return;
           }
           // Logged in user sent request, status isAccepted false, status isAccepted false
-          if(((contact.userId == this.loggedInUser && contact.friendId == this.profileUser) && !contact.isAccepted)) {
-            console.log("second if statement")
-
+          else if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser.id) && !contact.isAccepted)) {
             this.isRequestSent = true;
             this.isConnected = false;
-            return
+            console.log("second else if")
+            console.log(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser.id) && !contact.isAccepted));
+            this.contact = contact;
+
+            return;
+          }
+          else if(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser.id) && !contact.isAccepted)){
+            this.isRequestReceived = true;
+            this.isConnected = false;
+            console.log("second else if")
+            console.log(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser.id) && !contact.isAccepted));
+            this.contact = contact;
+
+            return;
           }
 
-
-          
         });
 
-        console.log("isConnected " + this.isConnected);
-        console.log("isRequestsent " + this.isRequestSent);
-
-        // if(!found) {
-          
-        // }
-
+        console.log(this.isConnected);
+        console.log(this.isRequestSent);
+        console.log(this.isRequestReceived);
 
 
       }
@@ -176,32 +194,129 @@ export class ProfileComponent implements OnInit {
     
   }
 
-    //deleting skill data
-    deleteSkill(){
-      this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
-      {
-        this.skills = <Skill[]>data;
-        console.log(this.skills);
-      });
-    }
+  // get all skills
+  getAllSkills() {
+    this.profileService.getSkillsById()
+    .subscribe(
+      data => {
+        this.skills = <Object[]>data;
+      }
+    )
+  }
+
+  //open dialog for skills
+  openDialogSkill(skill: Skill): void {
+    console.log(skill);
+    const dialogRef = this.dialog.open(DeleteSkillComponent, {
+      maxWidth: '50%',
+      data: {skill: skill}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllSkills();  
+    });
+
+  }
+
+  // get all Education
+  getAllEducation() {
+    this.profileService.getEducationsById()
+    .subscribe(
+      data => {
+        this.educations = <Object[]>data;
+      }
+    )
+  }
+
+  //open dialog for education
+  openDialogEdu(education: Education): void {
+    console.log(education);
+    const dialogRef = this.dialog.open(DeleteEducationComponent, {
+      maxWidth: '50%',
+      data: {education: education}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllEducation();  
+    });
+
+  }
+
+  // get all Experience
+  getAllExperience() {
+    this.profileService.getExperienceById()
+    .subscribe(
+      data => {
+        this.experiences = <Experience[]>data;
+      }
+    )
+  } 
+
+  //open dialog for experience
+  openDialogExp(experience: Experience): void {
+    console.log(experience);
+    const dialogRef = this.dialog.open(DeleteExperienceComponent, {
+      maxWidth: '50%',
+      data: {experience: experience}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllExperience();  
+    });
+
+  }
+
+  GetAllAbout(){
+    this.profileService.getAboutById().subscribe((data)=>
+    {
+      this.about=<About[]>data;
+      console.log(this.about);
+    }); 
+  }
+
+  openDialogAbout(about: About): void {
   
-    //deleting experience data
-    deleteEducation(){
-      this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
-      {
-        this.educations = <Education[]>data;
-        console.log(this.educations);
-      });
-    }
+    const dialogRef = this.dialog.open(UpdateProfileAboutComponent, {
+      maxWidth: '50%',
+      data: {about: about}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.GetAllAbout();
+    });
+
+  }
   
-    //deleting experience data
-    deleteExperience(){
-      this.profileService.deleteExperience(this.profile.userId, this.experience.profileId, this.experience.id).subscribe((data)=>
-      {
-        this.experiences = <Experience []>data;
-        console.log(this.experiences);
-      });
-    }
+  openDialogUpdateEdu(education: Education): void {
+  
+    const dialogRef = this.dialog.open(UpdateProfileEducationComponent, {
+      maxWidth: '50%',
+      data: {education: education}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllEducation();  
+    });
+
+  }
+  openDialogUpdateExp(experience: Experience): void {
+  
+    const dialogRef = this.dialog.open(UpdateProfileExperienceComponent, {
+      maxWidth: '50%',
+      data: {experience: experience}
+    }); 
+    dialogRef.afterClosed()
+      .subscribe(res => {
+
+        this.getAllExperience();  
+    });
+
+  }
 
 //  constructor(private route: ActivatedRoute) {
 //     this.route.params.subscribe(params => console.log(params))
@@ -229,48 +344,49 @@ export class ProfileComponent implements OnInit {
   
 
   createContact() {
+    let user: UserDTO;
+
+    this.contacts.forEach(contact => {
+      if(contact.user.id == this.loggedInUser) {
+        user = contact.user;
+      }
+    });
+
+
     // get logged in user id from auth and friendId from url
-    let contact : {} = { userId: this.loggedInUser, friendId: this.profileUser, isAccepted: false};
+    let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};
+
+    console.log(contact);
     this.contactService.create(contact)
       .subscribe(
         newContact => {
           console.log(newContact);
+          console.log("newContact");
+
           //this.isConnected = true;
+          this.isRequestSent = true;
         }
       )
   }
 
-  deleteContact() {
-    // get logged in user id from auth and contatcId from link
-    this.contactService.delete(1)
-      .subscribe();
-  }
-
-
-  
-  // isContact() {
-  //   //let contacts;
-
-  //   this.contactService.getAll()
-  //   .subscribe(
-  //     contacts => {
-  //       this.contacts = <Contact[]>contacts;
-  //       console.log("contacts");
-
-  //       console.log(contacts);
-
-  //       this.contacts.forEach(contact => {
-  //         if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && contact.isAccepted) {
-  //           this.isConnected = true;
-  //         }
-  //         else if((contact.userId == this.loggedInUser || contact.friendId == this.loggedInUser) && !contact.isAccepted) {
-  //           this.isConnected = false;
-  //         }
-  //       });
-  //     }
-  //   )
+  // deleteContact() {
+  //   // get logged in user id from auth and contatcId from link
+  //   this.contactService.delete(1)
+  //     .subscribe();
   // }
 
+    // ACCEPT REQUEST
+    acceptContact() {
+      this.contact.isAccepted = true;
+  
+      this.contactService.update(this.contact)
+        .subscribe(
+          updatedContact => {
+  
+            this.isConnected = true;
+          }
+        )
+    }
 
 
 }

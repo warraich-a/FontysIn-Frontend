@@ -7,11 +7,15 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataService {
+  http: HttpClient;
+
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
 
-  constructor(private url: string, private http: HttpClient) { }
+  constructor(private url: string, http: HttpClient) {
+    this.http = http;
+   }
 
   getAll() {
     return this.http.get(this.url)
@@ -23,7 +27,6 @@ export class DataService {
 
 
   create(resource: {}) {
-    console.log(this.url);
     return this.http.post(this.url, JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)
@@ -32,7 +35,7 @@ export class DataService {
 
   
   update(resource) {
-    return this.http.patch(this.url + '/' + resource.id, JSON.stringify(resource))
+    return this.http.patch(this.url + '/' + resource.id, JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)
       )

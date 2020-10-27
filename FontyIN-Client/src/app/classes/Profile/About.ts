@@ -1,9 +1,9 @@
 
 export class About{
-
-    id: number;
-    profileId: number;
-    content: string;
-    
+    constructor(
+        public id: number,
+        public profileId: number,
+        public content: string,
+    ) {  }
 }
 
