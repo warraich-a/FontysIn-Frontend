@@ -256,15 +256,16 @@
             {{p.location}}  <br>
             </td>
 
-            <td> <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
-                <mat-icon>border_color</mat-icon>
-            </button>
-            </td>
+            
 
              <td> 
-                 <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
+                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
                     <mat-icon>remove_circle_outline</mat-icon>
                  </button>
+                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
+                    <mat-icon>border_color</mat-icon>
+                </button>
+               
              </td>
 
           </tr>
@@ -360,16 +361,16 @@
                 {{p.degreeEducation}}, {{p.fieldStudy}} <br>
                 {{p.startYearEducation}} - {{p.endYearEducation}} <br>
                 {{p.descriptionEducation}} </td>
-                <td> 
-                    <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(edu)">
-                    <mat-icon>border_color</mat-icon>
-                    </button>
-                </td>
+               
 
               <td> 
                 <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
-                   <mat-icon>remove_circle_outline</mat-icon>
-                </button>
+                    <mat-icon>remove_circle_outline</mat-icon>
+                 </button>
+                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogUpdateEdu(edu)">
+                    <mat-icon>border_color</mat-icon>
+                    </button>
+              
               </td>
 
             </tr>

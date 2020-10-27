@@ -12,18 +12,18 @@ export class ContactService extends DataService {
   loggedInUserId = 1;
 
   constructor(http: HttpClient) {
-    super('http://localhost:9090/users/1/contacts', http);
+    super('http://localhost:9099/users/1/contacts', http);
   }
 
   getContactRequests() {
-    return this.http.get('http://localhost:9090/users/1/requests')
+    return this.http.get('http://localhost:9099/users/1/requests')
       .pipe(
         map(response => response)
       )
   }
 
   	getAcceptedContacts() {
-		return this.http.get('http://localhost:9090/users/1/acceptedContacts')
+		return this.http.get('http://localhost:9099/users/1/acceptedContacts')
 		.pipe(
 		  map(response => response)
 		)
