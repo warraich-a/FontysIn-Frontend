@@ -31,19 +31,19 @@ export class ProfileService {
   }
 
   public getExperienceById(userId, profileId){  
-    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '1');
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '2');
     console.log(this.httpOptions.headers);
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/experiences', this.httpOptions)
   }
 
   public getEducationsById(userId, profileId){
-    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '1');
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '2');
     console.log(this.httpOptions.headers);
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/educations', this.httpOptions)
   }
 
   public getSkillsById(userId, profileId){ 
-    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '1');
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '2');
     console.log(this.httpOptions.headers);
     return this.httpClient.get('http://localhost:9099/users/' + userId + '/profiles/' + profileId + '/skills', this.httpOptions)
   }

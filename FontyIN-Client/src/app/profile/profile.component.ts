@@ -48,6 +48,8 @@ export class ProfileComponent implements OnInit {
   userId:number;
   profileId: number;
   
+  allowedToSee = null; 
+
   @Input() expToAdd={};
 
   // console.log(dataToAdd);
@@ -369,6 +371,7 @@ export class ProfileComponent implements OnInit {
           });
           }  else if(error.status === 401){
             console.log("sorry not sorry");
+            this.showAllowedToSee();
           } 
           else 
           {
@@ -387,6 +390,7 @@ export class ProfileComponent implements OnInit {
          });
        } else if(error.status === 401){
         console.log("sorry not sorry");
+        this.showAllowedToSee();
       }  else {
           alert('error')
         }
@@ -404,6 +408,7 @@ export class ProfileComponent implements OnInit {
        }
        else if(error.status === 401){
          console.log("sorry not sorry");
+         this.showAllowedToSee();
        } else {
           alert('error')
         }
@@ -614,6 +619,10 @@ export class ProfileComponent implements OnInit {
             this.isConnected = true;
           }
         )
+    }
+    showAllowedToSee() {
+      this.allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' };
+    
     }
 
 
