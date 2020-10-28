@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
 import { Address } from '../classes/Profile/Address';
+import { privacy } from '../classes/Profile/Privacy';
 
 import { ProfileService } from '../services/profile/profile.service';
-
+class Setting {
+ type: string;
+}
 @Component({
   selector: 'app-user-settings',
   templateUrl: './user-settings.component.html',
   styleUrls: ['./user-settings.component.css']
 })
 export class UserSettingsComponent implements OnInit {
+  privacySetting: Setting[] = [
+    { type: 'EVERYONE'}, {type: 'CONNECTIONS'}, {type: 'ONLYME'}];
 
   constructor( private service: ProfileService) { }
   notification = null; 
   address = new Address(1, "test1", "test2", "test3", "test4");
   user = new User(1, "0348348");
+  privacy = new privacy(1, 1, "Everyone", "everyone", "everyone");
 
   ngOnInit(): void {
     this.service.GetOneAddress(1)
@@ -26,6 +32,11 @@ export class UserSettingsComponent implements OnInit {
     .subscribe((data)=>{
       console.log(data);
     this.user = <User>data;
+    });
+    this.service.GetOnePrivacy(1)
+    .subscribe((data)=>{
+      console.log(data);
+    this.privacy = <privacy>data;
     });
   }
 
@@ -45,5 +56,12 @@ export class UserSettingsComponent implements OnInit {
 showNotification() {
   this.notification = { class: 'text-primary', message: 'updated!' };
 
+}
+
+updatePrivacy(){
+  this.service.updatePrivacy(this.privacy, 1).subscribe(
+    (res: any) => {
+      console.log("updated privacy");
+    });
 }
 }
