@@ -139,7 +139,7 @@
                 <input type='file' (change)="onSelectFile($event)"> -->
                 <!-- <div class="float-right"></div> -->
                 <div class="dropdown">
-                    <button class="dropbtn switch-profile-button">Switch Profile</button>
+                    <button class="dropbtn dropdown-toggle switch-profile-button">Switch Profile</button>
                     <div class="dropdown-content">
                         <li *ngFor="let p of profileData">
                             <a class="dropdown-item switch-profile" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
