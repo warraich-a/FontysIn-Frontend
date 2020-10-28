@@ -19,16 +19,19 @@
                                                                 <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
                                                                 used to send the data in onSubmitExperience which is created it in profile.component.ts-->
                     <form class="text-center" #userProfile="ngForm" (ngSubmit)="onSubmitProfile(userProfile.value)">
-                        <div class="form-group">
-                                <label for="language"> Language</label>
+                        <!-- <div class="form-group"> -->
+                                <!-- <label for="language"> Language</label> -->
 
-                                <mat-select name="language" ngModel>
-                                    <mat-option value="" disabled>Choose a language</mat-option>
-                                    <mat-option *ngFor = "let l of languages" [value]="l.name">
-                                        {{l.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </div>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Language</mat-label>
+                                    <mat-select name="language" ngModel>
+                                        <mat-option value="" disabled>Choose a language</mat-option>
+                                        <mat-option *ngFor = "let l of languages" [value]="l.name">
+                                            {{l.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            <!-- </div> -->
                         
                         <div class="form-group">
                             <label for="about">About </label>
@@ -58,18 +61,19 @@
                             <button 
                                 mdbBtn 
                                 type="submit"  
-                                color="success" 
                                 rounded="true" 
                                 id="submitButton" 
                                 onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > submit
                             </button>
+                            <button type="button" class="btn" data-dismiss="modal">Close</button>         
+
                         </form>
                     </div>
                     <!-- Modal footer -->
-                    <div class="modal-footer">
+                    <!-- <div class="modal-footer">
                     
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>         
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -246,19 +250,22 @@
                                         </mat-form-field>
                                         <br>
                                         <button 
-                                            type="submit" 
-                                            id="submitButton"   
+                                            mdbBtn 
+                                            type="submit"  
+                                            rounded="true" 
+                                            id="submitButton"  
                                             onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
                                             submit 
                                         </button>
-                                        
+                                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+
                                     </form>
                                 </div>
                                 
                                 <!-- Modal footer -->
-                                <div class="modal-footer">
+                                <!-- <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
+                                </div> -->
                                 
                             </div>
                             </div>
@@ -368,19 +375,26 @@
                                         <input matInput type="text" name="descriptionEducation" ngModel placeholder="ex: I have had a very good experience"> 
                                         </mat-form-field>
                                         <br>
-                                        <button type="submit" 
-                                            id="submitButton"   
+                                        <button 
+                                            mdbBtn 
+                                            type="submit"  
+                                            rounded="true" 
+                                            id="submitButton"  
                                             onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
                                             submit 
                                         </button>
+                                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+
                                         
                                     </form>
                                 </div>
+
+
                                 
                                 <!-- Modal footer -->
-                                <div class="modal-footer">
+                                <!-- <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                </div>
+                                </div> -->
                                 
                             </div>
                             </div>
@@ -470,19 +484,23 @@
                                 <input matInput type="text" name="skill" ngModel placeholder="C#"> 
                             </mat-form-field>
                             <button 
-                                type="submit" 
-                                id="submitButton"    
+                                mdbBtn 
+                                type="submit"  
+                                rounded="true"   
+                                id="submitButton"  
                                 onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()"  > 
                                 submit 
                             </button>
+                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+
                             
                         </form>
                     </div>
                     
                     <!-- Modal footer -->
-                    <div class="modal-footer">
+                    <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
+                    </div> -->
                     
                 </div>
                 </div>
