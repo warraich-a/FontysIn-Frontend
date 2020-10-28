@@ -16,6 +16,7 @@ import { UpdateProfileExperienceComponent} from './update-profile-experience/upd
 import { UpdateProfileAboutComponent} from './update-profile-about/update-profile-about.component';
 import { FilterUsersComponent } from './filter-users/filter-users.component';
 
+
 const routes: Routes = [{
   path: '',
   component: HomeComponent
@@ -63,6 +64,7 @@ const routes: Routes = [{
   path: 'settings',
   component: UserSettingsComponent
 },
+
 {
   path: 'users/filter',
   component: FilterUsersComponent

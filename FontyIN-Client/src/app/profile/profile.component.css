@@ -176,6 +176,7 @@ a:hover {
 
 /* Container around entire profile */
 .big-container {
+  background: white;
   padding-top: 3%;
   margin: 1% auto 6%;
 }
@@ -228,6 +229,7 @@ a.switch-profile {
   color: #e40086;
   background-color: transparent;
 }
+
 .material-icons {
   font-size: 1.4em;
 }

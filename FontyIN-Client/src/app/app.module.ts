@@ -85,6 +85,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,7 +111,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     // UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,
-    DialogAddProfileComponent
+    DialogAddProfileComponent,
+    
  
   ],
   entryComponents:[DialogAddProfileComponent],

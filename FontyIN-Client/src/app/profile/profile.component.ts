@@ -48,6 +48,8 @@ export class ProfileComponent implements OnInit {
   userId:number;
   profileId: number;
   
+  allowedToSee = null; 
+
   @Input() expToAdd={};
 
   // console.log(dataToAdd);
@@ -110,7 +112,7 @@ export class ProfileComponent implements OnInit {
 
   jobType = [
     {name: "FullTime"},
-    {name: "Parttime"},
+    {name: "PartTime"},
     {name: "FreeLancer"}
   ]
   onSubmitEducation(data)
@@ -198,6 +200,7 @@ export class ProfileComponent implements OnInit {
     .subscribe(
       data => {
         this.skills = <Object[]>data;
+        this.ngOnInit();
       }
     )
   }
@@ -225,7 +228,6 @@ export class ProfileComponent implements OnInit {
       data => {
         this.educations = <Education[]>data;
         this.ngOnInit();
-
       }
     )
   }
@@ -275,6 +277,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
       this.about=<About[]>data;
+      this.ngOnInit();
       console.log(this.about);
       this.ngOnInit();
 
@@ -369,6 +372,9 @@ export class ProfileComponent implements OnInit {
           this._snackBar.open('Id is wrong!!', 'End now', {
             duration: 1000,
           });
+          }  else if(error.status === 401){
+            console.log("sorry not sorry");
+            this.showAllowedToSee();
           } 
           else 
           {
@@ -385,7 +391,10 @@ export class ProfileComponent implements OnInit {
         this._snackBar.open('Id is wrong!!', 'End now', {
           duration: 1000,
          });
-       } else {
+       } else if(error.status === 401){
+        console.log("sorry not sorry");
+        this.showAllowedToSee();
+      }  else {
           alert('error')
         }
     });
@@ -399,6 +408,10 @@ export class ProfileComponent implements OnInit {
         this._snackBar.open('Id is wrong!!', 'End now', {
           duration: 1000,
          });
+       }
+       else if(error.status === 401){
+         console.log("sorry not sorry");
+         this.showAllowedToSee();
        } else {
           alert('error')
         }
@@ -609,6 +622,10 @@ export class ProfileComponent implements OnInit {
             this.isConnected = true;
           }
         )
+    }
+    showAllowedToSee() {
+      this.allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' };
+    
     }
 
 

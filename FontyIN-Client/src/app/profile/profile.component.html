@@ -161,13 +161,12 @@
                 <h1> {{userFirstName}} {{userLastName}} </h1>  
             </div>
             <!-- </div> -->
-            <div class="container p-3 bg-dark my-3 border text-white">
+            <div class="container p-3 my-3 border  block-profile">
                 
-        
                 <h1> About </h1>
                 <ul id="test" class="edit" *ngFor="let p of aboutList">
                     {{p.content}} 
-                    <button class="edit-icon" mat-icon-button ria-label="" (click)="openDialogAbout(p)">
+                    <button class="edit-icon icons" mat-icon-button ria-label="" (click)="openDialogAbout(p)">
                         <mat-icon>border_color</mat-icon>
                     </button>
                 </ul>
@@ -273,7 +272,10 @@
                 <h1>Experience</h1> 
                 <table class="table table-striped">
                     <thead>
-
+                        <span *ngIf="allowedToSee" class="h2">
+                            <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
+                            {{allowedToSee.message}}
+                        </span>
                     </thead>
                     <tbody >
                     <tr id="test"  *ngFor="let p of experiencesList">
@@ -387,6 +389,10 @@
 
                     <table class="table table-striped">
                         <thead>
+                            <span *ngIf="allowedToSee" class="h2">
+                                <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
+                                {{allowedToSee.message}}
+                            </span>
                         </thead>
                     <tbody>
                             <tr id="test"  *ngFor="let p of educationsList">
@@ -422,6 +428,10 @@
                     <mat-icon class="icons float-right add-icon" aria-hidden="false" aria-label="Example add icon" data-toggle="modal" data-target="#skillModal" id="buttonAdd">add</mat-icon>
 
                 <h1>Skills</h1>
+                <span *ngIf="allowedToSee" class="h2">
+                    <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
+                    {{allowedToSee.message}}
+                </span>
 
                 <table class="table table-striped">
                     <tbody>
@@ -477,7 +487,6 @@
                 </div>
                 </div>
             </div>
-
         </div>
     </div>
 <!-- </div> -->
