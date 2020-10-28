@@ -213,6 +213,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(res => {
 
         this.getAllSkills();  
+        this.ngOnInit();
     });
 
   }
@@ -223,6 +224,8 @@ export class ProfileComponent implements OnInit {
     .subscribe(
       data => {
         this.educations = <Education[]>data;
+        this.ngOnInit();
+
       }
     )
   }
@@ -273,6 +276,8 @@ export class ProfileComponent implements OnInit {
     {
       this.about=<About[]>data;
       console.log(this.about);
+      this.ngOnInit();
+
     }); 
   }
 
@@ -299,7 +304,7 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(res => {
 
-        this.getAllEducation();  
+        this.getAllEducation(); 
     });
 
   }

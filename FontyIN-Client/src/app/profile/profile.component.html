@@ -1,165 +1,452 @@
-<div class="container py-3 my-3 clearfix">
-    <ng-container *ngIf="loggedInUser != profileUser?.id">
-        <button mat-raised-button
-            id="contact"
-            *ngIf="isConnected"
-            class="float-right"
-            >Connected
-        </button>
-        <button mat-raised-button
-            id="contact"
-            *ngIf="!isConnected && isRequestSent"
-            class="float-right"
-            >Request sent
-        </button>
-        <button mat-raised-button
-                id="contact"
-                *ngIf="!isConnected && !isRequestSent && !isRequestReceived"
-                (click)="createContact()"
-                class="float-right"
-                >Connect
-        </button>
-        <button mat-raised-button
-                id="contact"
-                *ngIf="!isConnected && isRequestReceived"
-                (click)="acceptContact()"
-                class="float-right"
-                >Accept
-        </button>
-    </ng-container>
-</div>
-
-<div class="container" style="margin:30px;">
-
-    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addProfileModal" id="buttonAdd">Add New Profile</button>
-    <br><br><br>
-    <div class="modal fade" id="addProfileModal">
-        <div class="modal-dialog">
-        <div class="modal-content">
-        
-            <!-- Modal Header -->
-            <div class="modal-header">
-            <h4 class="modal-title">Add Profile</h4>
-            <button 
-                type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+<div class="container">
+    <div class="clearfix">
+        <div class="float-right add-new-profile clearfix">
+        <button type="button" class="btn add-new-profile-button float-right" data-toggle="modal" data-target="#addProfileModal">Add New Profile</button>
+        <br><br><br>
+        <div class="modal fade" id="addProfileModal">
+            <div class="modal-dialog">
+            <div class="modal-content">
             
-            <!-- Modal body -->
-            <div class="modal-body"> 
-                                                            <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
-                                                            used to send the data in onSubmitExperience which is created it in profile.component.ts-->
-                   <form class="text-center" #userProfile="ngForm" (ngSubmit)="onSubmitProfile(userProfile.value)">
-                       <div class="form-group">
-                            <label for="language"> Language</label>
-
-                            <mat-select name="language" ngModel>
-                                <mat-option value="" disabled>Choose a language</mat-option>
-                                <mat-option *ngFor = "let l of languages" [value]="l.name">
-                                    {{l.name}}
-                                </mat-option>
-                              </mat-select>
-                        </div>
-                      
-                       <div class="form-group">
-                           <label for="about">About </label>
-                           <textarea 
-                                required 
-                                minlength="25" 
-                                maxlength="200" 
-                                ngModel 
-                                name="about"  
-                                #about ="ngModel" 
-                                id="about" 
-                                cols="25" 
-                                rows="10" 
-                                class="form-control">
-                           </textarea>
-
-                           <div class="alert alert-danger" 
-                           *ngIf="about.touched && !about.valid">
-                                <div *ngIf="about.errors.required">
-                                     About is required
-                                </div>   
-                                <div *ngIf="about.errors.minlength"> 
-                                    minimum length is  {{about.errors.minlength.requiredLength}}
-                                </div>
-                           </div>
-                        </div> 
-                        <button 
-                            mdbBtn 
-                            type="submit"  
-                            color="success" 
-                            rounded="true" 
-                            id="submitButton" 
-                            onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > submit
-                        </button>
-                    </form>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Add Profile</h4>
+                <button 
+                    type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                   
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>         
+                
+                <!-- Modal body -->
+                <div class="modal-body"> 
+                                                                <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
+                                                                used to send the data in onSubmitExperience which is created it in profile.component.ts-->
+                    <form class="text-center" #userProfile="ngForm" (ngSubmit)="onSubmitProfile(userProfile.value)">
+                        <div class="form-group">
+                                <label for="language"> Language</label>
+
+                                <mat-select name="language" ngModel>
+                                    <mat-option value="" disabled>Choose a language</mat-option>
+                                    <mat-option *ngFor = "let l of languages" [value]="l.name">
+                                        {{l.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </div>
+                        
+                        <div class="form-group">
+                            <label for="about">About </label>
+                            <textarea 
+                                    required 
+                                    minlength="25" 
+                                    maxlength="200" 
+                                    ngModel 
+                                    name="about"  
+                                    #about ="ngModel" 
+                                    id="about" 
+                                    cols="25" 
+                                    rows="10" 
+                                    class="form-control">
+                            </textarea>
+
+                            <div class="alert alert-danger" 
+                            *ngIf="about.touched && !about.valid">
+                                    <div *ngIf="about.errors.required">
+                                        About is required
+                                    </div>   
+                                    <div *ngIf="about.errors.minlength"> 
+                                        minimum length is  {{about.errors.minlength.requiredLength}}
+                                    </div>
+                            </div>
+                            </div> 
+                            <button 
+                                mdbBtn 
+                                type="submit"  
+                                color="success" 
+                                rounded="true" 
+                                id="submitButton" 
+                                onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > submit
+                            </button>
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>         
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-</div>   
-<div class="container-fluid">
-    <div class="container p-3 my-3 border" >
-    
-       <!-- <img [src]="url" height="200"> <br/>
-        <input type='file' (change)="onSelectFile($event)"> -->
+</div>  
 
-        <div class="dropdown" style="float: right;">
-            <button class="dropbtn">Switch Language</button>
-            <div class="dropdown-content">
-                <li *ngFor="let p of profileData">
-                    <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
-                </li>
-            </div>
-          </div>
-        <!-- <div class="dropdown" mdbDropdown style="float: right;">
 
-            <button type="button"  Toggle mdbBtn color="primary" class="dropdown-toggle waves-light" 
-              mdbWavesEffect>
-              Switch Profile
+<div class="container big-container border clearfix mat-elevation-z3">
+    <div class="float-right">
+        <!-- Connect button -->
+        <ng-container *ngIf="loggedInUser != profileUser?.id">
+            <button mat-raised-button
+                id="contact"
+                *ngIf="isConnected"
+                class="float-right"
+                >Connected
             </button>
+            <button mat-raised-button
+                id="contact"
+                *ngIf="!isConnected && isRequestSent"
+                class="float-right"
+                >Request sent
+            </button>
+            <button mat-raised-button
+                    id="contact"
+                    *ngIf="!isConnected && !isRequestSent && !isRequestReceived"
+                    (click)="createContact()"
+                    class="float-right"
+                    >Connect
+            </button>
+            <button mat-raised-button
+                    id="contact"
+                    *ngIf="!isConnected && isRequestReceived"
+                    (click)="acceptContact()"
+                    class="float-right"
+                    >Accept
+            </button>
+        </ng-container>
+        <!-- <div class="container"> -->
+            <!-- <div class="clearfix">
+                <div class="float-right">
+                    <div class="dropdown">
+                        <button class="dropbtn">Switch Language</button>
+                        <div class="dropdown-content">
+                            <li *ngFor="let p of profileData">
+                                <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
+                            </li>
+                        </div>
+                    </div>    
+                </div> -->
+                <!-- <div class="float-right">
+                    <button type="button" class="btn btn-secondary">Example Button floated right</button>
+        
+                </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="row"> -->
+            <!-- <div class="clearfix"> -->
+            <!-- <div class="container p-3 my-3 border" > -->
+            
+            <!-- <img [src]="url" height="200"> <br/>
+                <input type='file' (change)="onSelectFile($event)"> -->
+                <!-- <div class="float-right"></div> -->
+                <div class="dropdown">
+                    <button class="dropbtn switch-profile-button">Switch Profile</button>
+                    <div class="dropdown-content">
+                        <li *ngFor="let p of profileData">
+                            <a class="dropdown-item switch-profile" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
+                        </li>
+                    </div>
+                </div>
+                <!-- <div class="dropdown" mdbDropdown style="float: right;">
 
-            <div class="dropdown-menu dropdown-pzrimary">
-                <li *ngFor="let p of profileData">
-                <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
-                </li>
+                    <button type="button"  Toggle mdbBtn color="primary" class="dropdown-toggle waves-light" 
+                    mdbWavesEffect>
+                    Switch Profile
+                    </button>
+
+                    <div class="dropdown-menu dropdown-pzrimary">
+                        <li *ngFor="let p of profileData">
+                        <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
+                        </li>
+                    </div>
+                </div> -->
             </div>
-          </div> -->
-        <div ng-controller="userImage, userFirstName, userLastName">
-            <!-- {{userImage}}    -->
-            <h1> {{userFirstName}} {{userLastName}} </h1>  
-        </div>
-    </div>
-    <div class="container p-3 bg-dark my-3 border text-white">
+            <div class="name" ng-controller="userImage, userFirstName, userLastName">
+                <!-- {{userImage}}    -->
+                <h1> {{userFirstName}} {{userLastName}} </h1>  
+            </div>
+            <!-- </div> -->
+            <div class="container p-3 bg-dark my-3 border text-white">
                 
         
-    <h1> About </h1>
-    <ul id="test"  *ngFor="let p of aboutList">
-        {{p.content}} 
-        <button mat-icon-button ria-label="" (click)="openDialogAbout(p)">
-            <mat-icon>border_color</mat-icon>
-        </button>
-    </ul>
-  
-</div>
+                <h1> About </h1>
+                <ul id="test" class="edit" *ngFor="let p of aboutList">
+                    {{p.content}} 
+                    <button class="edit-icon" mat-icon-button ria-label="" (click)="openDialogAbout(p)">
+                        <mat-icon>border_color</mat-icon>
+                    </button>
+                </ul>
+            
+            </div>
 
-<div class="container p-3 my-3 border" >
+            <div class="container p-3 my-3 border block-profile" >
 
-            <!-- The Modal -->
-            <div class="modal fade" id="myModal">
+                        <!-- The Modal -->
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Experience</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body"> 
+                                                                                <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
+                                                                                used to send the data in onSubmitExperience which is created it in profile.component.ts-->
+                                    <form  class="text-center border border-silver" #userExperience="ngForm" (ngSubmit)="onSubmitExperience(userExperience.value)"> 
+                                        <mat-form-field class="input-full-width">
+                                        <input matInput type="text" name="company" ngModel placeholder="Company"> 
+                                        </mat-form-field>
+                                        
+                                        <br>
+                                    
+                                        <mat-form-field class="input-full-width">
+                                        <input matInput type="text" name="title" ngModel placeholder="Title"> 
+                                        </mat-form-field><br>
+                            
+                                        <mat-form-field class="input-full-width">     
+                                        <mat-select name="employementType" ngModel>
+                                            <mat-option value="" disabled>Job Type </mat-option>
+                                            <mat-option *ngFor = "let l of jobType" [value]="l.name">
+                                                {{l.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>  
+                                        <br>
+
+                                        <mat-form-field class="input-full-width"> 
+                                        <input matInput type="text" name="locationId" ngModel placeholder="London, United Kingdom"> 
+                                        </mat-form-field>
+                                        <br>
+                                        <mat-form-field class="input-full-width">
+                                            <mat-select name="startDateExperience" ngModel>
+                                                <mat-option value="" disabled>Starting Year </mat-option>
+                                                <mat-option *ngFor = "let l of years" [value]="l.year">
+                                                    {{l.year}}
+                                                </mat-option>
+                                            </mat-select>
+
+                                        <!-- <input matInput type="text" name="startDateExperience" ngModel placeholder="ex: 2016"> -->
+                                        </mat-form-field>
+                                        <br>
+
+                                        
+                                        <mat-form-field class="input-full-width">
+
+                                            <mat-select name="endDateExperience" ngModel>
+                                                <mat-option value="" disabled>Ending Year </mat-option>
+                                                <mat-option *ngFor = "let l of years" [value]="l.year">
+                                                    {{l.year}}
+                                                </mat-option>
+                                            </mat-select>
+
+                                        <!-- <input matInput type="text" name="endDateExperience" ngModel placeholder="ex: 2020">  -->
+                                        </mat-form-field>
+                                        <br>
+
+                                        <mat-form-field class="input-full-width">
+                                        <input matInput type="text" name="descriptionExperience" ngModel placeholder="Ex: I have had a very good experience"> 
+                                        </mat-form-field>
+                                        <br>
+                                        <button 
+                                            type="submit" 
+                                            id="submitButton"   
+                                            onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
+                                            submit 
+                                        </button>
+                                        
+                                    </form>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal" id="buttonAdd">+</button> -->
+
+                <!-- <button > -->
+                    <mat-icon class="icons float-right add-icon" aria-hidden="false" aria-label="Example add icon" data-toggle="modal" data-target="#myModal" id="buttonAdd">add</mat-icon>
+                <!-- </button> -->
+
+                <h1>Experience</h1> 
+                <table class="table table-striped">
+                    <thead>
+
+                    </thead>
+                    <tbody >
+                    <tr id="test"  *ngFor="let p of experiencesList">
+                    
+                        <td class="font-italic"> <h3>{{p.title | uppercase}} </h3> 
+                        {{p.company}} . {{p.employmentType}} <br>
+                        {{p.startDateExperience}} - {{p.endDateExperience}} <br>
+                        {{p.descriptionExperience}} <br>
+                        {{p.location}}  <br>
+                        </td>
+
+                        <td class="icons"> <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
+                            <mat-icon>border_color</mat-icon>
+                        </button>
+                        <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
+                            <mat-icon>remove_circle_outline</mat-icon>
+                        </button>
+                        </td>
+<!-- 
+                        <td> 
+                            <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
+                                <mat-icon>remove_circle_outline</mat-icon>
+                            </button>
+                        </td> -->
+
+                    </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container p-3 my-3 border block-profile">
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#educationModal" id="buttonAdd">+</button> -->
+                <mat-icon class="icons float-right add-icon" aria-hidden="false" aria-label="Example add icon" data-toggle="modal" data-target="#educationModal" id="buttonAdd">add</mat-icon>
+
+                    <h1>Educations</h1>
+                
+                    <!-- The Modal -->
+                        <div class="modal fade" id="educationModal">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Education</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body"> 
+                                                                                <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
+                                                                                used to send the data in onSubmitExperience which is created it in profile.component.ts-->
+                                    <form  class="text-center border border-silver" #userEducation="ngForm" (ngSubmit)="onSubmitEducation(userEducation.value)"> 
+                                    
+                                        <mat-form-field class="input-full-width">
+                                        <input matInput type="text" name="school" ngModel placeholder="School/University" > 
+                                        </mat-form-field>
+                                    
+                                        <mat-form-field class="input-full-width">
+                                            <mat-select name="startYearEducation" ngModel>
+                                                <mat-option value="" disabled>Starting Year </mat-option>
+                                                <mat-option *ngFor = "let l of years" [value]="l.year">
+                                                    {{l.year}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                        <mat-form-field class="input-full-width">
+                                            <mat-select name="endYearEducation" ngModel>
+                                                <mat-option value="" disabled>Ending Year </mat-option>
+                                                <mat-option *ngFor = "let l of years" [value]="l.year">
+                                                    {{l.year}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <br>
+                                        
+            
+                                        <mat-form-field class="input-full-width">
+                                        <input matInput type="text" name="degreeEducation" ngModel placeholder="Degree">
+                                        </mat-form-field>
+                                        <br> 
+                
+                                        <mat-form-field class="input-full-width">
+                                        <input matInput type="text" name="fieldStudy" ngModel  placeholder="Field"> 
+                                        </mat-form-field>
+                                        <br>
+
+                                        <mat-form-field class="input-full-width">
+                                        <input matInput type="text" name="descriptionEducation" ngModel placeholder="ex: I have had a very good experience"> 
+                                        </mat-form-field>
+                                        <br>
+                                        <button type="submit" 
+                                            id="submitButton"   
+                                            onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
+                                            submit 
+                                        </button>
+                                        
+                                    </form>
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    <!-- <button class="btn btn-danger" id="" (click)="deleteEducation()">-</button> -->
+
+                    <table class="table table-striped">
+                        <thead>
+                        </thead>
+                    <tbody>
+                            <tr id="test"  *ngFor="let p of educationsList">
+                            <td> <h3> {{p.school}} </h3>
+                            {{p.degreeEducation}}, {{p.fieldStudy}} <br>
+                            {{p.startYearEducation}} - {{p.endYearEducation}} <br>
+                            {{p.descriptionEducation}} </td>
+                            <td class="icons"> 
+                                <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(edu)">
+                                <mat-icon>border_color</mat-icon>
+                                </button>
+                                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
+                                    <mat-icon>remove_circle_outline</mat-icon>
+                                    </button>
+                            </td>
+
+                        <!-- <td> 
+                            <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
+                            <mat-icon>remove_circle_outline</mat-icon>
+                            </button>
+                        </td> -->
+
+                        </tr>
+                        
+                    </tbody>
+                
+                    </table>
+                </div>
+
+                <div class="container p-3 my-3 border block-profile">
+                    <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#skillModal" id="buttonAdd">+</button> -->
+
+                    <mat-icon class="icons float-right add-icon" aria-hidden="false" aria-label="Example add icon" data-toggle="modal" data-target="#skillModal" id="buttonAdd">add</mat-icon>
+
+                <h1>Skills</h1>
+
+                <table class="table table-striped">
+                    <tbody>
+                        <tr id="test"  *ngFor="let s of skillsList">
+
+                            <td>{{s.name}}</td>  
+
+                            <td class="icons">
+                                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogSkill(s)">
+                                <mat-icon>remove_circle_outline</mat-icon>
+                                </button>
+                            </td>
+
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="skillModal">
                 <div class="modal-dialog">
                 <div class="modal-content">
                 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                    <h4 class="modal-title">Add Experience</h4>
+                    <h4 class="modal-title">Add Skill</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     
@@ -167,65 +454,15 @@
                     <div class="modal-body"> 
                                                                     <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
                                                                     used to send the data in onSubmitExperience which is created it in profile.component.ts-->
-                        <form  class="text-center border border-silver" #userExperience="ngForm" (ngSubmit)="onSubmitExperience(userExperience.value)"> 
+                        <form  class="text-center border border-silver" #userSkill="ngForm" (ngSubmit)= "onSubmitSkill(userSkill.value)"> 
+                            <label ><h3>Skill</h3> </label> 
                             <mat-form-field class="input-full-width">
-                            <input matInput type="text" name="company" ngModel placeholder="Company"> 
+                                <input matInput type="text" name="skill" ngModel placeholder="C#"> 
                             </mat-form-field>
-                               
-                            <br>
-                           
-                            <mat-form-field class="input-full-width">
-                            <input matInput type="text" name="title" ngModel placeholder="Title"> 
-                            </mat-form-field><br>
-                
-                            <mat-form-field class="input-full-width">     
-                            <mat-select name="employementType" ngModel>
-                                <mat-option value="" disabled>Job Type </mat-option>
-                                <mat-option *ngFor = "let l of jobType" [value]="l.name">
-                                    {{l.name}}
-                                </mat-option>
-                            </mat-select>
-                           </mat-form-field>  
-                            <br>
-
-                            <mat-form-field class="input-full-width"> 
-                            <input matInput type="text" name="locationId" ngModel placeholder="London, United Kingdom"> 
-                            </mat-form-field>
-                            <br>
-                            <mat-form-field class="input-full-width">
-                                <mat-select name="startDateExperience" ngModel>
-                                    <mat-option value="" disabled>Starting Year </mat-option>
-                                    <mat-option *ngFor = "let l of years" [value]="l.year">
-                                        {{l.year}}
-                                    </mat-option>
-                                </mat-select>
-
-                            <!-- <input matInput type="text" name="startDateExperience" ngModel placeholder="ex: 2016"> -->
-                            </mat-form-field>
-                            <br>
-
-                            
-                            <mat-form-field class="input-full-width">
-
-                                <mat-select name="endDateExperience" ngModel>
-                                    <mat-option value="" disabled>Ending Year </mat-option>
-                                    <mat-option *ngFor = "let l of years" [value]="l.year">
-                                        {{l.year}}
-                                    </mat-option>
-                                </mat-select>
-
-                            <!-- <input matInput type="text" name="endDateExperience" ngModel placeholder="ex: 2020">  -->
-                            </mat-form-field>
-                            <br>
-
-                            <mat-form-field class="input-full-width">
-                            <input matInput type="text" name="descriptionExperience" ngModel placeholder="Ex: I have had a very good experience"> 
-                            </mat-form-field>
-                            <br>
                             <button 
                                 type="submit" 
-                                id="submitButton"   
-                                onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
+                                id="submitButton"    
+                                onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()"  > 
                                 submit 
                             </button>
                             
@@ -240,206 +477,10 @@
                 </div>
                 </div>
             </div>
-    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal" id="buttonAdd">+</button>
-    <h1>Experience</h1> 
-    <table class="table table-striped" >
-        <thead>
 
-        </thead>
-        <tbody >
-          <tr id="test"  *ngFor="let p of experiencesList">
-           
-            <td class="font-italic"> <h3>{{p.title | uppercase}} </h3> 
-            {{p.company}} . {{p.employmentType}} <br>
-            {{p.startDateExperience}} - {{p.endDateExperience}} <br>
-            {{p.descriptionExperience}} <br>
-            {{p.location}}  <br>
-            </td>
-
-            <td> <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
-                <mat-icon>border_color</mat-icon>
-            </button>
-            </td>
-
-             <td> 
-                 <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
-                    <mat-icon>remove_circle_outline</mat-icon>
-                 </button>
-             </td>
-
-          </tr>
-          
-        </tbody>
-    </table>
-</div>
-
-<div class="container p-3 my-3 border">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#educationModal" id="buttonAdd">+</button>
-        <h1>Educations</h1>
-    
-        <!-- The Modal -->
-            <div class="modal fade" id="educationModal">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                    <h4 class="modal-title">Add Education</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    
-                    <!-- Modal body -->
-                    <div class="modal-body"> 
-                                                                    <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
-                                                                    used to send the data in onSubmitExperience which is created it in profile.component.ts-->
-                        <form  class="text-center border border-silver" #userEducation="ngForm" (ngSubmit)="onSubmitEducation(userEducation.value)"> 
-                           
-                            <mat-form-field class="input-full-width">
-                            <input matInput type="text" name="school" ngModel placeholder="School/University" > 
-                            </mat-form-field>
-                           
-                            <mat-form-field class="input-full-width">
-                                <mat-select name="startYearEducation" ngModel>
-                                    <mat-option value="" disabled>Starting Year </mat-option>
-                                    <mat-option *ngFor = "let l of years" [value]="l.year">
-                                        {{l.year}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field class="input-full-width">
-                                <mat-select name="endYearEducation" ngModel>
-                                    <mat-option value="" disabled>Ending Year </mat-option>
-                                    <mat-option *ngFor = "let l of years" [value]="l.year">
-                                        {{l.year}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            <br>
-                            
-  
-                            <mat-form-field class="input-full-width">
-                            <input matInput type="text" name="degreeEducation" ngModel placeholder="Degree">
-                            </mat-form-field>
-                            <br> 
-    
-                            <mat-form-field class="input-full-width">
-                            <input matInput type="text" name="fieldStudy" ngModel  placeholder="Field"> 
-                            </mat-form-field>
-                            <br>
-
-                            <mat-form-field class="input-full-width">
-                            <input matInput type="text" name="descriptionEducation" ngModel placeholder="ex: I have had a very good experience"> 
-                            </mat-form-field>
-                            <br>
-                            <button type="submit" 
-                                id="submitButton"   
-                                onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()" > 
-                                submit 
-                            </button>
-                            
-                        </form>
-                    </div>
-                    
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                    
-                </div>
-                </div>
-            </div>
-        <!-- <button class="btn btn-danger" id="" (click)="deleteEducation()">-</button> -->
-
-        <table class="table table-striped">
-            <thead>
-            </thead>
-        <tbody>
-                <tr id="test"  *ngFor="let p of educationsList">
-                <td> <h3> {{p.school}} </h3>
-                {{p.degreeEducation}}, {{p.fieldStudy}} <br>
-                {{p.startYearEducation}} - {{p.endYearEducation}} <br>
-                {{p.descriptionEducation}} </td>
-                <td> 
-                    <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(edu)">
-                    <mat-icon>border_color</mat-icon>
-                    </button>
-                </td>
-
-              <td> 
-                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
-                   <mat-icon>remove_circle_outline</mat-icon>
-                </button>
-              </td>
-
-            </tr>
-            
-        </tbody>
-      
-        </table>
-    </div>
-
-    <div class="container p-3 my-3 border">
-        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#skillModal" id="buttonAdd">+</button>
-    <h1>Skills</h1>
-
-    <table class="table table-striped">
-        <tbody>
-            <tr id="test"  *ngFor="let s of skillsList">
-
-                <td>{{s.name}}</td>  
-
-                <td> 
-                    <button class="float-right" mat-icon-button ria-label="" (click)="openDialogSkill(s)">
-                       <mat-icon>remove_circle_outline</mat-icon>
-                    </button>
-                </td>
-
-            </tr>
-            
-        </tbody>
-    </table>
-</div>
-<div class="modal fade" id="skillModal">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    
-        <!-- Modal Header -->
-        <div class="modal-header">
-        <h4 class="modal-title">Add Skill</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body"> 
-                                                        <!-- here this hastag is used to create a new variable which takes the whole form and then that value is  
-                                                        used to send the data in onSubmitExperience which is created it in profile.component.ts-->
-            <form  class="text-center border border-silver" #userSkill="ngForm" (ngSubmit)= "onSubmitSkill(userSkill.value)"> 
-                <label ><h3>Skill</h3> </label> 
-                <mat-form-field class="input-full-width">
-                    <input matInput type="text" name="skill" ngModel placeholder="C#"> 
-                </mat-form-field>
-                <button 
-                    type="submit" 
-                    id="submitButton"    
-                    onclick="$('.modal').modal('hide')&&$('.modal-backdrop').hide()"  > 
-                    submit 
-                </button>
-                
-            </form>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
     </div>
-    </div>
-</div>
-
-
-</div>
+<!-- </div> -->
 
 
 <!-- <div class="Experience">

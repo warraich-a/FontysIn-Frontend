@@ -51,6 +51,7 @@ export class ProfileService {
   }
   public addEducation(data, userId, profileId){
     return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/educations/new', data).toPromise().then(data => {
+      console.log("EDUCATION")
       console.log(data);
     })
   }
