@@ -27,7 +27,7 @@ export class FilterPipe implements PipeTransform {
       // if(loggedInUser)
       let fullName = user.firstName + ' ' + user.lastName;
       console.log(fullName);
-      return fullName.toString().toLowerCase().indexOf(searchText) == 0;
+      return fullName.toString().toLowerCase().indexOf(searchText) >= 0;
     });
   }
 }
