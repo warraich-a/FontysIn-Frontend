@@ -48,7 +48,10 @@ export class ProfileComponent implements OnInit {
   userId:number;
   profileId: number;
   
-  allowedToSee = null; 
+  allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
+  errorMsgEdu: boolean;
+  errorMsgExp: boolean;
+  errorMsgSki: boolean;
 
   @Input() expToAdd={};
 
@@ -362,7 +365,8 @@ export class ProfileComponent implements OnInit {
     
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
-      
+        
+        this.errorMsgEdu = false;
         this.educationsList=<Object[]>data;
         console.log(this.educationsList);
         console.log("profile id");
@@ -375,7 +379,7 @@ export class ProfileComponent implements OnInit {
           });
           }  else if(error.status === 401){
             console.log("sorry not sorry");
-            this.showAllowedToSee();
+            this.errorMsgEdu = true;
           } 
           else 
           {
@@ -384,6 +388,8 @@ export class ProfileComponent implements OnInit {
       });
     this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
+     
+      this.errorMsgExp = false;
       this.experiencesList=<Object[]>data;
       console.log(this.experiencesList);
     },
@@ -394,13 +400,15 @@ export class ProfileComponent implements OnInit {
          });
        } else if(error.status === 401){
         console.log("sorry not sorry");
-        this.showAllowedToSee();
+        this.errorMsgExp = true;
       }  else {
           alert('error')
         }
     });
     this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
     {
+    
+      this.errorMsgSki = false;
       this.skillsList=<Object[]>data;
       console.log(this.skillsList);
     },
@@ -412,7 +420,7 @@ export class ProfileComponent implements OnInit {
        }
        else if(error.status === 401){
          console.log("sorry not sorry");
-         this.showAllowedToSee();
+         this.errorMsgSki = true;
        } else {
           alert('error')
         }
@@ -624,10 +632,6 @@ export class ProfileComponent implements OnInit {
           }
         )
     }
-    showAllowedToSee() {
-      this.allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' };
-    
-    }
-
+   
 
 }
