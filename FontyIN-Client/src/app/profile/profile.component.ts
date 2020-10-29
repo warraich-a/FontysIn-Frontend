@@ -1,3 +1,4 @@
+import { DialogAddSkillComponent } from './dialog-add-skill/dialog-add-skill.component';
 import { DeleteExperienceComponent } from './../delete-experience/delete-experience.component';
 import { DeleteEducationComponent } from './../delete-education/delete-education.component';
 import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
@@ -27,6 +28,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { DialogAddExperienceComponent } from './dialog-add-experience/dialog-add-experience.component';
+import { DialogAddEducationComponent } from './dialog-add-education/dialog-add-education.component';
 
 
 @Component({
@@ -59,7 +62,7 @@ export class ProfileComponent implements OnInit {
                public dialog: MatDialog,
                private _snackBar: MatSnackBar) { }
             
-  profileData: Object; 
+  profileData: Profile[]; 
   educations: Object[];
   experiences: Experience[];
   skills : Object[];
@@ -115,84 +118,140 @@ export class ProfileComponent implements OnInit {
     {name: "PartTime"},
     {name: "FreeLancer"}
   ]
-  onSubmitEducation(data)
-  {
+  // onSubmitEducation(data)
+  // {
     
-   this.educationToAdd = {
-     "degreeEducation": data.degreeEducation,
-     "descriptionEducation": data.descriptionEducation,
-     "endYearEducation": parseInt(data.startYearEducation),
-     "fieldStudy": data.fieldStudy,
-     "profileId": this.profileId,
-     "school": data.school,
-     "startYearEducation": parseInt(data.endYearEducation)
-     }
-     this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
-     this.ngOnInit();
-  }
+  //  this.educationToAdd = {
+  //    "degreeEducation": data.degreeEducation,
+  //    "descriptionEducation": data.descriptionEducation,
+  //    "endYearEducation": parseInt(data.startYearEducation),
+  //    "fieldStudy": data.fieldStudy,
+  //    "profileId": this.profileId,
+  //    "school": data.school,
+  //    "startYearEducation": parseInt(data.endYearEducation)
+  //    }
+  //    this.profileService.addEducation(<JSON>this.educationToAdd, this.userId, this.profileId)
+  //    this.ngOnInit();
+  // }
 
 
-  onSubmitSkill(data)
-  {
+  // onSubmitSkill(data)
+  // {
     
-   this.skillToAdd = {
-        "id": 17,
-        "name": data.skill,
-        "profileId": this.profileId
-    }
-     this.profileService.addSkill(<JSON>this.skillToAdd, this.userId, this.profileId)
-     this.ngOnInit();
-  }
+  //  this.skillToAdd = {
+  //       "id": 17,
+  //       "name": data.skill,
+  //       "profileId": this.profileId
+  //   }
+  //    this.profileService.addSkill(<JSON>this.skillToAdd, this.userId, this.profileId)
+  //    this.ngOnInit();
+  // }
 
-  onSubmitExperience(data){
+  // onSubmitExperience(data){
    
-    this.experienceToAdd = {
-      "company": data.company,
-      "descriptionExperience": data.descriptionExperience,
-      "employmentType":data.employementType,
-      "endDateExperience": parseInt(data.endDateExperience),
-      // "id":453,
-      "location": data.locationId,
-      "profileId": this.profileId,
-      "startDateExperience": parseInt(data.startDateExperience),
-      "title": data.title
-       }
-       console.warn(this.experienceToAdd);
-       this.profileService.addExperience(<JSON>this.experienceToAdd, this.userId, this.profileId)
-       this.ngOnInit();
+  //   this.experienceToAdd = {
+  //     "company": data.company,
+  //     "descriptionExperience": data.descriptionExperience,
+  //     "employmentType":data.employementType,
+  //     "endDateExperience": parseInt(data.endDateExperience),
+  //     // "id":453,
+  //     "location": data.locationId,
+  //     "profileId": this.profileId,
+  //     "startDateExperience": parseInt(data.startDateExperience),
+  //     "title": data.title
+  //      }
+  //      console.warn(this.experienceToAdd);
+  //      this.profileService.addExperience(<JSON>this.experienceToAdd, this.userId, this.profileId)
+  //      this.ngOnInit();
        
-  }
+  // }
   
   
-  onSubmitProfile(data){
+//   onSubmitProfile(data){
     
   
-    this.profileToAdd = {
-      "language": data.language,
-      "userId": this.userId
-    }
-    this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
-      .subscribe(
-        newProfile => {
+//     this.profileToAdd = {
+//       "language": data.language,
+//       "userId": this.userId
+//     }
+//     this.profileService.addProfile(<JSON>this.profileToAdd, this.userId)
+//       .subscribe(
+//         newProfile => {
           
-          console.log("New Profile Added ----------------");
-          console.log(newProfile);
+//           console.log("New Profile Added ----------------");
+//           console.log(newProfile);
 
-          this.aboutToAdd = {
-            "content": data.about,
-            "profileId": newProfile
-          }
+//           this.aboutToAdd = {
+//             "content": data.about,
+//             "profileId": newProfile
+//         }
           
-          this.profileService.addAbout(<JSON>this.aboutToAdd,  this.userId, newProfile)
-          console.log("test about");
-          console.log(this.aboutToAdd);
-          //this.isConnected = true;
-        }
-      )
- // window.location.reload();
+//           this.profileService.addAbout(<JSON>this.aboutToAdd,  this.userId, newProfile)
+//           console.log("test about");
+//           console.log(this.aboutToAdd);
+          
+//           //this.isConnected = true;
+//         },(error: Response) => {
+//           if(error.status === 409){
+//             this._snackBar.open('Given Language already exist Exists!', 'End now', {
+//               duration: 2000,
+//             });
+//             }  else if(error.status === 401){
+//               console.log("sorry not sorry");
+//               this.showAllowedToSee();
+//             } 
+//             else 
+//             {
+//               alert('error')
+//             }
+//         });
+      
+//  // window.location.reload();
  
- this.ngOnInit();
- //this.refresh();
+//  this.ngOnInit();
+//  //this.refresh();
+// }
+
+openDialogProfile(): void {
+  const dialogRef = this.dialog.open(DialogAddProfileComponent, {
+    width: '50%',
+    data: {User: this.foundUser}
+  }); 
+  dialogRef.afterClosed()
+    .subscribe(res => {
+    this.getAllExperience();  
+  });
+}
+
+openDialogExperience(): void {
+  const dialogRef = this.dialog.open(DialogAddExperienceComponent, {
+    width: '50%',
+    data: {User: this.foundUser, Profile: this.profileId}
+  }); 
+  dialogRef.afterClosed()
+    .subscribe(res => {
+    this.getAllExperience();  
+  });
+}
+openDialogEducation() : void{
+  const dialogRef = this.dialog.open(DialogAddEducationComponent,{
+    width: '50%',
+    data: {User: this.foundUser, Profile: this.profileId}
+  }); 
+  dialogRef.afterClosed()
+    .subscribe(res => {
+    this.getAllEducation();  
+  });
+}
+openSkillDialog() : void{
+  const dialogRef = this.dialog.open(DialogAddSkillComponent,{
+    width: '25%',
+    data: {User: this.foundUser, Profile: this.profileId}
+  }); 
+  dialogRef.afterClosed()
+    .subscribe(res => {
+    this.getAllSkills();  
+  });
 }
 
   // get all skills 
