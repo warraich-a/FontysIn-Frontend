@@ -122,7 +122,7 @@
                 <h1>Experience</h1> 
                 <table class="table table-striped">
                     <thead>
-                        <span *ngIf="allowedToSee" class="h2">
+                        <span *ngIf="errorMsgExp">
                             <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
                             {{allowedToSee.message}}
                         </span>
@@ -168,7 +168,7 @@
                     <h1>Educations</h1>
                     <table class="table table-striped">
                         <thead>
-                            <span *ngIf="allowedToSee" class="h2">
+                            <span *ngIf="errorMsgEdu" >
                                 <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
                                 {{allowedToSee.message}}
                             </span>
@@ -211,7 +211,7 @@
                     id="buttonAdd">add</mat-icon>
 
                 <h1>Skills</h1>
-                <span *ngIf="allowedToSee" class="h2">
+                <span *ngIf="errorMsgSki">
                     <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
                     {{allowedToSee.message}}
                 </span>

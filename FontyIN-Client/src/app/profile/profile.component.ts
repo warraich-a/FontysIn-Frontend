@@ -51,7 +51,10 @@ export class ProfileComponent implements OnInit {
   userId:number;
   profileId: number;
   
-  allowedToSee = null; 
+  allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
+  errorMsgEdu: boolean;
+  errorMsgExp: boolean;
+  errorMsgSki: boolean;
 
   @Input() expToAdd={};
 
@@ -421,7 +424,8 @@ openSkillDialog() : void{
     
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
-      
+        
+        this.errorMsgEdu = false;
         this.educationsList=<Object[]>data;
         console.log(this.educationsList);
         console.log("profile id");
@@ -434,7 +438,7 @@ openSkillDialog() : void{
           });
           }  else if(error.status === 401){
             console.log("sorry not sorry");
-            this.showAllowedToSee();
+            this.errorMsgEdu = true;
           } 
           else 
           {
@@ -443,6 +447,8 @@ openSkillDialog() : void{
       });
     this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
+     
+      this.errorMsgExp = false;
       this.experiencesList=<Object[]>data;
       console.log(this.experiencesList);
     },
@@ -453,13 +459,15 @@ openSkillDialog() : void{
          });
        } else if(error.status === 401){
         console.log("sorry not sorry");
-        this.showAllowedToSee();
+        this.errorMsgExp = true;
       }  else {
           alert('error')
         }
     });
     this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
     {
+    
+      this.errorMsgSki = false;
       this.skillsList=<Object[]>data;
       console.log(this.skillsList);
     },
@@ -471,7 +479,7 @@ openSkillDialog() : void{
        }
        else if(error.status === 401){
          console.log("sorry not sorry");
-         this.showAllowedToSee();
+         this.errorMsgSki = true;
        } else {
           alert('error')
         }
@@ -683,10 +691,6 @@ openSkillDialog() : void{
           }
         )
     }
-    showAllowedToSee() {
-      this.allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' };
-    
-    }
-
+   
 
 }
