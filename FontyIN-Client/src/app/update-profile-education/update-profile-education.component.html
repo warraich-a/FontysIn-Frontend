@@ -13,17 +13,21 @@
             #school="ngModel">
         </div>
         <div class="col-md-12"><label class="labels">Start year</label>
-            <input type="text" class="form-control" id="startYearEducation"
-            required
-            [(ngModel)]="education.startYearEducation" name="startYearEducation"
-            #startYearEducation="ngModel">
+            <select id="startYearEducation" name="startYearEducation" [(ngModel)]="education.startYearEducation"
+                    class="form-control">
+                    <option *ngFor="let y of years" [value]="y.year">
+                    {{y.year}}
+                    </option>
+                    </select>
             
         </div>
         <div class="col-md-12"><label class="labels">End year</label>
-            <input type="text" class="form-control" id="endYearEducation"
-            required
-            [(ngModel)]="education.endYearEducation" name="endYearEducation"
-            #endYearEducation="ngModel">
+            <select id="endYearEducation" name="endYearEducation" [(ngModel)]="education.endYearEducation"
+            class="form-control">
+            <option *ngFor="let y of years" [value]="y.year">
+            {{y.year}}
+            </option>
+            </select>
         </div>
     </div>
     <div class="row mt-3">
@@ -46,6 +50,6 @@
             #descriptionEducation="ngModel">
         </div>
     </div>
-    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" [disabled]="!EducationForm.valid" >Save Education</button></div>
+    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit" >Save Education</button></div>
 
 </form>

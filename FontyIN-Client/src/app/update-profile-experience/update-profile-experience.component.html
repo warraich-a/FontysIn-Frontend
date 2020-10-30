@@ -31,17 +31,20 @@
     </div>
     <div class="row mt-3">
         <div class="col-md-12"><label class="labels">Start year</label>
-            <input type="text" class="form-control" id="startDateExperience"
-            required
-            [(ngModel)]="experience.startDateExperience" name="startDateExperience"
-            #startDateExperience="ngModel">
-            
+            <select id="startDateExperience" name="startDateExperience" [(ngModel)]="experience.startDateExperience"
+            class="form-control">
+            <option *ngFor="let y of years" [value]="y.year">
+            {{y.year}}
+            </option>
+            </select>
         </div>
         <div class="col-md-12"><label class="labels">End year</label>
-            <input type="text" class="form-control" id="endDateExperience"
-        required
-        [(ngModel)]="experience.endDateExperience" name="endDateExperience"
-        #endDateExperience="ngModel">
+            <select id="endDateExperience" name="endDateExperience" [(ngModel)]="experience.endDateExperience"
+            class="form-control">
+            <option *ngFor="let y of years" [value]="y.year">
+            {{y.year}}
+            </option>
+            </select>
         </div>
         <div class="col-md-12"><label class="labels">Title</label>
             <input type="text" class="form-control" id="title"
