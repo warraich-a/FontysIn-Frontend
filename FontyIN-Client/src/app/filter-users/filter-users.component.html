@@ -25,7 +25,7 @@
           <h4>Start Study Year *Student</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByYear()">
+            <mat-select [disabled]="!StudentDisabled" ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByYear()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
                 {{y.viewValue}}
                 
@@ -37,7 +37,7 @@
           <h4>Start Work Year  *Fontys staff</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByStartWorkYear()">
+            <mat-select [disabled]="!EmployeeDisabled" ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByStartWorkYear()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByWorkYear(y.viewValue)">
                 {{y.viewValue}}
                 

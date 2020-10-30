@@ -51,8 +51,14 @@ export class FilterUsersComponent implements OnInit {
     {value: '3', viewValue: 'Tilburg'}
   ];
 
+  StudentDisabled: boolean;
+  EmployeeDisabled: boolean;
+
   constructor(private filterService: FilterService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) { 
+                this.StudentDisabled = false;
+                this.EmployeeDisabled = false;
+              }
 
 
   ngOnInit(): void { 
@@ -70,6 +76,8 @@ export class FilterUsersComponent implements OnInit {
     this.filterService.filterByUserType('Student').subscribe((data)=>
     {
       this.users=<User[]>data;
+      this.StudentDisabled = true;
+      this.EmployeeDisabled = false;
       console.log(this.users);      
     });
     
@@ -79,6 +87,8 @@ export class FilterUsersComponent implements OnInit {
     this.filterService.filterByUserType('Teacher').subscribe((data)=>
     {
       this.users=<User[]>data;
+      this.StudentDisabled = false;
+      this.EmployeeDisabled = true;
       console.log(this.users);      
     });
     
@@ -88,6 +98,8 @@ export class FilterUsersComponent implements OnInit {
     this.filterService.filterByUserType('FontysStaff').subscribe((data)=>
     {
       this.users=<User[]>data;
+      this.StudentDisabled = false;
+      this.EmployeeDisabled = true;
       console.log(this.users);      
     });
     
