@@ -11,7 +11,7 @@ import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
-import { Component, OnInit , Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit , Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
@@ -637,11 +637,7 @@ export class ProfileComponent implements OnInit {
           }
         )
     }
-    name = 'Angular Html To Pdf ';
-
-    @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
-  
-  
+ 
     public downloadAsPDF() {
       var data = document.getElementById('pdfTable');
       html2canvas(data).then(canvas => {  
