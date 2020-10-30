@@ -23,11 +23,23 @@
           </p>
     
           <br>
-          <h4>Start Study Year</h4>
+          <h4>Start Study Year *Student</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
             <mat-select ng-model [(ngModel)]="real" (ngModelChange)="modoe()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
+                {{y.viewValue}}
+                
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+          <h4>Start Work Year  *Fontys staff</h4>
+          <mat-form-field appearance="fill">
+            <mat-label>Year</mat-label>
+            <mat-select ng-model [(ngModel)]="real" (ngModelChange)="foundDataByStartWorkYear()">
+              <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByWorkYear(y.viewValue)">
                 {{y.viewValue}}
                 
               </mat-option>
@@ -112,6 +124,22 @@
                 <tr id="tests" *ngFor="let y of years">
 
                   <div *ngIf="modoe() == 'y.value'" >
+                    <td class="font-italic"> 
+                      <mat-icon> account_circle </mat-icon>
+                      {{user.firstName}} - {{user.lastName}} <br>
+                      Fontys University of Applied Sciences
+                      <br>
+                      <br>
+                      <mat-divider></mat-divider>
+                      <br>
+                    </td>
+                  </div>
+
+                </tr>
+
+                <tr id="testsye" *ngFor="let y of years">
+
+                  <div *ngIf="foundDataByStartWorkYear() == 'y.value'" >
                     <td class="font-italic"> 
                       <mat-icon> account_circle </mat-icon>
                       {{user.firstName}} - {{user.lastName}} <br>

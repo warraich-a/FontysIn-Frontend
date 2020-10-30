@@ -14,7 +14,6 @@ export class FilterUsersComponent implements OnInit {
 
 
   years: Object[] = [
-    {value: '1995', viewValue: '1995'}, 
     {value: '1996', viewValue: '1996'},
     {value: '1997', viewValue: '1997'},
     {value: '1998', viewValue: '1998'},
@@ -125,6 +124,15 @@ export class FilterUsersComponent implements OnInit {
     });
   }
 
+  getUsersByWorkYear(year){
+    this.filterService.filterUsersByStartWorkYear(year).subscribe((data)=>
+    {
+     this.users=<User[]>data;
+      console.log(this.users);  
+      console.log(this.realm);   
+    });
+  }
+
   real: string;
   departmentSelection: string;
   locationSelection: string;
@@ -139,6 +147,10 @@ export class FilterUsersComponent implements OnInit {
 
   foundDataByLocation(){
     return this.locationSelection;
+  }
+
+  foundDataByStartWorkYear(){
+    return this.real;
   }
 
 }

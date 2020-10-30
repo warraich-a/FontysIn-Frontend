@@ -25,4 +25,8 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9090/users?studyYear=' + year);
   }
 
+  public filterUsersByStartWorkYear(year){
+    return this.httpClient.get('http://localhost:9090/users?workingYear=' + year);
+  }
+
 }
