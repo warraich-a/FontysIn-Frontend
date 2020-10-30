@@ -87,8 +87,8 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
-  getUsersByEmployeeType(){ 
-    this.filterService.filterByUserType('Employee').subscribe((data)=>
+  getUsersByFontysStaffType(){ 
+    this.filterService.filterByUserType('FontysStaff').subscribe((data)=>
     {
       this.users=<User[]>data;
       console.log(this.users);      

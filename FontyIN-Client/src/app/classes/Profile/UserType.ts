@@ -1,6 +1,6 @@
 export enum UserType{
 
-    Employee,
+    FontysStaff,
     Student,
     Teacher
     
