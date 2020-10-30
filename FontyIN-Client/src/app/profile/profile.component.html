@@ -1,241 +1,246 @@
 <div class="container">
     <div class="clearfix">
-        <div class="float-right add-new-profile clearfix">
-        <button type="button" 
-        class="btn add-new-profile-button float-right" 
-        (click)="openDialogProfile()">Add New Profile</button>
+      <div class="float-right add-new-profile clearfix">
+        <div> <button type="button" class="btn add-new-profile-button float-right" (click)="downloadAsPDF()">Export To PDF</button></div>
+        <button type="button"
+                class="btn add-new-profile-button float-right"
+                (click)="openDialogProfile()">
+          Add New Profile
+        </button>
         <br><br><br>
-    </div>
+      </div>
     
 </div>  
 
 
-<div class="container big-container border clearfix mat-elevation-z3">
-    <div class="float-right">
+    <div class="container big-container border clearfix mat-elevation-z3">
+      <div class="float-right">
         <!-- Connect button -->
         <ng-container *ngIf="loggedInUser != profileUser?.id">
-            <button mat-raised-button
-                id="contact"
-                *ngIf="isConnected"
-                class="float-right"
-                >Connected
-            </button>
-            <button mat-raised-button
-                id="contact"
-                *ngIf="!isConnected && isRequestSent"
-                class="float-right"
-                >Request sent
-            </button>
-            <button mat-raised-button
-                    id="contact"
-                    *ngIf="!isConnected && !isRequestSent && !isRequestReceived"
-                    (click)="createContact()"
-                    class="float-right"
-                    >Connect
-            </button>
-            <button mat-raised-button
-                    id="contact"
-                    *ngIf="!isConnected && isRequestReceived"
-                    (click)="acceptContact()"
-                    class="float-right"
-                    >Accept
-            </button>
+          <button mat-raised-button
+                  id="contact"
+                  *ngIf="isConnected"
+                  class="float-right">
+            Connected
+          </button>
+          <button mat-raised-button
+                  id="contact"
+                  *ngIf="!isConnected && isRequestSent"
+                  class="float-right">
+            Request sent
+          </button>
+          <button mat-raised-button
+                  id="contact"
+                  *ngIf="!isConnected && !isRequestSent && !isRequestReceived"
+                  (click)="createContact()"
+                  class="float-right">
+            Connect
+          </button>
+          <button mat-raised-button
+                  id="contact"
+                  *ngIf="!isConnected && isRequestReceived"
+                  (click)="acceptContact()"
+                  class="float-right">
+            Accept
+          </button>
         </ng-container>
         <!-- <div class="container"> -->
-            <!-- <div class="clearfix">
-                <div class="float-right">
-                    <div class="dropdown">
-                        <button class="dropbtn">Switch Language</button>
-                        <div class="dropdown-content">
-                            <li *ngFor="let p of profileData">
-                                <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
-                            </li>
-                        </div>
-                    </div>    
-                </div> -->
-                <!-- <div class="float-right">
-                    <button type="button" class="btn btn-secondary">Example Button floated right</button>
-        
-                </div> -->
-            <!-- </div> -->
+        <!-- <div class="clearfix">
+        <div class="float-right">
+            <div class="dropdown">
+                <button class="dropbtn">Switch Language</button>
+                <div class="dropdown-content">
+                    <li *ngFor="let p of profileData">
+                        <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
+                    </li>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="float-right">
+        <button type="button" class="btn btn-secondary">Example Button floated right</button>
+
+    </div> -->
+        <!-- </div> -->
         <!-- </div> -->
         <!-- <div class="row"> -->
-            <!-- <div class="clearfix"> -->
-            <!-- <div class="container p-3 my-3 border" > -->
-            
-            <!-- <img [src]="url" height="200"> <br/>
-                <input type='file' (change)="onSelectFile($event)"> -->
-                <!-- <div class="float-right"></div> -->
-                <div class="dropdown">
-                    <button class="dropbtn dropdown-toggle switch-profile-button">Switch Profile</button>
-                    <div class="dropdown-content">
-                        <li *ngFor="let p of profileData">
-                            <a class="dropdown-item switch-profile" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
-                        </li>
-                    </div>
-                </div>
-                <!-- <div class="dropdown" mdbDropdown style="float: right;">
+        <!-- <div class="clearfix"> -->
+        <!-- <div class="container p-3 my-3 border" > -->
+        <!-- <img [src]="url" height="200"> <br/>
+        <input type='file' (change)="onSelectFile($event)"> -->
+        <!-- <div class="float-right"></div> -->
+        <div class="dropdown">
+          <button class="dropbtn dropdown-toggle switch-profile-button">Switch Profile</button>
+          <div class="dropdown-content">
+            <li *ngFor="let p of profileData">
+              <a class="dropdown-item switch-profile" href="/users/{{p.userId}}/profiles/{{p.id}}"> {{p.language}}</a>
+            </li>
+          </div>
+        </div>
+        <!-- <div class="dropdown" mdbDropdown style="float: right;">
 
-                    <button type="button"  Toggle mdbBtn color="primary" class="dropdown-toggle waves-light" 
-                    mdbWavesEffect>
-                    Switch Profile
-                    </button>
+        <button type="button"  Toggle mdbBtn color="primary" class="dropdown-toggle waves-light"
+        mdbWavesEffect>
+        Switch Profile
+        </button>
 
-                    <div class="dropdown-menu dropdown-pzrimary">
-                        <li *ngFor="let p of profileData">
-                        <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
-                        </li>
-                    </div>
-                </div> -->
-            </div>
-            <div class="name" ng-controller="userImage, userFirstName, userLastName">
-                <!-- {{userImage}}    -->
-                <h1> {{userFirstName}} {{userLastName}} </h1>  
-            </div>
-            <!-- </div> -->
-            <div class="container p-3 my-3 border  block-profile">
-                
-                <h1> About </h1>
-                <ul id="test" class="edit" *ngFor="let p of aboutList">
-                    {{p.content}} 
-                    <button class="edit-icon icons" mat-icon-button ria-label="" (click)="openDialogAbout(p)">
-                        <mat-icon>border_color</mat-icon>
-                    </button>
-                </ul>
-            
-            </div>
+        <div class="dropdown-menu dropdown-pzrimary">
+            <li *ngFor="let p of profileData">
+            <a class="dropdown-item" href="/users/{{p.userId}}/profiles/{{p.id}}" > {{p.language}}</a>
+            </li>
+        </div>
+    </div> -->
+      </div>
+      <div id="pdfTable" #pdfTable>
+        <div class="name" ng-controller="userImage, userFirstName, userLastName">
+          <!-- {{userImage}}    -->
+          <h1> {{userFirstName}} {{userLastName}} </h1>
+        </div>
+        <!-- </div> -->
+        <div class="container p-3 my-3 border  block-profile">
 
-            <div class="container p-3 my-3 border block-profile" >
+          <h1> About </h1>
+          <ul id="test" class="edit" *ngFor="let p of aboutList">
+            {{p.content}}
+            <button class="edit-icon icons" mat-icon-button ria-label="" (click)="openDialogAbout(p)">
+              <mat-icon>border_color</mat-icon>
+            </button>
+          </ul>
 
-                        <!-- The Modal -->
-                       
-                <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal" id="buttonAdd">+</button> -->
+        </div>
 
-                <!-- <button > -->
-                    <mat-icon class="icons float-right add-icon" 
-                    aria-hidden="false" 
+        <div class="container p-3 my-3 border block-profile">
+
+          <!-- The Modal -->
+          <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#myModal" id="buttonAdd">+</button> -->
+          <!-- <button > -->
+          <mat-icon class="icons float-right add-icon"
+                    aria-hidden="false"
                     aria-label="Example add icon"
-                    (click)="openDialogExperience()" 
-                     id="buttonAdd">add</mat-icon>
-                <!-- </button> -->
+                    (click)="openDialogExperience()"
+                    id="buttonAdd">add</mat-icon>
+          <!-- </button> -->
 
-                <h1>Experience</h1> 
-                <table class="table table-striped">
-                    <thead>
-                        <span *ngIf="errorMsgExp">
-                            <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
-                            {{allowedToSee.message}}
-                        </span>
-                    </thead>
-                    <tbody >
-                    <tr id="test"  *ngFor="let p of experiencesList">
-                    
-                        <td class="font-italic"> <h3>{{p.title | uppercase}} </h3> 
-                        {{p.company}} . {{p.employmentType}} <br>
-                        {{p.startDateExperience}} - {{p.endDateExperience}} <br>
-                        {{p.descriptionExperience}} <br>
-                        {{p.location}}  <br>
-                        </td>
+          <h1>Experience</h1>
+          <table class="table table-striped">
+            <thead>
+              <span *ngIf="errorMsgExp">
+                <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
+                {{allowedToSee.message}}
+              </span>
+            </thead>
+            <tbody>
+              <tr id="test" *ngFor="let p of experiencesList">
 
-                        <td class="icons"> <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
-                            <mat-icon>border_color</mat-icon>
-                        </button>
-                        <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
-                            <mat-icon>remove_circle_outline</mat-icon>
-                        </button>
-                        </td>
-<!-- 
-                        <td> 
-                            <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
-                                <mat-icon>remove_circle_outline</mat-icon>
-                            </button>
-                        </td> -->
+                <td class="font-italic">
+                  <h3>{{p.title | uppercase}} </h3>
+                  {{p.company}} . {{p.employmentType}} <br>
+                  {{p.startDateExperience}} - {{p.endDateExperience}} <br>
+                  {{p.descriptionExperience}} <br>
+                  {{p.location}}  <br>
+                </td>
 
-                    </tr>
-                    
-                    </tbody>
-                </table>
-            </div>
+                <td class="icons">
+                  <button mat-icon-button ria-label="" (click)="openDialogUpdateExp(p)">
+                    <mat-icon>border_color</mat-icon>
+                  </button>
+                  <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </td>
+                <!--
+                                    <td>
+                                        <button class="float-right" mat-icon-button ria-label="" (click)="openDialogExp(p)">
+                                            <mat-icon>remove_circle_outline</mat-icon>
+                                        </button>
+                                    </td> -->
 
-            <div class="container p-3 my-3 border block-profile">
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#educationModal" id="buttonAdd">+</button> -->
-                <mat-icon class="icons float-right add-icon" 
-                aria-hidden="false" 
-                aria-label="Example add icon"
-                (click)="openDialogEducation()" 
-                id="buttonAdd">add</mat-icon>
+              </tr>
 
-                    <h1>Educations</h1>
-                    <table class="table table-striped">
-                        <thead>
-                            <span *ngIf="errorMsgEdu" >
-                                <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
-                                {{allowedToSee.message}}
-                            </span>
-                        </thead>
-                    <tbody>
-                            <tr id="test"  *ngFor="let p of educationsList">
-                            <td> <h3> {{p.school}} </h3>
-                            {{p.degreeEducation}}, {{p.fieldStudy}} <br>
-                            {{p.startYearEducation}} - {{p.endYearEducation}} <br>
-                            {{p.descriptionEducation}} </td>
-                            <td class="icons"> 
-                                <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(p)">
-                                <mat-icon>border_color</mat-icon>
-                                </button>
-                                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
-                                    <mat-icon>remove_circle_outline</mat-icon>
-                                    </button>
-                            </td>
+            </tbody>
+          </table>
+        </div>
 
-                        <!-- <td> 
-                            <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
-                            <mat-icon>remove_circle_outline</mat-icon>
-                            </button>
-                        </td> -->
-
-                        </tr>
-                        
-                    </tbody>
-                
-                    </table>
-                </div>
-
-                <div class="container p-3 my-3 border block-profile">
-                    <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#skillModal" id="buttonAdd">+</button> -->
-
-                    <mat-icon class="icons float-right add-icon" 
-                    aria-hidden="false" 
-                    aria-label="Example add icon" 
-                    (click)="openSkillDialog()" 
+        <div class="container p-3 my-3 border block-profile">
+          <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#educationModal" id="buttonAdd">+</button> -->
+          <mat-icon class="icons float-right add-icon"
+                    aria-hidden="false"
+                    aria-label="Example add icon"
+                    (click)="openDialogEducation()"
                     id="buttonAdd">add</mat-icon>
 
-                <h1>Skills</h1>
-                <span *ngIf="errorMsgSki">
-                    <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
-                    {{allowedToSee.message}}
-                </span>
+          <h1>Educations</h1>
+          <table class="table table-striped">
+            <thead>
+              <span *ngIf="errorMsgEdu">
+                <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
+                {{allowedToSee.message}}
+              </span>
+            </thead>
+            <tbody>
+              <tr id="test" *ngFor="let p of educationsList">
+                <td>
+                  <h3> {{p.school}} </h3>
+                  {{p.degreeEducation}}, {{p.fieldStudy}} <br>
+                  {{p.startYearEducation}} - {{p.endYearEducation}} <br>
+                  {{p.descriptionEducation}}
+                </td>
+                <td class="icons">
+                  <button mat-icon-button ria-label="" (click)="openDialogUpdateEdu(p)">
+                    <mat-icon>border_color</mat-icon>
+                  </button>
+                  <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </td>
 
-                <table class="table table-striped">
-                    <tbody>
-                        <tr id="test"  *ngFor="let s of skillsList">
+                <!-- <td>
+                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogEdu(p)">
+                <mat-icon>remove_circle_outline</mat-icon>
+                </button>
+            </td> -->
 
-                            <td>{{s.name}}</td>  
+              </tr>
 
-                            <td class="icons">
-                                <button class="float-right" mat-icon-button ria-label="" (click)="openDialogSkill(s)">
-                                <mat-icon>remove_circle_outline</mat-icon>
-                                </button>
-                            </td>
+            </tbody>
 
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
+          </table>
         </div>
+
+        <div class="container p-3 my-3 border block-profile">
+          <!-- <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#skillModal" id="buttonAdd">+</button> -->
+
+          <mat-icon class="icons float-right add-icon"
+                    aria-hidden="false"
+                    aria-label="Example add icon"
+                    (click)="openSkillDialog()"
+                    id="buttonAdd">add</mat-icon>
+
+          <h1>Skills</h1>
+          <span *ngIf="errorMsgSki">
+            <i class="fas fa-exclamation-circle {{allowedToSee.class}}"></i>
+            {{allowedToSee.message}}
+          </span>
+
+          <table class="table table-striped">
+            <tbody>
+              <tr id="test" *ngFor="let s of skillsList">
+
+                <td>{{s.name}}</td>
+
+                <td class="icons">
+                  <button class="float-right" mat-icon-button ria-label="" (click)="openDialogSkill(s)">
+                    <mat-icon>remove_circle_outline</mat-icon>
+                  </button>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-<!-- </div> -->
+</div> 
 
 
 <!-- <div class="Experience">
