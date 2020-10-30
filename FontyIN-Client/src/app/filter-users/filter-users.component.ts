@@ -11,7 +11,6 @@ import { FilterService } from '../services/filter/filter.service';
 export class FilterUsersComponent implements OnInit {
 
   years: Object[] = [
-    {value: '1995-0', viewValue: '1995'}, 
     {value: '1996-1', viewValue: '1996'},
     {value: '1997-2', viewValue: '1997'},
     {value: '1998-3', viewValue: '1998'},
@@ -85,8 +84,8 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
-  getUsersByEmployeeType(){ 
-    this.filterService.filterByUserType('Employee').subscribe((data)=>
+  getUsersByFontysStaffType(){ 
+    this.filterService.filterByUserType('FontysStaff').subscribe((data)=>
     {
       this.users=<User[]>data;
       console.log(this.users);      
@@ -99,6 +98,14 @@ export class FilterUsersComponent implements OnInit {
     {
      this.users=<User[]>data;
       console.log(this.users);     
+    });
+  }
+
+  getUsersByWorkYear(year){
+    this.filterService.filterUsersByStartWorkYear(year).subscribe((data)=>
+    {
+     this.users=<User[]>data;
+      console.log(this.users);  
     });
   }
 
@@ -132,5 +139,9 @@ export class FilterUsersComponent implements OnInit {
 
   foundDataByLocation(){
     return this.locationSelection;
+  }
+
+  foundDataByStartWorkYear(){
+    return this.yearSelection;
   }
 }

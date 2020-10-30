@@ -81,8 +81,8 @@ export class ProfileService {
   }
   public addSkill(data, userId, profileId){
     return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/skills/new', data).subscribe((data)=>
-    {
-     
+    { 
+      
     },
     (error: Response) => {
       if(error.status === 409){

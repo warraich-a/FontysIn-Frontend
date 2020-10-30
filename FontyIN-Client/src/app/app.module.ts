@@ -84,6 +84,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { DialogAddExperienceComponent } from './profile/dialog-add-experience/dialog-add-experience.component';
+import { DialogAddEducationComponent } from './profile/dialog-add-education/dialog-add-education.component';
+import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-skill.component';
 
 
 @NgModule({
@@ -112,6 +115,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     PostComponent,
     AddInformationComponent,
     DialogAddProfileComponent,
+    DialogAddExperienceComponent,
+    DialogAddEducationComponent,
+    DialogAddSkillComponent,
     
  
   ],

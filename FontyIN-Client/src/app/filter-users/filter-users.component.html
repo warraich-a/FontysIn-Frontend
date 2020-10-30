@@ -1,75 +1,3 @@
-<!-- <mat-card class="filter-card">
-    <mat-card-header>
-      <mat-card-title>Filter Users:</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-
-      <p>
-        <mat-radio-group aria-label="Select an option">
-          <br>
-          <label>User Type</label>
-          <br>
-          <mat-radio-button value="1">Student</mat-radio-button>
-          <mat-radio-button value="2">Teacher</mat-radio-button>
-          <mat-radio-button value="3">Employee</mat-radio-button>
-          <br>
-        </mat-radio-group>
-      </p>
-
-      <br>
-      <h4>Start Study Year</h4>
-      <mat-form-field appearance="fill">
-        <mat-label>Year</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let y of years" [value]="y.value">
-            {{y.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <br>
-      <h4>Department</h4>
-      <mat-form-field appearance="fill">
-        <mat-label>Department</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let d of departments" [value]="d.value">
-            {{d.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <br>
-      <h4>Location</h4>
-      <mat-form-field appearance="fill">
-        <mat-label>Location</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let l of locations" [value]="l.value">
-            {{l.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-    </mat-card-content> -->
-<!--     
-    <mat-card-actions>
-      
-    </mat-card-actions> -->
-<!-- </mat-card>
-
-<mat-card class="found-card">
-
-  <mat-card-header>
-    <mat-card-title>Users:</mat-card-title>
-  </mat-card-header>
-
-  <mat-card-content>
-
-
-  </mat-card-content>
-
-</mat-card> -->
-
 <div class="container">
   <div class="row">
     
@@ -88,17 +16,29 @@
               <br>
               <mat-radio-button type="radio" name="filter"  (click)="getUsersByStudentType()"  value="Student">Student</mat-radio-button>
               <mat-radio-button type="radio" name="filter"  (click)="getUsersByTeacherType()"  value="Teacher">Teacher</mat-radio-button>
-              <mat-radio-button type="radio" name="filter"  (click)="getUsersByEmployeeType()"  value="Employee">Employee</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByFontysStaffType()"  value="FontysStaff">FontysStaff</mat-radio-button>
               <br>
             </mat-radio-group>
           </p>
     
           <br>
-          <h4>Start Study Year</h4>
+          <h4>Start Study Year *Student</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
             <mat-select ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByYear()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
+                {{y.viewValue}}
+                
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+          <h4>Start Work Year  *Fontys staff</h4>
+          <mat-form-field appearance="fill">
+            <mat-label>Year</mat-label>
+            <mat-select ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByStartWorkYear()">
+              <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByWorkYear(y.viewValue)">
                 {{y.viewValue}}
                 
               </mat-option>
@@ -167,7 +107,7 @@
                   </td>
                 </div>
 
-                <div *ngIf="foundDataByUserType() == 'Employee'" >
+                <div *ngIf="foundDataByUserType() == 'FontysStaff'" >
                   <td class="font-italic"> 
                     <mat-icon> account_circle </mat-icon>
                     {{user.firstName}} - {{user.lastName}} <br>
@@ -192,6 +132,20 @@
                       <br>
                     </td>
                   </div>
+
+                  <tr id="workYear" *ngFor="let y of years">
+
+                    <div *ngIf="foundDataByStartWorkYear() == 'y.value'" >
+                      <td class="font-italic"> 
+                        <mat-icon> account_circle </mat-icon>
+                        {{user.firstName}} - {{user.lastName}} <br>
+                        Fontys University of Applied Sciences
+                        <br>
+                        <br>
+                        <mat-divider></mat-divider>
+                        <br>
+                      </td>
+                    </div>
 
                   <tr id="testDepartment" *ngFor="let d of departments">
 
