@@ -11,7 +11,7 @@ import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
 import { Education } from './../classes/Profile/Education';
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
@@ -22,6 +22,8 @@ import { User } from '../classes/Profile/User';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, interval, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import * as jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -52,6 +54,7 @@ export class ProfileComponent implements OnInit {
   errorMsgEdu: boolean;
   errorMsgExp: boolean;
   errorMsgSki: boolean;
+  
 
   @Input() expToAdd={};
 
@@ -196,6 +199,7 @@ export class ProfileComponent implements OnInit {
  
  this.ngOnInit();
  //this.refresh();
+ 
 }
 
   // get all skills 
@@ -427,6 +431,7 @@ export class ProfileComponent implements OnInit {
     });
     this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
+      
       this.aboutList=<Object[]>data;
       console.log(this.aboutList);
     },
@@ -469,7 +474,7 @@ export class ProfileComponent implements OnInit {
         console.log("-------------------------");
         
       });
-   
+     
    //this.profileUser = +this.route.snapshot.paramMap.get('id');
 
     this.userId = +this.route.snapshot.paramMap.get('id');
@@ -632,6 +637,28 @@ export class ProfileComponent implements OnInit {
           }
         )
     }
+    name = 'Angular Html To Pdf ';
+
+    @ViewChild('pdfTable', {static: false}) pdfTable: ElementRef;
+  
+  
+    public downloadAsPDF() {
+      var data = document.getElementById('pdfTable');
+      html2canvas(data).then(canvas => {  
+        // Few necessary setting options  
+        var imgWidth = 208;   
+        var pageHeight = 295;    
+        var imgHeight = canvas.height * imgWidth / canvas.width;  
+        var heightLeft = imgHeight;  
+    
+        const contentDataURL = canvas.toDataURL('image/png')  
+        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
+        var position = 0;  
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+        pdf.save('MYPdf.pdf'); // Generated PDF   
+      });  
+    }
+  
    
 
 }
