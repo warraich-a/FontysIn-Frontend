@@ -68,6 +68,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { HeaderComponent } from './header/header.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({
@@ -82,7 +84,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
     DeleteSkillComponent,
     DeleteEducationComponent,
     DeleteExperienceComponent,
-    FilterUsersComponent
+    FilterUsersComponent,
+    HeaderComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

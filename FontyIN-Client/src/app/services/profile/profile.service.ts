@@ -8,6 +8,10 @@ export class ProfileService {
 
   constructor(private httpClient: HttpClient) { }
 
+  public getAllUsers(){
+    return this.httpClient.get('http://localhost:9090/users/')
+  }
+
   public getProfile(){
     return this.httpClient.get('http://localhost:9099/users/1/profiles/1')
   }
