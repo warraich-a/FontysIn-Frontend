@@ -7,6 +7,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-add-profile',
@@ -18,7 +19,8 @@ export class DialogAddProfileComponent implements OnInit {
   constructor(private profileService: ProfileService,  
               public dialogRef: MatDialogRef<DialogAddProfileComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar,
+              private router: Router) { }
   profileToAdd: {};
   aboutToAdd : {};
   userId: number;
@@ -33,6 +35,10 @@ export class DialogAddProfileComponent implements OnInit {
   CloseDialog(){
     this.dialogRef.close();
   }
+  submit(pId){
+    this.router.navigate(['users/',this.userId, 'profiles', pId])
+  }
+
   ngOnInit(): void {
     this.userId = this.data.User.id;
     console.log(this.userId)
@@ -58,6 +64,7 @@ export class DialogAddProfileComponent implements OnInit {
           this.profileService.addAbout(<JSON>this.aboutToAdd,  this.userId, newProfile)
           console.log("test about");
           console.log(this.aboutToAdd);
+          this.submit(newProfile);
         }
         , 
         (error: Response) => {
@@ -75,6 +82,7 @@ export class DialogAddProfileComponent implements OnInit {
               alert('error')
             }
         });
+        
         this.CloseDialog();
   }
 }
