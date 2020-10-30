@@ -10,23 +10,23 @@ export class FilterService {
   constructor(private httpClient: HttpClient) { }
 
   public filterByUserType(userType){
-    return this.httpClient.get('http://localhost:9099/users?type=' + userType);
+    return this.httpClient.get('http://localhost:9090/users?type=' + userType);
   }
 
   public filterUserByLocation(location){
-    return this.httpClient.get('http://localhost:9099/users?location=' + location);
+    return this.httpClient.get('http://localhost:9090/users?location=' + location);
   }
 
   public filterUserByDepartment(department){
-    return this.httpClient.get('http://localhost:9099/users?department=' + department);
+    return this.httpClient.get('http://localhost:9090/users?department=' + department);
   }
 
   public filterUsersByStartStudyYear(year){
-    return this.httpClient.get('http://localhost:9099/users?studyYear=' + year);
+    return this.httpClient.get('http://localhost:9090/users?studyYear=' + year);
   }
 
   public filterUsersByStartWorkYear(year){
-    return this.httpClient.get('http://localhost:9099/users?workingYear=' + year);
+    return this.httpClient.get('http://localhost:9090/users?workingYear=' + year);
   }
 
 }
