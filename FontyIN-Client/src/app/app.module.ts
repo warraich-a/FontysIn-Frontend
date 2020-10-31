@@ -87,6 +87,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DialogAddExperienceComponent } from './profile/dialog-add-experience/dialog-add-experience.component';
 import { DialogAddEducationComponent } from './profile/dialog-add-education/dialog-add-education.component';
 import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-skill.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({
@@ -118,7 +119,7 @@ import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-s
     DialogAddExperienceComponent,
     DialogAddEducationComponent,
     DialogAddSkillComponent,
-    
+    SearchPipe,    
  
   ],
   entryComponents:[DialogAddProfileComponent],

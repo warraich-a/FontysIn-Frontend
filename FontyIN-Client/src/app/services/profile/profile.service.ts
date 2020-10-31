@@ -19,6 +19,9 @@ export class ProfileService {
   constructor(private httpClient: HttpClient, 
     private _snackBar: MatSnackBar) { }
 
+  public getAllUsers(){
+    return this.httpClient.get('http://localhost:9090/users/')
+  }
   public getProfile(userId){
     return this.httpClient.get( 'http://localhost:9090/users/'+ userId + '/profiles')
   }

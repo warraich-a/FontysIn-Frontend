@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { User } from '../classes/Profile/User';
+import { ProfileService } from '../services/profile/profile.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  searchText='';
+
+  constructor(private profileService: ProfileService,
+    private route: ActivatedRoute) { }
+
+    users: User[];
 
   ngOnInit(): void {
+    this.profileService.getAllUsers().subscribe(data =>{
+      this.users=<User[]>data;
+      console.log(data);
+    });
   }
 
 }
