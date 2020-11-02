@@ -15,6 +15,7 @@ import { UpdateProfileEducationComponent} from './update-profile-education/updat
 import { UpdateProfileExperienceComponent} from './update-profile-experience/update-profile-experience.component';
 import { UpdateProfileAboutComponent} from './update-profile-about/update-profile-about.component';
 import { FilterUsersComponent } from './filter-users/filter-users.component';
+import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 
 
 const routes: Routes = [{
@@ -42,7 +43,7 @@ const routes: Routes = [{
   component: ProfileComponent
 },{
   path: 'posts', 
-  component: PostComponent
+  component: NewsfeedComponent
 },
 {
   path: 'update-post/:id',

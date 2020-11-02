@@ -1,31 +1,44 @@
+
+
 <div class="container">
-    <br>
-    <div id="creatPostBlock">
-    <textarea [(ngModel)] = "content" placeholder="Your awesome post..." id = "newPostText"></textarea> <br>
-    <button (click) ="createPost()" class = "postBtn">Post</button>
-    <br>
-    <br>
     
-    </div>
-    
-<hr>
-</div>
-<div class="container">
-    <div *ngFor="let post of posts">
         
         <div class="post-block">
         
         <a (click)="deletePost(post.id)" class="deleteBtn"></a>
         <a [routerLink]="['/update-post', post.id]" class="editBtn"></a>
-        <h2><a [routerLink]="['/post', post.id]">{{post.content}}</a></h2>
+        <h2>{{post.content}}</h2>
         <p class="p-date">{{post.date}}</p>
         
         <br>
-        
+        <hr>
+            <div class="comment-block">
+                <div id="creatPostBlock">
+                    <textarea [(ngModel)] = "commentContent" placeholder="Your awesome comment..." id = "newPostText"></textarea> <br>
+                    <button (click) ="createComment(post.id)" class = "postBtn">Post</button>
+                    <br><br>
+                    <br><br>
+                    
+                    </div>
+            <div *ngFor="let comm of comments">
+                <a>
+                <br>
+                <hr>
+                <p style="font-size: 11px;">Comment left by user: {{comm.userId}}</p>
+                <h2>{{comm.content}}</h2>
+                <p class="p-date">{{comm.date}}</p>
+                
+                <br>
+                
+                
+                </a>
+              
+              </div>
+            </div>
         </div>
         
       
-      </div>
+      
 </div>
 
   
