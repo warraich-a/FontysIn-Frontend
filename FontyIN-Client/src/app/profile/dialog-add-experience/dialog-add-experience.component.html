@@ -1,0 +1,67 @@
+
+<h1> Add Experience </h1>
+<form  class="text-center border-silver" #userExperience="ngForm" (ngSubmit)="onSubmitExperience(userExperience.value)"> 
+    <mat-form-field class="input-full-width">
+    <input matInput type="text" name="company" ngModel placeholder="Company"> 
+    </mat-form-field>
+    
+    <br>
+
+    <mat-form-field class="input-full-width">
+    <input matInput type="text" name="title" ngModel placeholder="Title"> 
+    </mat-form-field><br>
+
+    <mat-form-field class="input-full-width">     
+    <mat-select name="employementType" ngModel>
+        <mat-option value="" disabled>Job Type </mat-option>
+        <mat-option *ngFor = "let l of jobType" [value]="l.name">
+            {{l.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>  
+    <br>
+
+    <mat-form-field class="input-full-width"> 
+    <input matInput type="text" name="locationId" ngModel placeholder="London, United Kingdom"> 
+    </mat-form-field>
+    <br>
+    <mat-form-field class="input-full-width">
+        <mat-select name="startDateExperience" ngModel>
+            <mat-option value="" disabled>Starting Year </mat-option>
+            <mat-option *ngFor = "let l of years" [value]="l.year">
+                {{l.year}}
+            </mat-option>
+        </mat-select>
+
+    <!-- <input matInput type="text" name="startDateExperience" ngModel placeholder="ex: 2016"> -->
+    </mat-form-field>
+    <br>
+
+    
+    <mat-form-field class="input-full-width">
+
+        <mat-select name="endDateExperience" ngModel>
+            <mat-option value="" disabled>Ending Year </mat-option>
+            <mat-option *ngFor = "let l of years" [value]="l.year">
+                {{l.year}}
+            </mat-option>
+        </mat-select>
+
+    <!-- <input matInput type="text" name="endDateExperience" ngModel placeholder="ex: 2020">  -->
+    </mat-form-field>
+    <br>
+
+    <mat-form-field class="input-full-width">
+    <input matInput type="text" name="descriptionExperience" ngModel placeholder="Ex: I have had a very good experience"> 
+    </mat-form-field>
+    <br>
+    <button 
+        mdbBtn 
+        type="submit"  
+        rounded="true" 
+        class="btn btn-success"
+        id="submitButton" > submit
+    </button>
+    <button type="button" class="btn btn-danger" (click)="CloseDialog()">Close</button> 
+
+</form>

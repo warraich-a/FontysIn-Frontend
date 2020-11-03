@@ -1,11 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PostsService} from '../services/posts.service';
+import { Moment } from 'moment';
 
 export interface Post {
   content: string;
   date: string;
   id: number;
   userId: number;
+}
+export interface Comment {
+  content: string;
+  date: string;
+  id: number;
+  userId: number;
+  postId: number;
 }
 
 @Component({
@@ -14,10 +23,28 @@ export interface Post {
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  posts : Post[];
+  post : Post;
+  comments: Comment[];
+  @Input() id ;
   constructor( private postService: PostsService) { }
   data = {};
   content : String;
+  commentContent : String;
+  commentData = {};
+  time : Moment;
+
+  createComment(id) {
+    this.commentData = {
+      "content": this.commentContent,
+      "date": "2020-10-20",
+      "id": 0,
+      "postId": id,
+      "userId": 1
+      };
+    this.postService.newComment(<JSON>this.commentData);
+    window.location.reload();
+    
+  }
 
   createPost() {
     this.data = {
@@ -35,12 +62,19 @@ export class PostComponent implements OnInit {
     window.location.reload()
   }
 
+  
+
   ngOnInit(): void {
-    this.postService.getPosts()
+    this.postService.getPost(this.id)
      .subscribe((data)=>{
      console.log(data);
-      this.posts = <Post[]>data;
+      this.post = <Post>data;
    });
+   this.postService.getCommentsByPostId(this.id)
+   .subscribe((data)=>{
+   console.log(data);
+    this.comments = <Comment[]>data;
+    });
   }
 
 }

@@ -1,0 +1,15 @@
+<h1>Add skill</h1>
+<form  class="text-center border-silver" #userSkill="ngForm" (ngSubmit)= "onSubmitSkill(userSkill.value)"> 
+    <label ><h3>Skill</h3> </label> 
+    <mat-form-field class="input-full-width">
+        <input matInput type="text" name="skill" ngModel placeholder="C#"> 
+    </mat-form-field>
+    <button 
+        mdbBtn 
+        type="submit"  
+        rounded="true" 
+        class="btn btn-success"
+        id="submitButton" > submit
+    </button>
+    <button type="button" class="btn btn-danger" (click)="CloseDialog()">Close</button> 
+</form>
