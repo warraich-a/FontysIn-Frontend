@@ -221,8 +221,9 @@ export class ProfileComponent implements OnInit {
 openDialogProfile(): void {
   const dialogRef = this.dialog.open(DialogAddProfileComponent, {
     width: '50%',
-    data: {User: this.foundUser}
-  }); 
+    data: {User: this.foundUser},
+    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+    }) 
   dialogRef.afterClosed()
     .subscribe(res => {
     this.getAllExperience();  
@@ -232,7 +233,9 @@ openDialogProfile(): void {
 openDialogExperience(): void {
   const dialogRef = this.dialog.open(DialogAddExperienceComponent, {
     width: '50%',
-    data: {User: this.foundUser, Profile: this.profileId}
+    data: {User: this.foundUser, Profile: this.profileId},
+    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+
   }); 
   dialogRef.afterClosed()
     .subscribe(res => {
@@ -242,7 +245,9 @@ openDialogExperience(): void {
 openDialogEducation() : void{
   const dialogRef = this.dialog.open(DialogAddEducationComponent,{
     width: '50%',
-    data: {User: this.foundUser, Profile: this.profileId}
+    data: {User: this.foundUser,Profile: this.profileId},
+    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+
   }); 
   dialogRef.afterClosed()
     .subscribe(res => {
@@ -251,8 +256,10 @@ openDialogEducation() : void{
 }
 openSkillDialog() : void{
   const dialogRef = this.dialog.open(DialogAddSkillComponent,{
-    width: '25%',
-    data: {User: this.foundUser, Profile: this.profileId}
+    width: '50%',
+    data: {User: this.foundUser,  Profile: this.profileId},
+    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+
   }); 
   dialogRef.afterClosed()
     .subscribe(res => {
