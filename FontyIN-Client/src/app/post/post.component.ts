@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService} from '../services/posts.service';
 import { Moment } from 'moment';
+import { User } from '../classes/Profile/User';
+import { ProfileService } from '../services/profile/profile.service';
 
 export interface Post {
   content: string;
@@ -26,12 +28,25 @@ export class PostComponent implements OnInit {
   post : Post;
   comments: Comment[];
   @Input() id ;
-  constructor( private postService: PostsService) { }
+  constructor( private postService: PostsService, private profileService: ProfileService) { }
   data = {};
   content : String;
   commentContent : String;
   commentData = {};
   time : Moment;
+  user: User;
+
+  getUserById(id){
+    user: User;
+    this.profileService.getUserById(this.post.userId)
+    .subscribe((data)=>
+    {
+     
+      return <User>data;
+
+    });
+
+  }
 
   createComment(id) {
     this.commentData = {
@@ -74,6 +89,13 @@ export class PostComponent implements OnInit {
    .subscribe((data)=>{
    console.log(data);
     this.comments = <Comment[]>data;
+    });
+    this.profileService.getUserById(this.post.userId)
+    .subscribe((data)=>
+    {
+     
+      this.user=<User>data;
+
     });
   }
 

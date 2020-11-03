@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule, Routes  } from '@angular/router';
 import { PostsService} from '../services/posts.service';
 
 export interface Post {
@@ -16,7 +16,7 @@ export interface Post {
 })
 export class UpdatePostComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute, private routes: Router,
               private postService: PostsService) { }
 
   postId = 0;
@@ -36,6 +36,8 @@ export class UpdatePostComponent implements OnInit {
       "userId": 1
       };
     this.postService.updatePost(<JSON>this.data,this.postId);
+
+    this.routes.navigate(['/posts']);
     
   }
 

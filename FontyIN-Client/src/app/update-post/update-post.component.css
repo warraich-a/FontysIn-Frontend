@@ -37,13 +37,13 @@ textarea {
 .postBtn{
     height: 37px;
     width: 125px;
-    background-color: #c4c4c4;
+    background-color: #0075db;
     color: white;
     border: none;
     transition-duration: 0.4s;
 }
 .postBtn:hover{
-    background-color: #d09fd7;
+    background-color: #47a9ff;
 }
 .deleteBtn{
     float:right;
