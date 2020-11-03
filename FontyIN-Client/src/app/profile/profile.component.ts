@@ -256,7 +256,7 @@ openDialogEducation() : void{
 }
 openSkillDialog() : void{
   const dialogRef = this.dialog.open(DialogAddSkillComponent,{
-    width: '50%',
+    maxWidth: '50%',
     data: {User: this.foundUser,  Profile: this.profileId},
     panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
 
