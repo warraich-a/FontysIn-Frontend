@@ -29,11 +29,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <div class="mt-5 text-center"><span *ngIf="notification" class="elementToFadeInAndOut">
-                                <i class="fas fa-check-circle {{notification.class}}"></i>
-                                {{notification.message}}
-                            </span>
-                        </div>
+                            
                             <div class="card-actions float-right">
                               
                             </div>
@@ -81,7 +77,12 @@
                                    
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <span><button type="submit" [disabled]="!SettingsForm.dirty" class="btn btn-primary">Save changes</button></span>
+                                <span *ngIf="notification" class="elementToFadeInAndOut">
+                                    <i class="fas fa-check-circle {{notification.class}}"></i>
+                                    {{notification.message}}
+                                </span>
+                            
                                 
                             </form>
 
@@ -103,8 +104,12 @@
                             </div>
                             <h5 class="card-title mb-0">Privacy</h5>
                         </div>
-                        <form (ngSubmit)="updatePrivacy()" #PrivacyForm="ngForm">
+                    
+                        
                         <div class="card-body">
+                            <mat-slide-toggle [(ngModel)]="isChecked">Hide me from everything? (This will override below)</mat-slide-toggle>
+                            <form (ngSubmit)="updatePrivacy()" #PrivacyForm="ngForm">
+                                
                             <label class="labels">Who can see my experience?</label>
                                                 
                             <select id="experienceSetting" name="experienceSetting" [(ngModel)]="privacy.experienceSetting"
@@ -131,12 +136,20 @@
                     {{types.type}}
                     </option>
                     </select>
-                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Settings</button></div>
+                 
+                    <div class="mt-5 text-center"><span><button class="btn btn-primary profile-button"  type="submit">Save Settings</button></span>
+                        <span *ngIf="notificationP" class="elementToFadeInAndOut">
+                            <i class="fas fa-check-circle {{notificationP.class}}"></i>
+                            {{notificationP.message}}
+                        </span>
+                    
+                    </div>
 
                           
-                              
+                         
+                </form>
                         </div>
-                    </form>
+                    
                     </div>
 
                     

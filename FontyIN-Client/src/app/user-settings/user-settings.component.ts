@@ -18,6 +18,8 @@ export class UserSettingsComponent implements OnInit {
 
   constructor( private service: ProfileService) { }
   notification = null; 
+  notificationP = null;
+  isChecked = true;
   address = new Address(1, "test1", "test2", "test3", "test4");
   user = new User(1, "0348348");
   privacy = new privacy(1, 1, "Everyone", "everyone", "everyone");
@@ -38,6 +40,7 @@ export class UserSettingsComponent implements OnInit {
       console.log(data);
     this.privacy = <privacy>data;
     });
+ 
   }
 
   update(){
@@ -57,11 +60,24 @@ showNotification() {
   this.notification = { class: 'text-primary', message: 'updated!' };
 
 }
+showNotificationP() {
+  this.notificationP = { class: 'text-primary', message: 'updated!' };
+
+}
 
 updatePrivacy(){
+  this.hideEverything();
   this.service.updatePrivacy(this.privacy, 1).subscribe(
     (res: any) => {
-      console.log("updated privacy");
+      this.showNotificationP();
     });
 }
+hideEverything(){
+  if(this.isChecked){
+    console.log("true");
+  }else{
+    console.log("false");
+  }
+}
+
 }

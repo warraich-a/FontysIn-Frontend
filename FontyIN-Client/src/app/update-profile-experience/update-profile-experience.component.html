@@ -2,7 +2,7 @@
 <div class="container h-100 d-flex justify-content-center">
 <form (ngSubmit)="updateExperience()" #ExperienceForm="ngForm">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h6 class="text-right">Edit your Experience</h6>
+        <h2 class="text-right">Edit your Experience</h2>
     </div>
     <div class="row mt-3">
         <div class="col-md-12"><label class="labels">Company</label>
@@ -59,7 +59,7 @@
         #descriptionExperience="ngModel">
         </div>
     </div>
-    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit"  [disabled]="!ExperienceForm.valid">Save Experience</button></div>
+    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit"  [disabled]="!ExperienceForm.valid">Save</button></div>
     
 </form>
 </div>
