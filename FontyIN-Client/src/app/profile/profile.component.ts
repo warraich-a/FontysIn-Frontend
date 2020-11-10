@@ -450,10 +450,6 @@ openSkillDialog() : void{
             console.log("sorry not sorry");
             this.errorMsgEdu = true;
           } 
-          else 
-          {
-            alert('error')
-          }
       });
     this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
@@ -470,9 +466,7 @@ openSkillDialog() : void{
        } else if(error.status === 401){
         console.log("sorry not sorry");
         this.errorMsgExp = true;
-      }  else {
-          alert('error')
-        }
+      }  
     });
     this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
     {
@@ -490,9 +484,7 @@ openSkillDialog() : void{
        else if(error.status === 401){
          console.log("sorry not sorry");
          this.errorMsgSki = true;
-       } else {
-          alert('error')
-        }
+       }
     });
     this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
@@ -505,9 +497,7 @@ openSkillDialog() : void{
         this._snackBar.open('Id is wrong!!', 'End now', {
           duration: 1000,
          });
-       } else {
-          alert('error')
-        }
+       } 
     });
   }
 
