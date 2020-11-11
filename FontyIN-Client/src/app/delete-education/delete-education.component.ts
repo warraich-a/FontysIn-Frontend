@@ -10,7 +10,7 @@ import { ProfileService } from '../services/profile/profile.service';
 })
 export class DeleteEducationComponent implements OnInit {
 
-  loggedInUser: number = 1;
+  loggedInUser: number = 5;
 
   constructor(
     private profileService: ProfileService,
@@ -30,7 +30,7 @@ export class DeleteEducationComponent implements OnInit {
   //delete education
   deleteEducation() {
     this.profileService.deleteEducation(this.loggedInUser, this.data.education.profileId, this.data.education.id).subscribe();
-    console.log(this.loggedInUser + " " + this.data.education.profileId + " " + this.data.education.id);
+    console.log("deleted " + this.loggedInUser + " " + this.data.education.profileId + " " + this.data.education.id);
 
     // Close dialog
     this.dialogRef.close();
