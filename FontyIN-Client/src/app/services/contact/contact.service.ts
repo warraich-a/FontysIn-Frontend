@@ -1,15 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../data.service';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService extends DataService {
+  // logged in user id
+  loggedInUserId = 1;
 
-  constructor(http: HttpClient) { 
-    // logged in user id
-    let loggedInUserId = 1;
-    super('http://localhost:9099/users/1/contacts', http);
+  constructor(http: HttpClient) {
+    super('http://localhost:9090/users/1/contacts', http);
   }
+
+  getContactRequests() {
+    return this.http.get('http://localhost:9090/users/1/requests')
+      .pipe(
+        map(response => response)
+      )
+  }
+
+  	getAcceptedContacts() {
+		return this.http.get('http://localhost:9090/users/1/acceptedContacts')
+		.pipe(
+		  map(response => response)
+		)
+	}
 }

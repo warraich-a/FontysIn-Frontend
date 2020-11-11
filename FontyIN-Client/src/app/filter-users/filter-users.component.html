@@ -10,23 +10,22 @@
         <mat-card-content>
     
           <p>
-            <mat-radio-group aria-label="Select an option" ng-init="selectedUserType" [(ngModel)]="realm" (ngModelChange)="modo()">
+            <mat-radio-group aria-label="Select an option" [(ngModel)]="radioSelection" (ngModelChange)="foundDataByUserType()"> 
               <br>
-              <label>User Type</label>
+              <label>User Type</label> 
               <br>
-              
               <mat-radio-button type="radio" name="filter"  (click)="getUsersByStudentType()"  value="Student">Student</mat-radio-button>
-              <mat-radio-button type="radio" name="filter"  (click)="getUsersByTeacherType()" value="Teacher">Teacher</mat-radio-button>
-              <mat-radio-button type="radio" name="filter"  (click)="getUsersByFontysStaffType()" value="FontysStaff">FontysStaff</mat-radio-button>
-
-            </mat-radio-group> 
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByTeacherType()"  value="Teacher">Teacher</mat-radio-button>
+              <mat-radio-button type="radio" name="filter"  (click)="getUsersByFontysStaffType()"  value="FontysStaff">FontysStaff</mat-radio-button>
+              <br>
+            </mat-radio-group>
           </p>
-        
+    
           <br>
           <h4>Start Study Year *Student</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select [disabled]="!StudentDisabled" ng-model [(ngModel)]="real" (ngModelChange)="modoe()">
+            <mat-select [disabled]="!StudentDisabled" ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByYear()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByStudyYear(y.viewValue)">
                 {{y.viewValue}}
                 
@@ -38,9 +37,9 @@
           <h4>Start Work Year  *Fontys staff</h4>
           <mat-form-field appearance="fill">
             <mat-label>Year</mat-label>
-            <mat-select [disabled]="!EmployeeDisabled" ng-model [(ngModel)]="real" (ngModelChange)="foundDataByStartWorkYear()">
+            <mat-select [disabled]="!EmployeeDisabled" ng-model [(ngModel)]="yearSelection" (ngModelChange)="foundDataByStartWorkYear()">
               <mat-option *ngFor="let y of years" name="filter" [value]="y.value" (click)="getUsersByWorkYear(y.viewValue)">
-                {{y.viewValue}}
+                {{y.viewValue}} 
                 
               </mat-option>
             </mat-select>
@@ -51,11 +50,11 @@
           <mat-form-field appearance="fill">
             <mat-label>Department</mat-label>
             <mat-select ng-model [(ngModel)]="departmentSelection" (ngModelChange)="foundDataByDepartment()">
-              <mat-option *ngFor="let d of departments" name="filter" [value]="d.value"  (click)="getUsersByDepartment(d.value)">
+              <mat-option *ngFor="let d of departments" [value]="d.value"  name="filter" (click)="getUsersByDepartment(d.value)">
                 {{d.viewValue}}
               </mat-option>
             </mat-select>
-          </mat-form-field> 
+          </mat-form-field>
     
           <br>
           <h4>Location</h4>
@@ -72,23 +71,21 @@
       </mat-card>
     </div>
 
-
-    <!-- FOUND USERS -->
     <div class="col-sm">
       <mat-card class="found-card">
 
         <mat-card-header>
-          <mat-card-title>Found Users:</mat-card-title>
+          <mat-card-title>Users:</mat-card-title>
         </mat-card-header>
+
 
           <mat-list>  
                
-              <tr id="test"  *ngFor="let user of users">
+              <tr id="testUser"  *ngFor="let user of users">
             
-                <div *ngIf="modo() == 'Student'" >
-                  <td class="font-italic"> 
+\                  <td class="font-italic"> 
                     <mat-icon> account_circle </mat-icon>
-                    {{user.firstName}} - {{user.lastName}} <br>
+                    {{user.firstName}}  {{user.lastName}} <br>
                     ({{user.userType}}) <br>
                     Fontys University of Applied Sciences
                     <br>
@@ -96,109 +93,13 @@
                     <mat-divider></mat-divider>
                     <br>
                   </td>
-                </div>
 
-                <div *ngIf="modo() == 'Teacher'" >
-                  <td class="font-italic"> 
-                    <mat-icon> account_circle </mat-icon>
-                    {{user.firstName}} - {{user.lastName}} <br>
-                    ({{user.userType}}) <br>
-                    Fontys University of Applied Sciences
-                    <br>
-                    <br>
-                    <mat-divider></mat-divider>
-                    <br>
-                  </td>
-                </div>
-
-                <div *ngIf="modo() == 'FontysStaff'" >
-                  <td class="font-italic"> 
-                    <mat-icon> account_circle </mat-icon>
-                    {{user.firstName}} - {{user.lastName}} <br>
-                    ({{user.userType}}) <br>
-                    Fontys University of Applied Sciences
-                    <br>
-                    <br>
-                    <mat-divider></mat-divider>
-                    <br>
-                  </td>
-                </div>
-
-                <tr id="tests" *ngFor="let y of years">
-
-                  <div *ngIf="modoe() == 'y.value'" >
-                    <td class="font-italic"> 
-                      <mat-icon> account_circle </mat-icon>
-                      {{user.firstName}} - {{user.lastName}} <br>
-                      ({{user.userType}}) <br>
-                      Fontys University of Applied Sciences
-                      <br>
-                      <br>
-                      <mat-divider></mat-divider>
-                      <br>
-                    </td>
-                  </div>
-
-                </tr>
-
-                <tr id="testsye" *ngFor="let y of years">
-
-                  <div *ngIf="foundDataByStartWorkYear() == 'y.value'" >
-                    <td class="font-italic"> 
-                      <mat-icon> account_circle </mat-icon>
-                      {{user.firstName}} - {{user.lastName}} <br>
-                      ({{user.userType}}) <br>
-                      Fontys University of Applied Sciences
-                      <br>
-                      <br>
-                      <mat-divider></mat-divider>
-                      <br>
-                    </td>
-                  </div>
-
-                </tr>
-
-                <tr id="testss" *ngFor="let d of departments">
-
-                  <div *ngIf="modoe() == 'd.value'" >
-                    <td class="font-italic"> 
-                      <mat-icon> account_circle </mat-icon>
-                      {{user.firstName}} - {{user.lastName}} <br>
-                      ({{user.userType}}) <br>
-                      Fontys University of Applied Sciences
-                      <br>
-                      <br>
-                      <mat-divider></mat-divider>
-                      <br>
-                    </td>
-                  </div>
-
-                  <tr id="testsds" *ngFor="let l of locations">
-
-                    <div *ngIf="foundDataByLocation() == 'l.value'" >
-                      <td class="font-italic"> 
-                        <mat-icon> account_circle </mat-icon>
-                        {{user.firstName}} - {{user.lastName}} <br>
-                        ({{user.userType}}) <br>
-                        Fontys University of Applied Sciences
-                        <br>
-                        <br>
-                        <mat-divider></mat-divider>
-                        <br>
-                      </td>
-                    </div>
-
-                </tr>
+              </tr>
             
           </mat-list>
 
-          <!-- <mat-list>
-            <tr id="tests" *ngFor="let y of years">
-
-            </tr>
-          </mat-list> -->
-
         <mat-card-content>
+
 
         </mat-card-content>
 

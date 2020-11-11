@@ -13,16 +13,16 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9090/users?type=' + userType);
   }
 
+  public filterUsersByStartStudyYear(year){
+    return this.httpClient.get('http://localhost:9090/users?studyYear=' + year);
+  }
+
   public filterUserByLocation(location){
     return this.httpClient.get('http://localhost:9090/users?location=' + location);
   }
 
   public filterUserByDepartment(department){
     return this.httpClient.get('http://localhost:9090/users?department=' + department);
-  }
-
-  public filterUsersByStartStudyYear(year){
-    return this.httpClient.get('http://localhost:9090/users?studyYear=' + year);
   }
 
   public filterUsersByStartWorkYear(year){

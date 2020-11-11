@@ -1,0 +1,28 @@
+<div class="container">
+    <br><br>
+    <br>
+    <br>
+    
+    <div id="creatPostBlock">
+    <textarea [(ngModel)] = "content" placeholder="Your awesome post..." id = "newPostText"></textarea> <br>
+    <button (click) ="createPost()" class = "postBtn">Post</button>
+    <br>
+    <br>
+    
+    </div>
+    
+<hr>
+<br><br><br>
+</div>
+
+
+<div class="container">
+    <div *ngFor="let post of posts">
+        
+        
+        
+        <app-post [id]="post.id"></app-post>
+        
+      
+      
+</div>

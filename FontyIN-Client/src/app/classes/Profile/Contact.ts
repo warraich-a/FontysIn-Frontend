@@ -1,6 +1,8 @@
+import { UserDTO } from './UserDTO';
+
 export class Contact {
     id: number;
-    userId: number;
-    friendId: number;
-    isAccepted: boolean;    
+    user: UserDTO;
+    friend: UserDTO;
+    isAccepted: boolean;  
 }
