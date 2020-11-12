@@ -46,8 +46,8 @@ export class FilterUsersComponent implements OnInit {
   ];
 
   locations: Object[] = [
-    {value: '1', viewValue: 'Venlo'},
-    {value: '2', viewValue: 'Eindhoven'},
+    {value: '1', viewValue: 'Eindhoven'},
+    {value: '2', viewValue: 'Venlo'},
     {value: '3', viewValue: 'Tilburg'}
   ];
 
