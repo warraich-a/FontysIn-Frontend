@@ -54,6 +54,8 @@ export class FilterUsersComponent implements OnInit {
   StudentDisabled: boolean;
   EmployeeDisabled: boolean;
 
+  loggedInUser: number = 1;
+
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { 
                 this.StudentDisabled = false;
@@ -65,72 +67,68 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
-  radioSelection: String;
+  TypeSelection: String;
   yearSelection: String;
   departmentSelection: String;
   locationSelection: String;
   users: User[]; 
   user: User;
 
-  getUsersByStudentType(){
-    this.filterService.filterByUserType('Student').subscribe((data)=>
-    {
-      this.users=<User[]>data;
-      this.StudentDisabled = true;
-      this.EmployeeDisabled = false;
-      console.log(this.users);      
-    });
+  
+
+  getUsersByType(){
+
+    if (this.TypeSelection == "Student"){
+
+      this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
+      {
+        this.users=<User[]>data;
+        this.StudentDisabled = true;
+        this.EmployeeDisabled = false;
+        console.log(this.users);      
+      });
+
+    }
+
+    else{
+      this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
+      {
+        this.users=<User[]>data;
+        this.StudentDisabled = false;
+        this.EmployeeDisabled = true;
+        console.log(this.users);      
+      });
+    }
     
   }
 
-  getUsersByTeacherType(){ 
-    this.filterService.filterByUserType('Teacher').subscribe((data)=>
-    {
-      this.users=<User[]>data;
-      this.StudentDisabled = false;
-      this.EmployeeDisabled = true;
-      console.log(this.users);      
-    });
-    
-  }
 
-  getUsersByFontysStaffType(){ 
-    this.filterService.filterByUserType('FontysStaff').subscribe((data)=>
-    {
-      this.users=<User[]>data;
-      this.StudentDisabled = false;
-      this.EmployeeDisabled = true;
-      console.log(this.users);      
-    });
-    
-  }
-
-  getUsersByStudyYear(year){
-    this.filterService.filterUsersByStartStudyYear(year).subscribe((data)=>
+  getUsersByStudyYear(){
+    this.filterService.filterUsersByStartStudyYear(this.yearSelection).subscribe((data)=>
     {
      this.users=<User[]>data;
       console.log(this.users);     
     });
   }
 
-  getUsersByWorkYear(year){
-    this.filterService.filterUsersByStartWorkYear(year).subscribe((data)=>
+  getUsersByWorkYear(){
+    this.filterService.filterUsersByStartWorkYear(this.yearSelection).subscribe((data)=>
     {
      this.users=<User[]>data;
       console.log(this.users);  
     });
   }
 
-  getUsersByLocation(location){
-    this.filterService.filterUserByLocation(location).subscribe((data)=>
+  getUsersByLocation(){
+    this.filterService.filterUserByLocation(this.locationSelection).subscribe((data)=>
     {
       this.users=<User[]>data; 
       console.log(this.users);      
     });
   }
 
-  getUsersByDepartment(department){
-    this.filterService.filterUserByDepartment(department).subscribe((data)=>
+  getUsersByDepartment(){
+    this.filterService.filterUserByDepartment(this.departmentSelection).subscribe((data)=>
     {
       this.users=<User[]>data; 
       console.log(this.users);      
@@ -138,7 +136,7 @@ export class FilterUsersComponent implements OnInit {
   }
 
   foundDataByUserType(){
-    return this.radioSelection;
+    return this.TypeSelection;
   }
 
   foundDataByYear(){
