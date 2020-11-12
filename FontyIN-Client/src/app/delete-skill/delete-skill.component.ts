@@ -12,7 +12,7 @@ import { ProfileComponent } from '../profile/profile.component';
 })
 export class DeleteSkillComponent implements OnInit {
 
-  loggedInUser: number = 1;
+  loggedInUser: number = 5;
 
   constructor(
     private profileService: ProfileService,
