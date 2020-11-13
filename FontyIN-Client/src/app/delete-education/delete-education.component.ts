@@ -10,7 +10,7 @@ import { ProfileService } from '../services/profile/profile.service';
 })
 export class DeleteEducationComponent implements OnInit {
 
-  loggedInUser: number = 1;
+  loggedInUser: number = 5;
 
   constructor(
     private profileService: ProfileService,

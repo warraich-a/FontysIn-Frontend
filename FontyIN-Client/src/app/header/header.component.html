@@ -50,13 +50,20 @@
 
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="md-form my-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+          <input id="search-text" [(ngModel)]="searchText" name="searchText" class="form-control mr-sm-2" 
+          type="search" placeholder="Search" autofocus>
         </div>
       </form>
+    
+    <div *ngFor="let user of users | search: searchText" >
+              <!-- <h3>
+                {{user.firstName}}
+              </h3> -->
+    </div> 
 
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="example-button-container">
-          <button mat-mini-fab aria-label="Example icon button with a filter alt icon">
+          <button mat-mini-fab aria-label="Example icon button with a filter alt icon" [routerLink]="['/users', 'filter']">
             <mat-icon>filter_alt</mat-icon>
           </button>
         </div>

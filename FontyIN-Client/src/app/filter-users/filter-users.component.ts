@@ -46,13 +46,15 @@ export class FilterUsersComponent implements OnInit {
   ];
 
   locations: Object[] = [
-    {value: '1', viewValue: 'Venlo'},
-    {value: '2', viewValue: 'Eindhoven'},
+    {value: '1', viewValue: 'Eindhoven'},
+    {value: '2', viewValue: 'Venlo'},
     {value: '3', viewValue: 'Tilburg'}
   ];
 
   StudentDisabled: boolean;
   EmployeeDisabled: boolean;
+
+  loggedInUser: number = 1;
 
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { 
@@ -65,84 +67,120 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
-  radioSelection: String;
-  yearSelection: String;
+  TypeSelection: String;
+  syearSelection: String;
+  wyearSelection: String;
   departmentSelection: String;
   locationSelection: String;
   users: User[]; 
   user: User;
 
-  getUsersByStudentType(){
-    this.filterService.filterByUserType('Student').subscribe((data)=>
-    {
-      this.users=<User[]>data;
-      this.StudentDisabled = true;
-      this.EmployeeDisabled = false;
-      console.log(this.users);      
-    });
+  
+
+  combinedFilter(){
+
+    if(this.TypeSelection != null && this.syearSelection != null && this.locationSelection != null && this.departmentSelection != null){
+      console.log("S Year");
+      this.filterService.filterUsersByTypeLocationDepartmentStudyYear(this.TypeSelection, this.syearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+      {
+        this.users = <User[]>data;
+        console.log(this.users);
+      });
+    }
+
+    else if(this.TypeSelection != null && this.wyearSelection != null && this.locationSelection != null && this.departmentSelection != null){
+       
+      if(this.TypeSelection == "FontysStaff"){
+        console.log("FontysStaff Year");
+        this.filterService.filterUsersByTypeLocationDepartmentWorkYearFontysStaff(this.TypeSelection, this.wyearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+        {
+          this.users = <User[]>data;
+          console.log(this.users);
+        });
+       }
+      
+    }
+
+    else if(this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
+      console.log("Test 2");
+      this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+      {
+        this.users = <User[]>data;
+        console.log(this.users);
+      });
+    } 
+
+  }
+  
+  getUsersByType(){
+
+    if (this.TypeSelection == "Student"){
+
+      this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
+      {
+        this.users=<User[]>data;
+        this.StudentDisabled = true;
+        this.EmployeeDisabled = false;
+        console.log(this.users);      
+      });
+
+    }
+
+    else{
+      this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
+      {
+        this.users=<User[]>data;
+        this.StudentDisabled = false;
+        this.EmployeeDisabled = true;
+        console.log(this.users);      
+      });
+    }
     
   }
 
-  getUsersByTeacherType(){ 
-    this.filterService.filterByUserType('Teacher').subscribe((data)=>
-    {
-      this.users=<User[]>data;
-      this.StudentDisabled = false;
-      this.EmployeeDisabled = true;
-      console.log(this.users);      
-    });
-    
-  }
 
-  getUsersByFontysStaffType(){ 
-    this.filterService.filterByUserType('FontysStaff').subscribe((data)=>
-    {
-      this.users=<User[]>data;
-      this.StudentDisabled = false;
-      this.EmployeeDisabled = true;
-      console.log(this.users);      
-    });
-    
-  }
-
-  getUsersByStudyYear(year){
-    this.filterService.filterUsersByStartStudyYear(year).subscribe((data)=>
+  getUsersByStudyYear(){
+    this.filterService.filterUsersByStartStudyYear(this.syearSelection).subscribe((data)=>
     {
      this.users=<User[]>data;
       console.log(this.users);     
     });
   }
 
-  getUsersByWorkYear(year){
-    this.filterService.filterUsersByStartWorkYear(year).subscribe((data)=>
+  getUsersByWorkYear(){
+    this.filterService.filterUsersByStartWorkYear(this.wyearSelection).subscribe((data)=>
     {
      this.users=<User[]>data;
       console.log(this.users);  
     });
   }
 
-  getUsersByLocation(location){
-    this.filterService.filterUserByLocation(location).subscribe((data)=>
+  getUsersByLocation(){
+    this.filterService.filterUserByLocation(this.locationSelection).subscribe((data)=>
     {
       this.users=<User[]>data; 
       console.log(this.users);      
     });
   }
 
-  getUsersByDepartment(department){
-    this.filterService.filterUserByDepartment(department).subscribe((data)=>
+  getUsersByDepartment(){
+    this.filterService.filterUserByDepartment(this.departmentSelection).subscribe((data)=>
     {
       this.users=<User[]>data; 
       console.log(this.users);      
     });
+  }
+
+  ClearFilters(){
+    window.location.reload();
   }
 
   foundDataByUserType(){
-    return this.radioSelection;
+    return this.TypeSelection;
   }
 
   foundDataByYear(){
-    return this.yearSelection;
+    return this.syearSelection;
   }
 
   foundDataByDepartment(){
@@ -154,6 +192,6 @@ export class FilterUsersComponent implements OnInit {
   }
 
   foundDataByStartWorkYear(){
-    return this.yearSelection;
+    return this.wyearSelection;
   }
 }
