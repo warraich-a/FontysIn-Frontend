@@ -27,8 +27,8 @@ export class DeleteConnectionComponent {
 
   delete() {
     // Delete connection
-    console.log("ID: " + this.data.connection);
-    console.log("ID: " + this.data.connection.firstName);
+    console.log("DELETING ID: " + this.data.connection);
+    console.log("DELETING ID: " + this.data.connection.firstName);
 
     this.contactService.delete(this.data.connection.id)
     .subscribe();
