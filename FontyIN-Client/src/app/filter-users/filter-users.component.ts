@@ -77,9 +77,10 @@ export class FilterUsersComponent implements OnInit {
 
   
 
-  combineFilter(){
+  combinedFilter(){
+
     if(this.TypeSelection != null && this.syearSelection != null && this.locationSelection != null && this.departmentSelection != null){
-      console.log("T2");
+      console.log("S Year");
       this.filterService.filterUsersByTypeLocationDepartmentStudyYear(this.TypeSelection, this.syearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
       {
         this.users = <User[]>data;
@@ -87,14 +88,27 @@ export class FilterUsersComponent implements OnInit {
       });
     }
 
+    else if(this.TypeSelection != null && this.wyearSelection != null && this.locationSelection != null && this.departmentSelection != null){
+       
+      if(this.TypeSelection == "FontysStaff"){
+        console.log("FontysStaff Year");
+        this.filterService.filterUsersByTypeLocationDepartmentWorkYearFontysStaff(this.TypeSelection, this.wyearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+        {
+          this.users = <User[]>data;
+          console.log(this.users);
+        });
+       }
+      
+    }
+
     else if(this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
-      console.log("T1");
+      console.log("Test 2");
       this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
       {
         this.users = <User[]>data;
         console.log(this.users);
       });
-    }
+    } 
 
   }
   
