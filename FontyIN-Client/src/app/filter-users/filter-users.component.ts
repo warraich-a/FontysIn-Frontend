@@ -76,6 +76,16 @@ export class FilterUsersComponent implements OnInit {
 
   
 
+  getusersByTypeLocationAndDepartment(){
+    console.log("Test");
+    this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+    {
+      this.users = <User[]>data;
+      console.log(this.users);
+    });
+
+  }
+  
   getUsersByType(){
 
     if (this.TypeSelection == "Student"){
@@ -133,6 +143,10 @@ export class FilterUsersComponent implements OnInit {
       this.users=<User[]>data; 
       console.log(this.users);      
     });
+  }
+
+  ClearFilters(){
+    window.location.reload();
   }
 
   foundDataByUserType(){
