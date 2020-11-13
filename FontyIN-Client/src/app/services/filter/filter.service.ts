@@ -37,5 +37,9 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9090/users?type=' + type + '&studyYear=' + year + '&location=' + locId + '&department=' + depId );
   }
 
+  public filterUsersByTypeLocationDepartmentWorkYear(type, year, locId, depId){
+    return this.httpClient.get('http://localhost:9090/users?type=' + type + '&workingYear=' + year + '&location=' + locId + '&department=' + depId );
+  }
+
 
 }
