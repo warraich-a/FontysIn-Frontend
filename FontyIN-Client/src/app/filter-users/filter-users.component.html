@@ -44,6 +44,17 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
+          <br>
+          <h4>Location</h4>
+          <mat-form-field appearance="fill">
+            <mat-label>Location</mat-label>
+            <mat-select ng-model [(ngModel)]="locationSelection" (ngModelChange)="foundDataByLocation()">
+              <mat-option *ngFor="let l of locations" name="filter" [value]="l.value" (click)="getUsersByLocation()">
+                {{l.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
     
           <br>
           <h4>Department</h4>
@@ -52,17 +63,6 @@
             <mat-select ng-model [(ngModel)]="departmentSelection" (ngModelChange)="foundDataByDepartment()">
               <mat-option *ngFor="let d of departments" [value]="d.value"  name="filter" (click)="getUsersByDepartment()">
                 {{d.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-    
-          <br>
-          <h4>Location</h4>
-          <mat-form-field appearance="fill">
-            <mat-label>Location</mat-label>
-            <mat-select ng-model [(ngModel)]="locationSelection" (ngModelChange)="foundDataByLocation()">
-              <mat-option *ngFor="let l of locations" name="filter" [value]="l.value" (click)="getUsersByLocation()">
-                {{l.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
