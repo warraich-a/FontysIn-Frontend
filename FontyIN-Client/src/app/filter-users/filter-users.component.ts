@@ -68,7 +68,8 @@ export class FilterUsersComponent implements OnInit {
   }
 
   TypeSelection: String;
-  yearSelection: String;
+  syearSelection: String;
+  wyearSelection: String;
   departmentSelection: String;
   locationSelection: String;
   users: User[]; 
@@ -76,13 +77,24 @@ export class FilterUsersComponent implements OnInit {
 
   
 
-  getusersByTypeLocationAndDepartment(){
-    console.log("Test");
-    this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
-    {
-      this.users = <User[]>data;
-      console.log(this.users);
-    });
+  combineFilter(){
+    if(this.TypeSelection != null && this.syearSelection != null && this.locationSelection != null && this.departmentSelection != null){
+      console.log("T2");
+      this.filterService.filterUsersByTypeLocationDepartmentStudyYear(this.TypeSelection, this.syearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+      {
+        this.users = <User[]>data;
+        console.log(this.users);
+      });
+    }
+
+    else if(this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
+      console.log("T1");
+      this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+      {
+        this.users = <User[]>data;
+        console.log(this.users);
+      });
+    }
 
   }
   
@@ -114,7 +126,7 @@ export class FilterUsersComponent implements OnInit {
 
 
   getUsersByStudyYear(){
-    this.filterService.filterUsersByStartStudyYear(this.yearSelection).subscribe((data)=>
+    this.filterService.filterUsersByStartStudyYear(this.syearSelection).subscribe((data)=>
     {
      this.users=<User[]>data;
       console.log(this.users);     
@@ -122,7 +134,7 @@ export class FilterUsersComponent implements OnInit {
   }
 
   getUsersByWorkYear(){
-    this.filterService.filterUsersByStartWorkYear(this.yearSelection).subscribe((data)=>
+    this.filterService.filterUsersByStartWorkYear(this.wyearSelection).subscribe((data)=>
     {
      this.users=<User[]>data;
       console.log(this.users);  
@@ -154,7 +166,7 @@ export class FilterUsersComponent implements OnInit {
   }
 
   foundDataByYear(){
-    return this.yearSelection;
+    return this.syearSelection;
   }
 
   foundDataByDepartment(){
@@ -166,6 +178,6 @@ export class FilterUsersComponent implements OnInit {
   }
 
   foundDataByStartWorkYear(){
-    return this.yearSelection;
+    return this.wyearSelection;
   }
 }
