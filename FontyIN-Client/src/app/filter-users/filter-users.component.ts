@@ -73,8 +73,18 @@ export class FilterUsersComponent implements OnInit {
   locationSelection: String;
   users: User[]; 
   user: User;
+  
 
   
+  getusersByTypeLocationAndDepartment(){
+    console.log("Test");
+    this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+    {
+      this.users = <User[]>data;
+      console.log(this.users);
+    });
+
+  }
 
   getUsersByType(){
 
@@ -133,6 +143,10 @@ export class FilterUsersComponent implements OnInit {
       this.users=<User[]>data; 
       console.log(this.users);      
     });
+  }
+
+  ClearFilters(){
+    window.location.reload();
   }
 
   foundDataByUserType(){
