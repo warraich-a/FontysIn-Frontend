@@ -1,3 +1,4 @@
+import { MessagesComponent } from './messages/messages.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -65,10 +66,13 @@ const routes: Routes = [{
   path: 'settings',
   component: UserSettingsComponent
 },
-
 {
   path: 'users/filter',
   component: FilterUsersComponent
+},
+{
+  path: 'messages',
+  component: MessagesComponent
 },
 ]
 

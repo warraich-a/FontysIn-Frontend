@@ -89,6 +89,7 @@ import { DialogAddEducationComponent } from './profile/dialog-add-education/dial
 import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-skill.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -121,7 +122,8 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
     DialogAddEducationComponent,
     DialogAddSkillComponent,
     SearchPipe,
-    NewsfeedComponent,    
+    NewsfeedComponent,
+    MessagesComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],
