@@ -12,6 +12,7 @@ export class MessagesComponent implements OnInit {
   raisedElevation = 5;    
   position = new FormControl('below');
 
+  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
 
 
   constructor() { }
