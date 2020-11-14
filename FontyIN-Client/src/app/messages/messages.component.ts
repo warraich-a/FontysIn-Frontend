@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,18 +6,30 @@ import { FormControl } from '@angular/forms';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent implements OnInit, AfterViewInit {
 
-  defaultElevation = 3;
-  raisedElevation = 5;    
-  position = new FormControl('below');
+	defaultElevation = 3;
+	raisedElevation = 5;    
+	position = new FormControl('below');
 
-  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
+	@ViewChild('scrollable') private scrollable: ElementRef;
+	private shouldScrollDown: boolean;
 
 
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+	constructor() { }
+	
+	ngOnInit(): void {
+	
+	}
+	
+	ngAfterViewInit() {
+		// Scroll to bottom
+		this.scrollable.nativeElement.scrollIntoView({ behavior: "auto", block: "end" });
+	}
 
+
+	public get width() {
+	  return window.innerWidth;
+	}
 }

@@ -1,78 +1,43 @@
+/* Container */
 .container {
 	width: 80%;
+	height: 100vh;
 }
 
 
+/* Flex container */
 .flex-container {
 	display: flex;
 	width: 100%;
-  }
-  
-.flex-container > div {
-	/* margin: 10px;
-	padding: 20px;
-	font-size: 30px; */
+	height: inherit;
 }
 
-.flex-small-container {
-	display: flex;
-	flex-direction: column;
-	width: 70%;
-}
-  
-.flex-container > div {
-	/* margin: 10px;
-	padding: 20px;
-	font-size: 30px; */
+/* Flex items */
+.item, .selected-message {
+	padding: 3%;
 }
 
-.selected-message {
-	/* flex-grow: 4; */
-	width: 60%;
-}
-
+/* item, left */
 .item {
 	width: 40%;
 }
 
-.item, .selected-message {
-	padding: 3%;
-
+/* item, right */
+.selected-message {
+	width: 60%;
+	height: inherit;
 }
 
+
+/* Icons container (delete, send a message to someone new */
 #icons {
 	text-align: right;
 }
 
-/* List of messages */
-.messages {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    /* height: 18vh; */
-}
-
-/* Connection image */
-img {
-    width: 107px;
-	margin-right: 4%;
-}
-
-/* Friend name */
-/* .friend-name {
-    cursor: pointer;
-} */
-
-/* Connection Description */
-/* .message-item.firend-desc {
-    margin: auto;
-    width: 60%;
-} */
-
-/* Icons */
+/* icons */
 mat-icon {
     font-size: 2em;
-    margin: auto 1%;
+    margin: auto 2%;
     cursor: pointer;
 }
 
@@ -80,50 +45,131 @@ mat-icon:hover {
     color: #0075db;
 }
 
-#notification {
-    font-size: 1.8em;
-}
-
-/* Tooltip */
+/* tooltip */
 ::ng-deep .mat-tooltip {
     font-size: 0.8em;
 }
 
-.selected-message {
-	/* width: 100%; */
+
+/* List of chats */
+.messages {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
+
+/* friend's image */
+img {
+    width: 107px;
+	margin-right: 4%;
+}
+
+/* friend's name */
+.friend-name {
+    /* cursor: pointer; */
+}
+
+
+
+
 
 /* Selected message */
-.selected-message > h3.friend-name {
-	display: inline-block;
+/* scroll */
+.scroll-viewport {
+	height: 67%;
+	width: 100%;
+    margin-bottom: 7%;
 }
 
+/* container */
+.chat-container {
+	padding-right: 3%;
+}
+
+/* firend name */
+.selected-message > h3.friend-name {
+	display: inline-block;
+	font-size: 1.9em;
+}
+
+/* friends's image */
+.firend-img {
+	width: 90px;
+}
+
+/* line between messages */
 .conversation-divider {
 	width: 60%;
 }
 
+/* sender's name */
 .sender {
 	font-size: 1.2em;
 }
 
+/* time of message */
 .sender > .time {
 	float: right;
 }
 
+/* message content */
 .message-content {
 	margin-top: 2%;
     line-height: 1.7em;
 }
 
-.message-img {
-	width: 90px;
-}
-
-
+/* textarea message */
 .full-width-field {
    width: 100%;
 }
 
+/* send button */
 #send-message {
 	float: right;
 }
+
+
+
+.desktop-view {
+
+}
+
+
+.mobile-view {
+
+}
+
+
+@media screen and (max-width: 1000px) {
+	/* friend's image */
+	img {
+    	width: 71px;
+	    height: 78px;
+	}
+
+}
+
+/* small screen */
+@media screen and (max-width: 770px) {
+	/* Flex item, left */
+	.item {
+		width: 100%;
+	}
+
+	.mat-divider {
+		display: none;
+	}
+
+	/* friend's image */
+	img {
+		width: 80px;
+		height: 100px;
+		margin-right: 4%;
+	}
+
+	/* Flex item, right */
+	.selected-message {
+		display: none;
+	}
+}
+
