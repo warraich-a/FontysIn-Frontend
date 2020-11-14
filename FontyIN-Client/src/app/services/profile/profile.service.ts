@@ -30,6 +30,7 @@ export class ProfileService {
   }
 
   public getUserById(userId){
+    console.log("GETTING USER BY ID")
     return this.httpClient.get('http://localhost:9090/users/p/' + userId)
   }
 

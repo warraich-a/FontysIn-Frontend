@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataService } from '../data.service';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ContactService extends DataService {
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
+
   // logged in user id
   loggedInUserId = 1;
 

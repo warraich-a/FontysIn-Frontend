@@ -29,4 +29,16 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9090/users?workingYear=' + year);
   }
 
+  public filterUsersByTypeLocationDepartment(type, locId, depId){
+    return this.httpClient.get('http://localhost:9090/users?type=' + type + '&location=' + locId + '&department=' + depId);
+  }
+
+  public filterUsersByTypeLocationDepartmentStudyYear(type, year, locId, depId){
+    return this.httpClient.get('http://localhost:9090/users?type=' + type + '&studyYear=' + year + '&location=' + locId + '&department=' + depId );
+  }
+
+  public filterUsersByTypeLocationDepartmentWorkYearFontysStaff(type, year, locId, depId){
+    return this.httpClient.get('http://localhost:9090/users?type=' + type + '&workingYear=' + year + '&location=' + locId + '&department=' + depId );
+  }
+
 }

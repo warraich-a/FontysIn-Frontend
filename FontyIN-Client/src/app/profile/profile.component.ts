@@ -450,10 +450,6 @@ openSkillDialog() : void{
             console.log("sorry not sorry");
             this.errorMsgEdu = true;
           } 
-          else 
-          {
-            alert('error')
-          }
       });
     this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
@@ -470,9 +466,7 @@ openSkillDialog() : void{
        } else if(error.status === 401){
         console.log("sorry not sorry");
         this.errorMsgExp = true;
-      }  else {
-          alert('error')
-        }
+      }  
     });
     this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
     {
@@ -490,9 +484,7 @@ openSkillDialog() : void{
        else if(error.status === 401){
          console.log("sorry not sorry");
          this.errorMsgSki = true;
-       } else {
-          alert('error')
-        }
+       }
     });
     this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
@@ -505,9 +497,7 @@ openSkillDialog() : void{
         this._snackBar.open('Id is wrong!!', 'End now', {
           duration: 1000,
          });
-       } else {
-          alert('error')
-        }
+       } 
     });
   }
 
@@ -528,16 +518,15 @@ openSkillDialog() : void{
 
 
   ngOnInit(): void {
+    
     let profileUserId: number = +this.route.snapshot.paramMap.get('id');
-    console.log(profileUserId)
+    console.log("Profile user " + this.profileUser)
+
     this.profileService.getUser(profileUserId)
-      .subscribe((data)=> {
-        console.log("-------------------------");
-        
+      .subscribe((data)=> {        
         this.profileUser = <UserDTO>data;
-        console.log(this.profileUser.id);
-        console.log("-------------------------");
-        
+
+        console.log("Profile user " + this.profileUser.profileId)
       });
      
    //this.profileUser = +this.route.snapshot.paramMap.get('id');
@@ -560,14 +549,7 @@ openSkillDialog() : void{
       contacts => {
         this.contacts = <Contact[]>contacts;
 
-        console.log("HELLO")
-        console.log("contacts");
-
-        console.log(contacts);
-        
-
         this.contacts.forEach(contact => {
-          console.log(contact);
           // Logged in user sent request or other user sent request, status isAccepted true
           if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) || (contact.user.id == this.profileUser?.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
             this.isRequestSent = true;
@@ -579,8 +561,6 @@ openSkillDialog() : void{
           else if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) && !contact.isAccepted)) {
             this.isRequestSent = true;
             this.isConnected = false;
-            console.log("second else if")
-            console.log(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) && !contact.isAccepted));
             this.contact = contact;
 
             return;
@@ -588,18 +568,12 @@ openSkillDialog() : void{
           else if(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser?.id) && !contact.isAccepted)){
             this.isRequestReceived = true;
             this.isConnected = false;
-            console.log("second else if")
-            console.log(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser?.id) && !contact.isAccepted));
             this.contact = contact;
 
             return;
           }
 
         });
-
-        console.log(this.isConnected);
-        console.log(this.isRequestSent);
-        console.log(this.isRequestReceived);
 
 
       }
@@ -671,14 +645,9 @@ openSkillDialog() : void{
     // get logged in user id from auth and friendId from url
     let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};
 
-    console.log(contact);
     this.contactService.create(contact)
       .subscribe(
         newContact => {
-          console.log(newContact);
-          console.log("newContact");
-
-          //this.isConnected = true;
           this.isRequestSent = true;
         }
       )
@@ -697,7 +666,6 @@ openSkillDialog() : void{
       this.contactService.update(this.contact)
         .subscribe(
           updatedContact => {
-  
             this.isConnected = true;
           }
         )
