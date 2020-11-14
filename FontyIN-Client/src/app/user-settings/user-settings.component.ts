@@ -21,7 +21,7 @@ export class UserSettingsComponent implements OnInit {
   notificationP = null;
   isChecked = true;
   address = new Address(1, "test1", "test2", "test3", "test4");
-  user = new User(1, "0348348");
+  user = new User(3, "0348348");
   privacy = new privacy(1, 1, "Everyone", "everyone", "everyone");
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class UserSettingsComponent implements OnInit {
       console.log(data);
     this.address = <Address>data;
     });
-    this.service.GetOneUser(1)
+    this.service.GetOneUser(3)
     .subscribe((data)=>{
       console.log(data);
     this.user = <User>data;
@@ -50,7 +50,7 @@ export class UserSettingsComponent implements OnInit {
         this.showNotification();
       });
       
-      this.service.updatePhoneNumber(this.user, 1).subscribe(
+      this.service.updatePhoneNumber(this.user, 3).subscribe(
         (res: any) => {
           console.log("updated phone" + this.user);
         });
