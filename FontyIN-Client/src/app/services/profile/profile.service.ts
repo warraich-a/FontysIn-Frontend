@@ -35,7 +35,7 @@ export class ProfileService {
   }
 
   public getExperienceById(userId, profileId){  
-    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '2');
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '5');
     console.log(this.httpOptions.headers);
     return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/experiences', this.httpOptions)
   }
