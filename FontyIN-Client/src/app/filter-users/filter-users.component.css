@@ -17,11 +17,6 @@
   margin-top: 100px;
 }
 
-/* Connection image */
-img.item {
-  width: 120px;
-}
-
 .mat-flat-button.mat-accent, .mat-raised-button.mat-accent, .mat-fab.mat-accent, .mat-mini-fab.mat-accent {
   background-color: white;
   color: palevioletred;

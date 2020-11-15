@@ -121,8 +121,7 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
     DialogAddEducationComponent,
     DialogAddSkillComponent,
     SearchPipe,
-    NewsfeedComponent,    
- 
+    NewsfeedComponent, 
   ],
   entryComponents:[DialogAddProfileComponent],
   imports: [

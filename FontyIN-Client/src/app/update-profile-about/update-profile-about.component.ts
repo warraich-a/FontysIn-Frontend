@@ -14,7 +14,9 @@ export class UpdateProfileAboutComponent {
   constructor(  private service: ProfileService, 
     public dialogRef: MatDialogRef<UpdateProfileAboutComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
+
   about = new About(1, 1, "hello");
+  
   ngOnInit(): void {
 console.log(this.data.about.id);
     this.id = this.data.about.id

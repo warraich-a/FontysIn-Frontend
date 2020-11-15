@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../classes/Profile/User';
 import { ProfileService } from '../services/profile/profile.service';
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
   searchText='';
 
   constructor(private profileService: ProfileService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    public dialog: MatDialog) { }
 
     users: User[];
 
@@ -22,6 +24,7 @@ export class HeaderComponent implements OnInit {
       this.users=<User[]>data;
       console.log(data);
     });
-  }
+  } 
+
 
 }

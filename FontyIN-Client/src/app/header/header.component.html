@@ -50,17 +50,39 @@
 
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="md-form my-0">
-          <input id="search-text" [(ngModel)]="searchText" name="searchText" class="form-control mr-sm-2" 
+          <input list="browsers" id="search-text" [(ngModel)]="searchText" name="searchText" class="form-control mr-sm-2" 
           type="search" placeholder="Search" autofocus>
-        </div>
-      </form>
-    
-    <div *ngFor="let user of users | search: searchText" >
-              <!-- <h3>
-                {{user.firstName}}
-              </h3> -->
-    </div> 
 
+          <datalist id="browsers">
+          
+            <div *ngFor="let user of users">
+              <option> 
+                <td class="font-italic"> 
+                  {{user.firstName}}  {{user.lastName}}
+                </td>
+            </div>
+          </datalist>
+
+        </div>
+
+      </form>
+
+      <!-- <select id="search-text" class="js-example-basic-multiple" [(ngModel)]="searchText" name="searchText" type="search" placeholder="Search" autofocus>
+          
+        <div *ngFor="let user of users" >
+          <option>
+              {{user.firstName}}
+          </option>
+        </div> 
+
+      </select> -->
+    
+
+    <!-- <div *ngFor="let user of users | search: searchText" > -->
+          <!-- <h3>
+              {{user.firstName}}
+          </h3> -->
+    <!-- </div>  -->
 
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="example-button-container">
@@ -75,4 +97,25 @@
   <!-- Collapsible content -->
 
 </mdb-navbar>
+
+<!-- <mat-card>
+
+  <div *ngFor="let user of users | search: searchText" class="filter">
+    <div class="item connectionDesc">
+
+      <td class="font-italic"> 
+        <mat-icon> account_circle </mat-icon>
+        {{user.firstName}}  {{user.lastName}} <br>
+        ({{user.userType}}) <br>
+        Fontys University of Applied Sciences
+        <br>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+      </td>
+      
+    </div>
+  </div>
+
+</mat-card> -->
 
