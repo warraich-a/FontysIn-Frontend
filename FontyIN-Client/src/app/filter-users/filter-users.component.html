@@ -86,8 +86,22 @@
     <div class="col-sm">
       <mat-card class="found-card">
 
+        <form class="example-form float-right">
+          <mat-form-field class="example-full-width">
+            <mat-label>Search</mat-label>
+            <input type="text" matInput placeholder="Search"
+            id="search-text" 
+            aria-describedby="search-text" 
+            name="searchText"
+            [(ngModel)]="searchText" 
+            autofocus>
+          </mat-form-field>
+        </form>
+
         <mat-card-header>
+
           <mat-card-title>Users:</mat-card-title>
+          
         </mat-card-header>
 
 
@@ -106,7 +120,6 @@
 
                     <br>
 
-                    <!-- ({{user.userType}}) <br> -->
                     Fontys University of Applied Sciences
                     
                     <br>
