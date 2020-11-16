@@ -3,6 +3,7 @@
     
     <div class="col-sm">
       <mat-card class="filter-card">
+
         <mat-card-header>
 
           <mat-card-title>Filter Users:</mat-card-title>
@@ -73,9 +74,11 @@
 
         <div class="actions">
 
-          <button mat-mini-fab aria-label="Example icon button with a find replace icon" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> find_replace </mat-icon></button>
+          <!-- mat-mini-fab aria-label="Example icon button with a filter list icon" -->
+          <button mat-icon-button ria-label="" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> filter_list </mat-icon></button>
 
-          <button mat-mini-fab aria-label="Example icon button with a cleaning services icon" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
+          <!-- mat-mini-fab aria-label="Example icon button with a cleaning services icon" -->
+          <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
 
         </div>
 
@@ -96,6 +99,11 @@
             [(ngModel)]="searchText" 
             autofocus>
           </mat-form-field>
+
+          <button class="float-right" mat-icon-button ria-label="" (click)="getUsersByFirstNameChars()">
+            <mat-icon>search</mat-icon>
+          </button>
+
         </form>
 
         <mat-card-header>

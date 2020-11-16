@@ -29,6 +29,10 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9090/users?workingYear=' + year);
   }
 
+  public filterUsersByName(name){
+    return this.httpClient.get('http://localhost:9090/users?firstName=' + name);
+  }
+
   public filterUsersByTypeLocationDepartment(type, locId, depId){
     return this.httpClient.get('http://localhost:9090/users?type=' + type + '&location=' + locId + '&department=' + depId);
   }

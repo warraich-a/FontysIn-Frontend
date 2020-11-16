@@ -148,6 +148,15 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
+  getUsersByFirstNameChars(){
+    console.log("Test: " + this.searchText);
+    this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
+    {
+     this.users=<UserDTO[]>data;
+      console.log(this.users);     
+    });
+  }
+
 
   getUsersByStudyYear(){
     this.filterService.filterUsersByStartStudyYear(this.syearSelection).subscribe((data)=>
