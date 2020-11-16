@@ -22,6 +22,7 @@ export class ContactService extends DataService {
 
   constructor(http: HttpClient) {
     super('http://localhost:9090/users/1/contacts', http);
+    this.readLocalStorageValue();
   }
 
   getContactRequests() {
