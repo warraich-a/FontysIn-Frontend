@@ -4,7 +4,9 @@
     <div class="col-sm">
       <mat-card class="filter-card">
         <mat-card-header>
+
           <mat-card-title>Filter Users:</mat-card-title>
+          
         </mat-card-header>
     
         <mat-card-content>
@@ -71,9 +73,9 @@
 
         <div class="actions">
 
-          <button mat-mini-fab aria-label="Example icon button with a filter alt icon" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> filter_alt </mat-icon></button>
+          <button mat-mini-fab aria-label="Example icon button with a find replace icon" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> find_replace </mat-icon></button>
 
-          <button class="float-right"  mat-mini-fab aria-label="Example icon button with a cleaning services icon" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
+          <button mat-mini-fab aria-label="Example icon button with a cleaning services icon" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
 
         </div>
 
@@ -94,10 +96,19 @@
               <tr id="testUser"  *ngFor="let user of users">
             
                   <td class="font-italic"> 
-                    <mat-icon> account_circle </mat-icon>
-                    {{user.firstName}}  {{user.lastName}} <br>
-                    ({{user.userType}}) <br>
+
+                    <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
+
+                      <mat-icon> account_circle </mat-icon>
+                      {{user.firstName}} {{user.lastName}} <br>
+                
+                    </div>
+
+                    <br>
+
+                    <!-- ({{user.userType}}) <br> -->
                     Fontys University of Applied Sciences
+                    
                     <br>
                     <br>
                     <mat-divider></mat-divider>

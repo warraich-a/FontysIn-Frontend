@@ -1,5 +1,5 @@
 .filter-card {
-    max-width: 400px;
+    max-width: 350px;
     max-height: 1000px;
     
     margin-top: 100px;
@@ -13,7 +13,6 @@
 .found-card {
   max-width: 600px;
   max-height: 1000px;
-
   margin-top: 100px;
 }
 
@@ -22,6 +21,6 @@
   color: palevioletred;
 }
 
-/* .actions{
+.actions{
   margin-right: 10px;
-} */
+}

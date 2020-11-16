@@ -1,3 +1,4 @@
+import { UserDTO } from './../classes/Profile/UserDTO';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../classes/Profile/User';
@@ -72,8 +73,8 @@ export class FilterUsersComponent implements OnInit {
   wyearSelection: String;
   departmentSelection: String;
   locationSelection: String;
-  users: User[]; 
-  user: User;
+  users: UserDTO[]; 
+  user: UserDTO;
   
 
   
@@ -83,7 +84,7 @@ export class FilterUsersComponent implements OnInit {
       console.log("Student Year");
       this.filterService.filterUsersByTypeLocationDepartmentStudyYear(this.TypeSelection, this.syearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
       {
-        this.users = <User[]>data;
+        this.users = <UserDTO[]>data;
         console.log(this.users);
       });
     }
@@ -92,7 +93,7 @@ export class FilterUsersComponent implements OnInit {
          console.log("Employee Year");
         this.filterService.filterUsersByTypeLocationDepartmentWorkYear(this.TypeSelection, this.wyearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
         {
-          this.users = <User[]>data;
+          this.users = <UserDTO[]>data;
           console.log(this.users);
         });
     }
@@ -101,7 +102,7 @@ export class FilterUsersComponent implements OnInit {
       console.log("Users wothout year");
       this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
       {
-        this.users = <User[]>data;
+        this.users = <UserDTO[]>data;
         console.log(this.users);
       });
     } 
@@ -114,7 +115,7 @@ export class FilterUsersComponent implements OnInit {
 
       this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
       {
-        this.users=<User[]>data;
+        this.users=<UserDTO[]>data;
         this.StudentDisabled = true;
         this.EmployeeDisabled = false;
         console.log(this.users);      
@@ -125,7 +126,7 @@ export class FilterUsersComponent implements OnInit {
     else{
       this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
       {
-        this.users=<User[]>data;
+        this.users=<UserDTO[]>data;
         this.StudentDisabled = false;
         this.EmployeeDisabled = true;
         console.log(this.users);      
@@ -138,7 +139,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByStudyYear(){
     this.filterService.filterUsersByStartStudyYear(this.syearSelection).subscribe((data)=>
     {
-     this.users=<User[]>data;
+     this.users=<UserDTO[]>data;
       console.log(this.users);     
     });
   }
@@ -146,7 +147,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByWorkYear(){
     this.filterService.filterUsersByStartWorkYear(this.wyearSelection).subscribe((data)=>
     {
-     this.users=<User[]>data;
+     this.users=<UserDTO[]>data;
       console.log(this.users);  
     });
   }
@@ -154,7 +155,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByLocation(){
     this.filterService.filterUserByLocation(this.locationSelection).subscribe((data)=>
     {
-      this.users=<User[]>data; 
+      this.users=<UserDTO[]>data; 
       console.log(this.users);      
     });
   }
@@ -162,7 +163,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByDepartment(){
     this.filterService.filterUserByDepartment(this.departmentSelection).subscribe((data)=>
     {
-      this.users=<User[]>data; 
+      this.users=<UserDTO[]>data; 
       console.log(this.users);      
     });
   }

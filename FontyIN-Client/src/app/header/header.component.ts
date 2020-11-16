@@ -1,3 +1,4 @@
+import { UserDTO } from './../classes/Profile/UserDTO';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -17,11 +18,11 @@ export class HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog) { }
 
-    users: User[];
+    users: UserDTO[];
 
   ngOnInit(): void {
     this.profileService.getAllUsers().subscribe(data =>{
-      this.users=<User[]>data;
+      this.users=<UserDTO[]>data;
       console.log(data);
     });
   } 
