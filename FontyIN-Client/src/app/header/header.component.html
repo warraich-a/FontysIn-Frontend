@@ -49,16 +49,22 @@
 
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="md-form my-0">
-          <input id="search-text" [(ngModel)]="searchText" name="searchText" class="form-control mr-sm-2" 
+          <input list="browsers" id="search-text" [(ngModel)]="searchText" name="searchText" class="form-control mr-sm-2" 
           type="search" placeholder="Search" autofocus>
+
+          <datalist id="browsers">
+          
+            <div *ngFor="let user of users | search: searchText">
+              <option> 
+                <td class="font-italic"> 
+                  {{user.firstName}}  {{user.lastName}}
+                </td>
+            </div>
+          </datalist>
+
         </div>
+
       </form>
-    
-    <div *ngFor="let user of users | search: searchText" >
-              <!-- <h3>
-                {{user.firstName}}
-              </h3> -->
-    </div> 
 
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="example-button-container">
