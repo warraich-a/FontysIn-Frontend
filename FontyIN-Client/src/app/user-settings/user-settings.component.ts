@@ -20,22 +20,26 @@ export class UserSettingsComponent implements OnInit {
   notification = null; 
   notificationP = null;
   isChecked = true;
+  id:string;
   address = new Address(1, "test1", "test2", "test3", "test4");
   user = new User(3, "0348348");
   privacy = new privacy(1, 1, "Everyone", "everyone", "everyone");
 
   ngOnInit(): void {
-    this.service.GetOneAddress(1)
-    .subscribe((data)=>{
-      console.log(data);
-    this.address = <Address>data;
-    });
-    this.service.GetOneUser(3)
+    this.id = localStorage.getItem('userId');
+ 
+    this.service.GetOneUser(this.id)
     .subscribe((data)=>{
       console.log(data);
     this.user = <User>data;
+    this.service.GetOneAddress(this.user.addressId)
+    .subscribe((data)=>{
+      console.log(this.user.addressId);
+    this.address = <Address>data;
     });
-    this.service.GetOnePrivacy(1)
+    });
+   
+    this.service.GetOnePrivacy()
     .subscribe((data)=>{
       console.log(data);
     this.privacy = <privacy>data;
@@ -45,12 +49,12 @@ export class UserSettingsComponent implements OnInit {
 
   update(){
     console.log(this.address);
-    this.service.updateAddress(this.address, 1).subscribe(
+    this.service.updateAddress(this.address, this.user.addressId).subscribe(
       (res: any) => {
         this.showNotification();
       });
       
-      this.service.updatePhoneNumber(this.user, 3).subscribe(
+      this.service.updatePhoneNumber(this.user, this.id).subscribe(
         (res: any) => {
           console.log("updated phone" + this.user);
         });
@@ -67,7 +71,7 @@ showNotificationP() {
 
 updatePrivacy(){
   this.hideEverything();
-  this.service.updatePrivacy(this.privacy, 1).subscribe(
+  this.service.updatePrivacy(this.privacy).subscribe(
     (res: any) => {
       this.showNotificationP();
     });

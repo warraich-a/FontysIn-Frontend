@@ -16,11 +16,12 @@ import { UpdateProfileExperienceComponent} from './update-profile-experience/upd
 import { UpdateProfileAboutComponent} from './update-profile-about/update-profile-about.component';
 import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import {LoginComponent} from './login/login.component';
 
 
 const routes: Routes = [{
   path: '',
-  component: HomeComponent
+  component: LoginComponent
 },
 {
   path: 'profile',

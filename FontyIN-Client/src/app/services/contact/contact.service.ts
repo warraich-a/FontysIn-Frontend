@@ -11,6 +11,11 @@ export class ContactService extends DataService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
+  readLocalStorageValue() {
+    if(localStorage.getItem("userToken") != null){
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization',  'Basic ' + localStorage.getItem("userToken"));
+    };
+}
 
   // logged in user id
   loggedInUserId = 1;
@@ -20,14 +25,14 @@ export class ContactService extends DataService {
   }
 
   getContactRequests() {
-    return this.http.get('http://localhost:9090/users/1/requests')
+    return this.http.get('http://localhost:9090/users/1/requests', this.httpOptions)
       .pipe(
         map(response => response)
       )
   }
 
   	getAcceptedContacts() {
-		return this.http.get('http://localhost:9090/users/1/acceptedContacts')
+		return this.http.get('http://localhost:9090/users/1/acceptedContacts', this.httpOptions)
 		.pipe(
 		  map(response => response)
 		)
