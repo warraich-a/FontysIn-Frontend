@@ -90,6 +90,8 @@ import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-s
 import { SearchPipe } from './pipes/search.pipe';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { LoginComponent } from './login/login.component';
+import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -124,6 +126,8 @@ import { LoginComponent } from './login/login.component';
     SearchPipe,
     NewsfeedComponent,
     LoginComponent,    
+    DialogChangeDpComponent,
+    RegistrationComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],
