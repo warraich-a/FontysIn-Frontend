@@ -38,9 +38,11 @@ export class PostComponent implements OnInit {
   content : String;
   commentContent : String;
   commentData = {};
+  likeData = {};
   time : Moment;
   user: User;
   likeCount = 0;
+  userLikeOnPost : Like;
 
   getUserById(id){
     user: User;
@@ -81,6 +83,15 @@ export class PostComponent implements OnInit {
     window.location.reload()
   }
 
+  likePost(){
+    this.likeData = {
+      "id":1,
+      "likerId": localStorage.getItem("userId"),
+      "postId": this.id
+    }
+    this.postService.newLikeOnPost(this.id,this.likeData);
+  }
+
   
 
   ngOnInit(): void {
@@ -91,11 +102,11 @@ export class PostComponent implements OnInit {
       this.likeCount=<number>data;
 
     });
-  //   this.postService.getPost(this.id)
-  //    .subscribe((data)=>{
-  //    console.log(data);
-  //     this.post = <Post>data;
-  //  });
+    this.postService.getPostLikeByUser(this.id,localStorage.getItem("userId"))
+     .subscribe((data)=>{
+     console.log(data);
+      this.userLikeOnPost = <Like>data;
+   });
    this.postService.getCommentsByPostId(this.id)
    .subscribe((data)=>{
    console.log(data);

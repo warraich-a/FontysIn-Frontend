@@ -24,8 +24,16 @@ export class PostsService {
 
   public getPostLikes(id){
     return this.httpClient.get('http://localhost:9090/posts/'+id+"/likes", this.httpOptions);
+   } 
+
+  public newLikeOnPost(id,data){
+    return this.httpClient.post('http://localhost:9090/posts/'+id+"/likes", data, this.httpOptions).toPromise().then(data => {
+      console.log(data);
+    });
+  }
+   public getPostLikeByUser(id,userid){
+    return this.httpClient.get('http://localhost:9090/posts/'+id+"/likes/user/"+userid, this.httpOptions);
    }
-  
   public getPostLikesCount(id){
     return this.httpClient.get('http://localhost:9090/posts/'+id+"/likes/count", this.httpOptions);
    }
