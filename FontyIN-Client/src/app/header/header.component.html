@@ -57,9 +57,12 @@
             <div *ngFor="let user of users | search: searchText">
               <option> 
                 <td class="font-italic"> 
-                  {{user.firstName}}  {{user.lastName}}
+                  <div [routerLink]="['/users', user.id, 'profiles', user.profileId]">
+                    {{user.firstName}}  {{user.lastName}}
+                  </div>
                 </td>
             </div>
+            
           </datalist>
 
         </div>

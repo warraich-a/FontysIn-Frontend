@@ -93,16 +93,24 @@
                
               <tr id="testUser"  *ngFor="let user of users">
             
-                  <td class="font-italic"> 
+                <td class="font-italic"> 
+
+                  <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
+
                     <mat-icon> account_circle </mat-icon>
-                    {{user.firstName}}  {{user.lastName}} <br>
-                    ({{user.userType}}) <br>
+                    {{user.firstName}} {{user.lastName}} <br>
+              
+                  </div>
+
+                  <br>
+
                     Fontys University of Applied Sciences
-                    <br>
-                    <br>
-                    <mat-divider></mat-divider>
-                    <br>
-                  </td>
+                  
+                  <br>
+                  <br>
+                  <mat-divider></mat-divider>
+                  <br>
+                </td>
 
               </tr>
             

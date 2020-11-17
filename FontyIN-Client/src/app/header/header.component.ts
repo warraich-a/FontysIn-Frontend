@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../classes/Profile/User';
+import { UserDTO } from '../classes/Profile/UserDTO';
 import { ProfileService } from '../services/profile/profile.service';
 import { UserService } from '../services/user.service';
 
@@ -15,14 +16,14 @@ export class HeaderComponent implements OnInit {
 
   constructor(private service: UserService,private profileService: ProfileService,
     private route: ActivatedRoute) { }
-    users: User[];
+    users: UserDTO[];
     
     
     ngOnInit(): void {
      
     
     this.profileService.getAllUsers().subscribe(data =>{
-      this.users=<User[]>data;
+      this.users=<UserDTO[]>data;
       console.log(data);
     });
   }
