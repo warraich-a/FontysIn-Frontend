@@ -31,7 +31,7 @@ export class NewsfeedComponent implements OnInit {
     this.data = {
       "content": this.content,
       "id": 5,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newPost(<JSON>this.data);
     console.log(this.data);

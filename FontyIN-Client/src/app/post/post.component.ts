@@ -53,7 +53,7 @@ export class PostComponent implements OnInit {
       "content": this.commentContent,
       "id": 0,
       "postId": id,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newComment(<JSON>this.commentData);
     // window.location.reload();
@@ -65,7 +65,7 @@ export class PostComponent implements OnInit {
       "content": this.content,
       
       "id": 5,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newPost(<JSON>this.data);
     window.location.reload()
