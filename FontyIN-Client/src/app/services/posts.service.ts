@@ -21,6 +21,9 @@ export class PostsService {
   public getPosts(){
    return this.httpClient.get('http://localhost:9090/posts/user/'+'1', this.httpOptions);
   }
+  public getNewsfeed(id){
+    return this.httpClient.get('http://localhost:9090/posts/newsfeed/'+id,this.httpOptions);
+   }
 
   public getPost(id){
     return this.httpClient.get('http://localhost:9090/posts/'+id, this.httpOptions);

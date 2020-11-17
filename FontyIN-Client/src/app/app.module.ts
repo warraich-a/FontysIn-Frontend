@@ -92,6 +92,7 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { LoginComponent } from './login/login.component';
 import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { CommentUsernameComponent } from './comment-username/comment-username.component';
 
 
 @NgModule({
@@ -127,7 +128,8 @@ import { RegistrationComponent } from './registration/registration.component';
     NewsfeedComponent,
     LoginComponent,    
     DialogChangeDpComponent,
-    RegistrationComponent,    
+    RegistrationComponent,
+    CommentUsernameComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],

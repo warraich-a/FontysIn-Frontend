@@ -3,6 +3,7 @@
     <br>
     <br>
     
+    
     <div id="creatPostBlock">
     <textarea [(ngModel)] = "content" placeholder="Your awesome post..." id = "newPostText"></textarea> <br>
     <button (click) ="createPost()" class = "postBtn">Post</button>
@@ -17,10 +18,10 @@
 
 
 <div class="container">
-    <div *ngFor="let post of posts">
+    <div *ngFor="let post of allposts">
         
         
-        
+       
         <app-post [id]="post.id"></app-post>
         
       

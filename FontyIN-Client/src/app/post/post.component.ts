@@ -51,20 +51,19 @@ export class PostComponent implements OnInit {
   createComment(id) {
     this.commentData = {
       "content": this.commentContent,
-      "date": "2020-10-20",
       "id": 0,
       "postId": id,
       "userId": 1
       };
     this.postService.newComment(<JSON>this.commentData);
-    window.location.reload();
+    // window.location.reload();
     
   }
 
   createPost() {
     this.data = {
       "content": this.content,
-      "date": "2020-10-06",
+      
       "id": 5,
       "userId": 1
       };
@@ -93,7 +92,7 @@ export class PostComponent implements OnInit {
     this.profileService.getUserById(this.post.userId)
     .subscribe((data)=>
     {
-     
+      console.log(data);
       this.user=<User>data;
 
     });
