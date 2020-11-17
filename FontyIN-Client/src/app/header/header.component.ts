@@ -14,20 +14,12 @@ export class HeaderComponent implements OnInit {
   searchText='';
 
   constructor(private service: UserService,private profileService: ProfileService,
-    private route: ActivatedRoute,  private router : Router) { }
-loggedIn:boolean;
+    private route: ActivatedRoute) { }
     users: User[];
-    readLocalStorageValue() {
-      return localStorage.getItem('userToken');
-    }
+    
     
     ngOnInit(): void {
-      if(this.readLocalStorageValue() != null){
-        this.loggedIn= true;
-      }else{
-        this.loggedIn = false;
-        this.router.navigate(['/']);
-      }
+     
     
     this.profileService.getAllUsers().subscribe(data =>{
       this.users=<User[]>data;
