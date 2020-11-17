@@ -38,6 +38,10 @@ export class FilterService {
     return this.httpClient.get('http://localhost:9090/users?workingYear=' + year, this.httpOptions);
   }
 
+  public filterUsersByName(name){
+    return this.httpClient.get('http://localhost:9090/users?firstName=' + name, this.httpOptions);
+  }
+
   public filterUsersByTypeLocationDepartment(type, locId, depId){
     return this.httpClient.get('http://localhost:9090/users?type=' + type + '&location=' + locId + '&department=' + depId, this.httpOptions);
   }
@@ -51,7 +55,7 @@ export class FilterService {
   }
 
   public filterUsersByTypeLocationDepartmentName(name, locId, depId, type){
-    return this.httpClient.get('http://localhost:9090/users?firstName=' + name + '&location=' + locId + '&department=' + depId + '&type=' + type );
+    return this.httpClient.get('http://localhost:9090/users?firstName=' + name + '&location=' + locId + '&department=' + depId + '&type=' + type, this.httpOptions);
   }
 
 }

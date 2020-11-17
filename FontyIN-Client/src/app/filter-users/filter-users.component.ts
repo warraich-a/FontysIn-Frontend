@@ -101,6 +101,16 @@ export class FilterUsersComponent implements OnInit {
         });
     }
 
+    
+    else if(this.searchText != null && this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
+      console.log("using search box in combining the search");
+      this.filterService.filterUsersByTypeLocationDepartmentName(this.searchText, this.locationSelection, this.departmentSelection, this.TypeSelection).subscribe((data)=>
+      {
+        this.users = <UserDTO[]>data;
+        console.log(this.users);
+      });
+    }
+
     else if(this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
       console.log("Users wothout year");
       this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
@@ -114,15 +124,14 @@ export class FilterUsersComponent implements OnInit {
 
   getUsersByFirstNameChars(){
 
-    if(this.searchText != null && this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
-      console.log("using search box in combining the search");
-      this.filterService.filterUsersByTypeLocationDepartmentName(this.searchText, this.locationSelection, this.departmentSelection, this.TypeSelection).subscribe((data)=>
+    if (this.searchText != null){
+      this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
       {
-        this.users = <UserDTO[]>data;
-        console.log(this.users);
+       this.users=<UserDTO[]>data;
+        console.log(this.users);     
       });
     }
-    
+
   }
   
   getUsersByType(){
@@ -207,4 +216,9 @@ export class FilterUsersComponent implements OnInit {
   foundDataByStartWorkYear(){
     return this.wyearSelection;
   }
+
+  foundDataByInput(){
+    return this.searchText;
+  }
+
 }
