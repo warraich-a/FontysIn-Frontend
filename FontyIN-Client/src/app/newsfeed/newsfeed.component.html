@@ -18,12 +18,18 @@
 
 
 <div class="container">
-    <div *ngFor="let post of allposts">
+    <!-- <div *ngFor="let p of allposts ">
         
         
        
-        <app-post [id]="post.id"></app-post>
-        
+        <app-post [id]="p.id" [post] = "p"></app-post>
+        <p>{{p.id}}</p>
+    </div> -->
+    
+        <li *ngFor="let post of allposts;">
+            <app-post [id]="post.id" [post] = "post"></app-post>
+        </li>
+    
       
       
 </div>

@@ -9,10 +9,11 @@
     <a [routerLink]="['/update-post', post.id]" class="editBtn"></a>
 
     <p style="font-size: 11px;">Post created by <a [routerLink]="['/users', post.userId, 'profiles', 1]" target="_blank" style="text-decoration: underline;">
-        <app-comment-username [userId]="post.userId"></app-comment-username> 
+       <!-- <app-comment-username [userId]="post.userId"></app-comment-username>  -->
     </a></p>
     <h2>{{post.content}}</h2>
     <p class="p-date">{{post.date.substring(0,10)}} {{post.date.substring(11,16)}}</p>
+    <h3>likes: {{likeCount}}</h3>
     
     <br>
     <hr>

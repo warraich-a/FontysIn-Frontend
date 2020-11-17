@@ -19,8 +19,17 @@ export class PostsService {
     })
   };
   public getPosts(){
-   return this.httpClient.get('http://localhost:9090/posts/user/'+'1', this.httpOptions);
+   return this.httpClient.get('http://localhost:9090/posts/user/'+ 1, this.httpOptions);
   }
+
+  public getPostLikes(id){
+    return this.httpClient.get('http://localhost:9090/posts/'+id+"/likes", this.httpOptions);
+   }
+  
+  public getPostLikesCount(id){
+    return this.httpClient.get('http://localhost:9090/posts/'+id+"/likes/count", this.httpOptions);
+   }
+
   public getNewsfeed(id){
     return this.httpClient.get('http://localhost:9090/posts/newsfeed/'+id,this.httpOptions);
    }

@@ -27,6 +27,8 @@ export class NewsfeedComponent implements OnInit {
   content : String;
   public user : User;
   allposts : Post[];
+  
+  
   createPost() {
     this.data = {
       "content": this.content,
@@ -57,9 +59,11 @@ export class NewsfeedComponent implements OnInit {
     this.postService.getNewsfeed(this.userID)
      .subscribe((data)=>{
      console.log(data);
-      this.allposts = <Post[]>data;
+      this.allposts = <Post[]> data;
+      console.log("posts");
+    console.log(this.allposts);
    });
-    
+   
 
   }
 

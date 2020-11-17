@@ -11,6 +11,11 @@ export interface Post {
   id: number;
   userId: number;
 }
+export interface Like {
+  id: number;
+  postId: number;
+  userId: number;
+}
 export interface Comment {
   content: string;
   date: string;
@@ -25,7 +30,7 @@ export interface Comment {
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  post : Post;
+  @Input()  post : Post;
   comments: Comment[];
   @Input() id ;
   constructor( private postService: PostsService, private profileService: ProfileService) { }
@@ -35,6 +40,7 @@ export class PostComponent implements OnInit {
   commentData = {};
   time : Moment;
   user: User;
+  likeCount = 0;
 
   getUserById(id){
     user: User;
@@ -63,7 +69,6 @@ export class PostComponent implements OnInit {
   createPost() {
     this.data = {
       "content": this.content,
-      
       "id": 5,
       "userId": localStorage.getItem("userId")
       };
@@ -79,11 +84,18 @@ export class PostComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.postService.getPost(this.id)
-     .subscribe((data)=>{
-     console.log(data);
-      this.post = <Post>data;
-   });
+    this.postService.getPostLikesCount(this.id)
+    .subscribe((data)=>
+    {
+      
+      this.likeCount=<number>data;
+
+    });
+  //   this.postService.getPost(this.id)
+  //    .subscribe((data)=>{
+  //    console.log(data);
+  //     this.post = <Post>data;
+  //  });
    this.postService.getCommentsByPostId(this.id)
    .subscribe((data)=>{
    console.log(data);
@@ -96,6 +108,7 @@ export class PostComponent implements OnInit {
       this.user=<User>data;
 
     });
+    
   }
 
 }
