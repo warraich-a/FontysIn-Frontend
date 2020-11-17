@@ -210,5 +210,22 @@ export class ProfileService {
     return this.httpClient.put(url, model, this.httpOptions);
   }
 
+  public uploadPicture(userId, data){
+    return this.httpClient.put('http://localhost:9090/upload/'+userId+'/uploadPicture', data, {responseType: 'text'})
+  }
 
+  public getFontysLocations(){
+    return this.httpClient.get('http://localhost:9090/users/fontysLocations');
+  }
+
+  public getFontysDepartments(){
+    return this.httpClient.get('http://localhost:9090/users/fontysDepartments');
+  }
+  public addAddress(data){
+    return this.httpClient.post('http://localhost:9090/users/newAddress', data);
+  }
+
+  public addNewUser(data){
+    return this.httpClient.post('http://localhost:9090/users/new', data);
+  }
 }

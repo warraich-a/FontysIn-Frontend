@@ -1,3 +1,4 @@
+import { RegistrationComponent } from './registration/registration.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -64,6 +65,10 @@ const routes: Routes = [{
   path: 'users/filter',
   component: FilterUsersComponent,
   canActivate: [ AuthGuard ]
+},
+{
+  path:'register', 
+  component: RegistrationComponent
 },
 ]
 
