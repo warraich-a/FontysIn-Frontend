@@ -3,6 +3,12 @@
     
     <div class="col-sm">
       <mat-card class="filter-card">
+
+        <div>
+          <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
+        </div>
+
+
         <mat-card-header>
           <mat-card-title>Filter Users:</mat-card-title>
         </mat-card-header>
@@ -75,7 +81,7 @@
           <button mat-icon-button ria-label="" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> filter_list </mat-icon></button>
 
           <!-- mat-mini-fab aria-label="Example icon button with a cleaning services icon" -->
-          <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
+          <!-- <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button> -->
 
         </div>
         
