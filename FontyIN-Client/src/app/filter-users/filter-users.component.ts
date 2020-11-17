@@ -55,7 +55,7 @@ export class FilterUsersComponent implements OnInit {
   StudentDisabled: boolean;
   EmployeeDisabled: boolean;
 
-  loggedInUser: number = 1;
+  loggedInUser: number = 3;
 
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { 
@@ -68,6 +68,7 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
+  searchText = '';
   TypeSelection: String;
   syearSelection: String;
   wyearSelection: String;
@@ -79,6 +80,8 @@ export class FilterUsersComponent implements OnInit {
   
 
   combinedFilter(){
+
+    console.log(this.searchText);
 
     if(this.TypeSelection != null && this.syearSelection != null && this.locationSelection != null && this.departmentSelection != null){
       console.log("Student Year");
@@ -107,6 +110,19 @@ export class FilterUsersComponent implements OnInit {
       });
     } 
 
+  }
+
+  getUsersByFirstNameChars(){
+
+    if(this.searchText != null && this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
+      console.log("using search box in combining the search");
+      this.filterService.filterUsersByTypeLocationDepartmentName(this.searchText, this.locationSelection, this.departmentSelection, this.TypeSelection).subscribe((data)=>
+      {
+        this.users = <UserDTO[]>data;
+        console.log(this.users);
+      });
+    }
+    
   }
   
   getUsersByType(){
