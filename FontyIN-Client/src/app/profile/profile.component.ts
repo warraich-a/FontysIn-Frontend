@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
 
-  userId:number;
+  userId:number = parseInt(localStorage.getItem("userId"));
   profileId: number;
   
   allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
@@ -447,14 +447,14 @@ openSkillDialog() : void{
       console.log(this.profileData);
 
     });
-    this.profileService.getUserById(this.userId)
+    this.profileService.getUser(this.userId)
     .subscribe((data)=>
     {
      
       this.foundUser=<User>data;
       this.userFirstName = this.foundUser.firstName;
       this.userLastName = this.foundUser.lastName;
-      this.profileUrl = this.foundUser.img;
+      this.profileUrl = this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
       console.log(this.foundUser);
