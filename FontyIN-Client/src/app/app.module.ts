@@ -1,3 +1,4 @@
+import { MessageService } from './services/message/message.service';
 import { AddInformationComponent } from './profile/add-information/add-information.component';
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
@@ -202,7 +203,7 @@ import { MessagesComponent } from './messages/messages.component';
     DataService,
     ContactService,
     FormsModule,
-    
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

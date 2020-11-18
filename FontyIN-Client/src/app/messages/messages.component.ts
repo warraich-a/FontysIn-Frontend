@@ -1,3 +1,5 @@
+import { Conversation } from './../classes/Message/Conversation';
+import { MessageService } from './../services/message/message.service';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -7,20 +9,31 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent implements OnInit, AfterViewInit {
+	conversations: Conversation[];
+
+    loggedInUser = 1;
 
 	defaultElevation = 3;
 	raisedElevation = 5;    
 	position = new FormControl('below');
+
 
 	@ViewChild('scrollable') private scrollable: ElementRef;
 	private shouldScrollDown: boolean;
 
 
 
-	constructor() { }
+	constructor(private messageService: MessageService) { 
+
+	}
 	
 	ngOnInit(): void {
-	
+		this.messageService.getAll()
+			.subscribe((data) => {
+				this.conversations = <Conversation[]>data;
+				console.log("Conversations");
+				console.log(data);
+			})
 	}
 	
 	ngAfterViewInit() {

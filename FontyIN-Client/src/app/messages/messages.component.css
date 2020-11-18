@@ -51,17 +51,25 @@ mat-icon:hover {
 }
 
 
+/* Heading divider/line */
+.heading-divider {
+    margin-bottom: 2rem;
+}
+
 /* List of chats */
 .messages {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    width: 80%;
+    margin: 4% 10%;
 }
 
 /* friend's image */
-img {
-    width: 107px;
+.conversation-img {
+    width: 100px;
 	margin-right: 4%;
+    height: 62%;
 }
 
 /* friend's name */
@@ -95,11 +103,14 @@ img {
 /* friends's image */
 .firend-img {
 	width: 90px;
+    margin-right: 4%;
 }
 
 /* line between messages */
 .conversation-divider {
-	width: 60%;
+    width: 80%;
+    color: gray;
+    margin: auto 10%;
 }
 
 /* sender's name */
