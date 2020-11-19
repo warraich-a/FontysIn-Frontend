@@ -91,7 +91,15 @@ import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-s
 import { SearchPipe } from './pipes/search.pipe';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { MessagesComponent } from './messages/messages.component';
+import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   suppressScrollX: true
+// };
 
 @NgModule({
   declarations: [
@@ -124,7 +132,9 @@ import { MessagesComponent } from './messages/messages.component';
     DialogAddSkillComponent,
     SearchPipe,
     NewsfeedComponent,
-    MessagesComponent,    
+    MessagesComponent,
+    SelectedMessageComponent,
+    DateAgoPipe,
  
   ],
   entryComponents:[DialogAddProfileComponent],
@@ -197,7 +207,8 @@ import { MessagesComponent } from './messages/messages.component';
     MatDialogModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    PerfectScrollbarModule,
   ],
   providers: [
     DataService,

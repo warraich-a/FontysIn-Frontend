@@ -1,3 +1,4 @@
+import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -72,7 +73,13 @@ const routes: Routes = [{
 },
 {
   path: 'messages',
-  component: MessagesComponent
+  component: MessagesComponent,
+    children: [
+        {
+            path: ':conversationId',
+            component: SelectedMessageComponent
+        }
+    ]
 },
 ]
 

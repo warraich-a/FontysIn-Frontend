@@ -1,7 +1,7 @@
 /* Container */
 .container {
 	width: 80%;
-    height: 86vh;
+	height: 100vh;
 }
 
 
@@ -72,10 +72,6 @@ mat-icon:hover {
     height: 62%;
 }
 
-.conversation-img, .firend-desc {
-    cursor: pointer;
-}
-
 /* friend's name */
 .friend-name {
     /* cursor: pointer; */
@@ -88,7 +84,7 @@ mat-icon:hover {
 /* Selected message */
 /* scroll */
 .scroll-viewport {
-	height: 67%;
+    height: 61%;
 	width: 100%;
     margin-bottom: 7%;
 }
@@ -99,7 +95,7 @@ mat-icon:hover {
 }
 
 /* firend name */
-.selected-message > h3.friend-name {
+h3.friend-name {
 	display: inline-block;
 	font-size: 1.9em;
 }
@@ -143,6 +139,18 @@ mat-icon:hover {
 	float: right;
 }
 
+.message {
+    margin: 4% auto;
+}
+
+.time {
+    font-size: 0.8em;
+}
+
+/* Tooltip */
+::ng-deep .mat-tooltip {
+    font-size: 0.8em;
+}
 
 
 .desktop-view {
@@ -183,8 +191,8 @@ mat-icon:hover {
 	}
 
 	/* Flex item, right */
-	.selected-message {
+	/* .selected-message {
 		display: none;
-	}
+	} */
 }
 
