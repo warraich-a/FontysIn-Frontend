@@ -11,6 +11,11 @@ export interface Post {
   id: number;
   userId: number;
 }
+export interface Like {
+  id: number;
+  postId: number;
+  userId: number;
+}
 export interface Comment {
   content: string;
   date: string;
@@ -25,7 +30,7 @@ export interface Comment {
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  post : Post;
+  @Input()  post : Post;
   comments: Comment[];
   @Input() id ;
   constructor( private postService: PostsService, private profileService: ProfileService) { }
@@ -33,8 +38,11 @@ export class PostComponent implements OnInit {
   content : String;
   commentContent : String;
   commentData = {};
+  likeData = {};
   time : Moment;
   user: User;
+  likeCount = 0;
+  userLikeOnPost : Like;
 
   getUserById(id){
     user: User;
@@ -51,22 +59,20 @@ export class PostComponent implements OnInit {
   createComment(id) {
     this.commentData = {
       "content": this.commentContent,
-      "date": "2020-10-20",
       "id": 0,
       "postId": id,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newComment(<JSON>this.commentData);
-    window.location.reload();
+    // window.location.reload();
     
   }
 
   createPost() {
     this.data = {
       "content": this.content,
-      "date": "2020-10-06",
       "id": 5,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newPost(<JSON>this.data);
     window.location.reload()
@@ -77,13 +83,29 @@ export class PostComponent implements OnInit {
     window.location.reload()
   }
 
+  likePost(){
+    this.likeData = {
+      "id":1,
+      "likerId": localStorage.getItem("userId"),
+      "postId": this.id
+    }
+    this.postService.newLikeOnPost(this.id,this.likeData);
+  }
+
   
 
   ngOnInit(): void {
-    this.postService.getPost(this.id)
+    this.postService.getPostLikesCount(this.id)
+    .subscribe((data)=>
+    {
+      
+      this.likeCount=<number>data;
+
+    });
+    this.postService.getPostLikeByUser(this.id,localStorage.getItem("userId"))
      .subscribe((data)=>{
      console.log(data);
-      this.post = <Post>data;
+      this.userLikeOnPost = <Like>data;
    });
    this.postService.getCommentsByPostId(this.id)
    .subscribe((data)=>{
@@ -93,10 +115,11 @@ export class PostComponent implements OnInit {
     this.profileService.getUserById(this.post.userId)
     .subscribe((data)=>
     {
-     
+      console.log(data);
       this.user=<User>data;
 
     });
+    
   }
 
 }

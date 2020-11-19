@@ -96,6 +96,10 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { LoginComponent } from './login/login.component';
+import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { CommentUsernameComponent } from './comment-username/comment-username.component';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
@@ -135,6 +139,10 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
     MessagesComponent,
     SelectedMessageComponent,
     DateAgoPipe,
+    LoginComponent,    
+    DialogChangeDpComponent,
+    RegistrationComponent,
+    CommentUsernameComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],

@@ -28,11 +28,11 @@ export class SearchPipe implements PipeTransform {
     //   return fullName.toString().toLowerCase().indexOf(searchText) == 0;
     // });
 
-    let user = items.filter(it => {
-        let fullName = it.firstName + ' ' + it.lastName;
-        return fullName.toString().toLowerCase().indexOf(searchText) >= 0;
-      })
-      console.log(user);
+  return items.filter(it => {
+      let fullName = it.firstName + ' ' + it.lastName;
+      console.log(fullName);
+      return fullName.toString().toLowerCase().indexOf(searchText) >= 0;
+    });
   }
 
 }

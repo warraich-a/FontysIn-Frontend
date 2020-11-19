@@ -21,20 +21,22 @@ export class NewsfeedComponent implements OnInit {
 
   constructor(private postService: PostsService, private profileService: ProfileService) { }
 
-  posts : Post[];
-
+  
+  userID = localStorage.getItem("userId");
   data = {};
   content : String;
-  user : User;
-
+  public user : User;
+  allposts : Post[];
+  
+  
   createPost() {
     this.data = {
       "content": this.content,
-      "date": "2020-10-06",
       "id": 5,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newPost(<JSON>this.data);
+    console.log(this.data);
     window.location.reload()
   }
 
@@ -45,20 +47,23 @@ export class NewsfeedComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.postService.getPosts()
+    
+  //  this.profileService.getUserById(1)
+  //   .subscribe((data)=>
+  //   {
+  //     console.log(data);
+  //     this.user=<User>data;
+      
+  //   });
+  
+    this.postService.getNewsfeed(this.userID)
      .subscribe((data)=>{
      console.log(data);
-      this.posts = <Post[]>data;
+      this.allposts = <Post[]> data;
+      console.log("posts");
+    console.log(this.allposts);
    });
-   this.profileService.getUserById(2)
-    .subscribe((data)=>
-    {
-     
-      this.user=<User>data;
-      
-    
-
-    });
+   
 
   }
 

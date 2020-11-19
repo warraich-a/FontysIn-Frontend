@@ -1,5 +1,6 @@
 import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
 import { MessagesComponent } from './messages/messages.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NgModule } from '@angular/core';
@@ -13,63 +14,62 @@ import {PostDetailsComponent} from './post-details/post-details.component'
 
 
 import {UserSettingsComponent} from './user-settings/user-settings.component';
-import { UpdateProfileEducationComponent} from './update-profile-education/update-profile-education.component';
-import { UpdateProfileExperienceComponent} from './update-profile-experience/update-profile-experience.component';
-import { UpdateProfileAboutComponent} from './update-profile-about/update-profile-about.component';
 import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
-
+import {LoginComponent} from './login/login.component';
+import { AuthGuard } from  './auth/auth.guard';
 
 const routes: Routes = [{
   path: '',
-  component: HomeComponent
+  component: LoginComponent
 },
 {
   path: 'profile',
-  component: UserComponent
-},
-{
-  path: 'education/:id',
-  component: UpdateProfileEducationComponent
-},
-{
-  path: 'experience/:id',
-  component: UpdateProfileExperienceComponent
-},
-{
-  path: 'about/:id',
-  component: UpdateProfileAboutComponent
+  component: UserComponent,
+  canActivate: [ AuthGuard ]
 },
 {
   path: 'users/:id/profiles/:profileId', 
-  component: ProfileComponent
+  component: ProfileComponent,
+  canActivate: [ AuthGuard ]
 },{
   path: 'posts', 
-  component: NewsfeedComponent
+  component: NewsfeedComponent,
+  canActivate: [ AuthGuard ]
 },
 {
   path: 'update-post/:id',
-  component: UpdatePostComponent
+  component: UpdatePostComponent,
+  canActivate: [ AuthGuard ]
 },
 {
   path: 'post/:id',
-  component: PostDetailsComponent
+  component: PostDetailsComponent,
+  canActivate: [ AuthGuard ]
 },
   {
     path: 'users/:id/connections',
-    component: ConnectionComponent
+    component: ConnectionComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'users/:id/messages',
-    component: HomeComponent // MessageComponent
+    component: HomeComponent,
+    canActivate: [ AuthGuard ] // MessageComponent
 },
 {
   path: 'settings',
-  component: UserSettingsComponent
+  component: UserSettingsComponent,
+  canActivate: [ AuthGuard ]
 },
 {
   path: 'users/filter',
-  component: FilterUsersComponent
+  component: FilterUsersComponent,
+  canActivate: [ AuthGuard ]
+},
+{
+  path:'register', 
+  component: RegistrationComponent
 },
 {
   path: 'messages',
