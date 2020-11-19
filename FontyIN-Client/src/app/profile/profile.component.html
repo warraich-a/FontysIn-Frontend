@@ -90,9 +90,23 @@
         </div>
     </div> -->
       </div>
+
       <div id="pdfTable" #pdfTable>
+        
+        <!-- <div>
+          <h1>Image</h1>
+          <input type="file" (change)="onFileSelected($event)">
+          <button type="button" (click)="onUpload()">Upload</button>
+        </div> -->
+       
         <div class="name" ng-controller="userImage, userFirstName, userLastName">
-          <!-- {{userImage}}    -->
+          <div *ngIf="profileUrl?.length> 0; else noProfilePicture">
+            <img width="100%" src="{{profileUrl}}" (click)="openDialogDp()" class="zoom">  
+          </div>
+          <ng-template #noProfilePicture>
+            <button (click)="openDialogDp()">Upload Profile Picture</button>
+          </ng-template>
+         
           <h1> {{userFirstName}} {{userLastName}} </h1>
         </div>
         <!-- </div> -->

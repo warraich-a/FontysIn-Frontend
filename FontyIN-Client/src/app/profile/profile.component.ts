@@ -1,3 +1,4 @@
+import { DialogChangeDpComponent } from './dialog-change-dp/dialog-change-dp.component';
 import { DialogAddSkillComponent } from './dialog-add-skill/dialog-add-skill.component';
 import { DeleteExperienceComponent } from './../delete-experience/delete-experience.component';
 import { DeleteEducationComponent } from './../delete-education/delete-education.component';
@@ -7,7 +8,7 @@ import { UpdateProfileEducationComponent} from './../update-profile-education/up
 import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { DialogAddProfileComponent } from './dialog-add-profile/dialog-add-profile.component';
-import { Contact } from './../classes/Profile/Contact';
+import { Contact } from '../classes/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
@@ -32,6 +33,8 @@ import {
 } from '@angular/material/snack-bar';
 import { DialogAddExperienceComponent } from './dialog-add-experience/dialog-add-experience.component';
 import { DialogAddEducationComponent } from './dialog-add-education/dialog-add-education.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { delay } from 'rxjs/operators';
 
 
 @Component({
@@ -50,7 +53,7 @@ export class ProfileComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
 
-  userId:number;
+  userId:number = parseInt(localStorage.getItem("userId"));
   profileId: number;
   
   allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
@@ -58,15 +61,18 @@ export class ProfileComponent implements OnInit {
   errorMsgExp: boolean;
   errorMsgSki: boolean;
   
-
+  uploadForm: FormGroup; 
   @Input() expToAdd={};
+  selectedFile:File = null;
+  profileUrl: any;
 
   // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
                private route: ActivatedRoute,
                public dialog: MatDialog,
-               private _snackBar: MatSnackBar) { }
+               private _snackBar: MatSnackBar,
+               private formBuilder: FormBuilder) { }
             
   profileData: Profile[]; 
   educations: Object[];
@@ -217,6 +223,28 @@ export class ProfileComponent implements OnInit {
 //  this.ngOnInit();
 //  //this.refresh();
 // }
+
+
+onFileSelect(event) {
+  if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    this.uploadForm.get('profile').setValue(file);
+    console.log("yes aadded")
+  }
+}
+
+
+openDialogDp(): void {
+  const dialogRef = this.dialog.open(DialogChangeDpComponent, {
+    width: '50%',
+    data: {User: this.foundUser},
+    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+    }) 
+  dialogRef.afterClosed()
+    .subscribe(res => {
+    this.getAllExperience();  
+  });
+}
 
 openDialogProfile(): void {
   const dialogRef = this.dialog.open(DialogAddProfileComponent, {
@@ -419,13 +447,14 @@ openSkillDialog() : void{
       console.log(this.profileData);
 
     });
-    this.profileService.getUserById(this.userId)
+    this.profileService.getUser(this.userId)
     .subscribe((data)=>
     {
      
       this.foundUser=<User>data;
       this.userFirstName = this.foundUser.firstName;
       this.userLastName = this.foundUser.lastName;
+      this.profileUrl = this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
       console.log(this.foundUser);
@@ -518,18 +547,18 @@ openSkillDialog() : void{
 
 
   ngOnInit(): void {
+    
     let profileUserId: number = +this.route.snapshot.paramMap.get('id');
-    console.log(profileUserId)
+    console.log("Profile user " + this.profileUser)
+
     this.profileService.getUser(profileUserId)
-      .subscribe((data)=> {
-        console.log("-------------------------");
-        
+      .subscribe((data)=> {        
         this.profileUser = <UserDTO>data;
-        console.log(this.profileUser.id);
-        console.log("-------------------------");
-        
+
+        console.log("Profile user " + this.profileUser.profileId)
       });
      
+      
    //this.profileUser = +this.route.snapshot.paramMap.get('id');
 
     this.userId = +this.route.snapshot.paramMap.get('id');
@@ -550,14 +579,7 @@ openSkillDialog() : void{
       contacts => {
         this.contacts = <Contact[]>contacts;
 
-        console.log("HELLO")
-        console.log("contacts");
-
-        console.log(contacts);
-        
-
         this.contacts.forEach(contact => {
-          console.log(contact);
           // Logged in user sent request or other user sent request, status isAccepted true
           if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) || (contact.user.id == this.profileUser?.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
             this.isRequestSent = true;
@@ -569,8 +591,6 @@ openSkillDialog() : void{
           else if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) && !contact.isAccepted)) {
             this.isRequestSent = true;
             this.isConnected = false;
-            console.log("second else if")
-            console.log(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) && !contact.isAccepted));
             this.contact = contact;
 
             return;
@@ -578,18 +598,12 @@ openSkillDialog() : void{
           else if(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser?.id) && !contact.isAccepted)){
             this.isRequestReceived = true;
             this.isConnected = false;
-            console.log("second else if")
-            console.log(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser?.id) && !contact.isAccepted));
             this.contact = contact;
 
             return;
           }
 
         });
-
-        console.log(this.isConnected);
-        console.log(this.isRequestSent);
-        console.log(this.isRequestReceived);
 
 
       }
@@ -661,14 +675,9 @@ openSkillDialog() : void{
     // get logged in user id from auth and friendId from url
     let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};
 
-    console.log(contact);
     this.contactService.create(contact)
       .subscribe(
         newContact => {
-          console.log(newContact);
-          console.log("newContact");
-
-          //this.isConnected = true;
           this.isRequestSent = true;
         }
       )
@@ -687,7 +696,6 @@ openSkillDialog() : void{
       this.contactService.update(this.contact)
         .subscribe(
           updatedContact => {
-  
             this.isConnected = true;
           }
         )

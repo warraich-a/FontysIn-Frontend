@@ -18,7 +18,11 @@
         mdbWavesEffect>Profile</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link waves-light" href="#" mdbWavesEffect>Messages</a>
+        <a class="nav-link 
+            waves-light" 
+            href="#" 
+            mdbWavesEffect
+            [routerLink]="['/messages']">Messages</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link waves-light"
@@ -41,10 +45,9 @@
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light" mdbWavesEffect href="settings">Settings</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+        
           <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+          <a class="dropdown-item" routerLink="/"(click)="logout()">Log out</a>
         </div>
       </li>
 
@@ -63,32 +66,16 @@
                   </div>
                 </td>
             </div>
+            
           </datalist>
 
         </div>
 
       </form>
 
-      <!-- <select id="search-text" class="js-example-basic-multiple" [(ngModel)]="searchText" name="searchText" type="search" placeholder="Search" autofocus>
-          
-        <div *ngFor="let user of users" >
-          <option>
-              {{user.firstName}}
-          </option>
-        </div> 
-
-      </select> -->
-    
-
-    <!-- <div *ngFor="let user of users | search: searchText" > -->
-          <!-- <h3>
-              {{user.firstName}}
-          </h3> -->
-    <!-- </div>  -->
-
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="example-button-container">
-          <button mat-mini-fab aria-label="Example icon button with a filter alt icon" [routerLink]="['/users', 'filter']" > 
+          <button mat-mini-fab aria-label="Example icon button with a filter alt icon" [routerLink]="['/users', 'filter']">
             <mat-icon>filter_alt</mat-icon>
           </button>
         </div>
@@ -99,25 +86,4 @@
   <!-- Collapsible content -->
 
 </mdb-navbar>
-
-<!-- <mat-card>
-
-  <div *ngFor="let user of users | search: searchText" class="filter">
-    <div class="item connectionDesc">
-
-      <td class="font-italic"> 
-        <mat-icon> account_circle </mat-icon>
-        {{user.firstName}}  {{user.lastName}} <br>
-        ({{user.userType}}) <br>
-        Fontys University of Applied Sciences
-        <br>
-        <br>
-        <mat-divider></mat-divider>
-        <br>
-      </td>
-      
-    </div>
-  </div>
-
-</mat-card> -->
 

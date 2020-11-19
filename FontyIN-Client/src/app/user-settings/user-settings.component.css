@@ -32,3 +32,6 @@ body{
     background-color: #fff;
     border-bottom: 1px solid #e5e9f2;
 }
+span + span {
+    margin-left: 10px;
+}

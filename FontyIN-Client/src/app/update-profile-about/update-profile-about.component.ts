@@ -11,12 +11,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class UpdateProfileAboutComponent {
   id: number;
   notification = null; 
-  constructor(  private service: ProfileService, 
-    public dialogRef: MatDialogRef<UpdateProfileAboutComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
+  constructor(  private service: ProfileService, public dialogRef: MatDialogRef<UpdateProfileAboutComponent>,@Inject(MAT_DIALOG_DATA) public data: any) { }
   about = new About(1, 1, "hello");
-  
   ngOnInit(): void {
 console.log(this.data.about.id);
     this.id = this.data.about.id

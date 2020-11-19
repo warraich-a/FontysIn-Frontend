@@ -4,10 +4,13 @@
     <div class="col-sm">
       <mat-card class="filter-card">
 
-        <mat-card-header>
+        <div>
+          <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
+        </div>
 
+
+        <mat-card-header>
           <mat-card-title>Filter Users:</mat-card-title>
-          
         </mat-card-header>
     
         <mat-card-content>
@@ -78,12 +81,12 @@
           <button mat-icon-button ria-label="" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> filter_list </mat-icon></button>
 
           <!-- mat-mini-fab aria-label="Example icon button with a cleaning services icon" -->
-          <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
+          <!-- <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button> -->
 
         </div>
-
-
+        
       </mat-card>
+
     </div>
 
     <div class="col-sm">
@@ -117,24 +120,24 @@
                
               <tr id="testUser"  *ngFor="let user of users">
             
-                  <td class="font-italic"> 
+                <td class="font-italic"> 
 
-                    <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
+                  <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
 
-                      <mat-icon> account_circle </mat-icon>
-                      {{user.firstName}} {{user.lastName}} <br>
-                
-                    </div>
+                    <mat-icon> account_circle </mat-icon>
+                    {{user.firstName}} {{user.lastName}} <br>
+              
+                  </div>
 
-                    <br>
+                  <br>
 
                     Fontys University of Applied Sciences
-                    
-                    <br>
-                    <br>
-                    <mat-divider></mat-divider>
-                    <br>
-                  </td>
+                  
+                  <br>
+                  <br>
+                  <mat-divider></mat-divider>
+                  <br>
+                </td>
 
               </tr>
             

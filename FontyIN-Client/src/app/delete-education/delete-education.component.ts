@@ -30,7 +30,7 @@ export class DeleteEducationComponent implements OnInit {
   //delete education
   deleteEducation() {
     this.profileService.deleteEducation(this.loggedInUser, this.data.education.profileId, this.data.education.id).subscribe();
-    console.log("deleted " + this.loggedInUser + " " + this.data.education.profileId + " " + this.data.education.id);
+    console.log(this.loggedInUser + " " + this.data.education.profileId + " " + this.data.education.id);
 
     // Close dialog
     this.dialogRef.close();

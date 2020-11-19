@@ -1,7 +1,7 @@
-import { UserDTO } from './../classes/Profile/UserDTO';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../classes/Profile/User';
+import { UserDTO } from '../classes/Profile/UserDTO';
 import { FilterService } from '../services/filter/filter.service';
 
 @Component({
@@ -55,7 +55,7 @@ export class FilterUsersComponent implements OnInit {
   StudentDisabled: boolean;
   EmployeeDisabled: boolean;
 
-  loggedInUser: number = 1;
+  loggedInUser: number = 3;
 
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { 
@@ -69,7 +69,6 @@ export class FilterUsersComponent implements OnInit {
   }
 
   searchText = '';
-
   TypeSelection: String;
   syearSelection: String;
   wyearSelection: String;
@@ -77,9 +76,9 @@ export class FilterUsersComponent implements OnInit {
   locationSelection: String;
   users: UserDTO[]; 
   user: UserDTO;
-  
 
   
+
   combinedFilter(){
 
     console.log(this.searchText);
@@ -95,13 +94,14 @@ export class FilterUsersComponent implements OnInit {
 
     else if(this.TypeSelection != null && this.wyearSelection != null && this.locationSelection != null && this.departmentSelection != null){
          console.log("Employee Year");
-        this.filterService.filterUsersByTypeLocationDepartmentWorkYear(this.TypeSelection, this.wyearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
+        this.filterService.filterUsersByTypeLocationDepartmentWorkYearFontysStaff(this.TypeSelection, this.wyearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
         {
           this.users = <UserDTO[]>data;
           console.log(this.users);
         });
     }
 
+    
     else if(this.searchText != null && this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
       console.log("using search box in combining the search");
       this.filterService.filterUsersByTypeLocationDepartmentName(this.searchText, this.locationSelection, this.departmentSelection, this.TypeSelection).subscribe((data)=>
@@ -122,6 +122,18 @@ export class FilterUsersComponent implements OnInit {
 
   }
 
+  getUsersByFirstNameChars(){
+
+    if (this.searchText != null){
+      this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
+      {
+       this.users=<UserDTO[]>data;
+        console.log(this.users);     
+      });
+    }
+
+  }
+  
   getUsersByType(){
 
     if (this.TypeSelection == "Student"){
@@ -146,15 +158,6 @@ export class FilterUsersComponent implements OnInit {
       });
     }
     
-  }
-
-  getUsersByFirstNameChars(){
-    console.log("Test: " + this.searchText);
-    this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
-    {
-     this.users=<UserDTO[]>data;
-      console.log(this.users);     
-    });
   }
 
 
@@ -217,4 +220,5 @@ export class FilterUsersComponent implements OnInit {
   foundDataByInput(){
     return this.searchText;
   }
+
 }

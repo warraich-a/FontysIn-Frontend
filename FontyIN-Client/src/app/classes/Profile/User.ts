@@ -1,4 +1,3 @@
-import { UserDTO } from './UserDTO';
 import { UserType } from './UserType';
 
 export class User {
@@ -12,9 +11,8 @@ export class User {
     locationId: number;
     departmentId: number; 
     userNumber: string;; 
-    img: string;; 
+    image: string;; 
     userType: UserType;
-    user: UserDTO;
     
     constructor(
         public id: number,
