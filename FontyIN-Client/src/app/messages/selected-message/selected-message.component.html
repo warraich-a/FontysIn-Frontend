@@ -2,50 +2,6 @@
 <h3 class="friend-name"> {{ friend?.firstName }} {{ friend?.lastName }}</h3>
 <hr>
 
-<!-- <perfect-scrollbar class="scroll-viewport" scroll-down="true" refresh-on-change="conversation.messages">
-    <div *ngFor="let message of conversation?.messages"> 
-        <div class="message">
-                <div class="sender">{{message?.sender.firstName}} {{message?.sender.lastName}}
-                    <span class="time" 
-                        [matTooltip]="getTooltipDate(getLocalDate(message.dateTime) | slice:0:19)"
-						[matTooltipPosition]="position.value">
-                        {{getLocalDate(message.dateTime) | slice:0:19 | dateAgo  }}
-                    </span> -->
-
-                    <!-- {{message?.dateTime | slice:0:10}} {{message?.dateTime | slice:11:16}} -->
-                <!-- </div>
-                <div class="message-content">
-                        {{message.content}}
-                </div>
-            </div>
-            <hr class="conversation-divider">
-    </div>
-</perfect-scrollbar> -->
-
-<!-- <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">   -->
-    <!-- Loop over conversation -->
-    <!-- <div class="chat-container" #scrollable  [scrollTop]="scrollable.scrollHeight">
-        <div *cdkVirtualFor="let message of conversation?.messages">
-            <div class="message">
-                <div class="sender">{{message?.sender.firstName}} {{message?.sender.lastName}}
-                    <span class="time" 
-                        [matTooltip]="getTooltipDate(getLocalDate(message.dateTime) | slice:0:19)"
-						[matTooltipPosition]="position.value">
-                        {{getLocalDate(message.dateTime) | slice:0:19 | dateAgo  }}
-                    </span> -->
-
-                    <!-- {{message?.dateTime | slice:0:10}} {{message?.dateTime | slice:11:16}} -->
-                <!-- </div>
-                <div class="message-content">
-                        {{message.content}}
-                </div>
-            </div>
-            <hr class="conversation-divider">
-        </div>
-
-    </div>
-</cdk-virtual-scroll-viewport> -->
-
 <div class="scroll-viewport" #scrollable (scroll)="onScroll()">  
     <!-- Loop over conversation -->
     <div class="chat-container">
@@ -57,8 +13,6 @@
 						[matTooltipPosition]="position.value">
                         {{getLocalDate(message.dateTime) | slice:0:19 | dateAgo  }}
                     </span>
-
-                    <!-- {{message?.dateTime | slice:0:10}} {{message?.dateTime | slice:11:16}} -->
                 </div>
                 <div class="message-content">
                         {{message.content}}
