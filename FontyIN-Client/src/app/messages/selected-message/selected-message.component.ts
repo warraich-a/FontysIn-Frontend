@@ -1,6 +1,6 @@
 import { MessageService } from './../../services/message/message.service';
 import { Conversation } from './../../classes/Message/Conversation';
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
@@ -9,9 +9,9 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-selected-message',
   templateUrl: './selected-message.component.html',
-  styleUrls: ['./selected-message.component.css']
+  styleUrls: ['./selected-message.component.css'],
 })
-export class SelectedMessageComponent implements OnInit, AfterViewInit {
+export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	conversation: Conversation;
 	id: number;
 	currentUser;
@@ -19,7 +19,8 @@ export class SelectedMessageComponent implements OnInit, AfterViewInit {
 	loggedInUser = 1;
 
 	@ViewChild('scrollable') private scrollable: ElementRef;
-	private shouldScrollDown: boolean;
+    disableScrollDown = false;
+
 
 	position = new FormControl('below');
 
@@ -35,14 +36,13 @@ export class SelectedMessageComponent implements OnInit, AfterViewInit {
 	
 					this.getConversation();
 				}
-		)
-	
-  }
+		)	
+    }
 
-  	ngAfterViewInit() {
-		// Scroll to bottom
-		this.scrollable.nativeElement.scrollIntoView({ behavior: "auto", block: "end" });
-	}
+
+    ngAfterViewChecked() {
+        this.scrollToBottom();
+    }
 
 	// Format tooltip date as (Nov 19, 2020 2:42 AM)
 	getTooltipDate(date) {
@@ -53,7 +53,7 @@ export class SelectedMessageComponent implements OnInit, AfterViewInit {
 	// Convert date and time from UTC to local
 	getLocalDate(date) {
 		var gmtDateTime = moment.utc(date, "YYYY-MM-DD HH:mm")
-		var local = gmtDateTime.local().format('YYYY-MMM-DD h:mm A');
+		var local = gmtDateTime.local().format('YYYY-MMM-DD h:mm');
 
 		return local;
 	}
@@ -71,6 +71,28 @@ export class SelectedMessageComponent implements OnInit, AfterViewInit {
 	}
 
 
+    // Scroll
+    onScroll() {
+        let element = this.scrollable.nativeElement;
+        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
+        if (this.disableScrollDown && atBottom) {
+            this.disableScrollDown = false;
+        } else {
+            this.disableScrollDown = true;
+        }
+    }
+
+
+    private scrollToBottom(): void {
+        if (this.disableScrollDown) {
+            return
+        }
+        try {
+            this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
+        } catch(err) { }
+    }
+
+
 	// Send message
 	submit(f) {
 		let newMessage = {
@@ -85,6 +107,9 @@ export class SelectedMessageComponent implements OnInit, AfterViewInit {
 				this.getConversation();
 
 				f.reset();
+
+                this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
 			});
 	}
+
 }

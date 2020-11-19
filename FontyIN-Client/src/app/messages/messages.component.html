@@ -7,7 +7,6 @@
 >
 	<div class="flex-container">
 		<!-- Messages list -->
-		<!-- <div class="flex-small-container"> -->
 		<div class="item">
 			<div>
 				<div id="icons">
@@ -33,15 +32,7 @@
 				<div class="messages" (click)="onSelected(conversation, i)" [class.active]="selectedIndex == i">
 					<!-- Loop -->
 					<img class="conversation-img" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
-					<!-- <div class="item connectionDesc" 
-						[routerLink]="['/users', loggedInUser == contact.friend.id ? contact.user.id: contact.friend.id, 'profiles', loggedInUser == contact.friend.id ? contact.user.profileId: contact.friend.profileId]">
-						<h3 class="connectionName">
-							{{ loggedInUser == contact.friend.id ? contact.user.firstName + ' ' + contact.user.lastName: contact.friend.firstName + ' ' + contact.friend.lastName}} 
-						</h3>
-						<h4>Student at Fontys of Applied Sciences</h4>
-						<hr class="dividerConnections">
-			
-					</div> -->
+
 					<div class="firend-desc message-item">
 						<h3 class="friend-name">
 							{{ loggedInUser != conversation.messages[0].sender.id ? conversation.messages[0].sender.firstName + ' ' + conversation.messages[0].sender.lastName :   conversation.messages[0].receiver.firstName + ' ' + conversation.messages[0].receiver.lastName }}
@@ -57,63 +48,12 @@
 
 		</div>
 
-
   		<mat-divider [vertical]="true"></mat-divider>
-
 
 		<!-- Selected message -->
 		<div class="selected-message">
+            <!-- Selected message -->
             <router-outlet></router-outlet>
-			<!-- <img class="firend-img" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
-			<h3 class="friend-name"> Rawan </h3>
-			<hr>
-
-			<cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">   -->
-				<!-- Loop over conversation -->
-				<!-- <div class="chat-container" #scrollable>
-					<div class="sender">Sender <span class="time">23/9</span></div>
-					<div class="message-content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-					</div>
-					<hr class="conversation-divider">
-
-					<div class="sender">Me <span class="time">23/9</span></div>
-					<div class="message-content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-					</div>
-					<hr class="conversation-divider">
-
-					<div class="sender">Ranim <span class="time">23/9</span></div>
-					<div class="message-content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-					</div>
-					<hr class="conversation-divider">
-
-					<div class="sender">Ranim <span class="time">23/9</span></div>
-					<div class="message-content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-					</div>
-					<hr class="conversation-divider">
-
-					<div class="sender">Sender <span class="time">23/9</span></div>
-					<div class="message-content">
-						Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-					</div>
-
-					<hr class="conversation-divider">
-					
-				</div>
-			</cdk-virtual-scroll-viewport>
-
-			<form class="example-form">
-  				<mat-form-field appearance="outline" class="full-width-field">
-					<mat-label>Send a message</mat-label>
-					<textarea matInput></textarea>
-				</mat-form-field>
-				<button mat-raised-button color="accent" id="send-message">Send</button>
-			</form> -->
-
-
 		</div>
 	</div>	
 </div>

@@ -98,7 +98,7 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-//   suppressScrollX: true
+//   wheelPropagation: true
 // };
 
 @NgModule({
@@ -208,13 +208,17 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
     MatSnackBarModule,
     BrowserAnimationsModule,
     NgbModule,
-    PerfectScrollbarModule,
+    // PerfectScrollbarModule,
   ],
   providers: [
     DataService,
     ContactService,
     FormsModule,
-    MessageService
+    MessageService,
+    //     {
+    //   provide: PERFECT_SCROLLBAR_CONFIG,
+    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    // }
   ],
   bootstrap: [AppComponent]
 })
