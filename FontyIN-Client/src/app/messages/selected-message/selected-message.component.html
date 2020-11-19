@@ -11,7 +11,7 @@
                     <span class="time" 
                         [matTooltip]="getTooltipDate(getLocalDate(message.dateTime) | slice:0:19)"
 						[matTooltipPosition]="position.value">
-                        {{getLocalDate(message.dateTime) | slice:0:19 | dateAgo  }}
+                        {{ getLocalDate(message.dateTime) | slice:0:19 | dateAgo }}
                     </span>
                 </div>
                 <div class="message-content">

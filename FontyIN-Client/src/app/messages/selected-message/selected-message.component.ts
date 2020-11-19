@@ -53,7 +53,7 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	// Convert date and time from UTC to local
 	getLocalDate(date) {
 		var gmtDateTime = moment.utc(date, "YYYY-MM-DD HH:mm")
-		var local = gmtDateTime.local().format('YYYY-MMM-DD h:mm');
+		var local = gmtDateTime.local().format('YYYY-MMM-DD HH:mm');
 
 		return local;
 	}

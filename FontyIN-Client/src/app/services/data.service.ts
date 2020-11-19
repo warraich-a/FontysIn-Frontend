@@ -32,7 +32,7 @@ export class DataService {
   }
 
   get(id: number) {
-      return this.http.get(this.url + "/" + id)
+      return this.http.get(this.url + "/" + id, this.httpOptions)
         .pipe(
             map(response => response)
         )

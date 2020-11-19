@@ -77,9 +77,12 @@ const routes: Routes = [{
     children: [
         {
             path: ':conversationId',
-            component: SelectedMessageComponent
+            component: SelectedMessageComponent,
+            canActivate: [ AuthGuard ]
         }
-    ]
+    ],
+    canActivate: [ AuthGuard ]
+
 },
 ]
 
