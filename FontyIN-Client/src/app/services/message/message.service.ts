@@ -13,4 +13,10 @@ export class MessageService extends DataService {
   constructor(http: HttpClient) {
     super('http://localhost:9090/users/1/messages', http);
   }
+
+  //delete conversation in messaging page
+  public deleteConversation(userId, conversationId){
+    userId = this.loggedInUserId;
+    return this.http.delete('http://localhost:9090/users/1/messages/user/' + userId + '/conversation/' + conversationId);
+  }
 }

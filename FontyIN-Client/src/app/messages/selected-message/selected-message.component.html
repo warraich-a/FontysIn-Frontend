@@ -1,4 +1,15 @@
 <img class="firend-img" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
+
+<mat-icon 
+        class="float-right"
+        aria-hidden="false" 
+        aria-label="Example remove_circle_outline icon" 
+        matTooltip="Delete chat" 
+        [matTooltipPosition]="position.value"
+        (click)="openDialogDeleteConversation(conversation)">
+        remove_circle_outline
+</mat-icon>
+
 <h3 class="friend-name"> {{ friend?.firstName }} {{ friend?.lastName }}</h3>
 <hr>
 
