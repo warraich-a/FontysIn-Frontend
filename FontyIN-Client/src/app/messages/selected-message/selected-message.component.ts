@@ -4,6 +4,8 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConversationComponent } from 'src/app/delete-conversation/delete-conversation.component';
 
 
 @Component({
@@ -26,7 +28,8 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 
 	constructor(private messageService: MessageService,
 			  private router: Router,
-			  private route: ActivatedRoute) { }
+			  private route: ActivatedRoute,
+			  public dialog: MatDialog) { }
 
   	ngOnInit(): void {
 		this.route.params
@@ -37,7 +40,23 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 					this.getConversation();
 				}
 		)	
-    }
+	}
+	
+	//open dialog for deleting conversation
+	openDialogDeleteConversation(conversation: Conversation){
+
+		console.log("Conversation id: " + this.conversation.id);
+		console.log(conversation);
+		const dialogRef = this.dialog.open(DeleteConversationComponent, {
+		maxWidth: '50%',
+		data: {conversation: conversation}
+		}); 
+		dialogRef.afterClosed()
+		.subscribe(res => {
+			this.ngOnInit();
+		});
+
+	}
 
 
     ngAfterViewChecked() {

@@ -1,0 +1,70 @@
+<div class="col-sm">
+    <mat-card class="found-card">
+
+      <form class="example-form float-right">
+        <mat-form-field class="example-full-width">
+          <mat-label>Search</mat-label>
+          <input type="text" matInput placeholder="Search for new contact"
+          id="search-text" 
+          aria-describedby="search-text" 
+          name="searchText"
+          [(ngModel)]="searchText" 
+          autofocus>
+        </mat-form-field>
+
+        <button class="float-right" mat-icon-button ria-label="" (click)="getUsersByFirstNameChars()">
+          <mat-icon>search</mat-icon>
+        </button>
+
+      </form>
+
+      <mat-card-header>
+          <br>
+          <br>
+      </mat-card-header>
+
+
+        <mat-list>  
+             
+            <tr id="testUser"  *ngFor="let user of users">
+          
+              <td class="font-italic"> 
+
+                <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
+
+                  <mat-icon> account_circle </mat-icon>
+                  {{user.firstName}} {{user.lastName}} <br>
+            
+                </div>
+
+                <br>
+
+                <form class="example-form" #f="ngForm" (ngSubmit)="submit(f)">
+                    <mat-form-field appearance="outline" class="full-width-field">
+                        <mat-label>Send a message</mat-label>
+                        <textarea matInput ngModel name="message" #message="ngModel"></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button color="accent" id="send-message" [disabled]="!message.value?.trim()">Send</button>
+                </form>
+                
+                <br>
+                <br>
+                <mat-divider></mat-divider>
+                <br>
+              </td>
+
+            </tr>
+          
+        </mat-list>
+
+        <!-- <button class="float-right" mat-icon-button ria-label="" (click)="Close()">
+            <mat-icon>clear</mat-icon>
+        </button> -->
+
+      <mat-card-content>
+
+
+      </mat-card-content>
+
+    </mat-card> 
+  </div>
