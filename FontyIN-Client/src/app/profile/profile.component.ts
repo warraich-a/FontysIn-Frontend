@@ -35,6 +35,8 @@ import { DialogAddExperienceComponent } from './dialog-add-experience/dialog-add
 import { DialogAddEducationComponent } from './dialog-add-education/dialog-add-education.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { delay } from 'rxjs/operators';
+import { strict } from 'assert';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -94,6 +96,7 @@ export class ProfileComponent implements OnInit {
   profileWithLangauge: {};
   aboutToAdd: {};
   newProfileId : number;
+  currentProfile:string = "";
  
   
 
@@ -437,6 +440,21 @@ openSkillDialog() : void{
       console.log("Implement delete functionality here");
     }
   }
+
+  CurrentProfile(idG){
+   
+    var self = this;
+    this.profileData.forEach(function (value) {
+   
+      if(value.id == idG){
+         self.currentProfile = value.language;
+        // console.log(this.tempProfile)
+      }
+    });
+    console.log("Language");
+    
+    console.log(this.currentProfile);
+  }
   refreshProfile(){
     
     this.profileService.getProfile(this.userId).
@@ -445,8 +463,10 @@ openSkillDialog() : void{
       this.profileData=<Profile[]>data;
       console.log("Total profiles are")
       console.log(this.profileData);
-
     });
+
+  
+
     this.profileService.getUser(this.userId)
     .subscribe((data)=>
     {
@@ -460,7 +480,7 @@ openSkillDialog() : void{
       console.log(this.foundUser);
 
     });
-    
+   
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
         
@@ -469,6 +489,7 @@ openSkillDialog() : void{
         console.log(this.educationsList);
         console.log("profile id");
         console.log(this.profileId);
+        this.CurrentProfile(this.profileId);
       },
       (error: Response) => {
         if(error.status === 404){
