@@ -16,7 +16,8 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	id: number;
 	currentUser;
 	friend;
-	loggedInUser = 1;
+
+    userId : number = parseInt(localStorage.getItem("userId"));
 
 	@ViewChild('scrollable') private scrollable: ElementRef;
     disableScrollDown = false;
@@ -65,8 +66,8 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 				this.conversation = <Conversation>data;
 
 				// Get users
-				this.currentUser = (this.conversation.messages[0].receiver.id == this.loggedInUser) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
-				this.friend = (this.conversation.messages[0].receiver.id != this.loggedInUser) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+				this.currentUser = (this.conversation.messages[0].receiver.id == this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+				this.friend = (this.conversation.messages[0].receiver.id != this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
 			})
 	}
 

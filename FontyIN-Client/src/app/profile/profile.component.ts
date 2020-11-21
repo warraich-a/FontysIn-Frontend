@@ -44,8 +44,6 @@ import { delay } from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
-
-  loggedInUser: number = 1;
   profileUser: UserDTO;
   isConnected: boolean = false;
   isRequestSent: boolean = false;
@@ -581,21 +579,21 @@ openSkillDialog() : void{
 
         this.contacts.forEach(contact => {
           // Logged in user sent request or other user sent request, status isAccepted true
-          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) || (contact.user.id == this.profileUser?.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
+          if(((contact.user.id == this.userId && contact.friend.id == this.profileUser?.id) || (contact.user.id == this.profileUser?.id && contact.friend.id == this.userId)) && contact.isAccepted == true) {
             this.isRequestSent = true;
             this.isConnected = true;
             this.contact = contact;
             return;
           }
           // Logged in user sent request, status isAccepted false, status isAccepted false
-          else if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) && !contact.isAccepted)) {
+          else if(((contact.user.id == this.userId && contact.friend.id == this.profileUser?.id) && !contact.isAccepted)) {
             this.isRequestSent = true;
             this.isConnected = false;
             this.contact = contact;
 
             return;
           }
-          else if(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser?.id) && !contact.isAccepted)){
+          else if(((contact.friend.id == this.userId && contact.user.id == this.profileUser?.id) && !contact.isAccepted)){
             this.isRequestReceived = true;
             this.isConnected = false;
             this.contact = contact;
@@ -666,7 +664,7 @@ openSkillDialog() : void{
     let user: UserDTO;
 
     this.contacts.forEach(contact => {
-      if(contact.user.id == this.loggedInUser) {
+      if(contact.user.id == this.userId) {
         user = contact.user;
       }
     });

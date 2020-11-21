@@ -14,7 +14,7 @@ import { FormControl } from '@angular/forms';
 export class ConnectionComponent implements OnInit {
   searchText = '';
 
-  loggedInUser = 1;
+  userId:number = parseInt(localStorage.getItem("userId"));
   contacts: Contact[];
   requests: Contact[];
 

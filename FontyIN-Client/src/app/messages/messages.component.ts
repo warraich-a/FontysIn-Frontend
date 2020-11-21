@@ -12,8 +12,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MessagesComponent implements OnInit {
 	conversations: Conversation[];
 
-    loggedInUser = 1;
-
 	defaultElevation = 3;
 	raisedElevation = 5;    
 	position = new FormControl('below');
@@ -22,7 +20,7 @@ export class MessagesComponent implements OnInit {
     selectedConversation: Conversation;
     selectedIndex = -1;
 
-
+    userId : number = parseInt(localStorage.getItem("userId"));
 
 	// @ViewChild('scrollable') private scrollable: ElementRef;
 	// private shouldScrollDown: boolean;
@@ -41,6 +39,9 @@ export class MessagesComponent implements OnInit {
 				this.conversations = <Conversation[]>data;
 				console.log("Conversations");
 				console.log(data);
+
+                // Show first conversation
+                this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
 			})
 	}
 	

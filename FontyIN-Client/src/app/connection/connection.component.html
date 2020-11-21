@@ -22,9 +22,9 @@
             <div *ngFor="let contact of contacts | appFilter: searchText" class="connection">
                 <img class="item" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
                 <div class="item connectionDesc" 
-                    [routerLink]="['/users', loggedInUser == contact.friend.id ? contact.user.id: contact.friend.id, 'profiles', loggedInUser == contact.friend.id ? contact.user.profileId: contact.friend.profileId]">
+                    [routerLink]="['/users', userId == contact.friend.id ? contact.user.id: contact.friend.id, 'profiles', userId == contact.friend.id ? contact.user.profileId: contact.friend.profileId]">
                       <h3 class="connectionName">
-                        {{ loggedInUser == contact.friend.id ? contact.user.firstName + ' ' + contact.user.lastName: contact.friend.firstName + ' ' + contact.friend.lastName}} 
+                        {{ userId == contact.friend.id ? contact.user.firstName + ' ' + contact.user.lastName: contact.friend.firstName + ' ' + contact.friend.lastName}} 
                       </h3>
                       <h4>Student at Fontys of Applied Sciences</h4>
                     <hr class="dividerConnections">
@@ -65,8 +65,8 @@
                 <img class="item" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
                 <div class="item connectionDesc">
                   <h3 class="connectionName"
-                      [routerLink]="['/users', loggedInUser == request.friend.id ? request.user.id: request.friend.id, 'profiles', loggedInUser == request.friend.id ? request.user.profileId: request.friend.profileId]">
-                    {{ loggedInUser == request.friend.id ? request.user.firstName + ' ' + request.user.lastName: request.friend.firstName + ' ' + request.friend.lastName}} 
+                      [routerLink]="['/users', userId == request.friend.id ? request.user.id: request.friend.id, 'profiles', userId == request.friend.id ? request.user.profileId: request.friend.profileId]">
+                    {{ userId == request.friend.id ? request.user.firstName + ' ' + request.user.lastName: request.friend.firstName + ' ' + request.friend.lastName}} 
                   </h3>
                   <h4>Student at Fontys of Applied Sciences</h4>
                     <hr class="dividerConnections">
