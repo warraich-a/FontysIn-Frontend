@@ -3,6 +3,8 @@ import { MessageService } from './../services/message/message.service';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StartConversationComponent } from '../start-conversation/start-conversation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-messages',
@@ -28,10 +30,9 @@ export class MessagesComponent implements OnInit {
 
 
 	constructor(private messageService: MessageService,
-                private router: Router,
-              private route: ActivatedRoute) { 
-
-	}
+		private router: Router,
+		private route: ActivatedRoute,
+		public dialog: MatDialog) { }
 	
 	ngOnInit(): void {
 		this.messageService.getAll()
@@ -62,5 +63,18 @@ export class MessagesComponent implements OnInit {
 
         // Redirect and pass the cselected conversation object
         this.router.navigate([conversation.id], {relativeTo: this.route});
-    }
+	}
+	
+	// Start new Conversation Dialog
+	openDialogStartConversation(){
+
+		const dialogRef = this.dialog.open(StartConversationComponent, {
+			maxWidth: '50%',
+			}); 
+			dialogRef.afterClosed()
+			.subscribe(res => {
+				this.ngOnInit();
+			});
+
+	}
 }

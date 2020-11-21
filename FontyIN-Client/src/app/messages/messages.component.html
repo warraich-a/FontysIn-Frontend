@@ -10,19 +10,12 @@
 		<div class="item">
 			<div>
 				<div id="icons">
-					<!-- **************************Move to selected message ********************* -->
-					<mat-icon 
-						aria-hidden="false" 
-						aria-label="Example remove_circle_outline icon" 
-						matTooltip="Delete chat" 
-						[matTooltipPosition]="position.value">
-						remove_circle_outline
-					</mat-icon>
 					<mat-icon 
 						aria-hidden="false" 
 						aria-label="Example chat icon" 
 						matTooltip="Chat with someone new" 
-						[matTooltipPosition]="position.value">
+						[matTooltipPosition]="position.value"
+						(click)="openDialogStartConversation()">
 						chat
 					</mat-icon>
 				</div>

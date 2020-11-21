@@ -100,6 +100,8 @@ import { LoginComponent } from './login/login.component';
 import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CommentUsernameComponent } from './comment-username/comment-username.component';
+import { DeleteConversationComponent } from './delete-conversation/delete-conversation.component';
+import { StartConversationComponent } from './start-conversation/start-conversation.component';
 
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
@@ -142,7 +144,9 @@ import { CommentUsernameComponent } from './comment-username/comment-username.co
     LoginComponent,    
     DialogChangeDpComponent,
     RegistrationComponent,
-    CommentUsernameComponent,    
+    CommentUsernameComponent,
+    DeleteConversationComponent,
+    StartConversationComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],
