@@ -1,0 +1,181 @@
+/* Container */
+.container {
+	width: 80%;
+    height: 86vh;
+}
+
+
+/* Flex container */
+.flex-container {
+	display: flex;
+	width: 100%;
+	height: inherit;
+}
+
+/* Flex items */
+.item, .selected-message {
+	padding: 3%;
+}
+
+/* item, left */
+.item {
+	width: 40%;
+}
+
+/* item, right */
+.selected-message {
+	width: 60%;
+	height: inherit;
+}
+
+
+/* Icons container (delete, send a message to someone new */
+#icons {
+	text-align: right;
+}
+
+/* icons */
+mat-icon {
+    font-size: 2em;
+    margin: auto 2%;
+    cursor: pointer;
+}
+
+mat-icon:hover {
+    color: #0075db;
+}
+
+/* tooltip */
+::ng-deep .mat-tooltip {
+    font-size: 0.8em;
+}
+
+
+/* Heading divider/line */
+.heading-divider {
+    margin-bottom: 2rem;
+}
+
+/* List of chats */
+.messages {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 80%;
+    margin: 4% 10%;
+}
+
+/* friend's image */
+.conversation-img {
+    width: 100px;
+	margin-right: 4%;
+    height: 62%;
+}
+
+.conversation-img, .firend-desc {
+    cursor: pointer;
+}
+
+/* friend's name */
+.friend-name {
+    /* cursor: pointer; */
+}
+
+
+
+
+
+/* Selected message */
+/* scroll */
+.scroll-viewport {
+	height: 67%;
+	width: 100%;
+    margin-bottom: 7%;
+}
+
+/* container */
+.chat-container {
+	padding-right: 3%;
+}
+
+/* firend name */
+.selected-message > h3.friend-name {
+	display: inline-block;
+	font-size: 1.9em;
+}
+
+/* friends's image */
+.firend-img {
+	width: 90px;
+    margin-right: 4%;
+}
+
+/* line between messages */
+.conversation-divider {
+    width: 80%;
+    color: gray;
+    margin: auto 10%;
+}
+
+/* sender's name */
+.sender {
+	font-size: 1.2em;
+}
+
+/* time of message */
+.sender > .time {
+	float: right;
+}
+
+/* message content */
+.message-content {
+	margin-top: 2%;
+    line-height: 1.7em;
+}
+
+
+
+/* 
+.desktop-view {
+
+}
+
+
+.mobile-view {
+
+} */
+
+
+@media screen and (max-width: 1000px) {
+	/* friend's image */
+	img {
+    	width: 71px;
+	    height: 78px;
+	}
+
+}
+
+/* small screen */
+@media screen and (max-width: 770px) {
+	/* Flex item, left */
+	.item {
+		width: 100%;
+	}
+
+	.mat-divider {
+		display: none;
+	}
+
+	/* friend's image */
+	img {
+		width: 80px;
+		height: 100px;
+		margin-right: 4%;
+	}
+
+	/* Flex item, right */
+	.selected-message {
+		display: none;
+	}
+}
+

@@ -8,7 +8,7 @@ import { UpdateProfileEducationComponent} from './../update-profile-education/up
 import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { DialogAddProfileComponent } from './dialog-add-profile/dialog-add-profile.component';
-import { Contact } from './../classes/Profile/Contact';
+import { Contact } from '../classes/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';

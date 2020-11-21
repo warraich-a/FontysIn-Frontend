@@ -1,0 +1,52 @@
+<div class="container border my-5" 
+	appMaterialElevation 
+	[defaultElevation]="defaultElevation" 
+	[raisedElevation]="raisedElevation"
+	[ngClass]="{ 'desktop-view': width >= 768, 'mobile-view': width < 768 
+}"
+>
+	<div class="flex-container">
+		<!-- Messages list -->
+		<div class="item">
+			<div>
+				<div id="icons">
+					<mat-icon 
+						aria-hidden="false" 
+						aria-label="Example chat icon" 
+						matTooltip="Chat with someone new" 
+						[matTooltipPosition]="position.value"
+						(click)="openDialogStartConversation()">
+						chat
+					</mat-icon>
+				</div>
+			</div>
+			<hr class="heading-divider">
+			<div *ngFor="let conversation of conversations; let i = index;">
+				<div class="messages" (click)="onSelected(conversation, i)" [class.active]="selectedIndex == i">
+					<!-- Loop -->
+					<img class="conversation-img" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
+
+					<div class="firend-desc message-item">
+						<h3 class="friend-name">
+							{{ loggedInUser != conversation.messages[0].sender.id ? conversation.messages[0].sender.firstName + ' ' + conversation.messages[0].sender.lastName :   conversation.messages[0].receiver.firstName + ' ' + conversation.messages[0].receiver.lastName }}
+
+						</h3>
+						<h4>Student at Fontys of Applied Sciences</h4>
+
+					</div>
+
+				</div>
+				<hr class="conversation-divider">
+			</div>
+
+		</div>
+
+  		<mat-divider [vertical]="true"></mat-divider>
+
+		<!-- Selected message -->
+		<div class="selected-message">
+            <!-- Selected message -->
+            <router-outlet></router-outlet>
+		</div>
+	</div>	
+</div>

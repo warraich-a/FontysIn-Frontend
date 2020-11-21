@@ -31,6 +31,13 @@ export class DataService {
       )
   }
 
+  get(id: number) {
+      return this.http.get(this.url + "/" + id, this.httpOptions)
+        .pipe(
+            map(response => response)
+        )
+    }
+
 
   create(resource: {}) {
     return this.http.post(this.url, JSON.stringify(resource), this.httpOptions)
