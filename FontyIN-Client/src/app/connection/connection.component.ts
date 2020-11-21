@@ -1,4 +1,4 @@
-import { Contact } from '../classes/Contact';
+import { Contact } from './../classes/Profile/Contact';
 import { DeleteConnectionComponent } from './../delete-connection/delete-connection.component';
 import { ContactService } from './../services/contact/contact.service';
 import { Component, OnInit } from '@angular/core';
@@ -49,6 +49,8 @@ export class ConnectionComponent implements OnInit {
     this.contactService.getAcceptedContacts()
     .subscribe(
       contacts => {
+        console.log("Refresh my connections")
+        console.log("All connections")
         console.log(contacts);
         this.contacts = <Contact[]>contacts;
       }
@@ -60,6 +62,7 @@ export class ConnectionComponent implements OnInit {
   getRequests() {
       this.contactService.getContactRequests()
       .subscribe(requests => {
+        console.log("Refresh requests")
         this.requests = <Contact[]>requests;
       })
   }

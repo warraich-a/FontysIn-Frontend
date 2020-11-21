@@ -1,4 +1,4 @@
-import { UserDTO } from './Profile/UserDTO';
+import { UserDTO } from './UserDTO';
 
 export class Contact {
     id: number;
