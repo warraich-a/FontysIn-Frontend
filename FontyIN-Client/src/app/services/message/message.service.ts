@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MessageService extends DataService {
   // logged in user id
-  loggedInUserId = 1;
+  loggedInUserId = localStorage.getItem('userId');
 
   constructor(http: HttpClient) {
     super('http://localhost:9090/users/' + localStorage.getItem('userId') + '/messages', http);

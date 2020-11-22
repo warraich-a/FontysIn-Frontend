@@ -42,7 +42,9 @@ export class MessagesComponent implements OnInit {
 				console.log(data);
 
                 // Show first conversation
-                this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
+                if(this.conversations.length > 0) {
+                    this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
+                }
 			})
 	}
 	
