@@ -11,7 +11,7 @@ export class MessageService extends DataService {
   loggedInUserId = 1;
 
   constructor(http: HttpClient) {
-    super('http://localhost:9090/users/1/messages', http);
+    super('http://localhost:9090/users/' + localStorage.getItem('userId') + '/messages', http);
   }
 
   //delete conversation in messaging page
