@@ -8,7 +8,7 @@ import { UpdateProfileEducationComponent} from './../update-profile-education/up
 import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { DialogAddProfileComponent } from './dialog-add-profile/dialog-add-profile.component';
-import { Contact } from './../classes/Profile/Contact';
+import { Contact } from '../classes/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
@@ -35,6 +35,8 @@ import { DialogAddExperienceComponent } from './dialog-add-experience/dialog-add
 import { DialogAddEducationComponent } from './dialog-add-education/dialog-add-education.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { delay } from 'rxjs/operators';
+import { strict } from 'assert';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -45,7 +47,7 @@ import { delay } from 'rxjs/operators';
 export class ProfileComponent implements OnInit {
 
 
-  loggedInUser: number = 1;
+  loggedInUser: number = parseInt(localStorage.getItem("userId"));
   profileUser: UserDTO;
   isConnected: boolean = false;
   isRequestSent: boolean = false;
@@ -53,7 +55,7 @@ export class ProfileComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
 
-  userId:number;
+  userId:number = parseInt(localStorage.getItem("userId"));
   profileId: number;
   
   allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
@@ -94,6 +96,7 @@ export class ProfileComponent implements OnInit {
   profileWithLangauge: {};
   aboutToAdd: {};
   newProfileId : number;
+  currentProfile:string = "";
  
   
 
@@ -437,6 +440,21 @@ openSkillDialog() : void{
       console.log("Implement delete functionality here");
     }
   }
+
+  CurrentProfile(idG){
+   
+    var self = this;
+    this.profileData.forEach(function (value) {
+   
+      if(value.id == idG){
+         self.currentProfile = value.language;
+        // console.log(this.tempProfile)
+      }
+    });
+    console.log("Language");
+    
+    console.log(this.currentProfile);
+  }
   refreshProfile(){
     
     this.profileService.getProfile(this.userId).
@@ -445,22 +463,24 @@ openSkillDialog() : void{
       this.profileData=<Profile[]>data;
       console.log("Total profiles are")
       console.log(this.profileData);
-
     });
-    this.profileService.getUserById(this.userId)
+
+  
+
+    this.profileService.getUser(this.userId)
     .subscribe((data)=>
     {
      
       this.foundUser=<User>data;
       this.userFirstName = this.foundUser.firstName;
       this.userLastName = this.foundUser.lastName;
-      this.profileUrl = this.foundUser.img;
+      this.profileUrl = this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
       console.log(this.foundUser);
 
     });
-    
+   
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
         
@@ -469,6 +489,7 @@ openSkillDialog() : void{
         console.log(this.educationsList);
         console.log("profile id");
         console.log(this.profileId);
+        this.CurrentProfile(this.profileId);
       },
       (error: Response) => {
         if(error.status === 404){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../classes/Profile/User';
+import { UserDTO } from '../classes/Profile/UserDTO';
 import { FilterService } from '../services/filter/filter.service';
 
 @Component({
@@ -54,7 +55,7 @@ export class FilterUsersComponent implements OnInit {
   StudentDisabled: boolean;
   EmployeeDisabled: boolean;
 
-  loggedInUser: number = 1;
+  loggedInUser: number = 3;
 
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { 
@@ -67,23 +68,26 @@ export class FilterUsersComponent implements OnInit {
     
   }
 
+  searchText = '';
   TypeSelection: String;
   syearSelection: String;
   wyearSelection: String;
   departmentSelection: String;
   locationSelection: String;
-  users: User[]; 
-  user: User;
+  users: UserDTO[]; 
+  user: UserDTO;
 
   
 
   combinedFilter(){
 
+    console.log(this.searchText);
+
     if(this.TypeSelection != null && this.syearSelection != null && this.locationSelection != null && this.departmentSelection != null){
       console.log("Student Year");
       this.filterService.filterUsersByTypeLocationDepartmentStudyYear(this.TypeSelection, this.syearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
       {
-        this.users = <User[]>data;
+        this.users = <UserDTO[]>data;
         console.log(this.users);
       });
     }
@@ -92,19 +96,41 @@ export class FilterUsersComponent implements OnInit {
          console.log("Employee Year");
         this.filterService.filterUsersByTypeLocationDepartmentWorkYearFontysStaff(this.TypeSelection, this.wyearSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
         {
-          this.users = <User[]>data;
+          this.users = <UserDTO[]>data;
           console.log(this.users);
         });
+    }
+
+    
+    else if(this.searchText != null && this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
+      console.log("using search box in combining the search");
+      this.filterService.filterUsersByTypeLocationDepartmentName(this.searchText, this.locationSelection, this.departmentSelection, this.TypeSelection).subscribe((data)=>
+      {
+        this.users = <UserDTO[]>data;
+        console.log(this.users);
+      });
     }
 
     else if(this.TypeSelection != null && this.locationSelection != null && this.departmentSelection != null){
       console.log("Users wothout year");
       this.filterService.filterUsersByTypeLocationDepartment(this.TypeSelection, this.locationSelection, this.departmentSelection).subscribe((data)=>
       {
-        this.users = <User[]>data;
+        this.users = <UserDTO[]>data;
         console.log(this.users);
       });
     } 
+
+  }
+
+  getUsersByFirstNameChars(){
+
+    if (this.searchText != null){
+      this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
+      {
+       this.users=<UserDTO[]>data;
+        console.log(this.users);     
+      });
+    }
 
   }
   
@@ -114,7 +140,7 @@ export class FilterUsersComponent implements OnInit {
 
       this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
       {
-        this.users=<User[]>data;
+        this.users=<UserDTO[]>data;
         this.StudentDisabled = true;
         this.EmployeeDisabled = false;
         console.log(this.users);      
@@ -125,7 +151,7 @@ export class FilterUsersComponent implements OnInit {
     else{
       this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
       {
-        this.users=<User[]>data;
+        this.users=<UserDTO[]>data;
         this.StudentDisabled = false;
         this.EmployeeDisabled = true;
         console.log(this.users);      
@@ -138,7 +164,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByStudyYear(){
     this.filterService.filterUsersByStartStudyYear(this.syearSelection).subscribe((data)=>
     {
-     this.users=<User[]>data;
+     this.users=<UserDTO[]>data;
       console.log(this.users);     
     });
   }
@@ -146,7 +172,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByWorkYear(){
     this.filterService.filterUsersByStartWorkYear(this.wyearSelection).subscribe((data)=>
     {
-     this.users=<User[]>data;
+     this.users=<UserDTO[]>data;
       console.log(this.users);  
     });
   }
@@ -154,7 +180,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByLocation(){
     this.filterService.filterUserByLocation(this.locationSelection).subscribe((data)=>
     {
-      this.users=<User[]>data; 
+      this.users=<UserDTO[]>data; 
       console.log(this.users);      
     });
   }
@@ -162,7 +188,7 @@ export class FilterUsersComponent implements OnInit {
   getUsersByDepartment(){
     this.filterService.filterUserByDepartment(this.departmentSelection).subscribe((data)=>
     {
-      this.users=<User[]>data; 
+      this.users=<UserDTO[]>data; 
       console.log(this.users);      
     });
   }
@@ -190,4 +216,9 @@ export class FilterUsersComponent implements OnInit {
   foundDataByStartWorkYear(){
     return this.wyearSelection;
   }
+
+  foundDataByInput(){
+    return this.searchText;
+  }
+
 }

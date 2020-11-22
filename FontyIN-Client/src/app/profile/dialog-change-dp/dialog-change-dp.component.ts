@@ -40,7 +40,7 @@ export class DialogChangeDpComponent implements OnInit {
     
      this.profileService.uploadPicture(this.userId, formData).subscribe((data)=>
      { 
-         this.profileUrl = data;
+         this.profileUrl =<string> data;
          console.log("data");
          console.log(this.profileUrl);
      },
@@ -57,10 +57,11 @@ export class DialogChangeDpComponent implements OnInit {
     
     
   ngOnInit(): void {
-    this.userId = this.data.User.id;
-    this.profileService.getUserById(this.userId).subscribe(response=>{
+    // this.userId = this.data.User.id;
+    this.userId = parseInt(localStorage.getItem("userId"));
+    this.profileService.getUser(this.userId).subscribe(response=>{
       this.foundUser=<User>response;
-      this.profileUrl = this.foundUser.img;
+      this.profileUrl = this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
       console.log(this.foundUser);

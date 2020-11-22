@@ -3,6 +3,12 @@
     
     <div class="col-sm">
       <mat-card class="filter-card">
+
+        <div>
+          <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
+        </div>
+
+
         <mat-card-header>
           <mat-card-title>Filter Users:</mat-card-title>
         </mat-card-header>
@@ -71,10 +77,12 @@
 
         <div class="actions">
 
-          <button mat-mini-fab aria-label="Example icon button with a filter alt icon" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> filter_alt </mat-icon></button>
-  
-          <button class="float-right"  mat-mini-fab aria-label="Example icon button with a cleaning services icon" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button>
-  
+          <!-- mat-mini-fab aria-label="Example icon button with a filter list icon" -->
+          <button mat-icon-button ria-label="" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> filter_list </mat-icon></button>
+
+          <!-- mat-mini-fab aria-label="Example icon button with a cleaning services icon" -->
+          <!-- <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button> -->
+
         </div>
         
       </mat-card>
@@ -84,8 +92,27 @@
     <div class="col-sm">
       <mat-card class="found-card">
 
+        <form class="example-form float-right">
+          <mat-form-field class="example-full-width">
+            <mat-label>Search</mat-label>
+            <input type="text" matInput placeholder="Search"
+            id="search-text" 
+            aria-describedby="search-text" 
+            name="searchText"
+            [(ngModel)]="searchText" 
+            autofocus>
+          </mat-form-field>
+
+          <button class="float-right" mat-icon-button ria-label="" (click)="getUsersByFirstNameChars()">
+            <mat-icon>search</mat-icon>
+          </button>
+
+        </form>
+
         <mat-card-header>
+
           <mat-card-title>Users:</mat-card-title>
+          
         </mat-card-header>
 
 
@@ -93,16 +120,24 @@
                
               <tr id="testUser"  *ngFor="let user of users">
             
-                  <td class="font-italic"> 
+                <td class="font-italic"> 
+
+                  <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
+
                     <mat-icon> account_circle </mat-icon>
-                    {{user.firstName}}  {{user.lastName}} <br>
-                    ({{user.userType}}) <br>
+                    {{user.firstName}} {{user.lastName}} <br>
+              
+                  </div>
+
+                  <br>
+
                     Fontys University of Applied Sciences
-                    <br>
-                    <br>
-                    <mat-divider></mat-divider>
-                    <br>
-                  </td>
+                  
+                  <br>
+                  <br>
+                  <mat-divider></mat-divider>
+                  <br>
+                </td>
 
               </tr>
             

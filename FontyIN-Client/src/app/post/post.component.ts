@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { PostsService} from '../services/posts.service';
 import { Moment } from 'moment';
@@ -9,6 +10,11 @@ export interface Post {
   content: string;
   date: string;
   id: number;
+  userId: number;
+}
+export interface Like {
+  id: number;
+  postId: number;
   userId: number;
 }
 export interface Comment {
@@ -25,16 +31,25 @@ export interface Comment {
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  post : Post;
+  @Input()  post : Post;
+  checked: boolean;
   comments: Comment[];
+  userId :number = +localStorage.getItem("userId");
   @Input() id ;
-  constructor( private postService: PostsService, private profileService: ProfileService) { }
+  constructor( private postService: PostsService, private profileService: ProfileService,private router: Router) { }
   data = {};
   content : String;
   commentContent : String;
   commentData = {};
+  likeData = {};
   time : Moment;
   user: User;
+  likeCount = 0;
+  userLikeOnPost : Like;
+  wasClicked = true;
+  clicked = false;
+
+ 
 
   getUserById(id){
     user: User;
@@ -51,22 +66,32 @@ export class PostComponent implements OnInit {
   createComment(id) {
     this.commentData = {
       "content": this.commentContent,
-      "date": "2020-10-20",
       "id": 0,
       "postId": id,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newComment(<JSON>this.commentData);
-    window.location.reload();
+    // window.location.reload();
     
+  }
+
+  checkIds(){
+    console.log("compare to ids");
+    console.log(this.userId);
+    console.log( this.post?.userId);
+    if( this.userId == this.post?.userId){
+      this.checked = true;
+    } else {
+      this.checked = false;
+    }
+    console.log(this.checked);
   }
 
   createPost() {
     this.data = {
       "content": this.content,
-      "date": "2020-10-06",
       "id": 5,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.newPost(<JSON>this.data);
     window.location.reload()
@@ -77,14 +102,33 @@ export class PostComponent implements OnInit {
     window.location.reload()
   }
 
+  likePost(){
+    this.likeData = {
+      "id":1,
+      "likerId": localStorage.getItem("userId"),
+      "postId": this.id
+    }
+    this.postService.newLikeOnPost(this.id,this.likeData);
+    this.likeCount += 1;
+    
+  }
+
   
 
   ngOnInit(): void {
-    this.postService.getPost(this.id)
+    this.postService.getPostLikesCount(this.id)
+    .subscribe((data)=>
+    {
+      
+      this.likeCount=<number>data;
+
+    });
+    this.postService.getPostLikeByUser(this.id,localStorage.getItem("userId"))
      .subscribe((data)=>{
      console.log(data);
-      this.post = <Post>data;
+      this.userLikeOnPost = <Like>data;
    });
+   this.checkIds();
    this.postService.getCommentsByPostId(this.id)
    .subscribe((data)=>{
    console.log(data);
@@ -93,10 +137,11 @@ export class PostComponent implements OnInit {
     this.profileService.getUserById(this.post.userId)
     .subscribe((data)=>
     {
-     
+      console.log(data);
       this.user=<User>data;
 
     });
+    
   }
 
 }
