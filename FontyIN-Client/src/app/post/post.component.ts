@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { PostsService} from '../services/posts.service';
 import { Moment } from 'moment';
@@ -31,9 +32,11 @@ export interface Comment {
 })
 export class PostComponent implements OnInit {
   @Input()  post : Post;
+  checked: boolean;
   comments: Comment[];
+  userId :number = +localStorage.getItem("userId");
   @Input() id ;
-  constructor( private postService: PostsService, private profileService: ProfileService) { }
+  constructor( private postService: PostsService, private profileService: ProfileService,private router: Router) { }
   data = {};
   content : String;
   commentContent : String;
@@ -43,6 +46,10 @@ export class PostComponent implements OnInit {
   user: User;
   likeCount = 0;
   userLikeOnPost : Like;
+  wasClicked = true;
+  clicked = false;
+
+ 
 
   getUserById(id){
     user: User;
@@ -68,6 +75,18 @@ export class PostComponent implements OnInit {
     
   }
 
+  checkIds(){
+    console.log("compare to ids");
+    console.log(this.userId);
+    console.log( this.post?.userId);
+    if( this.userId == this.post?.userId){
+      this.checked = true;
+    } else {
+      this.checked = false;
+    }
+    console.log(this.checked);
+  }
+
   createPost() {
     this.data = {
       "content": this.content,
@@ -90,6 +109,8 @@ export class PostComponent implements OnInit {
       "postId": this.id
     }
     this.postService.newLikeOnPost(this.id,this.likeData);
+    this.likeCount += 1;
+    
   }
 
   
@@ -107,6 +128,7 @@ export class PostComponent implements OnInit {
      console.log(data);
       this.userLikeOnPost = <Like>data;
    });
+   this.checkIds();
    this.postService.getCommentsByPostId(this.id)
    .subscribe((data)=>{
    console.log(data);

@@ -77,3 +77,39 @@ a {
     margin-right: 40px;
     margin-top: 35px;
 }
+
+.like_btn{
+    background-image: url("img/like.png");
+    border: none;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+}
+.liked_btn{
+    background-image: url("img/liked.png");
+    border: none;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    
+}
+
+
+
+.like_input{
+    border: none;
+    width: 20px;
+    font-size: 15px;
+    padding-bottom: 5px;
+    margin-left: 25px;
+}
+
+.active {
+    background-image:url("img/liked.png"); 
+  }
+.disabled {
+    background: #eee;
+    color: #aaa;
+  }
