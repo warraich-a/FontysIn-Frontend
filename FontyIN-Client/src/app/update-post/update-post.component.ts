@@ -33,7 +33,7 @@ export class UpdatePostComponent implements OnInit {
       "content": this.newContent,
       "date": this.post.date,
       "id": this.postId,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.updatePost(<JSON>this.data,this.postId);
 
