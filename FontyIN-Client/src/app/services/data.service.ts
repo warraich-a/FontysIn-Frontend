@@ -21,6 +21,7 @@ export class DataService {
   constructor(private url: string, http: HttpClient) {
     this.http = http;
     this.readLocalStorageValue();
+    console.log("http option in data service " + this.httpOptions);
    }
 
   getAll() {
