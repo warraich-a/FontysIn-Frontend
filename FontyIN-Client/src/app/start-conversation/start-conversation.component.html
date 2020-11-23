@@ -33,22 +33,15 @@
                 <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
 
                   <mat-icon> account_circle </mat-icon>
-                  {{user.firstName}} {{user.lastName}} <br>
+                  {{user.firstName}} {{user.lastName}} 
+                  <br>
             
                 </div>
 
-                <br>
+                <div>
+                  <button class = "btn" mat-icon-button ria-label="" (click)="addNewConversation(user.id)"><mat-icon matTooltip="Add New Conversation"> add_circle </mat-icon></button>
+                </div>
 
-                <form class="example-form" #f="ngForm" (ngSubmit)="submit(f)">
-                    <mat-form-field appearance="outline" class="full-width-field">
-                        <mat-label>Send a message</mat-label>
-                        <textarea matInput ngModel name="message" #message="ngModel"></textarea>
-                    </mat-form-field>
-                    <button mat-raised-button color="accent" id="send-message" [disabled]="!message.value?.trim()">Send</button>
-                </form>
-                
-                <br>
-                <br>
                 <mat-divider></mat-divider>
                 <br>
               </td>
@@ -56,10 +49,6 @@
             </tr>
           
         </mat-list>
-
-        <!-- <button class="float-right" mat-icon-button ria-label="" (click)="Close()">
-            <mat-icon>clear</mat-icon>
-        </button> -->
 
       <mat-card-content>
 

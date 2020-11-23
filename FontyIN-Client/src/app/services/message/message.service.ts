@@ -20,4 +20,16 @@ export class MessageService extends DataService {
     return this.http.delete('http://localhost:9090/users/1/messages/user/' + userId + '/conversation/' + conversationId);
   }
 
-}
+  //start new conversation with new contact
+  public startConversation(data){
+    return this.http.post('http://localhost:9090/users/1/messages/newConversation/', data).toPromise().then(data => {
+      console.log("In the message service: " + data);
+    });   
+  }
+
+  //get second user id
+  public getSecondUserId(id){
+    return this.http.get('http://localhost:9090/users/1/messages/', id);
+  }
+
+} 

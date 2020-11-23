@@ -1,10 +1,13 @@
 import { Conversation } from './../classes/Message/Conversation';
+import { ConversationDTO } from './../classes/Message/ConversationDTO';
 import { FilterService } from './../services/filter/filter.service';
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserDTO } from '../classes/Profile/UserDTO';
 import { MessageService } from '../services/message/message.service';
+import { idText } from 'typescript';
+import { pid } from 'process';
 
 @Component({
   selector: 'app-start-conversation',
@@ -17,9 +20,8 @@ export class StartConversationComponent implements OnInit {
   users: UserDTO[]; 
   user: UserDTO;
   conversation: Conversation;
-  currentUser;
+  conversationDTO: ConversationDTO; 
   friend;
-  id: number;
   loggedInUser: 1;
 
   
@@ -31,7 +33,10 @@ export class StartConversationComponent implements OnInit {
       console.log(data);
     }
 
+    logId: string;
+
   ngOnInit(): void {
+    this.logId = localStorage.getItem('userId');
   }
 
   @ViewChild('scrollable') private scrollable: ElementRef;
@@ -44,7 +49,7 @@ export class StartConversationComponent implements OnInit {
       this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
       {
        this.users=<UserDTO[]>data;
-        console.log(this.users);     
+        console.log(this.users);  
       });
     }
 
@@ -55,21 +60,21 @@ export class StartConversationComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // getConversation() {
-	// 	this.messageService.get(this.id)
-	// 		.subscribe((data) => {
-	// 			this.conversation = <Conversation>data;
-
-	// 			// Get users
-	// 			this.currentUser = (this.conversation.messages[0].receiver.id == this.loggedInUser) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
-	// 			this.friend = (this.conversation.messages[0].receiver.id != this.loggedInUser) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
-	// 		})
-	// }
-
   // Send message
-	submit(f) {
+	addNewConversation(id: number) {
+    
+    console.log("In start conversation method --- second user=  " + id + "first user id= " + this.logId);
+
+
+    let newConversation = {
+      firstUserId: this.logId,
+      secondUserId: id
+    }
+
+    this.messageService.startConversation(newConversation);
+    console.log("Added" + newConversation);
       
-      this.Close();
+    this.Close();
 	}
 
 }
