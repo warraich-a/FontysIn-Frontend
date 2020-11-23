@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
      localStorage.setItem('userId', this.user.id.toString());
      
      this.router.navigate(['/profile']);
+     console.log("testing loging -----------------");
+     console.log(this.user)
     },
     (error: Response) => {
       if(error.status === 404){

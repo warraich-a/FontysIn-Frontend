@@ -62,9 +62,7 @@ export class ProfileService {
     return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/abouts', this.httpOptions)
   }
   public addAbout(data, userId, profileId){
-    return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/abouts/new', data, this.httpOptions).toPromise().then(data => {
-      console.log(data);
-    })
+    return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/abouts/new', data, this.httpOptions);
   }
   public addEducation(data, userId, profileId){
     return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/educations/new', data, this.httpOptions).toPromise().then(data => {
