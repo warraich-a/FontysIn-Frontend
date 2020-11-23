@@ -12,7 +12,8 @@ export class FilterPipe implements PipeTransform {
    * @returns {any[]}
    */
   transform(items: any[], searchText: string): any[] {
-    let loggedInUser = 1;
+    let userId : number = parseInt(localStorage.getItem("userId"));
+
     if (!items) {
       return [];
     }
@@ -23,7 +24,7 @@ export class FilterPipe implements PipeTransform {
     console.log(searchText);
 
     return items.filter(it => {
-      let user = it.user.id == loggedInUser ? it.friend: it.user;
+      let user = it.user.id == userId ? it.friend: it.user;
       // if(loggedInUser)
       let fullName = user.firstName + ' ' + user.lastName;
       console.log(fullName);

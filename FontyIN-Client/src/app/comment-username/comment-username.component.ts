@@ -18,7 +18,7 @@ export class CommentUsernameComponent implements OnInit {
   user : User;
   @Input() userId ;
   ngOnInit(): void {
-    this.profileService.getUserById(this.userId)
+    this.profileService.getUser(this.userId)
     .subscribe((data)=>
     {
      

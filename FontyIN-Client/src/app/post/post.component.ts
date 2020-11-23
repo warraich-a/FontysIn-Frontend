@@ -53,7 +53,7 @@ export class PostComponent implements OnInit {
 
   getUserById(id){
     user: User;
-    this.profileService.getUserById(this.post.userId)
+    this.profileService.getUser(this.post.userId)
     .subscribe((data)=>
     {
      
@@ -134,7 +134,7 @@ export class PostComponent implements OnInit {
    console.log(data);
     this.comments = <Comment[]>data;
     });
-    this.profileService.getUserById(this.post.userId)
+    this.profileService.getUser(this.post.userId)
     .subscribe((data)=>
     {
       console.log(data);

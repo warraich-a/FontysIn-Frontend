@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Conversation } from '../classes/Message/Conversation';
+import { ConversationDTO } from '../classes/Message/ConversationDTO';
 import { UserDTO } from '../classes/Profile/UserDTO';
 import { FilterService } from '../services/filter/filter.service';
 import { MessageService } from '../services/message/message.service';
@@ -16,10 +17,8 @@ export class StartConversationComponent implements OnInit {
   users: UserDTO[]; 
   user: UserDTO;
   conversation: Conversation;
-  currentUser;
-  friend;
-  id: number;
-  loggedInUser: 1;
+  conversationDTO: ConversationDTO; 
+  logId: string;
 
   
   constructor(
@@ -31,10 +30,8 @@ export class StartConversationComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.logId = localStorage.getItem('userId');
   }
-
-  // @ViewChild('scrollable') private scrollable: ElementRef;
-
 
   //get user by type letters of his/her name
   getUsersByFirstNameChars(){
@@ -55,19 +52,20 @@ export class StartConversationComponent implements OnInit {
   }
 
   // Send message
-	addNewConversation() {
-      
-    // let newMessage = {
-		// 	sender: this.currentUser,
-		// 	receiver: this.friend,
-		// }
+	startNewConversation(id: number) {
+    
+    console.log("In start conversation method --- second user=  " + id + "first user id= " + this.logId);
 
-		// this.messageService.create(newMessage)
-		// 	.subscribe(() => {
-    //     console.log("New conversation is added to my list");
-    //   });
+
+    let newConversation = {
+      firstUserId: this.logId,
+      secondUserId: id
+    }
+
+    this.messageService.startConversation(newConversation);
+    console.log("Added" + newConversation);
       
-      this.Close();
+    this.Close();
 	}
 
 }
