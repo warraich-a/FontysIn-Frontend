@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
 
-  userId:number = parseInt(localStorage.getItem("userId"));
+  userId : number = parseInt(localStorage.getItem("userId"));
   profileId: number;
   
   allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
@@ -689,9 +689,13 @@ openSkillDialog() : void{
     this.contacts.forEach(contact => {
       if(contact.user.id == this.loggedInUser) {
         user = contact.user;
+        return;
+      }
+      else if(contact.friend.id == this.loggedInUser) {
+        user = contact.friend;
+        return;
       }
     });
-
 
     // get logged in user id from auth and friendId from url
     let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};

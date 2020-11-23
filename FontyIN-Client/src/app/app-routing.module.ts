@@ -1,3 +1,4 @@
+import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
 import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -83,6 +84,11 @@ const routes: Routes = [{
     ],
     canActivate: [ AuthGuard ]
 
+},
+{
+  path: 'addProfile',
+  component: DialogAddProfileComponent,
+  canActivate: [ AuthGuard ]
 },
 ]
 
