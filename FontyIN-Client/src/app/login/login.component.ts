@@ -12,13 +12,13 @@ export class LoginComponent implements OnInit {
   token:string;
   loggedIn:boolean;
   isLoginError : boolean = false;
-  user = new User(3, "0348348");
+  user = new User(1, "");
   constructor(private service: UserService,private router : Router) { }
 
   ngOnInit(): void {
     if(this.readLocalStorageValue() != null){
       this.loggedIn= true;
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/posts']);
     }else{
       this.loggedIn = false;
       
@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
      localStorage.setItem('userId', this.user.id.toString());
      
      this.router.navigate(['/profile']);
+     console.log("testing loging -----------------");
+     console.log(this.user)
     },
     (error: Response) => {
       if(error.status === 404){

@@ -107,12 +107,12 @@
                     
                         
                         <div class="card-body">
-                            <mat-slide-toggle [(ngModel)]="isChecked">Hide me from everything? (This will override below)</mat-slide-toggle>
+                            <mat-slide-toggle [(ngModel)]="isChecked">Hide me from search?</mat-slide-toggle>
                             <form (ngSubmit)="updatePrivacy()" #PrivacyForm="ngForm">
                                 
                             <label class="labels">Who can see my experience?</label>
                                                 
-                            <select id="experienceSetting" [disabled]="isChecked" name="experienceSetting" [(ngModel)]="privacy.experienceSetting"
+                            <select id="experienceSetting" name="experienceSetting" [(ngModel)]="privacy.experienceSetting"
                     class="form-control">
                     <option *ngFor="let types of privacySetting" [value]="types.type">
                     {{types.type}}
@@ -120,7 +120,7 @@
                     </select>
                            <label class="labels">Who can see my education?</label>
                             
-                                                <select id="educationSetting" [disabled]="isChecked"name="educationSetting" [(ngModel)]="privacy.educationSetting"
+                                                <select id="educationSetting"name="educationSetting" [(ngModel)]="privacy.educationSetting"
                                 class="form-control">
                         <option *ngFor="let types of privacySetting" [value]="types.type">
                             {{types.type}}
@@ -130,7 +130,7 @@
                     
                     <label class="labels">Who can see my skills?</label>
                                                 
-                        <select id="skillSetting" [disabled]="isChecked" name="skillSetting" [(ngModel)]="privacy.skillSetting"
+                        <select id="skillSetting" name="skillSetting" [(ngModel)]="privacy.skillSetting"
                     class="form-control">
                     <option *ngFor="let types of privacySetting" [value]="types.type">
                     {{types.type}}

@@ -6,6 +6,10 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DialogAddProfileComponent } from '../profile/dialog-add-profile/dialog-add-profile.component';
+import { MatDialog } from '@angular/material/dialog';
+import { User } from '../classes/Profile/User';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -24,9 +28,17 @@ export class RegistrationComponent implements OnInit {
   ]
   newAddressToAdd: {};
   newUser:{};
+  foundUser: User;
+  token:string;
+  loggedIn:boolean;
+  isLoginError : boolean = false;
+  user = new User(3, "0348348");
+  
   constructor(private profileService: ProfileService,
     private _snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog,
+    private service: UserService) { }
 
 
   onSubmitRegistration(data){
@@ -58,17 +70,49 @@ export class RegistrationComponent implements OnInit {
               this._snackBar.open('Congratulations, You are now FontysIN user', 'End now', {
                 duration: 2000,
               });
-              this.router.navigate(['']),
-              console.log(response);
+              
+              // this.router.navigate(['']),
+              this.foundUser = <User>response;
+              console.log(this.foundUser);
+
+              this.login(data.email, data.password);
+
+              
             })
         }
-        
           console.log("New Profile Added ----------------");
           console.log(newAddress);
         })
+  
+       
+
+  }
+  login(email, password){
+    this.token = btoa(email+':'+password);
+      this.service.login(email, password)
+      .subscribe(
+        (res: any) => {
+          console.log(this.token);
+          this.user = <User>res;
+        localStorage.setItem('userToken', this.token);
+        localStorage.setItem('userId', this.user.id.toString());
+        
+        // location.reload();
+        console.log("testing loging -----------------");
+        console.log(this.user);
+        this.router.navigate(['posts']);
+        window.location.href = '/posts';
+        // this.delay();
+        },
+        (error: Response) => {
+          if(error.status === 404){
+            console.log("not found");
+            this.isLoginError = true;
+          }
+        }
+    );
   }
     
-
   ngOnInit(): void {
     this.profileService.getFontysLocations().subscribe(response=>{
       this.fontysLocations = <Object[]>response;

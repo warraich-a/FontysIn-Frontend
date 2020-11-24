@@ -34,11 +34,12 @@
 
                   <mat-icon> account_circle </mat-icon>
                   {{user.firstName}} {{user.lastName}} 
-                  <div>
-                    <button class = "btn" mat-icon-button ria-label="" (click)="addNewConversation()"><mat-icon matTooltip="Add New Conversation"> add_circle </mat-icon></button>
-                  </div>
                   <br>
             
+                </div>
+
+                <div>
+                  <button class = "btn" mat-icon-button ria-label="" (click)="startNewConversation(user.id)"><mat-icon matTooltip="Add New Conversation"> add_circle </mat-icon></button>
                 </div>
 
                 <mat-divider></mat-divider>

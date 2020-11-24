@@ -12,11 +12,20 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link waves-light" href="/" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
       </li>
+      <div *ngIf="profiles?.length> 0; else noProfile">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link waves-light"
         [routerLink]="['/users', userId, 'profiles', profileId]"
         mdbWavesEffect>Profile</a>
       </li>
+      </div>
+      <ng-template #noProfile>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link waves-light"
+          (click) = "openDialogProfile()"
+          mdbWavesEffect>Profile</a>
+        </li>
+      </ng-template>
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link 
             waves-light" 
