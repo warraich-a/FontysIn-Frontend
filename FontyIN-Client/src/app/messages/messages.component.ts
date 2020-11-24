@@ -38,8 +38,6 @@ export class MessagesComponent implements OnInit {
 		this.messageService.getAll()
 			.subscribe((data) => {
 				this.conversations = <Conversation[]>data;
-				console.log("Conversations");
-				console.log(data);
 
                 // Show first conversation
                 if(this.conversations.length > 0) {

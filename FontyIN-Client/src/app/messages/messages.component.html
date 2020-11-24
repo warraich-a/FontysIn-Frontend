@@ -28,7 +28,7 @@
 
 					<div class="firend-desc message-item">
 						<h3 class="friend-name">
-							{{ loggedInUser != conversation.messages[0].sender.id ? conversation.messages[0].sender.firstName + ' ' + conversation.messages[0].sender.lastName :   conversation.messages[0].receiver.firstName + ' ' + conversation.messages[0].receiver.lastName }}
+							{{ userId != conversation.firstUser.id ? conversation.firstUser.firstName + ' ' + conversation.firstUser.lastName :   conversation.secondUser.firstName + ' ' + conversation.secondUser.lastName }}
 
 						</h3>
 						<h4>Student at Fontys of Applied Sciences</h4>

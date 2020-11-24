@@ -45,9 +45,6 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	
 		//open dialog for deleting conversation
 		openDialogDeleteConversation(conversation: Conversation){
-
-			console.log("Conversation id: " + this.conversation.id);
-			console.log(conversation);
 			const dialogRef = this.dialog.open(DeleteConversationComponent, {
 			maxWidth: '50%',
 			data: {conversation: conversation}
@@ -84,9 +81,15 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 			.subscribe((data) => {
 				this.conversation = <Conversation>data;
 
-				// Get users
-				this.currentUser = (this.conversation.messages[0].receiver.id == this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
-				this.friend = (this.conversation.messages[0].receiver.id != this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+                if(this.conversation?.messages.length > 0) {
+                    // Get users
+    				this.currentUser = (this.conversation.messages[0].receiver.id == this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+    				this.friend = (this.conversation.messages[0].receiver.id != this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+                }
+                else {
+                    this.currentUser = (this.userId != this.conversation.firstUser.id) ? this.conversation.firstUser : this.conversation.secondUser;
+                    this.friend = (this.userId == this.conversation.firstUser.id) ? this.conversation.firstUser : this.conversation.secondUser;
+                }
 			})
 	}
 
