@@ -15,7 +15,6 @@
 
 <div class="scroll-viewport" #scrollable (scroll)="onScroll()">  
     <!-- Loop over conversation -->
-
     <div class="chat-container">
         <div *ngFor="let message of conversation?.messages">
             <div class="message">
@@ -27,7 +26,7 @@
                     </span>
                 </div>
                 <div class="message-content">
-                        {{message.content}}
+                        {{message?.content}}
                 </div>
             </div>
             <hr class="conversation-divider">

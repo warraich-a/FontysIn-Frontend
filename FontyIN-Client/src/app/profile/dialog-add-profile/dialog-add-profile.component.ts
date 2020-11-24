@@ -23,7 +23,7 @@ export class DialogAddProfileComponent implements OnInit {
               private router: Router) { }
   profileToAdd: {};
   aboutToAdd : {};
-  userId: number;
+  userId: number = parseInt(localStorage.getItem('userId'));
   //User = new User(1, "adsf");
   languages = [
     {name: "English"},
@@ -36,11 +36,13 @@ export class DialogAddProfileComponent implements OnInit {
     this.dialogRef.close();
   }
   submit(pId){
-    this.router.navigate(['users/',this.userId, 'profiles', pId])
+    this.router.navigate(['users/',this.userId, 'profiles', pId]);
+    this.CloseDialog();
   }
 
   ngOnInit(): void {
-    this.userId = this.data.User.id;
+    // this.userId = this.data.User.id;
+    console.log("in diload add profile");
     console.log(this.userId)
   }
 
@@ -59,12 +61,16 @@ export class DialogAddProfileComponent implements OnInit {
           this.aboutToAdd = {
             "content": data.about,
             "profileId": newProfile
-        }
+            }
           
-          this.profileService.addAbout(<JSON>this.aboutToAdd,  this.userId, newProfile)
+          this.profileService.addAbout(<JSON>this.aboutToAdd,  this.userId, newProfile).subscribe(data=>{
+
           console.log("test about");
           console.log(this.aboutToAdd);
           this.submit(newProfile);
+         
+          })
+          //  this.CloseDialog();
         }
         , 
         (error: Response) => {
@@ -83,6 +89,6 @@ export class DialogAddProfileComponent implements OnInit {
             }
         });
         
-        this.CloseDialog();
+       
   }
 }

@@ -1,10 +1,9 @@
-import { UserDTO } from './../classes/Profile/UserDTO';
-import { StartConversationComponent } from './../start-conversation/start-conversation.component';
 import { Conversation } from './../classes/Message/Conversation';
 import { MessageService } from './../services/message/message.service';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StartConversationComponent } from '../start-conversation/start-conversation.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -15,19 +14,15 @@ import { MatDialog } from '@angular/material/dialog';
 export class MessagesComponent implements OnInit {
 	conversations: Conversation[];
 
-    loggedInUser = 1;
-
 	defaultElevation = 3;
 	raisedElevation = 5;    
 	position = new FormControl('below');
 
     // Selected conversation
     selectedConversation: Conversation;
-	selectedIndex = -1;
-	
-	user: UserDTO; 
+    selectedIndex = -1;
 
-
+    userId : number = parseInt(localStorage.getItem("userId"));
 
 	// @ViewChild('scrollable') private scrollable: ElementRef;
 	// private shouldScrollDown: boolean;
@@ -35,18 +30,19 @@ export class MessagesComponent implements OnInit {
 
 
 	constructor(private messageService: MessageService,
-                private router: Router,
-			  private route: ActivatedRoute,
-			  public dialog: MatDialog) { 
-
-	}
+		private router: Router,
+		private route: ActivatedRoute,
+		public dialog: MatDialog) { }
 	
 	ngOnInit(): void {
 		this.messageService.getAll()
 			.subscribe((data) => {
 				this.conversations = <Conversation[]>data;
-				console.log("Conversations");
-				console.log(data);
+
+                // Show first conversation
+                if(this.conversations.length > 0) {
+                    this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
+                }
 			})
 	}
 	
@@ -66,7 +62,8 @@ export class MessagesComponent implements OnInit {
         this.selectedIndex = index;
 
         // Redirect and pass the cselected conversation object
-        this.router.navigate([conversation.id], {relativeTo: this.route});
+		this.router.navigate([conversation.id], {relativeTo: this.route});
+		console.log(conversation.id);
 	}
 	
 	// Start new Conversation Dialog
@@ -81,6 +78,4 @@ export class MessagesComponent implements OnInit {
 			});
 
 	}
-
-	
 }

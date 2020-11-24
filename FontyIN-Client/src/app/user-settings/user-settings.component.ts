@@ -21,8 +21,8 @@ export class UserSettingsComponent implements OnInit {
   notificationP = null;
   isChecked = true;
   id:string;
-  address = new Address(1, "test1", "test2", "test3", "test4");
-  user = new User(3, "0348348");
+  address = new Address(1, "", "", "", "");
+  user = new User(3, "");
   privacy = new privacy(1, 1, "Everyone", "everyone", "everyone");
 
   ngOnInit(): void {

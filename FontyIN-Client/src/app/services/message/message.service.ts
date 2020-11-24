@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -8,10 +8,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class MessageService extends DataService {
   // logged in user id
-  loggedInUserId = 1;
+  loggedInUserId = localStorage.getItem('userId');
 
   constructor(http: HttpClient) {
-    super('http://localhost:9090/users/1/messages', http);
+    super('http://localhost:9090/users/' + localStorage.getItem('userId') + '/messages', http);
   }
 
   //delete conversation in messaging page
@@ -26,10 +26,4 @@ export class MessageService extends DataService {
       console.log("In the message service: " + data);
     });   
   }
-
-  //get second user id
-  public getSecondUserId(id){
-    return this.http.get('http://localhost:9090/users/1/messages/', id);
-  }
-
-} 
+}

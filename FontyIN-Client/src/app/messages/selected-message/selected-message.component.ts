@@ -4,8 +4,8 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
-import { MatDialog } from '@angular/material/dialog';
 import { DeleteConversationComponent } from 'src/app/delete-conversation/delete-conversation.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -18,7 +18,8 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	id: number;
 	currentUser;
 	friend;
-	loggedInUser = 1;
+
+    userId : number = parseInt(localStorage.getItem("userId"));
 
 	@ViewChild('scrollable') private scrollable: ElementRef;
     disableScrollDown = false;
@@ -27,9 +28,9 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	position = new FormControl('below');
 
 	constructor(private messageService: MessageService,
-			  private router: Router,
-			  private route: ActivatedRoute,
-			  public dialog: MatDialog) { }
+		private router: Router,
+		private route: ActivatedRoute,
+		public dialog: MatDialog) { }
 
   	ngOnInit(): void {
 		this.route.params
@@ -42,21 +43,18 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 		)	
 	}
 	
-	//open dialog for deleting conversation
-	openDialogDeleteConversation(conversation: Conversation){
-
-		console.log("Conversation id: " + this.conversation.id);
-		console.log(conversation);
-		const dialogRef = this.dialog.open(DeleteConversationComponent, {
-		maxWidth: '50%',
-		data: {conversation: conversation}
-		}); 
-		dialogRef.afterClosed()
-		.subscribe(res => {
-			this.ngOnInit();
-		});
-
-	}
+		//open dialog for deleting conversation
+		openDialogDeleteConversation(conversation: Conversation){
+			const dialogRef = this.dialog.open(DeleteConversationComponent, {
+			maxWidth: '50%',
+			data: {conversation: conversation}
+			}); 
+			dialogRef.afterClosed()
+			.subscribe(res => {
+				this.ngOnInit();
+			});
+	
+		}
 
 
     ngAfterViewChecked() {
@@ -83,9 +81,18 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 			.subscribe((data) => {
 				this.conversation = <Conversation>data;
 
-				// Get users
-				this.currentUser = (this.conversation.messages[0].receiver.id == this.loggedInUser) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
-				this.friend = (this.conversation.messages[0].receiver.id != this.loggedInUser) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+                // console.log("CON " + this.conversation.firstUser.id + " " + this.conversation.secondUser.id)
+
+                if(this.conversation.messages.length > 0) {
+                    // Get users
+    				this.currentUser = (this.conversation.messages[0].receiver.id == this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+    				this.friend = (this.conversation.messages[0].receiver.id == this.userId) ? this.conversation.messages[0].sender : this.conversation.messages[0].receiver;
+                }
+                else {
+                    this.currentUser = (this.userId == this.conversation.firstUser.id) ? this.conversation.firstUser : this.conversation.secondUser;
+                    this.friend = (this.userId == this.conversation.firstUser.id) ? this.conversation.secondUser : this.conversation.firstUser;
+                }
+
 			})
 	}
 

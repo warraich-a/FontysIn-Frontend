@@ -1,13 +1,10 @@
-import { Conversation } from './../classes/Message/Conversation';
-import { ConversationDTO } from './../classes/Message/ConversationDTO';
-import { FilterService } from './../services/filter/filter.service';
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Conversation } from '../classes/Message/Conversation';
+import { ConversationDTO } from '../classes/Message/ConversationDTO';
 import { UserDTO } from '../classes/Profile/UserDTO';
+import { FilterService } from '../services/filter/filter.service';
 import { MessageService } from '../services/message/message.service';
-import { idText } from 'typescript';
-import { pid } from 'process';
 
 @Component({
   selector: 'app-start-conversation',
@@ -21,8 +18,7 @@ export class StartConversationComponent implements OnInit {
   user: UserDTO;
   conversation: Conversation;
   conversationDTO: ConversationDTO; 
-  friend;
-  loggedInUser: 1;
+  logId: string;
 
   
   constructor(
@@ -33,14 +29,9 @@ export class StartConversationComponent implements OnInit {
       console.log(data);
     }
 
-    logId: string;
-
   ngOnInit(): void {
     this.logId = localStorage.getItem('userId');
   }
-
-  @ViewChild('scrollable') private scrollable: ElementRef;
-
 
   //get user by type letters of his/her name
   getUsersByFirstNameChars(){
@@ -49,7 +40,7 @@ export class StartConversationComponent implements OnInit {
       this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
       {
        this.users=<UserDTO[]>data;
-        console.log(this.users);  
+        console.log(this.users);     
       });
     }
 
@@ -61,7 +52,7 @@ export class StartConversationComponent implements OnInit {
   }
 
   // Send message
-	addNewConversation(id: number) {
+	startNewConversation(id: number) {
     
     console.log("In start conversation method --- second user=  " + id + "first user id= " + this.logId);
 
