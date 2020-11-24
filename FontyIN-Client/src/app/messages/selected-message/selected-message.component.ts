@@ -81,15 +81,18 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 			.subscribe((data) => {
 				this.conversation = <Conversation>data;
 
-                if(this.conversation?.messages.length > 0) {
+                // console.log("CON " + this.conversation.firstUser.id + " " + this.conversation.secondUser.id)
+
+                if(this.conversation.messages.length > 0) {
                     // Get users
     				this.currentUser = (this.conversation.messages[0].receiver.id == this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
-    				this.friend = (this.conversation.messages[0].receiver.id != this.userId) ? this.conversation.messages[0].receiver : this.conversation.messages[0].sender;
+    				this.friend = (this.conversation.messages[0].receiver.id == this.userId) ? this.conversation.messages[0].sender : this.conversation.messages[0].receiver;
                 }
                 else {
-                    this.currentUser = (this.userId != this.conversation.firstUser.id) ? this.conversation.firstUser : this.conversation.secondUser;
-                    this.friend = (this.userId == this.conversation.firstUser.id) ? this.conversation.firstUser : this.conversation.secondUser;
+                    this.currentUser = (this.userId == this.conversation.firstUser.id) ? this.conversation.firstUser : this.conversation.secondUser;
+                    this.friend = (this.userId == this.conversation.firstUser.id) ? this.conversation.secondUser : this.conversation.firstUser;
                 }
+
 			})
 	}
 
