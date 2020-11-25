@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
 
 
   loggedInUser: number = parseInt(localStorage.getItem("userId"));
+  currentUser: UserDTO;
   profileUser: UserDTO;
   isConnected: boolean = false;
   isRequestSent: boolean = false;
@@ -481,6 +482,7 @@ openSkillDialog() : void{
 
     });
    
+
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
         
@@ -600,7 +602,9 @@ openSkillDialog() : void{
       contacts => {
         this.contacts = <Contact[]>contacts;
 
-        this.contacts.forEach(contact => {
+        console.log("CONTACTS " + contacts);
+        if(this.contacts.length > 0) {
+       this.contacts.forEach(contact => {
           // Logged in user sent request or other user sent request, status isAccepted true
           if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) || (contact.user.id == this.profileUser?.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
             this.isRequestSent = true;
@@ -625,12 +629,24 @@ openSkillDialog() : void{
           }
 
         });
+        }
+
+        this.getUserDTO();
 
 
       }
     )
    
     
+  }
+
+  getUserDTO() {
+    this.profileService.getUser(this.loggedInUser)
+    .subscribe((data)=>
+    {
+      this.currentUser = <UserDTO>data;
+      console.log("CURRENT " + this.currentUser);
+    });
   }
 
     //deleting skill data
@@ -686,16 +702,18 @@ openSkillDialog() : void{
   createContact() {
     let user: UserDTO;
 
-    this.contacts.forEach(contact => {
-      if(contact.user.id == this.loggedInUser) {
-        user = contact.user;
-        return;
-      }
-      else if(contact.friend.id == this.loggedInUser) {
-        user = contact.friend;
-        return;
-      }
-    });
+    // this.contacts.forEach(contact => {
+    //   if(contact.user.id == this.loggedInUser) {
+    //     user = contact.user;
+    //     return;
+    //   }
+    //   else if(contact.friend.id == this.loggedInUser) {
+    //     user = contact.friend;
+    //     return;
+    //   }
+    // });
+
+    user = this.currentUser;
 
     // get logged in user id from auth and friendId from url
     let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};
