@@ -61,7 +61,7 @@ export class DialogChangeDpComponent implements OnInit {
     this.userId = parseInt(localStorage.getItem("userId"));
     this.profileService.getUser(this.userId).subscribe(response=>{
       this.foundUser=<User>response;
-      this.profileUrl = this.foundUser.image;
+      this.profileUrl = "assets/"+this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
       console.log(this.foundUser);

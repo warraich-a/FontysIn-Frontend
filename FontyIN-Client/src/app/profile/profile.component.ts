@@ -37,6 +37,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { delay } from 'rxjs/operators';
 import { strict } from 'assert';
 import { stringify } from 'querystring';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -74,7 +75,8 @@ export class ProfileComponent implements OnInit {
                private route: ActivatedRoute,
                public dialog: MatDialog,
                private _snackBar: MatSnackBar,
-               private formBuilder: FormBuilder) { }
+               private formBuilder: FormBuilder,
+               private sanitizer: DomSanitizer) { }
             
   profileData: Profile[]; 
   educations: Object[];
@@ -474,12 +476,14 @@ openSkillDialog() : void{
       this.foundUser=<User>data;
       this.userFirstName = this.foundUser.firstName;
       this.userLastName = this.foundUser.lastName;
-      this.profileUrl = this.foundUser.image;
+      this.profileUrl = "assets/"+this.foundUser.image;
+      // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
-      console.log(this.foundUser);
+      console.log(this.profileUrl);
 
     });
+  
    
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
@@ -578,6 +582,12 @@ openSkillDialog() : void{
 
         console.log("Profile user " + this.profileUser.profileId)
       });
+      // this.profileService.getPicture().subscribe(response=>{
+      //   console.log("------------------");
+        
+      //   console.log(response);
+
+      // });
      
       
    //this.profileUser = +this.route.snapshot.paramMap.get('id');

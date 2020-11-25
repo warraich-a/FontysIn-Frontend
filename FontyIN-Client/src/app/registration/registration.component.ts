@@ -78,9 +78,21 @@ export class RegistrationComponent implements OnInit {
               this.login(data.email, data.password);
 
               
+            },
+            (error: Response) => {
+              if(error.status === 409){
+                  this._snackBar.open('This user already exists', 'End now', {
+                    duration: 3000,
+                  });
+                }
+                else{
+                  this._snackBar.open('Wrong data provided', 'End now', {
+                    duration: 3000,
+                  });
+                } 
             })
         }
-          console.log("New Profile Added ----------------");
+          console.log("New Adress Added ----------------");
           console.log(newAddress);
         })
   
