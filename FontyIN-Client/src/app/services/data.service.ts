@@ -41,6 +41,7 @@ export class DataService {
 
 
   create(resource: {}) {
+      console.log(resource)
     return this.http.post(this.url, JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)
