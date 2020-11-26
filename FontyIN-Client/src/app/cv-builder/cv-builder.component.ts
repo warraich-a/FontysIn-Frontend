@@ -34,7 +34,7 @@ export class Skill2{
 
   id: number;
   profileId: number;
-  skillName: string;
+  name: string;
   
 }
 
@@ -53,17 +53,25 @@ export class CvBuilderComponent implements OnInit {
   degrees = ['B.E.', 'M.E.', 'B.Com', 'M.Com'];
   user = new User(3, "0348348");
   id:string;
-  hideEverything(){
-    if(this.useExisting){
-      this.skills2.forEach(ski => {
-        //this.resume.skills.concat(ski.skillName)
-      });
-    }else{
-      console.log("false");
-    }
-  }
-
-
+  
+useExist(){
+  if(this.useExisting){
+    this.resume.skills = [];
+    
+   this.skills2.forEach(ski => {
+    
+     var newSkill = new Skill();
+     newSkill.value = ski.name;
+   
+     this.resume.skills.push(newSkill);
+    
+   });
+   console.log(this.resume.skills);
+ }else{
+   console.log("false");
+   console.log(this.resume.skills);
+ }
+}
 
 
   constructor(private profileService: ProfileService) {
@@ -102,6 +110,7 @@ export class CvBuilderComponent implements OnInit {
   getDocumentDefinition() {
    console.log(this.user.firstName);
    console.log(this.user.email);
+  this.useExist();
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
     return {
       content: [
@@ -390,20 +399,21 @@ export class CvBuilderComponent implements OnInit {
       console.log(data);
     this.user = <User>data;
    
-      this.profileService.getEducationsById(94, 106)
+      this.profileService.getEducationsById(5, 6)
       .subscribe(
         data => {
           this.educations2 = <Education2[]>data;
           
         }
       );
-      this.profileService.getSkillsById(94, 106)
+      this.profileService.getSkillsById(5, 6)
     .subscribe(
       data => {
         this.skills2 = <Skill2[]>data;
+        console.log(this.skills2);
       }
     );
-    this.profileService.getExperienceById(94, 106)
+    this.profileService.getExperienceById(5, 6)
     .subscribe(
       data => {
         this.experiences2 = <Experience2[]>data;
