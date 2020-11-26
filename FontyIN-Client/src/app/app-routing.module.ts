@@ -16,15 +16,15 @@ import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import {LoginComponent} from './login/login.component';
 import { AuthGuard } from  './auth/auth.guard';
-
+import {CvBuilderComponent} from './cv-builder/cv-builder.component';
 const routes: Routes = [{
   path: '',
   component: LoginComponent
 },
 {
   path: 'profile',
-  component: UserComponent,
-  canActivate: [ AuthGuard ]
+  component: CvBuilderComponent,
+  //canActivate: [ AuthGuard ]
 },
 {
   path: 'users/:id/profiles/:profileId', 
