@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { User } from '../classes/Profile/User';
 import { Resume, Experience, Education, Skill } from '../classes/Profile/Resume';
+import { ProfileService } from '../services/profile/profile.service';
 export class Experience2{
   constructor( 
       public id: number,
@@ -28,6 +30,14 @@ export class Education2{
     ) {  }
 }
 
+export class Skill2{
+
+  id: number;
+  profileId: number;
+  skillName: string;
+  
+}
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 @Component({
   selector: 'app-cv-builder',
@@ -35,16 +45,19 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./cv-builder.component.css']
 })
 export class CvBuilderComponent implements OnInit {
-  education: Education2;
-  experience: Experience2;
+  educations2: Education2[];
+  experiences2: Experience2[];
+  skills2 : Skill2[];
   useExisting:boolean;
   resume = new Resume();
   degrees = ['B.E.', 'M.E.', 'B.Com', 'M.Com'];
-
-
+  user = new User(3, "0348348");
+  id:string;
   hideEverything(){
     if(this.useExisting){
-      console.log("true");
+      this.skills2.forEach(ski => {
+        //this.resume.skills.concat(ski.skillName)
+      });
     }else{
       console.log("false");
     }
@@ -53,7 +66,7 @@ export class CvBuilderComponent implements OnInit {
 
 
 
-  constructor() {
+  constructor(private profileService: ProfileService) {
     this.resume = JSON.parse(sessionStorage.getItem('resume')) || new Resume();
     if (!this.resume.experiences || this.resume.experiences.length === 0) {
       this.resume.experiences = [];
@@ -87,6 +100,8 @@ export class CvBuilderComponent implements OnInit {
     this.resume = new Resume();
   }
   getDocumentDefinition() {
+   console.log(this.user.firstName);
+   console.log(this.user.email);
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
     return {
       content: [
@@ -100,14 +115,14 @@ export class CvBuilderComponent implements OnInit {
         {
           columns: [
             [{
-              text: this.resume.name, //this.user.name
+              text: this.user.firstName+' '+this.user.lastName, //this.user.name
               style: 'name'
             },
             {
               text: this.resume.address
             },
             {
-              text: 'Email : ' + this.resume.email, // this.user.email
+              text: 'Email : ' + this.user.email, // this.user.email
             },
             {
               text: 'Phonenumber : ' + this.resume.contactNo,
@@ -211,39 +226,75 @@ export class CvBuilderComponent implements OnInit {
     };
   }
   getExperienceObject(experiences: Experience[]) {
-    const exs = [];
-    experiences.forEach(experience => {
-      exs.push(
-        [{
-          columns: [
-            [{
-              text: experience.jobTitle,
-              style: 'jobTitle'
-            },
-            {
-              text: experience.employer,
-            },
-            {
-              text: experience.jobDescription,
-            }],
-            {
-              text: 'Experience : ' + experience.experience + ' Months',
-              alignment: 'right'
-            }
+    if(this.useExisting){
+      const exs = [];
+      this.experiences2.forEach(experience => {
+        exs.push(
+          [{
+            columns: [
+              [{
+                text: experience.title,
+                style: 'jobTitle'
+              },
+              {
+                text: experience.company,
+              },
+              {
+                text: experience.location,
+              }],
+              {
+                text: 'Start date: ' + experience.startDateExperience + ' End date ' + experience.endDateExperience,
+                alignment: 'right'
+              }
+            ]
+          }]
+        );
+      });
+      return {
+        table: {
+          widths: ['*'],
+          body: [
+            ...exs
           ]
-        }]
-      );
-    });
-    return {
-      table: {
-        widths: ['*'],
-        body: [
-          ...exs
-        ]
-      }
-    };
+        }
+      };
+    }else{
+      const exs = [];
+      experiences.forEach(experience => {
+        exs.push(
+          [{
+            columns: [
+              [{
+                text: experience.jobTitle,
+                style: 'jobTitle'
+              },
+              {
+                text: experience.employer,
+              },
+              {
+                text: experience.jobDescription,
+              }],
+              {
+                text: 'Experience : ' + experience.experience + ' Months',
+                alignment: 'right'
+              }
+            ]
+          }]
+        );
+      });
+      return {
+        table: {
+          widths: ['*'],
+          body: [
+            ...exs
+          ]
+        }
+      };
+    }
+   
+   
   }
-  getEducationObject(educations: Education[]) {
+  getEducationObject(educations: Education[],) {
     if(this.useExisting){
       return {
         table: {
@@ -258,16 +309,16 @@ export class CvBuilderComponent implements OnInit {
               style: 'tableHeader'
             },
             {
-              text: 'Passing Year',
+              text: 'Start year',
               style: 'tableHeader'
             },
             {
-              text: 'Result',
+              text: 'End Year',
               style: 'tableHeader'
             },
             ],
-            ...educations.map(ed => {
-              return [ed.degree, ed.college, ed.passingYear, ed.percentage];
+            ...this.educations2.map(ed => {
+              return [ed.degreeEducation, ed.school, ed.startYearEducation, ed.endYearEducation];
             })
           ]
         }
@@ -332,6 +383,35 @@ export class CvBuilderComponent implements OnInit {
     this.resume.skills.push(new Skill());
   }
   ngOnInit(): void {
+    this.id = localStorage.getItem('userId');
+ 
+    this.profileService.GetOneUser(this.id)
+    .subscribe((data)=>{
+      console.log(data);
+    this.user = <User>data;
+   
+      this.profileService.getEducationsById(94, 106)
+      .subscribe(
+        data => {
+          this.educations2 = <Education2[]>data;
+          
+        }
+      );
+      this.profileService.getSkillsById(94, 106)
+    .subscribe(
+      data => {
+        this.skills2 = <Skill2[]>data;
+      }
+    );
+    this.profileService.getExperienceById(94, 106)
+    .subscribe(
+      data => {
+        this.experiences2 = <Experience2[]>data;
+       
+      }
+    )
+    
+  });
   }
 
 }

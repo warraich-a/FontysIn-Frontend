@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if(this.readLocalStorageValue() != null){
       this.loggedIn= true;
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/posts']);
     }else{
       this.loggedIn = false;
       
