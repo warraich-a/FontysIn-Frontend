@@ -1,5 +1,5 @@
 .post-block {
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     padding: 15px;
     padding-left: 20px;
     padding-right: 20px;
@@ -112,4 +112,15 @@ a {
 .disabled {
     background: #eee;
     color: #aaa;
+  }
+
+  /* Icons */
+.icons {
+    float: right;
+    color: #e40086;
+    background-color: transparent;
+  }
+  
+  .material-icons {
+    font-size: 1.4em;
   }
