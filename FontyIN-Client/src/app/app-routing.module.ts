@@ -22,7 +22,7 @@ const routes: Routes = [{
   component: LoginComponent
 },
 {
-  path: 'export',
+  path: 'export/:profileId',
   component: CvBuilderComponent,
   //canActivate: [ AuthGuard ]
 },

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { User } from '../classes/Profile/User';
+import { ActivatedRoute } from '@angular/router';
 import { Resume, Experience, Education, Skill } from '../classes/Profile/Resume';
 import { ProfileService } from '../services/profile/profile.service';
 export class Experience2{
@@ -53,6 +54,7 @@ export class CvBuilderComponent implements OnInit {
   degrees = ['B.E.', 'M.E.', 'B.Com', 'M.Com'];
   user = new User(3, "0348348");
   id:string;
+  profileId:number;
   
 useExist(){
   if(this.useExisting){
@@ -74,7 +76,7 @@ useExist(){
 }
 
 
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: ProfileService,private route: ActivatedRoute,) {
     this.resume = JSON.parse(sessionStorage.getItem('resume')) || new Resume();
     if (!this.resume.experiences || this.resume.experiences.length === 0) {
       this.resume.experiences = [];
@@ -393,27 +395,28 @@ useExist(){
   }
   ngOnInit(): void {
     this.id = localStorage.getItem('userId');
- 
+    
+    this.profileId = +this.route.snapshot.paramMap.get('profileId');
     this.profileService.GetOneUser(this.id)
     .subscribe((data)=>{
       console.log(data);
     this.user = <User>data;
    
-      this.profileService.getEducationsById(5, 6)
+      this.profileService.getEducationsById(this.id, this.profileId)
       .subscribe(
         data => {
           this.educations2 = <Education2[]>data;
           
         }
       );
-      this.profileService.getSkillsById(5, 6)
+      this.profileService.getSkillsById(this.id, this.profileId)
     .subscribe(
       data => {
         this.skills2 = <Skill2[]>data;
         console.log(this.skills2);
       }
     );
-    this.profileService.getExperienceById(5, 6)
+    this.profileService.getExperienceById(this.id, this.profileId)
     .subscribe(
       data => {
         this.experiences2 = <Experience2[]>data;

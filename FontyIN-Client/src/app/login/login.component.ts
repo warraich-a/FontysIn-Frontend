@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
      localStorage.setItem('userToken', this.token);
      localStorage.setItem('userId', this.user.id.toString());
      
-     this.router.navigate(['/profile']);
+     this.router.navigate(['/posts']);
     },
     (error: Response) => {
       if(error.status === 404){
