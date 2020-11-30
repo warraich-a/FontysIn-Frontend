@@ -24,8 +24,7 @@ import { User } from '../classes/Profile/User';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, interval, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,

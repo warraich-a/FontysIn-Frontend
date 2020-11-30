@@ -58,6 +58,7 @@ export class CvBuilderComponent implements OnInit {
   
 useExist(){
   if(this.useExisting){
+    
     this.resume.skills = [];
     
    this.skills2.forEach(ski => {
@@ -113,6 +114,7 @@ useExist(){
    console.log(this.user.firstName);
    console.log(this.user.email);
   this.useExist();
+
     sessionStorage.setItem('resume', JSON.stringify(this.resume));
     return {
       content: [
@@ -195,17 +197,17 @@ useExist(){
         },
         {
           columns : [
-              { qr: this.resume.name + ', Phone number : ' + this.resume.contactNo, fit : 100 },
+              { qr: this.user.firstName+' '+this.user.lastName + ', Phone number : ' + this.resume.contactNo, fit : 100 },
               {
-              text: `(${this.resume.name})`,
+              text: `${this.user.firstName+' '+this.user.lastName}`,
               alignment: 'right',
               }
           ]
         }
       ],
       info: {
-        title: this.resume.name + '_RESUME',
-        author: this.resume.name,
+        title: this.user.firstName+' '+this.user.lastName + '_RESUME',
+        author: this.user.firstName+' '+this.user.lastName,
         subject: 'RESUME',
         keywords: 'RESUME, ONLINE RESUME',
       },
@@ -238,6 +240,10 @@ useExist(){
   }
   getExperienceObject(experiences: Experience[]) {
     if(this.useExisting){
+      if(this.experiences2.length < 1){
+        console.log("not enough");
+        return null;
+      }
       const exs = [];
       this.experiences2.forEach(experience => {
         exs.push(
@@ -307,6 +313,10 @@ useExist(){
   }
   getEducationObject(educations: Education[],) {
     if(this.useExisting){
+      if(this.educations2.length < 1){
+        console.log("not enough");
+        return null;
+      }
       return {
         table: {
           widths: ['*', '*', '*', '*'],
@@ -420,7 +430,7 @@ useExist(){
     .subscribe(
       data => {
         this.experiences2 = <Experience2[]>data;
-       
+        
       }
     )
     

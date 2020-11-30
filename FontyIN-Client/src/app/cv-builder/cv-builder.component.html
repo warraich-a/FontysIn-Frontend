@@ -16,14 +16,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" [disabled]="true" [(ngModel)]="resume.name" name="name" placeholder="Name"
+                    <input type="text" class="form-control" [disabled]="true" [(ngModel)]="user.firstName" name="name" placeholder="Name"
                       #Name="ngModel"
                       [ngClass]="{'is-invalid': Name.invalid && (Name.touched || resumeForm.submitted) }">
                   </div>
                   <div class="form-group">
                     <div class="form-group">
                       <textarea class="form-control" [(ngModel)]="resume.address" name="address" rows="3"
-                        placeholder="Address" #Address="ngModel" required
+                        placeholder="Address" #Address="ngModel" 
                         [ngClass]="{'is-invalid': Address.invalid && (Address.touched || resumeForm.submitted) }"></textarea>
                     </div>
                   </div>
@@ -31,11 +31,11 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <input type="text" class="form-control" [(ngModel)]="resume.contactNo" name="contactNo"
-                      placeholder="Contact No." #ContactNo="ngModel" required
+                      placeholder="Contact No." #ContactNo="ngModel" 
                       [ngClass]="{'is-invalid': ContactNo.invalid && (ContactNo.touched || resumeForm.submitted) }">
                   </div>
                   <div class="form-group">
-                    <input type="text" class="form-control"[disabled]="true"  [(ngModel)]="resume.email" name="emailId"
+                    <input type="text" class="form-control"[disabled]="true"  [(ngModel)]="user.email" name="emailId"
                       placeholder="Email ID" #Email="ngModel" 
                       [ngClass]="{'is-invalid': Email.invalid && (Email.touched || resumeForm.submitted) }">
                   </div>
@@ -63,7 +63,7 @@
                 <div class="col-md-4" *ngFor="let s of resume.skills; let i=index">
                   <div class="form-group">
                     <input type="text" class="form-control"[disabled]="useExisting" name="skill{{i}}" [(ngModel)]="s.value"
-                      placeholder="e.g. Java / Angular / .Net " #Skill="ngModel" required
+                      placeholder="e.g. Java / Angular / .Net " #Skill="ngModel" 
                       [ngClass]="{'is-invalid': Skill.invalid && (Skill.touched || resumeForm.submitted) }">
                   </div>
                 </div>

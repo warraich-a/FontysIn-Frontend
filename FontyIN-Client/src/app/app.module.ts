@@ -144,6 +144,9 @@ import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
     LoginComponent,    
     DialogChangeDpComponent,
     RegistrationComponent,
+    CommentUsernameComponent,
+    DeleteConversationComponent,
+    StartConversationComponent,  
     CvBuilderComponent,    
  
   ],
@@ -219,6 +222,7 @@ import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
     BrowserAnimationsModule,
     NgbModule,
     // PerfectScrollbarModule,
+
   ],
   providers: [
     DataService,
