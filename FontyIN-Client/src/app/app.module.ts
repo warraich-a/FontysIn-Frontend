@@ -102,6 +102,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { CommentUsernameComponent } from './comment-username/comment-username.component';
 import { DeleteConversationComponent } from './delete-conversation/delete-conversation.component';
 import { StartConversationComponent } from './start-conversation/start-conversation.component';
+import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
+
 import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
@@ -146,7 +148,8 @@ import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
     RegistrationComponent,
     CommentUsernameComponent,
     DeleteConversationComponent,
-    StartConversationComponent,  
+    StartConversationComponent,
+    UpdatePostDialogComponent,    
     CvBuilderComponent,    
  
   ],
