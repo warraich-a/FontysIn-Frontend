@@ -3,42 +3,58 @@
 <div class="container">
     
         
-        <div class="post-block">
-        
-        <a (click)="deletePost(post.id)" class="deleteBtn"></a>
-        <a [routerLink]="['/update-post', post.id]" class="editBtn"></a>
-        <h2>{{post.content}}</h2>
-        <p class="p-date">{{post.date}}</p>
-        
-        <br>
-        <hr>
-            <div class="comment-block">
-                <div id="creatPostBlock">
-                    <textarea [(ngModel)] = "commentContent" placeholder="Your awesome comment..." id = "newPostText"></textarea> <br>
-                    <button (click) ="createComment(post.id)" class = "postBtn">Post</button>
-                    <br><br>
-                    <br><br>
-                    
-                    </div>
-            <div *ngFor="let comm of comments">
-                <a>
-                <br>
-                <hr>
-                <p style="font-size: 11px;">Comment left by user: {{comm.userId}}</p>
-                <h2>{{comm.content}}</h2>
-                <p class="p-date">{{comm.date}}</p>
+    <div class="post-block">
+    
+
+    <div *ngIf="checked; then thenB else elseB"></div>
+        <ng-template #thenB><a (click)="deletePost(post.id)" class="deleteBtn"></a>
+            <a [routerLink]="['/update-post', post.id]" class="editBtn"></a></ng-template>
+        <ng-template #elseB></ng-template>
+    
+    
+    <p style="font-size: 11px;">Post created by <a [routerLink]="['/users', post.userId, 'profiles', 1]" target="_blank" style="text-decoration: underline;">
+       <app-comment-username [userId]="post.userId"></app-comment-username> 
+    </a></p>
+    
+    <h2>{{post.content}}</h2>
+    <p class="p-date">{{post.date.substring(0,10)}} {{post.date.substring(11,16)}}</p>
+    
+    
+    <div *ngIf="userLikeOnPost; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock><button disabled class="liked_btn"   ></button></ng-template>
+    <ng-template #elseBlock>
+        <button disabled class="liked_btn"   ></button>
+        <button class="like_btn" [hidden]="clicked" (click) = "likePost(); clicked = true;"  [class.test]="wasClicked"></button></ng-template>
+    <input class="like_input" disabled [(ngModel)] = "likeCount">
+    <br>
+    <hr>
+        <div class="comment-block">
+            <div id="creatPostBlock">
+                <textarea [(ngModel)] = "commentContent" placeholder="Your awesome comment..." id = "newPostText"></textarea> <br>
+                <button (click) ="createComment(post.id)" class = "postBtn">Post</button>
+                <br><br>
+                <br><br>
                 
-                <br>
-                
-                
-                </a>
-              
-              </div>
-            </div>
+                </div>
+        <div *ngFor="let comm of comments">
+            <a>
+            <br>
+            <hr>
+            <p style="font-size: 11px;">Comment left by user: <a [routerLink]="['/users', comm.userId, 'profiles', 1]" target="_blank" style="text-decoration: underline;"><app-comment-username [userId]="post.userId"></app-comment-username> </a> </p>
+            <h2>{{comm.content}}</h2>
+            <p class="p-date">{{post.date.substring(0,10)}} {{post.date.substring(11,16)}}</p>
+            
+            <br>
+            
+            
+            </a>
+          
+          </div>
         </div>
-        
-      
-      
+    </div>
+    
+  
+  
 </div>
 
-  
+

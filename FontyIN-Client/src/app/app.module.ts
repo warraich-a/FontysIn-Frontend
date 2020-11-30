@@ -1,3 +1,4 @@
+import { MessageService } from './services/message/message.service';
 import { AddInformationComponent } from './profile/add-information/add-information.component';
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
@@ -89,11 +90,22 @@ import { DialogAddEducationComponent } from './profile/dialog-add-education/dial
 import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-skill.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { MessagesComponent } from './messages/messages.component';
+import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { LoginComponent } from './login/login.component';
 import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { CvBuilderComponent } from './cv-builder/cv-builder.component';
+import { CommentUsernameComponent } from './comment-username/comment-username.component';
+import { DeleteConversationComponent } from './delete-conversation/delete-conversation.component';
+import { StartConversationComponent } from './start-conversation/start-conversation.component';
 
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   wheelPropagation: true
+// };
 
 @NgModule({
   declarations: [
@@ -126,6 +138,9 @@ import { CvBuilderComponent } from './cv-builder/cv-builder.component';
     DialogAddSkillComponent,
     SearchPipe,
     NewsfeedComponent,
+    MessagesComponent,
+    SelectedMessageComponent,
+    DateAgoPipe,
     LoginComponent,    
     DialogChangeDpComponent,
     RegistrationComponent,
@@ -202,13 +217,18 @@ import { CvBuilderComponent } from './cv-builder/cv-builder.component';
     MatDialogModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    // PerfectScrollbarModule,
   ],
   providers: [
     DataService,
     ContactService,
     FormsModule,
-    
+    MessageService,
+    //     {
+    //   provide: PERFECT_SCROLLBAR_CONFIG,
+    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    // }
   ],
   bootstrap: [AppComponent]
 })

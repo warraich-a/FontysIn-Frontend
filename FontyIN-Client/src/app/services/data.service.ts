@@ -21,6 +21,7 @@ export class DataService {
   constructor(private url: string, http: HttpClient) {
     this.http = http;
     this.readLocalStorageValue();
+    console.log("http option in data service " + this.httpOptions);
    }
 
   getAll() {
@@ -31,8 +32,16 @@ export class DataService {
       )
   }
 
+  get(id: number) {
+      return this.http.get(this.url + "/" + id, this.httpOptions)
+        .pipe(
+            map(response => response)
+        )
+    }
+
 
   create(resource: {}) {
+      console.log(resource)
     return this.http.post(this.url, JSON.stringify(resource), this.httpOptions)
       .pipe(
         map(response => response)

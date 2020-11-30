@@ -1,3 +1,6 @@
+import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
+import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
+import { MessagesComponent } from './messages/messages.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -60,7 +63,6 @@ const routes: Routes = [{
   component: UserSettingsComponent,
   canActivate: [ AuthGuard ]
 },
-
 {
   path: 'users/filter',
   component: FilterUsersComponent,
@@ -69,6 +71,24 @@ const routes: Routes = [{
 {
   path:'register', 
   component: RegistrationComponent
+},
+{
+  path: 'messages',
+  component: MessagesComponent,
+    children: [
+        {
+            path: ':conversationId',
+            component: SelectedMessageComponent,
+            canActivate: [ AuthGuard ]
+        }
+    ],
+    canActivate: [ AuthGuard ]
+
+},
+{
+  path: 'addProfile',
+  component: DialogAddProfileComponent,
+  canActivate: [ AuthGuard ]
 },
 ]
 

@@ -69,7 +69,7 @@
         <input type='file' (change)="onSelectFile($event)"> -->
         <!-- <div class="float-right"></div> -->
         <div class="dropdown">
-          <button class="dropbtn dropdown-toggle switch-profile-button">Switch Profile</button>
+          <button class="dropbtn dropdown-toggle switch-profile-button">{{currentProfile}}</button>
           <div class="dropdown-content">
             <li *ngFor="let p of profileData">
               <a class="dropdown-item switch-profile" href="/users/{{p.userId}}/profiles/{{p.id}}"> {{p.language}}</a>
@@ -98,6 +98,8 @@
           <input type="file" (change)="onFileSelected($event)">
           <button type="button" (click)="onUpload()">Upload</button>
         </div> -->
+        <!-- <img width="100%" src="assets/Untitled Diagram (1).png13" (click)="openDialogDp()" class="zoom">   -->
+        <!-- <img width="100%" src="{{profileUrl}}" (click)="openDialogDp()" class="zoom">   -->
        
         <div class="name" ng-controller="userImage, userFirstName, userLastName">
           <div *ngIf="profileUrl?.length> 0; else noProfilePicture">
