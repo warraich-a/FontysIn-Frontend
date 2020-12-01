@@ -12,6 +12,7 @@ export interface Post {
   date: string;
   id: number;
   userId: number;
+  image: string;
 }
 
 @Component({

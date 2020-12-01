@@ -1,32 +1,34 @@
 <div class="container">
-    <br><br>
-    <br>
-    <br>
-    
-    
-    <div id="creatPostBlock">
-    <textarea [(ngModel)] = "content" placeholder="Your awesome post..." id = "newPostText"></textarea> <br>
-    <button (click) ="createPost()" class = "postBtn">Post</button>
-    <br>
-    <br>
-    
-    </div>
-    
-<hr>
-<br><br><br>
-</div>
+    <br />
+    <br />
+    <br />
+    <br />
 
+    <div id="creatPostBlock">
+        <textarea [(ngModel)]="content" placeholder="Your awesome post..." id="newPostText"></textarea> <br />
+        <form [formGroup]="uploadForm" >
+            <div>
+                <input style="display: none;" type="file" name="profile" (change)="onFileSelect($event)" #selectPicture />
+            </div>
+            <div class="buttons">
+                <button class="uploadBtn" type="button" rounded="true" (click)="selectPicture.click()"></button>
+                <button (click)="createPost()" class="postBtn">Post</button>
+            </div>
+            
+        </form>
+        
+        <br />
+        <br />
+    </div>
+
+    <hr />
+    <br />
+    <br />
+    <br />
+</div>
 
 <div class="container">
     <div *ngFor="let p of allposts ">
-        
-        
-       
-        <app-post [id]="p.id" [post] = "p"></app-post>
-        
+        <app-post [id]="p.id" [post]="p"></app-post>
     </div>
-    
-    
-      
-      
 </div>

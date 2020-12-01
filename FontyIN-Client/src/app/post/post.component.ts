@@ -18,6 +18,7 @@ export interface Post {
   date: string;
   id: number;
   userId: number;
+  image: string;
 }
 export interface Like {
   id: number;
