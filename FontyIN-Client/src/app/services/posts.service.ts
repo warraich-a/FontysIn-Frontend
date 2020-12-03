@@ -69,6 +69,10 @@ export class PostsService {
   public getCommentsByPostId(id){
     return this.httpClient.get('http://localhost:9090/comments/post/'+id, this.httpOptions);
   }
+  
+  public uploadPicture(userId, data){
+    return this.httpClient.put('http://localhost:9090/posts/'+userId+'/uploadPicture', data, {responseType: 'text'})
+  }
 
   public newComment(data){
     return this.httpClient.post('http://localhost:9090/comments', data, this.httpOptions).toPromise().then(data => {

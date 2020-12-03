@@ -1,7 +1,7 @@
 <div class="container">
     <div class="clearfix">
       <div class="float-right add-new-profile clearfix">
-        <div> <button type="button" class="btn add-new-profile-button float-right" (click)="downloadAsPDF()">Export To PDF</button></div>
+        <div> <button type="button" class="btn add-new-profile-button float-right" routerLink="/export/{{profileId}}">Export</button></div>
         <button type="button"
                 class="btn add-new-profile-button float-right"
                 (click)="openDialogProfile()">
@@ -98,6 +98,8 @@
           <input type="file" (change)="onFileSelected($event)">
           <button type="button" (click)="onUpload()">Upload</button>
         </div> -->
+        <!-- <img width="100%" src="assets/Untitled Diagram (1).png13" (click)="openDialogDp()" class="zoom">   -->
+        <!-- <img width="100%" src="{{profileUrl}}" (click)="openDialogDp()" class="zoom">   -->
        
         <div class="name" ng-controller="userImage, userFirstName, userLastName">
           <div *ngIf="profileUrl?.length> 0; else noProfilePicture">

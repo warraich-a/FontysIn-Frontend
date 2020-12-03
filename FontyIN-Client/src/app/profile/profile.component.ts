@@ -24,8 +24,7 @@ import { User } from '../classes/Profile/User';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, interval, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -37,6 +36,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { delay } from 'rxjs/operators';
 import { strict } from 'assert';
 import { stringify } from 'querystring';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
 
 
   loggedInUser: number = parseInt(localStorage.getItem("userId"));
+  currentUser: UserDTO;
   profileUser: UserDTO;
   isConnected: boolean = false;
   isRequestSent: boolean = false;
@@ -74,7 +75,8 @@ export class ProfileComponent implements OnInit {
                private route: ActivatedRoute,
                public dialog: MatDialog,
                private _snackBar: MatSnackBar,
-               private formBuilder: FormBuilder) { }
+               private formBuilder: FormBuilder,
+               private sanitizer: DomSanitizer) { }
             
   profileData: Profile[]; 
   educations: Object[];
@@ -474,13 +476,16 @@ openSkillDialog() : void{
       this.foundUser=<User>data;
       this.userFirstName = this.foundUser.firstName;
       this.userLastName = this.foundUser.lastName;
-      this.profileUrl = this.foundUser.image;
+      this.profileUrl = "assets/"+this.foundUser.image;
+      // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
-      console.log(this.foundUser);
+      console.log(this.profileUrl);
 
     });
+  
    
+
     this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
       {
         
@@ -578,6 +583,12 @@ openSkillDialog() : void{
 
         console.log("Profile user " + this.profileUser.profileId)
       });
+      // this.profileService.getPicture().subscribe(response=>{
+      //   console.log("------------------");
+        
+      //   console.log(response);
+
+      // });
      
       
    //this.profileUser = +this.route.snapshot.paramMap.get('id');
@@ -600,7 +611,9 @@ openSkillDialog() : void{
       contacts => {
         this.contacts = <Contact[]>contacts;
 
-        this.contacts.forEach(contact => {
+        console.log("CONTACTS " + contacts);
+        if(this.contacts.length > 0) {
+       this.contacts.forEach(contact => {
           // Logged in user sent request or other user sent request, status isAccepted true
           if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) || (contact.user.id == this.profileUser?.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
             this.isRequestSent = true;
@@ -625,12 +638,24 @@ openSkillDialog() : void{
           }
 
         });
+        }
+
+        this.getUserDTO();
 
 
       }
     )
    
     
+  }
+
+  getUserDTO() {
+    this.profileService.getUser(this.loggedInUser)
+    .subscribe((data)=>
+    {
+      this.currentUser = <UserDTO>data;
+      console.log("CURRENT " + this.currentUser);
+    });
   }
 
     //deleting skill data
@@ -686,16 +711,18 @@ openSkillDialog() : void{
   createContact() {
     let user: UserDTO;
 
-    this.contacts.forEach(contact => {
-      if(contact.user.id == this.loggedInUser) {
-        user = contact.user;
-        return;
-      }
-      else if(contact.friend.id == this.loggedInUser) {
-        user = contact.friend;
-        return;
-      }
-    });
+    // this.contacts.forEach(contact => {
+    //   if(contact.user.id == this.loggedInUser) {
+    //     user = contact.user;
+    //     return;
+    //   }
+    //   else if(contact.friend.id == this.loggedInUser) {
+    //     user = contact.friend;
+    //     return;
+    //   }
+    // });
+
+    user = this.currentUser;
 
     // get logged in user id from auth and friendId from url
     let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};
@@ -726,23 +753,7 @@ openSkillDialog() : void{
         )
     }
  
-    public downloadAsPDF() {
-      var data = document.getElementById('pdfTable');
-      html2canvas(data).then(canvas => {  
-        // Few necessary setting options  
-        var imgWidth = 208;   
-        var pageHeight = 295;    
-        var imgHeight = canvas.height * imgWidth / canvas.width;  
-        var heightLeft = imgHeight;  
-    
-        const contentDataURL = canvas.toDataURL('image/png')  
-        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
-        var position = 0;  
-        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-        pdf.save('MYPdf.pdf'); // Generated PDF   
-      });  
-    }
-  
+   
    
 
 }

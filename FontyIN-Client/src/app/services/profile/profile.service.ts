@@ -226,4 +226,8 @@ export class ProfileService {
   public addNewUser(data){
     return this.httpClient.post('http://localhost:9090/users/new', data);
   }
+
+  // public getPicture(){
+  //   return this.httpClient.get('http://localhost:9090/upload/picture', this.httpOptions);
+  // }
 }

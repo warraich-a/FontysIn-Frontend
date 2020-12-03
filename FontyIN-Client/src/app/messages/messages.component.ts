@@ -25,8 +25,6 @@ export class MessagesComponent implements OnInit {
     userId : number = parseInt(localStorage.getItem("userId"));
 
 	// @ViewChild('scrollable') private scrollable: ElementRef;
-	// disableScrollDown = false; 
-
 	// private shouldScrollDown: boolean;
 
 
@@ -47,6 +45,12 @@ export class MessagesComponent implements OnInit {
                 }
 			})
 	}
+	
+	// ngAfterViewInit() {
+	// 	// Scroll to bottom
+	// 	this.scrollable.nativeElement.scrollIntoView({ behavior: "auto", block: "end" });
+	// }
+
 
 	public get width() {
 	  return window.innerWidth;
@@ -71,30 +75,6 @@ export class MessagesComponent implements OnInit {
 			.subscribe(res => {
 				this.ngOnInit();
 			});
+
 	}
-
-	// // Scroll
-    // onScroll() {
-    //     let element = this.scrollable.nativeElement;
-    //     let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
-    //     if (this.disableScrollDown && atBottom) {
-    //         this.disableScrollDown = false;
-    //     } else {
-    //         this.disableScrollDown = true;
-    //     }
-	// }
-
-	// ngAfterViewInit() {
-	// 	this.scrollToBottom();
-	// 	// this.scrollable.nativeElement.scrollIntoView({ behavior: "auto", block: "end" });
-	// }
-	
-	// private scrollToBottom(): void {
-    //     if (this.disableScrollDown) {
-    //         return
-    //     }
-    //     try {
-    //         this.scrollable.nativeElement.scrollTop = this.scrollable.nativeElement.scrollHeight;
-    //     } catch(err) { }
-    // }
 }

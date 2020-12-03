@@ -6,5 +6,6 @@ export class privacy{
         public educationSetting: string,
         public experienceSetting: string,
         public skillSetting: string,
+        public hideFromSearch:boolean,
     ) {  }
 }

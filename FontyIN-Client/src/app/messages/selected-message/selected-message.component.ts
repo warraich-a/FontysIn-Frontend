@@ -22,7 +22,7 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
     userId : number = parseInt(localStorage.getItem("userId"));
 
 	@ViewChild('scrollable') private scrollable: ElementRef;
-    disableScrollDown = false; 
+    disableScrollDown = false;
 
 
 	position = new FormControl('below');

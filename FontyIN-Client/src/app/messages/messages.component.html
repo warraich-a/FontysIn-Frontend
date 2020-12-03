@@ -21,14 +21,13 @@
 				</div>
 			</div>
 			<hr class="heading-divider">
-			<!-- class="example-item" -->
 			<div *ngFor="let conversation of conversations; let i = index;">
 				<div class="messages" (click)="onSelected(conversation, i)" [class.active]="selectedIndex == i">
 					<!-- Loop -->
 					<img class="conversation-img" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
 
 					<div class="firend-desc message-item">
-						<h3 class="friend-name"> 
+						<h3 class="friend-name">
 							{{ userId != conversation.firstUser.id ? conversation.firstUser.firstName + ' ' + conversation.firstUser.lastName :   conversation.secondUser.firstName + ' ' + conversation.secondUser.lastName }}
 
 						</h3>
