@@ -112,7 +112,8 @@ export class ProfileComponent implements OnInit {
   skill: Skill;
   experience: Experience;
   profile: Profile; 
-
+  anotherUserId: number 
+  sameUser: boolean;
   
   years = [
     {year : 2010},
@@ -481,7 +482,7 @@ openSkillDialog() : void{
       // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
-      console.log(this.profileUrl);
+      console.log(this.foundUser);
 
     });
   
@@ -576,7 +577,13 @@ openSkillDialog() : void{
   ngOnInit(): void {
     
     let profileUserId: number = +this.route.snapshot.paramMap.get('id');
-    console.log("Profile user " + this.profileUser)
+    this.anotherUserId = +this.route.snapshot.paramMap.get('id');
+
+    console.log("Another User Profile id " + this.anotherUserId)
+    console.log("Your Profile id " + this.userId)
+    if(this.userId == this.anotherUserId){
+      this.sameUser = true;
+    }
 
     this.profileService.getUser(profileUserId)
       .subscribe((data)=> {        

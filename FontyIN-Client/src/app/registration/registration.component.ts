@@ -24,7 +24,7 @@ export class RegistrationComponent implements OnInit {
   jobType = [
     {name: "Teacher"},
     {name: "Student"},
-    {name: "Fontys Staff"}
+    {name: "FontysStaff"}
   ]
   newAddressToAdd: {};
   newUser:{};
@@ -43,18 +43,17 @@ export class RegistrationComponent implements OnInit {
 
   onSubmitRegistration(data){
     console.log(data);
-    this.newAddressToAdd = {
-      "streetName": data.streetName,
-      "houseNumber": data.houseNr,
-      "city": data.city,
-      "zipCode": data.zipcode
-    }
-    this.profileService.addAddress(<JSON>this.newAddressToAdd)
-      .subscribe(
-        newAddress => {
-          {
+    // this.newAddressToAdd = {
+    //   "streetName": data.streetName,
+    //   "houseNumber": data.houseNr,
+    //   "city": data.city,
+    //   "zipCode": data.zipcode
+    // }
+    // this.profileService.addAddress(<JSON>this.newAddressToAdd)
+    //   .subscribe(
+        // newAddress => {
+        //   {
             this.newUser ={
-              "addressId":newAddress,
               "departmentId": data.department,
               "email": data.email,
               "firstName": data.firstName,
@@ -62,7 +61,6 @@ export class RegistrationComponent implements OnInit {
               "lastName": data.lastName,
               "locationId": data.fontysLocation,
               "password": data.password,
-              "phoneNumber": data.phoneNr,
               "userNumber": data.userNumber,
               "userType": data.employementType
             }
@@ -91,13 +89,6 @@ export class RegistrationComponent implements OnInit {
                   });
                 } 
             })
-        }
-          console.log("New Adress Added ----------------");
-          console.log(newAddress);
-        })
-  
-       
-
   }
   login(email, password){
     this.token = btoa(email+':'+password);

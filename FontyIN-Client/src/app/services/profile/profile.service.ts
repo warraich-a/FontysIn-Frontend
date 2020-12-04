@@ -36,10 +36,10 @@ export class ProfileService {
   public getUser(userId){
     return this.httpClient.get('http://localhost:9090/users/' + userId, this.httpOptions)
   }
-  // public getUserById(userId){
-  //   console.log("GETTING USER BY ID")
-  //   return this.httpClient.get('http://localhost:9090/users/p/' + userId, this.httpOptions)
-  // }
+  public getUserById(userId){
+    console.log("GETTING USER BY ID")
+    return this.httpClient.get('http://localhost:9090/users/p/' + userId, this.httpOptions)
+  }
 
   public getExperienceById(userId, profileId){  
     this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '5');

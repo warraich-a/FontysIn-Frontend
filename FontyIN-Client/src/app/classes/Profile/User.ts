@@ -11,8 +11,8 @@ export class User {
     addressId: number;
     locationId: number;
     departmentId: number; 
-    userNumber: string;; 
-    image: string;; 
+    userNumber: string; 
+    image: string;
     userType: UserType;
     
     constructor(
