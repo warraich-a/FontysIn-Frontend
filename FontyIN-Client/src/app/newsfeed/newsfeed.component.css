@@ -49,6 +49,17 @@ a {
 .postBtn:hover{
     background-color: #47a9ff;
 }
+.uploadBtn{
+    height: 36px;
+    width: 36px;
+    background-color: white;
+    background-image: url("camera.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    color: black;
+    border:none;
+    transition-duration: 0.4s;
+}
 .deleteBtn{
     float:right;
     border:none;

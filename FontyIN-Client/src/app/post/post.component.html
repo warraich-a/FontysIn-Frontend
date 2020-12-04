@@ -7,17 +7,32 @@
     
 
     <div *ngIf="checked; then thenB else elseB"></div>
-        <ng-template #thenB><a (click)="deletePost(post.id)" class="deleteBtn"></a>
-            <a [routerLink]="['/update-post', post.id]" class="editBtn"></a></ng-template>
+        <ng-template #thenB>
+            <div class="icons">
+            <button class="float-right" mat-icon-button ria-label="" (click)="deletePost(post.id)">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+              <button mat-icon-button ria-label="" (click)="openUpdateDialog()" class="float-right">
+                <mat-icon>border_color</mat-icon>
+              </button>
+            </div>
+        </ng-template>
         <ng-template #elseB></ng-template>
-    
+
+       
+        
+          
     
     <p style="font-size: 11px;">Post created by <a [routerLink]="['/users', post.userId, 'profiles', 1]" target="_blank" style="text-decoration: underline;">
        <app-comment-username [userId]="post.userId"></app-comment-username> 
     </a></p>
     
     <h2>{{post.content}}</h2>
+    <img src="{{post.image}}" class="post-img"><br>
     <p class="p-date">{{post.date.substring(0,10)}} {{post.date.substring(11,16)}}</p>
+    <p></p>
+    
+
     
     
     <div *ngIf="userLikeOnPost; then thenBlock else elseBlock"></div>

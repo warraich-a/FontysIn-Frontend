@@ -1,0 +1,6 @@
+   <div class="update-block">
+       <h2>Update your post!</h2><br>
+   <textarea #newContent placeholder="Your awesome post..." id = "newPostText" (keyup)="saveVal($event)">{{post.content}}</textarea> <br><br>
+    <button (click)="updatePost()" class = "postBtn">Update</button><button (click)="CloseDialog()" class = "closeBtn">Close</button>
+    <br>
+</div>

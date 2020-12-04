@@ -24,8 +24,7 @@ import { User } from '../classes/Profile/User';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, interval, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import * as jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -761,23 +760,7 @@ openSkillDialog() : void{
         )
     }
  
-    public downloadAsPDF() {
-      var data = document.getElementById('pdfTable');
-      html2canvas(data).then(canvas => {  
-        // Few necessary setting options  
-        var imgWidth = 208;   
-        var pageHeight = 295;    
-        var imgHeight = canvas.height * imgWidth / canvas.width;  
-        var heightLeft = imgHeight;  
-    
-        const contentDataURL = canvas.toDataURL('image/png')  
-        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
-        var position = 0;  
-        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-        pdf.save('MYPdf.pdf'); // Generated PDF   
-      });  
-    }
-  
+   
    
 
 }

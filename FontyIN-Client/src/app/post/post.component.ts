@@ -5,12 +5,20 @@ import { PostsService} from '../services/posts.service';
 import { Moment } from 'moment';
 import { User } from '../classes/Profile/User';
 import { ProfileService } from '../services/profile/profile.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dialog.component';
 
 export interface Post {
   content: string;
   date: string;
   id: number;
   userId: number;
+  image: string;
 }
 export interface Like {
   id: number;
@@ -36,7 +44,8 @@ export class PostComponent implements OnInit {
   comments: Comment[];
   userId :number = +localStorage.getItem("userId");
   @Input() id ;
-  constructor( private postService: PostsService, private profileService: ProfileService,private router: Router) { }
+  constructor( private postService: PostsService, private profileService: ProfileService,private router: Router,public dialog: MatDialog,
+    private _snackBar: MatSnackBar) { }
   data = {};
   content : String;
   commentContent : String;
@@ -113,7 +122,15 @@ export class PostComponent implements OnInit {
     
   }
 
+  openUpdateDialog(){
+    const dialogRef = this.dialog.open(UpdatePostDialogComponent, {
+      width: '50%',
+      data: {p: this.post},
+      panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
   
+    }); 
+    dialogRef.afterClosed();
+  }
 
   ngOnInit(): void {
     this.postService.getPostLikesCount(this.id)

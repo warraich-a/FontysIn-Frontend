@@ -6,7 +6,7 @@
           <!-- empty because this is another user -->
          </div>
          <ng-template #differentUser>
-        <div> <button type="button" class="btn add-new-profile-button float-right" (click)="downloadAsPDF()">Export To PDF</button></div>
+          <div> <button type="button" class="btn add-new-profile-button float-right" routerLink="/export/{{profileId}}">Export</button></div>
           <button type="button"
             class="btn add-new-profile-button float-right"
             (click)="openDialogProfile()">

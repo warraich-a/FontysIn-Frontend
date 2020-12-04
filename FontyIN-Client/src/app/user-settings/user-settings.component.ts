@@ -23,7 +23,7 @@ export class UserSettingsComponent implements OnInit {
   id:string;
   address = new Address(1, "", "", "", "");
   user = new User(3, "");
-  privacy = new privacy(1, 1, "Everyone", "everyone", "everyone");
+  privacy = new privacy(1, 1, "", "", "",false);
 
   ngOnInit(): void {
     this.id = localStorage.getItem('userId');
@@ -43,6 +43,11 @@ export class UserSettingsComponent implements OnInit {
     .subscribe((data)=>{
       console.log(data);
     this.privacy = <privacy>data;
+    if(this.privacy.hideFromSearch){
+      this.isChecked = false;
+    }else{
+      this.isChecked = true;
+    }
     });
  
   }
@@ -71,6 +76,7 @@ showNotificationP() {
 
 updatePrivacy(){
   this.hideEverything();
+  console.log(this.privacy);
   this.service.updatePrivacy(this.privacy).subscribe(
     (res: any) => {
       this.showNotificationP();
@@ -78,9 +84,9 @@ updatePrivacy(){
 }
 hideEverything(){
   if(this.isChecked){
-    console.log("true");
+    this.privacy.hideFromSearch = false;
   }else{
-    console.log("false");
+    this.privacy.hideFromSearch = true;
   }
 }
 
