@@ -32,7 +32,7 @@ export class RegistrationComponent implements OnInit {
   token:string;
   loggedIn:boolean;
   isLoginError : boolean = false;
-  user = new User(3, "0348348");
+  user = new User(3);
   
   constructor(private profileService: ProfileService,
     private _snackBar: MatSnackBar,
