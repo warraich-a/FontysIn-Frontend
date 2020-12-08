@@ -7,7 +7,8 @@ export class User {
     userEmail: string;
     email:string;
     password: string;; 
-   
+    phoneNumbar: string;; 
+    addressId: number;
     locationId: number;
     departmentId: number; 
     userNumber: string; 
