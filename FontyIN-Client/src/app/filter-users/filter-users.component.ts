@@ -55,8 +55,6 @@ export class FilterUsersComponent implements OnInit {
   StudentDisabled: boolean;
   EmployeeDisabled: boolean;
 
-  loggedInUser: number = 3;
-
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { 
                 this.StudentDisabled = false;
@@ -128,10 +126,9 @@ export class FilterUsersComponent implements OnInit {
       this.filterService.filterUsersByName(this.searchText).subscribe((data)=>
       {
        this.users=<UserDTO[]>data;
-        console.log(this.users);     
+       console.log(this.users);     
       });
     }
-
   }
   
   getUsersByType(){
@@ -141,6 +138,7 @@ export class FilterUsersComponent implements OnInit {
       this.filterService.filterByUserType(this.TypeSelection).subscribe((data)=>
       {
         this.users=<UserDTO[]>data;
+        // this.image = "assets/"+this.user.image;
         this.StudentDisabled = true;
         this.EmployeeDisabled = false;
         console.log(this.users);      
