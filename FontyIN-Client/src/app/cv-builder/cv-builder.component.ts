@@ -52,7 +52,7 @@ export class CvBuilderComponent implements OnInit {
   useExisting:boolean;
   resume = new Resume();
   degrees = ['B.E.', 'M.E.', 'B.Com', 'M.Com'];
-  user = new User(3, "0348348");
+  user = new User(3);
   id:string;
   profileId:number;
   

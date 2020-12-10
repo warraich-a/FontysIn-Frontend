@@ -15,7 +15,7 @@
       <div *ngIf="profiles?.length> 0; else noProfile">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link waves-light"
-        [routerLink]="['/users', userId, 'profiles', profileId]"
+        (click)="submit()"
         mdbWavesEffect>Profile</a>
       </li>
       </div>

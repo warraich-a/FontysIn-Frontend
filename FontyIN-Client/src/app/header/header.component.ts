@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
     
     submit(){
       this.router.navigate(['users/',this.userId, 'profiles', this.profileId])
+      window.location.href = 'users/'+this.userId+'/profiles/'+this.profileId;
     }
     
     openDialogProfile(): void {

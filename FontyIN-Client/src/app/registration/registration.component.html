@@ -1,164 +1,120 @@
-<div class="container fadeInDown">
-    <div id="formContent">
-
-        <h1> Register </h1>
-        <mat-divider></mat-divider>
-        <form  #userData="ngForm" (ngSubmit)="onSubmitRegistration(userData.value)"> 
-        
-            <div class="container-right" style="float: left">
-                <h2>Basic Information</h2>
-                <mat-form-field class="input-full-width">
-                    <input required matInput 
-                    type="text" 
-                    name="firstName" 
-                    ngModel 
-                    placeholder="First Name"> 
-                </mat-form-field>
-
-                <mat-form-field class="input-full-width">
+<div class="container">
+    
+   
+    <form 
+     #userData="ngForm" 
+     class="text-center"
+     (ngSubmit)="onSubmitRegistration(userData.value)">  
+     <h1> Register </h1><br>  
+     <mat-divider></mat-divider>
+    <div class="row">
+        <div class="col">
+            <mat-form-field class="input-full-width">
                 <input required matInput 
-                    type="text" 
-                    name="lastName" 
-                    ngModel 
-                    placeholder="Last Name"> 
-                </mat-form-field>
+                type="text" 
+                name="firstName" 
+                ngModel 
+                placeholder="First Name"> 
+            </mat-form-field>
 
-                <mat-form-field class="input-full-width">     
-                    <mat-select required name="employementType" ngModel>
-                        <mat-option value="" disabled>User Type </mat-option>
-                        <mat-option *ngFor = "let l of jobType" [value]="l.name">
-                            {{l.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>  
-            
+            <mat-form-field class="input-full-width">
+            <input required matInput 
+                type="text" 
+                name="lastName" 
+                ngModel 
+                placeholder="Last Name"> 
+            </mat-form-field>
 
-                <mat-form-field class="input-full-width">     
-                <mat-select required name="fontysLocation" ngModel>
-                    <mat-option value="" disabled>Fontys Location </mat-option>
-                    <mat-option *ngFor = "let l of fontysLocations" [value]="l.id">
-                        {{l.city}}
+            <mat-form-field class="input-full-width">     
+                <mat-select required name="employementType" ngModel>
+                    <mat-option value="" disabled>User Type </mat-option>
+                    <mat-option *ngFor = "let l of jobType" [value]="l.name">
+                        {{l.name}}
                     </mat-option>
                 </mat-select>
-                </mat-form-field> 
-
-                <mat-form-field class="input-full-width">
-                    <mat-select required name="department" ngModel>
-                        <mat-option value="" disabled>Department </mat-option>
-                        <mat-option *ngFor = "let l of departments" [value]="l.id">
-                            {{l.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="input-full-width">
-                    <input required matInput 
-                        type="text" 
-                        name="userNumber" 
-                        ngModel 
-                        placeholder="PCN"> 
-                </mat-form-field>
-
-                <h2>Fontys Email</h2>
-
-                <mat-form-field class="input-full-width">
-                    <input required matInput 
-                        type="text" 
-                        name="email" 
-                        ngModel 
-                        placeholder="Email"> 
-                </mat-form-field>
-            
-               
-            </div>
-
-
-            <div class="container-right" style="float: right;">
-                <h2>Address</h2>
-                <mat-form-field class="input-full-width">
-                    <input required matInput 
-                        type="text" 
-                        name="streetName" 
-                        ngModel 
-                        placeholder="StreetName"> 
-                </mat-form-field>
-            
-                <mat-form-field class="input-full-width">
-                    <input required matInput
-                        type="text" 
-                        name="houseNr" 
-                        ngModel 
-                        placeholder="House Number"> 
-                </mat-form-field>
-                <mat-form-field class="input-full-width">
-                    <input required matInput
-                        type="text" 
-                        name="city" 
-                        ngModel 
-                        placeholder="City"> 
-                </mat-form-field>
-
-                <mat-form-field class="input-full-width">
-                    <input required matInput 
-                        type="text" 
-                        name="zipcode" 
-                        ngModel 
-                        placeholder="Zipcode"> 
-                </mat-form-field>
-
-                <mat-form-field class="input-full-width">
-                    <input required matInput 
-                        type="text" 
-                        name="phoneNr" 
-                        ngModel 
-                        placeholder="Phone Number"> 
-                </mat-form-field>
-            
-                <mat-form-field class="form-group input-full-width"> 
-                    <input matInput 
-                        type="password" 
-                        [(ngModel)]="userData.password" 
-                        name="password" 
-                        placeholder="Password" 
-                        class="form-control" 
-                        required
-                        #password="ngModel" 
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
-                    <div *ngIf="password.invalid && (userData.submitted || password.touched)" class="alert alert-danger">
-                    <div *ngIf="password.errors.required"> Password is required. </div>
-                    <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
-                    </div>
-                </mat-form-field>
-            
-                <mat-form-field class="form-group input-full-width">
-                    <input matInput 
-                        type="password" 
-                        [(ngModel)]="userData.confirmpassword" 
-                        name="confirmpassword" 
-                        placeholder="Confirm Password" 
-                        class="form-control" 
-                        required 
-                        #confirmpassword="ngModel" 
-                        pattern="{{ password.value }}" />
-                    <div *ngIf=" confirmpassword.invalid && (userData.submitted || confirmpassword.touched)" class="alert alert-danger">
-                    <div *ngIf="confirmpassword.errors.required"> Confirm password is required. </div>
-                    <div *ngIf="confirmpassword.errors.pattern"> Password & Confirm Password does not match.</div>
-                    </div>
-                </mat-form-field> 
-
-
-                <button 
-                    mdbBtn 
-                    type="submit"  
-                    rounded="true" 
-                    id="submitButton" > submit
-                </button>   
-            </div>
-        </form>
+            </mat-form-field>  
         
-        <a id="link" href="#">Already a member??</a>
 
+            <mat-form-field class="input-full-width">     
+            <mat-select required name="fontysLocation" ngModel>
+                <mat-option value="" disabled>Fontys Location </mat-option>
+                <mat-option *ngFor = "let l of fontysLocations" [value]="l.id">
+                    {{l.city}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field> 
+
+            <mat-form-field class="input-full-width">
+                <mat-select required name="department" ngModel>
+                    <mat-option value="" disabled>Department </mat-option>
+                    <mat-option *ngFor = "let l of departments" [value]="l.id">
+                        {{l.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+        </div>
+        <div class="col">
+            <mat-form-field class="input-full-width">
+                <input required matInput 
+                    type="text" 
+                    name="userNumber" 
+                    ngModel 
+                    placeholder="PCN"> 
+            </mat-form-field>
+            <mat-form-field class="input-full-width">
+                <input required matInput 
+                    type="text" 
+                    name="email" 
+                    ngModel 
+                    placeholder="Email"> 
+            </mat-form-field>
+            <mat-form-field class="form-group input-full-width"> 
+                <input matInput 
+                    type="password" 
+                    [(ngModel)]="userData.password" 
+                    name="password" 
+                    placeholder="Password" 
+                    class="form-control" 
+                    required
+                    #password="ngModel" 
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+                <div *ngIf="password.invalid && (userData.submitted || password.touched)" class="alert alert-danger">
+                <div *ngIf="password.errors.required"> Password is required. </div>
+                <div *ngIf="password.errors.pattern"> Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</div>
+                </div>
+            </mat-form-field>
         
+            <mat-form-field class="form-group input-full-width">
+                <input matInput 
+                    type="password" 
+                    [(ngModel)]="userData.confirmpassword" 
+                    name="confirmpassword" 
+                    placeholder="Confirm Password" 
+                    class="form-control" 
+                    required 
+                    #confirmpassword="ngModel" 
+                    pattern="{{ password.value }}" />
+                <div *ngIf=" confirmpassword.invalid && (userData.submitted || confirmpassword.touched)" class="alert alert-danger">
+                <div *ngIf="confirmpassword.errors.required"> Confirm password is required. </div>
+                <div *ngIf="confirmpassword.errors.pattern"> Password & Confirm Password does not match.</div>
+                </div>
+            </mat-form-field> 
+
+
+           
+        </div>
+    </div>
+        <button 
+        mdbBtn 
+        type="submit"  
+        rounded="true" 
+        id="submitButton" > submit
+    </button>  
+    <a id="link" href="#">Already a member??</a>
+</form>
+        
+
 </div>
 
-</div>
 
