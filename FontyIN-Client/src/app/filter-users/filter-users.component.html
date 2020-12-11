@@ -125,11 +125,8 @@
                   <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
 
                     <div class="userImage">
-                      <img width="50opx" src="assets/{{user.image}}">
-                    </div>
-                    <!-- <mat-icon> account_circle </mat-icon> -->
-                    {{user.firstName}} {{user.lastName}}<br>
-              
+                      <img width="50opx" src="assets/{{user.image}}"> {{user.firstName}} {{user.lastName}}<br>
+                    </div>              
                   </div>
 
                   <br>
