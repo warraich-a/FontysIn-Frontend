@@ -10,7 +10,7 @@ export class UserService {
 
   readLocalStorageValue() {
     if(localStorage.getItem("userToken") != null){
-      this.httpOptions.headers = this.httpOptions.headers.set('Authorization',  'Basic ' + localStorage.getItem("userToken"));
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization',  localStorage.getItem("userToken"));
     };
 }
   httpOptions = {
@@ -23,7 +23,7 @@ export class UserService {
   login(email, password){
    
     const body = email+":"+password;
-    return this.httpClient.post('http://localhost:9090/users/login', body, this.httpOptions);
+    return this.httpClient.post('http://localhost:9090/users/login', body, {responseType: 'text'});
    }
  
    logout(){
