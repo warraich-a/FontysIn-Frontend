@@ -1,5 +1,7 @@
+import { Conversation } from './../classes/Message/Conversation';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DataService } from '../services/data.service';
 import { MessageService } from '../services/message/message.service';
 
 @Component({

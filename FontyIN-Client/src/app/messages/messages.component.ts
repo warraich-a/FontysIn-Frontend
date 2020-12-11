@@ -1,3 +1,4 @@
+import { DataService } from './../services/data.service';
 import { Conversation } from './../classes/Message/Conversation';
 import { MessageService } from './../services/message/message.service';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -35,15 +36,24 @@ export class MessagesComponent implements OnInit {
 		public dialog: MatDialog) { }
 	
 	ngOnInit(): void {
-		this.messageService.getAll()
-			.subscribe((data) => {
-				this.conversations = <Conversation[]>data;
 
-                // Show first conversation
-                if(this.conversations.length > 0) {
-                    this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
-                }
-			})
+		this.messageService.getInfo().subscribe(val => {
+			console.log("Get information: " + val);
+			this.getMessages();
+		})
+		this.getMessages();
+	}
+
+	getMessages(){
+		this.messageService.getAll()
+		.subscribe((data) => {
+			this.conversations = <Conversation[]>data;
+
+			// Show first conversation
+			if(this.conversations.length > 0) {
+				this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
+			}
+		})
 	}
 	
 	// ngAfterViewInit() {
