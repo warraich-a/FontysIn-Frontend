@@ -10,7 +10,7 @@
 .flex-container {
 	display: flex;
 	width: 100%;
-	height: inherit;
+    height: 85vh;
 }
 
 /* Flex items */
@@ -27,6 +27,15 @@
 .selected-message {
 	width: 60%;
 	height: inherit;
+}
+
+
+/* Scroll */
+.scroll-viewport {
+    height: 87%;
+	width: 100%;
+    margin-bottom: 7%;
+    overflow-y: scroll;
 }
 
 
@@ -68,8 +77,8 @@ mat-icon:hover {
 
 /* friend's image */
 .conversation-img {
-    width: 100px;
-	margin-right: 4%;
+    width: 84px;
+    margin: auto 4% auto 1%;
     height: 62%;
     border-radius: 50%;
 }
@@ -80,104 +89,12 @@ mat-icon:hover {
 
 /* friend's name */
 .friend-name {
-    /* cursor: pointer; */
+    cursor: pointer;
+    font-weight: 580;
+    color: #252525;
+    margin-bottom: 2px;
 }
 
-
-
-
-
-/* Selected message */
-/* scroll */
-.scroll-viewport {
-	height: 67%;
-	width: 100%;
-    margin-bottom: 7%;
-}
-
-/* container */
-.chat-container {
-	padding-right: 3%;
-}
-
-/* firend name */
-.selected-message > h3.friend-name {
-	display: inline-block;
-	font-size: 1.9em;
-}
-
-/* friends's image */
-.firend-img {
-	width: 90px;
-    margin-right: 4%;
-}
-
-/* line between messages */
 .conversation-divider {
-    width: 80%;
-    color: gray;
-    margin: auto 10%;
+    width: 87%;
 }
-
-/* sender's name */
-.sender {
-	font-size: 1.2em;
-}
-
-/* time of message */
-.sender > .time {
-	float: right;
-}
-
-/* message content */
-.message-content {
-	margin-top: 2%;
-    line-height: 1.7em;
-}
-
-
-
-/* 
-.desktop-view {
-
-}
-
-
-.mobile-view {
-
-} */
-
-
-@media screen and (max-width: 1000px) {
-	/* friend's image */
-	img {
-    	width: 71px;
-	    height: 78px;
-	}
-
-}
-
-/* small screen */
-@media screen and (max-width: 770px) {
-	/* Flex item, left */
-	.item {
-		width: 100%;
-	}
-
-	.mat-divider {
-		display: none;
-	}
-
-	/* friend's image */
-	img {
-		width: 80px;
-		height: 100px;
-		margin-right: 4%;
-	}
-
-	/* Flex item, right */
-	/* .selected-message {
-		display: none;
-	} */
-}
-

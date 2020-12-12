@@ -16,6 +16,8 @@
 .friend-name {
 	display: inline-block;
 	font-size: 1.9em;
+    font-weight: 580;
+    color: #252525;
 }
 
 /* friends's image */
