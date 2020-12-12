@@ -71,6 +71,7 @@ mat-icon:hover {
     width: 100px;
 	margin-right: 4%;
     height: 62%;
+    border-radius: 50%;
 }
 
 .conversation-img, .firend-desc {

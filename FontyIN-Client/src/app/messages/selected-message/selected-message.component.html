@@ -1,5 +1,6 @@
-<img class="firend-img" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png">
-
+<img class="firend-img"
+    [src]="'assets/' + friend.image"
+    onerror="this.src='assets/placeholder.png'">
 <mat-icon 
         class="float-right"
         aria-hidden="false" 
