@@ -73,7 +73,10 @@ export class MessagesComponent implements OnInit {
 			}); 
 			dialogRef.afterClosed()
 			.subscribe(res => {
-				this.ngOnInit();
+				this.ngOnInit()
+
+                // Show last conversation
+                // this.router.navigate([this.conversations[this.conversations.length - 1].id], {relativeTo: this.route});
 			});
 
 	}

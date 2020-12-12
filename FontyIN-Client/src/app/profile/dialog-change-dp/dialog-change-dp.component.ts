@@ -32,6 +32,7 @@ export class DialogChangeDpComponent implements OnInit {
           this.profileUrl = event.target.result;
         }
         reader.readAsDataURL(event.target.files[0]);
+        console.log("SELECTED " +         reader.readAsDataURL(event.target.files[0]));
       }
     }
     onSubmit() {
@@ -61,7 +62,7 @@ export class DialogChangeDpComponent implements OnInit {
     this.userId = parseInt(localStorage.getItem("userId"));
     this.profileService.getUser(this.userId).subscribe(response=>{
       this.foundUser=<User>response;
-      this.profileUrl = "assets/"+this.foundUser.image;
+      this.profileUrl = this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
       console.log(this.foundUser);
