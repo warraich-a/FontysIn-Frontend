@@ -235,7 +235,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ContactService,
     FormsModule,
     MessageService,
-    { provide: ErrorHandler, useClass: AppErrorHandler },
+    // { provide: ErrorHandler, useClass: AppErrorHandler },
     // {
     //     provide: HTTP_INTERCEPTORS,
     //     useClass: ServerErrorInterceptor,
