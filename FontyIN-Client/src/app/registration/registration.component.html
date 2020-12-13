@@ -10,19 +10,40 @@
     <div class="row">
         <div class="col">
             <mat-form-field class="input-full-width">
-                <input required matInput 
+                <!-- <input required matInput 
                 type="text" 
                 name="firstName" 
                 ngModel 
-                placeholder="First Name"> 
+                placeholder="First Name">  -->
+
+                <input matInput 
+                    required
+                    type="text" 
+                    [(ngModel)]="userData.firstName" 
+                    name="firstName" 
+                    placeholder="First Name" 
+                 
+                    #firstName="ngModel" 
+                    pattern="[a-zA-Z]+" ng-pattern-restrict />
+                    <div *ngIf="firstName.invalid && (userData.submitted || firstName.touched)" class="alert alert-danger">
+                    <div *ngIf="firstName.errors.required"> Last Name is required. </div>
+                    <div *ngIf="firstName.errors.pattern"> Can only contain Alphabets</div>
+                    </div>
             </mat-form-field>
 
             <mat-form-field class="input-full-width">
             <input required matInput 
                 type="text" 
+                [(ngModel)]="userData.lastName" 
                 name="lastName" 
-                ngModel 
-                placeholder="Last Name"> 
+                placeholder="Last Name"  
+            
+                #lastName="ngModel" 
+                pattern="[a-zA-Z]+" ng-pattern-restrict />
+                <div *ngIf="lastName.invalid && (userData.submitted || lastName.touched)" class="alert alert-danger">
+                    <div *ngIf="lastName.errors.required"> Last Name is required. </div>
+                    <div *ngIf="lastName.errors.pattern"> Can only contain Alphabets</div>
+                    </div>
             </mat-form-field>
 
             <mat-form-field class="input-full-width">     
@@ -63,11 +84,35 @@
                     placeholder="PCN"> 
             </mat-form-field>
             <mat-form-field class="input-full-width">
-                <input required matInput 
-                    type="text" 
+                <!-- <input required matInput 
+                    type="email" 
                     name="email" 
                     ngModel 
-                    placeholder="Email"> 
+                    placeholder="Email">  -->
+                    <input required matInput 
+                        type="text" 
+                        [(ngModel)]="userData.email" 
+                        name="email" 
+                        placeholder="Email"  
+                       
+                        #email="ngModel" 
+
+                        pattern="^\w+([\.-]?\w+)*@([student|staff]+)*\.([fontys]+)*\.([nl]+)+$">
+                        <div class="alert alert-danger" [hidden]="email.valid || email.untouched">
+                            <div  *ngIf="email.errors && email.errors.required">
+                                Email is required
+                            </div>
+                            <div  *ngIf="email.errors && email.errors.pattern">
+                                Email is invalid
+                            </div>
+                        </div>
+
+                        <!-- <div *ngIf="email.invalid && (userData.submitted || email.touched)" class="alert alert-danger">
+
+                            <div *ngIf="email.errors.required"> Last Name is required. </div>
+                            <div *ngIf="email.includes('@')"> Email is not correct. </div>
+                    </div> -->
+                    
             </mat-form-field>
             <mat-form-field class="form-group input-full-width"> 
                 <input matInput 
@@ -109,7 +154,8 @@
         mdbBtn 
         type="submit"  
         rounded="true" 
-        id="submitButton" > submit
+        id="submitButton" 
+        [disabled]="!userData.valid"> submit
     </button>  
     <a id="link" href="#">Already a member??</a>
 </form>

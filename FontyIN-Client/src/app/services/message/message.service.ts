@@ -29,16 +29,16 @@ export class MessageService extends DataService {
     });   
   }
 
-    // RANIM
-    getInfo(): Observable<string>{
-      return this.info.asObservable();
-    }
-  
-    getInfoValue(): string{
-      return this.info.getValue();
-    }
-  
-    setInfo(value: string){
-      this.info.next(value);
-    }
+  // Used to refresh both parent and child componenets
+  getInfo(): Observable<string>{
+    return this.info.asObservable();
+  }
+
+  getInfoValue(): string{
+    return this.info.getValue();
+  }
+
+  setInfo(value: string){
+    this.info.next(value);
+  }
 }

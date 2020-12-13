@@ -44,13 +44,28 @@
     <br>
     <hr>
         <div class="comment-block">
+
+            
+
             <div id="creatPostBlock">
-                <textarea [(ngModel)] = "commentContent" placeholder="Your awesome comment..." id = "newPostText"></textarea> <br>
-                <button (click) ="createComment(post.id)" class = "postBtn">Post</button>
+                
+                <form name="form" [formGroup]="form" (ngSubmit)="form.valid">
+                    <div class="form-group">
+                        
+                        <textarea [(ngModel)] = "commentContent" placeholder="Your awesome comment..." id = "newPostText" formControlName="postText" [ngClass]="{'is-invalid':form.get('postText').touched && form.get('postText').invalid}" required></textarea> <br>
+               
+                        <div class="invalid-feedback">
+                            <div>You need to write something first</div>
+                        </div>
+                    </div>
+                    <button (click) ="createComment(post.id)" class = "postBtn" [disabled]="!form.valid" >Post</button>
+                    
+                </form>
                 <br><br>
                 <br><br>
                 
                 </div>
+
         <div *ngFor="let comm of comments">
             <a>
             <br>

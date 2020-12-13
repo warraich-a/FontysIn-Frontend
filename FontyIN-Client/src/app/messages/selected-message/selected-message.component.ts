@@ -1,4 +1,3 @@
-import { DataService } from './../../services/data.service';
 import { MessageService } from './../../services/message/message.service';
 import { Conversation } from './../../classes/Message/Conversation';
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -19,7 +18,6 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	id: number;
 	currentUser;
 	friend;
-	info;
 
     userId : number = parseInt(localStorage.getItem("userId"));
 
@@ -53,13 +51,11 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 			}); 
 			dialogRef.afterClosed()
 			.subscribe(res => {
-
 				this.conversation = null;
 
 				this.messageService.setInfo('Conversation is deleted');
-
+				
 				this.router.navigate(['/messages']);
-				// this.ngOnInit();
 			});
 	
 		}

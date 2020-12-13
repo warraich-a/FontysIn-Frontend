@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject, Observable, interval } from 'rxjs';
 
 
 @Injectable({
@@ -64,5 +63,4 @@ export class DataService {
         map(response => response)
       )
   }
-
 }

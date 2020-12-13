@@ -12,6 +12,9 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dialog.component';
+import { PostValidator} from './post.validator';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 export interface Post {
   content: string;
@@ -39,6 +42,13 @@ export interface Comment {
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
+
+  form = new FormGroup({
+    postText: new FormControl('', [Validators.required, PostValidator.cannotContainSpace]),
+    
+    
+   });
+
   @Input()  post : Post;
   checked: boolean;
   comments: Comment[];
@@ -142,7 +152,7 @@ export class PostComponent implements OnInit {
     });
     this.postService.getPostLikeByUser(this.id,localStorage.getItem("userId"))
      .subscribe((data)=>{
-     console.log(data);
+     
       this.userLikeOnPost = <Like>data;
    });
    this.checkIds();
