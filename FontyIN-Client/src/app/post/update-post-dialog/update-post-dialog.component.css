@@ -9,7 +9,17 @@
     -moz-box-shadow: 2px 2px 4px -3px rgba(0,0,0,0.75);
     box-shadow: 2px 2px 4px -3px rgba(0,0,0,0.75);
 }
-
+.uploadBtn{
+    height: 36px;
+    width: 36px;
+    background-color: white;
+    background-image: url("camera.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    color: black;
+    border:none;
+    transition-duration: 0.4s;
+}
 .p-date {
     float:right;
     font-size: 14px;
@@ -20,7 +30,7 @@ textarea {
   }
 
 #newPostText{
-    min-width: 700px;
+    min-width: 500px;
     max-width: 700px;
     min-height: 100px;
     border-radius: 4px;
@@ -70,4 +80,12 @@ textarea {
     transition-duration: 0.4s;
     margin-right: 5px;
     margin-left: 5px;
+}
+.post-img {
+    width: 30%;
+    max-width: 500px;
+    
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
 }
