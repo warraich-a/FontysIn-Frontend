@@ -18,6 +18,9 @@ export class MessagesComponent implements OnInit {
 	raisedElevation = 5;    
 	position = new FormControl('below');
 
+    @ViewChild('scrollable') private scrollable: ElementRef;
+    disableScrollDown = false;
+
     // Selected conversation
     selectedConversation: Conversation;
     selectedIndex = -1;
@@ -77,8 +80,23 @@ export class MessagesComponent implements OnInit {
 			}); 
 			dialogRef.afterClosed()
 			.subscribe(res => {
-				this.ngOnInit();
+				this.ngOnInit()
+
+                // Show last conversation
+                // this.router.navigate([this.conversations[this.conversations.length - 1].id], {relativeTo: this.route});
 			});
 
 	}
+
+
+    // Scroll
+    onScroll() {
+        let element = this.scrollable.nativeElement;
+        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
+        if (this.disableScrollDown && atBottom) {
+            this.disableScrollDown = false;
+        } else {
+            this.disableScrollDown = true;
+        }
+    }
 }

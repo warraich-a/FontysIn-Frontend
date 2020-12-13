@@ -61,6 +61,8 @@ export class ConnectionComponent implements OnInit {
       this.contactService.getContactRequests()
       .subscribe(requests => {
         this.requests = <Contact[]>requests;
+
+        console.log("Requests " + this.requests);
       })
   }
 
