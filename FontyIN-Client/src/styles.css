@@ -49,3 +49,11 @@ body {
     width: 100%;
   }
 }
+
+
+
+.mat-snack-bar-container.error {
+    background-color: #E53935;
+    font-weight: 700;
+
+}

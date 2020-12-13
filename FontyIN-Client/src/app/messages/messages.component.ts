@@ -18,6 +18,9 @@ export class MessagesComponent implements OnInit {
 	raisedElevation = 5;    
 	position = new FormControl('below');
 
+    @ViewChild('scrollable') private scrollable: ElementRef;
+    disableScrollDown = false;
+
     // Selected conversation
     selectedConversation: Conversation;
     selectedIndex = -1;
@@ -34,22 +37,26 @@ export class MessagesComponent implements OnInit {
 		private route: ActivatedRoute,
 		public dialog: MatDialog) { }
 	
-	ngOnInit(): void {
-		this.messageService.getAll()
+		ngOnInit(): void {
+
+			this.messageService.getInfo().subscribe(val => {
+				console.log("Get information: " + val);
+				this.getMessages();
+			})
+			this.getMessages();
+		}
+	
+		getMessages(){
+			this.messageService.getAll()
 			.subscribe((data) => {
 				this.conversations = <Conversation[]>data;
-
-                // Show first conversation
-                if(this.conversations.length > 0) {
-                    this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
-                }
-			})
-	}
 	
-	// ngAfterViewInit() {
-	// 	// Scroll to bottom
-	// 	this.scrollable.nativeElement.scrollIntoView({ behavior: "auto", block: "end" });
-	// }
+				// Show first conversation
+				if(this.conversations.length > 0) {
+					this.router.navigate([this.conversations[0].id], {relativeTo: this.route});
+				}
+			})
+		}
 
 
 	public get width() {
@@ -73,8 +80,23 @@ export class MessagesComponent implements OnInit {
 			}); 
 			dialogRef.afterClosed()
 			.subscribe(res => {
-				this.ngOnInit();
+				this.ngOnInit()
+
+                // Show last conversation
+                // this.router.navigate([this.conversations[this.conversations.length - 1].id], {relativeTo: this.route});
 			});
 
 	}
+
+
+    // Scroll
+    onScroll() {
+        let element = this.scrollable.nativeElement;
+        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
+        if (this.disableScrollDown && atBottom) {
+            this.disableScrollDown = false;
+        } else {
+            this.disableScrollDown = true;
+        }
+    }
 }

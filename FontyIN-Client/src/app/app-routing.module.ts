@@ -20,6 +20,7 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import {LoginComponent} from './login/login.component';
 import { AuthGuard } from  './auth/auth.guard';
 import {CvBuilderComponent} from './cv-builder/cv-builder.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [{
   path: '',
   component: LoginComponent
@@ -90,6 +91,13 @@ const routes: Routes = [{
   component: DialogAddProfileComponent,
   canActivate: [ AuthGuard ]
 },
+  {
+    path: '**',
+    // resolve: {
+    //   path: PathResolveService
+    // },
+    component: NotFoundComponent
+  }
 ]
 
 

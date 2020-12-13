@@ -490,6 +490,8 @@ openSkillDialog() : void{
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");
       console.log(this.foundUser);
+      console.log("Found img");
+      console.log(this.profileUrl);
 
     });
   
@@ -726,16 +728,16 @@ openSkillDialog() : void{
   createContact() {
     let user: UserDTO;
 
-    // this.contacts.forEach(contact => {
-    //   if(contact.user.id == this.loggedInUser) {
-    //     user = contact.user;
-    //     return;
-    //   }
-    //   else if(contact.friend.id == this.loggedInUser) {
-    //     user = contact.friend;
-    //     return;
-    //   }
-    // });
+    this.contacts.forEach(contact => {
+      if(contact.user.id == this.loggedInUser) {
+        user = contact.user;
+        return;
+      }
+      else if(contact.friend.id == this.loggedInUser) {
+        user = contact.friend;
+        return;
+      }
+    });
 
     user = this.currentUser;
 

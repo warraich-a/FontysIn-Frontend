@@ -78,7 +78,7 @@
         <div class="actions">
 
           <!-- mat-mini-fab aria-label="Example icon button with a filter list icon" -->
-          <button mat-icon-button ria-label="" (click)="combinedFilter()"><mat-icon matTooltip="Filter"> filter_list </mat-icon></button>
+          <button type="button" class="btn btn-info" (click)="combinedFilter()">Show Results</button>
 
           <!-- mat-mini-fab aria-label="Example icon button with a cleaning services icon" -->
           <!-- <button class = "float-right" mat-icon-button ria-label="" (click)="ClearFilters()"><mat-icon matTooltip="Clear filters"> cleaning_services </mat-icon></button> -->
@@ -124,16 +124,15 @@
 
                   <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
 
-                    <mat-icon> account_circle </mat-icon>
-                    {{user.firstName}} {{user.lastName}} <br>
-              
+                    <div class="userImage">
+                      <img width="50opx" src="assets/{{user.image}}"> {{user.firstName}} {{user.lastName}}<br>
+                    </div>              
                   </div>
 
                   <br>
 
                     Fontys University of Applied Sciences
                   
-                  <br>
                   <br>
                   <mat-divider></mat-divider>
                   <br>
