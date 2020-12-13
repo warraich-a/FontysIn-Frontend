@@ -105,6 +105,7 @@ import { StartConversationComponent } from './start-conversation/start-conversat
 import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
 
 import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
+import { NameValidator } from './validation/Restricted-Name.Directive';
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
 // };
@@ -151,6 +152,7 @@ import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
     StartConversationComponent,
     UpdatePostDialogComponent,    
     CvBuilderComponent,    
+    NameValidator
  
   ],
   entryComponents:[DialogAddProfileComponent],
