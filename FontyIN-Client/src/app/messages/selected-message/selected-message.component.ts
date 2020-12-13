@@ -51,7 +51,7 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 			}); 
 			dialogRef.afterClosed()
 			.subscribe(res => {
-				this.ngOnInit();
+				this.router.navigate(['/messages']);
 			});
 	
 		}
