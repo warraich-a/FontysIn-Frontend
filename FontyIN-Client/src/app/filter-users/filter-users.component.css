@@ -23,3 +23,10 @@ color: palevioletred;
 .actions{
 margin-right: 10px;
 }
+
+.userImage{
+  width: 75px;
+  margin: auto 4% auto 1%;
+  height: 55%;
+  border-radius: 50%;
+}
