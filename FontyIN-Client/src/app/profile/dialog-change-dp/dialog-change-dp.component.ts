@@ -32,7 +32,6 @@ export class DialogChangeDpComponent implements OnInit {
           this.profileUrl = event.target.result;
         }
         reader.readAsDataURL(event.target.files[0]);
-        console.log("SELECTED " +         reader.readAsDataURL(event.target.files[0]));
       }
     }
     onSubmit() {

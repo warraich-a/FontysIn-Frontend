@@ -3,7 +3,7 @@ import { AddInformationComponent } from './profile/add-information/add-informati
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -78,7 +78,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -105,6 +105,9 @@ import { StartConversationComponent } from './start-conversation/start-conversat
 import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
 
 import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
+import { AppErrorHandler } from './errors/app-error-handler';
+import { ServerErrorInterceptor } from './errors/server-error.interceptor';
+import { NotFoundComponent } from './not-found/not-found.component';
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
 // };
@@ -150,7 +153,7 @@ import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
     DeleteConversationComponent,
     StartConversationComponent,
     UpdatePostDialogComponent,    
-    CvBuilderComponent,    
+    CvBuilderComponent, NotFoundComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],
@@ -232,6 +235,12 @@ import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
     ContactService,
     FormsModule,
     MessageService,
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+    // {
+    //     provide: HTTP_INTERCEPTORS,
+    //     useClass: ServerErrorInterceptor,
+    //     multi: true
+    // }
     //     {
     //   provide: PERFECT_SCROLLBAR_CONFIG,
     //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
