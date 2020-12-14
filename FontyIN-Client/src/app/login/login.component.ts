@@ -42,9 +42,7 @@ export class LoginComponent implements OnInit {
       console.log(res);
     
      localStorage.setItem('userToken', res);
-     var decoded = this.getDecodedAccessToken(res)
-     var userId = decoded['jti'];
-     localStorage.setItem('userId', userId);
+   
      location.reload();
     this.router.navigate(['/posts']);
     },
