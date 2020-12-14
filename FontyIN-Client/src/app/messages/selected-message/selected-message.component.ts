@@ -51,7 +51,11 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 			}); 
 			dialogRef.afterClosed()
 			.subscribe(res => {
-				this.ngOnInit();
+				this.conversation = null;
+
+				this.messageService.setInfo('Conversation is deleted');
+				
+				this.router.navigate(['/messages']);
 			});
 	
 		}

@@ -12,7 +12,6 @@ margin-left: 16px;
 
 .found-card {
 max-width: 600px;
-max-height: 1000px;
 margin-top: 100px;
 }
 
@@ -23,4 +22,11 @@ color: palevioletred;
 
 .actions{
 margin-right: 10px;
+}
+
+.userImage{
+  width: 75px;
+  margin: auto 4% auto 1%;
+  height: 55%;
+  border-radius: 50%;
 }

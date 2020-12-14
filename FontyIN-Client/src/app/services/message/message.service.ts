@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -9,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class MessageService extends DataService {
   // logged in user id
   loggedInUserId = localStorage.getItem('userId');
+  info = new BehaviorSubject('information');
 
   constructor(http: HttpClient) {
     super('http://localhost:9090/users/' + localStorage.getItem('userId') + '/messages', http);
@@ -25,5 +27,18 @@ export class MessageService extends DataService {
     return this.http.post('http://localhost:9090/users/1/messages/newConversation/', data).toPromise().then(data => {
       console.log("In the message service: " + data);
     });   
+  }
+
+  // Used to refresh both parent and child componenets
+  getInfo(): Observable<string>{
+    return this.info.asObservable();
+  }
+
+  getInfoValue(): string{
+    return this.info.getValue();
+  }
+
+  setInfo(value: string){
+    this.info.next(value);
   }
 }

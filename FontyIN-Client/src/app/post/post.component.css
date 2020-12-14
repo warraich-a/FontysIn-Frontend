@@ -86,6 +86,7 @@ a {
     height: 24px;
     position: absolute;
     margin-top: -10px;
+    background-color: white;
 }
 .liked_btn{
     background-image: url("img/liked.png");
@@ -95,7 +96,7 @@ a {
     height: 24px;
     position: absolute;
     margin-top: -10px;
-    
+    background-color: white;
 }
 
 
