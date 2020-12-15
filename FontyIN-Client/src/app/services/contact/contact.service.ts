@@ -13,7 +13,7 @@ export class ContactService extends DataService {
 	}
   	readLocalStorageValue() {
 		if(localStorage.getItem("userToken") != null){
-		  this.httpOptions.headers = this.httpOptions.headers.set('Authorization',  'Basic ' + localStorage.getItem("userToken"));
+		  this.httpOptions.headers = this.httpOptions.headers.set('Authorization', localStorage.getItem("userToken"));
 		};
 	}
 

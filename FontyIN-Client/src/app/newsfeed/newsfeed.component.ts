@@ -43,22 +43,32 @@ export class NewsfeedComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('profile').value);
     
-   this.postService.uploadPicture(this.userId, formData).subscribe((data)=>
-   { 
-       this.postUrl =<string> data;
-       console.log("data");
-       console.log(this.postUrl);
-   });
+   
 
+   if(this.uploadForm.get('profile').value.name != null){
+    this.postService.uploadPicture(this.userId, formData).subscribe((data)=>
+    { 
+        this.postUrl =<string> data;
+        console.log("data");
+        console.log(this.postUrl);
+    });
     this.data = {
       "content": this.content,
       "id": 5,
       "userId": localStorage.getItem("userId"),
       "image": "assets/"+this.userId+this.uploadForm.get('profile').value.name
       };
+   } else {
+    this.data = {
+      "content": this.content,
+      "id": 5,
+      "userId": localStorage.getItem("userId"),
+      "image": ""
+      };
+   }
     this.postService.newPost(<JSON>this.data);
     console.log(this.data);
-    
+    window.location.reload();
   }
 
   deletePost(id){
