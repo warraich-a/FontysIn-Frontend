@@ -498,65 +498,73 @@ openSkillDialog() : void{
         console.log("profile id");
         console.log(this.profileId);
         this.CurrentProfile(this.profileId);
-      },
-      (error: Response) => {
-        if(error.status === 404){
-          this._snackBar.open('Id is wrong!!', 'End now', {
-            duration: 1000,
-          });
-          }  else if(error.status === 401){
-            console.log("sorry not sorry");
-            this.errorMsgEdu = true;
-          } 
-      });
+      }
+    //   ,
+    //   (error: Response) => {
+    //     if(error.status === 404){
+    //       this._snackBar.open('Id is wrong!!', 'End now', {
+    //         duration: 1000,
+    //       });
+    //       }  else if(error.status === 401){
+    //         console.log("sorry not sorry");
+    //         this.errorMsgEdu = true;
+    //       } 
+    //   }
+      );
     this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
     {
      
       this.errorMsgExp = false;
       this.experiencesList=<Object[]>data;
       console.log(this.experiencesList);
-    },
-    (error: Response) => {
-      if(error.status === 404){
-        this._snackBar.open('Id is wrong!!', 'End now', {
-          duration: 1000,
-         });
-       } else if(error.status === 401){
-        console.log("sorry not sorry");
-        this.errorMsgExp = true;
-      }  
-    });
+    }
+    // ,
+    // (error: Response) => {
+    //   if(error.status === 404){
+    //     this._snackBar.open('Id is wrong!!', 'End now', {
+    //       duration: 1000,
+    //      });
+    //    } else if(error.status === 401){
+    //     console.log("sorry not sorry");
+    //     this.errorMsgExp = true;
+    //   }  
+    // }
+    );
     this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
     {
     
       this.errorMsgSki = false;
       this.skillsList=<Object[]>data;
       console.log(this.skillsList);
-    },
-    (error: Response) => {
-      if(error.status === 404){
-        this._snackBar.open('Id is wrong!!', 'End now', {
-          duration: 1000,
-         });
-       }
-       else if(error.status === 401){
-         console.log("sorry not sorry");
-         this.errorMsgSki = true;
-       }
-    });
+    }
+    // ,
+    // (error: Response) => {
+    //   if(error.status === 404){
+    //     this._snackBar.open('Id is wrong!!', 'End now', {
+    //       duration: 1000,
+    //      });
+    //    }
+    //    else if(error.status === 401){
+    //      console.log("sorry not sorry");
+    //      this.errorMsgSki = true;
+    //    }
+    // }
+    );
     this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
     {
       
       this.aboutList=<Object[]>data;
       console.log(this.aboutList);
-    },
-    (error: Response) => {
-      if(error.status === 404){
-        this._snackBar.open('Id is wrong!!', 'End now', {
-          duration: 1000,
-         });
-       } 
-    });
+    }
+    // ,
+    // (error: Response) => {
+    //   if(error.status === 404){
+    //     this._snackBar.open('Id is wrong!!', 'End now', {
+    //       duration: 1000,
+    //      });
+    //    } 
+    // }
+    );
   }
 
   url: string;

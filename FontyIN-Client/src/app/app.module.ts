@@ -105,9 +105,13 @@ import { StartConversationComponent } from './start-conversation/start-conversat
 import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
 
 import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
-import { AppErrorHandler } from './errors/app-error-handler';
 import { ServerErrorInterceptor } from './errors/server-error.interceptor';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
+import { UnexpectedErrorComponent } from './errors/unexpected-error/unexpected-error.component';
+import { BadRequestComponent } from './errors/bad-request/bad-request.component';
+import { OfflineComponent } from './errors/offline/offline.component';
+import { InternalServerErrorComponent } from './errors/internal-server-error/internal-server-error.component';
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
 // };
@@ -153,7 +157,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     DeleteConversationComponent,
     StartConversationComponent,
     UpdatePostDialogComponent,    
-    CvBuilderComponent, NotFoundComponent,    
+    CvBuilderComponent, NotFoundComponent, ForbiddenComponent, UnexpectedErrorComponent, BadRequestComponent, OfflineComponent, InternalServerErrorComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],
@@ -235,12 +239,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ContactService,
     FormsModule,
     MessageService,
-    { provide: ErrorHandler, useClass: AppErrorHandler },
-    // {
-    //     provide: HTTP_INTERCEPTORS,
-    //     useClass: ServerErrorInterceptor,
-    //     multi: true
-    // }
+    // { provide: ErrorHandler, useClass: AppErrorHandler },
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ServerErrorInterceptor,
+        multi: true
+    }
     //     {
     //   provide: PERFECT_SCROLLBAR_CONFIG,
     //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

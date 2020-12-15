@@ -6,16 +6,12 @@ import { Injectable } from '@angular/core';
 })
 export class ErrorService {
 
-  getClientMessage(error: Error): string {    
-    return error.message ? 
-           error.message : 
-           error.toString();
-  }
+  	getClientMessage(error: Error): string {
+		return error.message ? error.message : error.toString();
+  	}
 
-  getServerMessage(error: HttpErrorResponse): string {
-      console.log("MESSAGE "+ error.error);
-    return navigator.onLine ?    
-           error.error :
-           'No Internet Connection';
-  }  
+  	getServerMessage(error: HttpErrorResponse): string {
+		let message = `Error Code: ${error.status},  Message: ${error.error}`
+		return message;
+  	} 
 }

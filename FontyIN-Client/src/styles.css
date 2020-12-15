@@ -52,8 +52,26 @@ body {
 
 
 
-.mat-snack-bar-container.error {
+/* ERRORS */
+snack-bar-container.mat-snack-bar-container.mat-snack-bar-container.error {
+    max-width: 100vw;
+    min-width: 0vw;
+    font-size: 1.2em;
+    width: 30vw;
+    height: fit-content;
+    margin: 4% auto;
+    font-size: 1.4em;
+    color: white;
     background-color: #E53935;
-    font-weight: 700;
+    font-weight: 500;
+}
 
+.mat-simple-snackbar > span {
+    font-size: 1.3em;
+}
+
+.mat-simple-snackbar-action button {
+    font-size: 1.3em;
+    color: white;
+    font-weight: 500;
 }
