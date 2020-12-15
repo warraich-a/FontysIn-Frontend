@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataService } from '../data.service';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { UserService } from '../user.service';
 
 
 @Injectable({
@@ -17,18 +18,17 @@ export class ContactService extends DataService {
 		};
 	}
 
-	getId() {
-		let id = localStorage.getItem('userId');
+    constructor(http: HttpClient, 
+                private userService: UserService) {
+    super('http://localhost:9090/users/' + userService.getUserIdOfLoggedIn(localStorage.getItem("userToken")) + '/contacts', http);
+    this.readLocalStorageValue();
+    }
 
-		console.log("ID " + id);
+  	getId() {
+		let id = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"))
 
 		return id;
 	}
-
-  constructor(http: HttpClient) {
-	super('http://localhost:9090/users/' + localStorage.getItem('userId') + '/contacts', http);
-	this.readLocalStorageValue();
-  }
 
   getContactRequests() {
 	return this.http.get('http://localhost:9090/users/' + this.getId() + '/requests', this.httpOptions)

@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-connection',
@@ -14,7 +15,7 @@ import { FormControl } from '@angular/forms';
 export class ConnectionComponent implements OnInit {
   searchText = '';
 
-  userId:number = parseInt(localStorage.getItem("userId"));
+  userId:number = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"));
   contacts: Contact[];
   requests: Contact[];
 
@@ -26,6 +27,7 @@ export class ConnectionComponent implements OnInit {
 
 
   constructor(private contactService: ContactService,
+              private userService: UserService,
               private dialog: MatDialog
     ) { }
 

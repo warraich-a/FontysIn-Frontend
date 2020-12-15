@@ -2,24 +2,29 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { UserService } from '../user.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService extends DataService {
-  // logged in user id
-  loggedInUserId = localStorage.getItem('userId');
   info = new BehaviorSubject('information');
 
-  constructor(http: HttpClient) {
-    super('http://localhost:9090/users/' + localStorage.getItem('userId') + '/messages', http);
-  }
+    constructor(http: HttpClient, 
+                private userService: UserService) {
+        super('http://localhost:9090/users/' + userService.getUserIdOfLoggedIn(localStorage.getItem("userToken")) + '/messages', http);
+    }
+
+    getId() {
+		let id = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"))
+
+		return id;
+	}
 
   //delete conversation in messaging page
   public deleteConversation(userId, conversationId){
-    userId = this.loggedInUserId;
-    return this.http.delete('http://localhost:9090/users/1/messages/user/' + userId + '/conversation/' + conversationId);
+    return this.http.delete('http://localhost:9090/users/1/messages/user/' + this.getId() + '/conversation/' + conversationId);
   }
 
   //start new conversation with new contact

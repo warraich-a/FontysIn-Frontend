@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -18,7 +19,8 @@ export class DataService {
     };
 }
 
-  constructor(private url: string, http: HttpClient) {
+  constructor(private url: string, 
+              http: HttpClient) {
     this.http = http;
     this.readLocalStorageValue();
     console.log("http option in data service " + this.httpOptions);

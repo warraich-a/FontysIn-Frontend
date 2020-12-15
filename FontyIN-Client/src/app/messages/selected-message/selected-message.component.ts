@@ -6,6 +6,7 @@ import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
 import { DeleteConversationComponent } from 'src/app/delete-conversation/delete-conversation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	currentUser;
 	friend;
 
-    userId : number = parseInt(localStorage.getItem("userId"));
+    userId:number = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"));
 
 	@ViewChild('scrollable') private scrollable: ElementRef;
     disableScrollDown = false;
@@ -28,6 +29,7 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	position = new FormControl('below');
 
 	constructor(private messageService: MessageService,
+        private userService: UserService,
 		private router: Router,
 		private route: ActivatedRoute,
 		public dialog: MatDialog) { }

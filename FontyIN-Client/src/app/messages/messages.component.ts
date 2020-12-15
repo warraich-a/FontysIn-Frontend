@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StartConversationComponent } from '../start-conversation/start-conversation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-messages',
@@ -25,7 +26,7 @@ export class MessagesComponent implements OnInit {
     selectedConversation: Conversation;
     selectedIndex = -1;
 
-    userId : number = parseInt(localStorage.getItem("userId"));
+    userId:number = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"));
 
 	// @ViewChild('scrollable') private scrollable: ElementRef;
 	// private shouldScrollDown: boolean;
@@ -33,6 +34,7 @@ export class MessagesComponent implements OnInit {
 
 
 	constructor(private messageService: MessageService,
+        private userService: UserService,
 		private router: Router,
 		private route: ActivatedRoute,
 		public dialog: MatDialog) { }
