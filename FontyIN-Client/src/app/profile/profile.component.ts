@@ -483,7 +483,7 @@ openSkillDialog() : void{
         
       }
       else{
-        this.profileUrl = this.foundUser.image;
+        this.profileUrl = +this.foundUser.image;
 
       }
       // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);

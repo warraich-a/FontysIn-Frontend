@@ -26,7 +26,7 @@
                     #firstName="ngModel" 
                     pattern="[a-zA-Z]+" ng-pattern-restrict />
                     <div *ngIf="firstName.invalid && (userData.submitted || firstName.touched)" class="alert alert-danger">
-                    <div *ngIf="firstName.errors.required"> First Name is required. </div>
+                    <div *ngIf="firstName.errors.required"> Last Name is required. </div>
                     <div *ngIf="firstName.errors.pattern"> Can only contain Alphabets</div>
                     </div>
             </mat-form-field>

@@ -141,15 +141,6 @@ export class PostComponent implements OnInit {
     }); 
     dialogRef.afterClosed();
   }
-  postUrl : string;
-  lenImg(){
-    if(this.postUrl?.length >0){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 
   ngOnInit(): void {
     this.postService.getPostLikesCount(this.id)
@@ -177,7 +168,7 @@ export class PostComponent implements OnInit {
       this.user=<User>data;
 
     });
-    this.postUrl = this.post.image;
+    
   }
 
 }

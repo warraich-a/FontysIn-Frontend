@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
-import jwt_decode from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,7 @@ export class UserService {
 
   readLocalStorageValue() {
     if(localStorage.getItem("userToken") != null){
-      this.httpOptions.headers = this.httpOptions.headers.set('Authorization',  localStorage.getItem("userToken"));
+      this.httpOptions.headers = this.httpOptions.headers.set('Authorization',  'Basic ' + localStorage.getItem("userToken"));
     };
 }
   httpOptions = {
@@ -23,26 +23,13 @@ export class UserService {
   login(email, password){
    
     const body = email+":"+password;
-    return this.httpClient.post('http://localhost:9090/users/login', body, {responseType: 'text'});
+    return this.httpClient.post('http://localhost:9090/users/login', body, this.httpOptions);
    }
  
    logout(){
      this.httpOptions.headers = this.httpOptions.headers.delete('Authorization');
    }
-   getDecodedAccessToken(token: string): any {
-    try{
-        return jwt_decode(token);
-    }
-    catch(Error){
-        return null;
-    }
-  }
-
-  getUserIdOfLoggedIn(token:string){
-    var decoded = this.getDecodedAccessToken(token)
-    var userId = decoded['jti'];
-    return userId;
-  }
+ 
  
 
 }
