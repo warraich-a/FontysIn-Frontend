@@ -28,7 +28,8 @@
     </a></p>
     
     <h2>{{post.content}}</h2>
-    <img src="{{post.image}}" class="post-img"><br>
+    <div *ngIf="lenImg()"> <img src="{{post.image}}" class="post-img"></div>
+    <br>
     <p class="p-date">{{post.date.substring(0,10)}} {{post.date.substring(11,16)}}</p>
     <p></p>
     
@@ -44,13 +45,28 @@
     <br>
     <hr>
         <div class="comment-block">
+
+            
+
             <div id="creatPostBlock">
-                <textarea [(ngModel)] = "commentContent" placeholder="Your awesome comment..." id = "newPostText"></textarea> <br>
-                <button (click) ="createComment(post.id)" class = "postBtn">Post</button>
+                
+                <form name="form" [formGroup]="form" (ngSubmit)="form.valid">
+                    <div class="form-group">
+                        
+                        <textarea [(ngModel)] = "commentContent" placeholder="Your awesome comment..." id = "newPostText" formControlName="postText" [ngClass]="{'is-invalid':form.get('postText').touched && form.get('postText').invalid}" required></textarea> <br>
+               
+                        <div class="invalid-feedback">
+                            <div>You need to write something first</div>
+                        </div>
+                    </div>
+                    <button (click) ="createComment(post.id)" class = "postBtn" [disabled]="!form.valid" >Post</button>
+                    
+                </form>
                 <br><br>
                 <br><br>
                 
                 </div>
+
         <div *ngFor="let comm of comments">
             <a>
             <br>

@@ -239,7 +239,6 @@ import { InternalServerErrorComponent } from './errors/internal-server-error/int
     ContactService,
     FormsModule,
     MessageService,
-    // { provide: ErrorHandler, useClass: AppErrorHandler },
     {
         provide: HTTP_INTERCEPTORS,
         useClass: ServerErrorInterceptor,

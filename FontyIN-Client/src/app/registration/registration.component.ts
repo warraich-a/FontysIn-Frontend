@@ -40,6 +40,16 @@ export class RegistrationComponent implements OnInit {
     public dialog: MatDialog,
     private service: UserService) { }
 
+    public inputValidator(event: any) {
+      //console.log(event.target.value);
+      const pattern = /^[a-zA-Z]*$/;   
+      //let inputChar = String.fromCharCode(event.charCode)
+      if (!pattern.test(event.target.value)) {
+        event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "");
+        // invalid character, prevent input
+  
+      }
+    }
 
   onSubmitRegistration(data){
     console.log(data);

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
 import { ProfileService } from '../services/profile/profile.service';
+import { FormControl, Validators } from '@angular/forms';
+import { PostValidator} from './post.validator';
 
 
 export interface Post {
@@ -21,6 +23,12 @@ export interface Post {
 })
 export class NewsfeedComponent implements OnInit {
 
+  form = new FormGroup({
+    postText: new FormControl('', [Validators.required, PostValidator.cannotContainSpace]),
+    
+    
+   });
+
   constructor(private postService: PostsService, private profileService: ProfileService,private formBuilder: FormBuilder) { }
 
   
@@ -35,22 +43,32 @@ export class NewsfeedComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.uploadForm.get('profile').value);
     
-   this.postService.uploadPicture(this.userId, formData).subscribe((data)=>
-   { 
-       this.postUrl =<string> data;
-       console.log("data");
-       console.log(this.postUrl);
-   });
+   
 
+   if(this.uploadForm.get('profile').value.name != null){
+    this.postService.uploadPicture(this.userId, formData).subscribe((data)=>
+    { 
+        this.postUrl =<string> data;
+        console.log("data");
+        console.log(this.postUrl);
+    });
     this.data = {
       "content": this.content,
       "id": 5,
       "userId": localStorage.getItem("userId"),
       "image": "assets/"+this.userId+this.uploadForm.get('profile').value.name
       };
+   } else {
+    this.data = {
+      "content": this.content,
+      "id": 5,
+      "userId": localStorage.getItem("userId"),
+      "image": ""
+      };
+   }
     this.postService.newPost(<JSON>this.data);
     console.log(this.data);
-    window.location.reload()
+    window.location.reload();
   }
 
   deletePost(id){
@@ -80,6 +98,17 @@ export class NewsfeedComponent implements OnInit {
     
   }
   
+  lenImg(){
+    if(this.postUrl?.length >0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  closeImg(){
+    this.postUrl = "";
+  }
   
 
 
@@ -103,5 +132,6 @@ export class NewsfeedComponent implements OnInit {
    
 
   }
+  
 
 }
