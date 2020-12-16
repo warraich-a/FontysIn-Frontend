@@ -20,7 +20,7 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	currentUser;
 	friend;
 
-    userId:number = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"));
+    userId:number = this.userService.getUserIdOfLoggedIn();
 
 	@ViewChild('scrollable') private scrollable: ElementRef;
     disableScrollDown = false;

@@ -13,11 +13,11 @@ export class MessageService extends DataService {
 
     constructor(http: HttpClient, 
                 private userService: UserService) {
-        super('http://localhost:9090/users/' + userService.getUserIdOfLoggedIn(localStorage.getItem("userToken")) + '/messages', http);
+        super('http://localhost:9090/users/' + userService.getUserIdOfLoggedIn() + '/messages', http);
     }
 
     getId() {
-		let id = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"))
+		let id = this.userService.getUserIdOfLoggedIn()
 
 		return id;
 	}

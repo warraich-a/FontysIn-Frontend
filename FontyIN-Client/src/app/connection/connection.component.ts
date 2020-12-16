@@ -15,7 +15,7 @@ import { UserService } from '../services/user.service';
 export class ConnectionComponent implements OnInit {
   searchText = '';
 
-  userId:number = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"));
+  userId:number = this.userService.getUserIdOfLoggedIn();
   contacts: Contact[];
   requests: Contact[];
 

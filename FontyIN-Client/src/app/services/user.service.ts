@@ -38,8 +38,8 @@ export class UserService {
     }
   }
 
-  getUserIdOfLoggedIn(token:string){
-    var decoded = this.getDecodedAccessToken(token)
+  getUserIdOfLoggedIn(){
+    var decoded = this.getDecodedAccessToken(localStorage.getItem("userToken"))
     var userId = decoded['jti'];
     return userId;
   }

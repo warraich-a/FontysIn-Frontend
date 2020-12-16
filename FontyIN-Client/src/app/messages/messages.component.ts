@@ -26,7 +26,7 @@ export class MessagesComponent implements OnInit {
     selectedConversation: Conversation;
     selectedIndex = -1;
 
-    userId:number = this.userService.getUserIdOfLoggedIn(localStorage.getItem("userToken"));
+    userId:number = this.userService.getUserIdOfLoggedIn();
 
 	// @ViewChild('scrollable') private scrollable: ElementRef;
 	// private shouldScrollDown: boolean;
