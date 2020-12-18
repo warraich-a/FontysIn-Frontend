@@ -6,7 +6,7 @@ import { User } from '../classes/Profile/User';
 import { ProfileService } from '../services/profile/profile.service';
 import { FormControl, Validators } from '@angular/forms';
 import { PostValidator} from './post.validator';
-
+import { UserService} from '../services/user.service'
 
 export interface Post {
   content: string;
@@ -29,10 +29,10 @@ export class NewsfeedComponent implements OnInit {
     
    });
 
-  constructor(private postService: PostsService, private profileService: ProfileService,private formBuilder: FormBuilder) { }
+  constructor(private postService: PostsService, private profileService: ProfileService,private formBuilder: FormBuilder, private userService : UserService) { }
 
   
-  userID = localStorage.getItem("userId");
+  userID = this.userService.getUserIdOfLoggedIn();
   data = {};
   content : String;
   public user : User;
@@ -55,14 +55,14 @@ export class NewsfeedComponent implements OnInit {
     this.data = {
       "content": this.content,
       "id": 5,
-      "userId": localStorage.getItem("userId"),
+      "userId": this.userID,
       "image": "assets/"+this.userId+this.uploadForm.get('profile').value.name
       };
    } else {
     this.data = {
       "content": this.content,
       "id": 5,
-      "userId": localStorage.getItem("userId"),
+      "userId": this.userID,
       "image": ""
       };
    }

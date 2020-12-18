@@ -15,6 +15,7 @@ import { UpdatePostDialogComponent } from './update-post-dialog/update-post-dial
 import { PostValidator} from './post.validator';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
+import { UserService } from '../services/user.service'
 
 export interface Post {
   content: string;
@@ -52,10 +53,10 @@ export class PostComponent implements OnInit {
   @Input()  post : Post;
   checked: boolean;
   comments: Comment[];
-  userId :number = +localStorage.getItem("userId");
+  userId :number = this.userService.getUserIdOfLoggedIn();
   @Input() id ;
   constructor( private postService: PostsService, private profileService: ProfileService,private router: Router,public dialog: MatDialog,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,  private userService : UserService) { }
   data = {};
   content : String;
   commentContent : String;
@@ -87,7 +88,7 @@ export class PostComponent implements OnInit {
       "content": this.commentContent,
       "id": 0,
       "postId": id,
-      "userId": localStorage.getItem("userId")
+      "userId": this.userId
       };
     this.postService.newComment(<JSON>this.commentData);
     // window.location.reload();
@@ -110,7 +111,7 @@ export class PostComponent implements OnInit {
     this.data = {
       "content": this.content,
       "id": 5,
-      "userId": localStorage.getItem("userId")
+      "userId": this.userId
       };
     this.postService.newPost(<JSON>this.data);
     window.location.reload()
@@ -124,7 +125,7 @@ export class PostComponent implements OnInit {
   likePost(){
     this.likeData = {
       "id":1,
-      "likerId": localStorage.getItem("userId"),
+      "likerId": this.userId,
       "postId": this.id
     }
     this.postService.newLikeOnPost(this.id,this.likeData);
@@ -159,7 +160,7 @@ export class PostComponent implements OnInit {
       this.likeCount=<number>data;
 
     });
-    this.postService.getPostLikeByUser(this.id,localStorage.getItem("userId"))
+    this.postService.getPostLikeByUser(this.id,this.userId)
      .subscribe((data)=>{
      
       this.userLikeOnPost = <Like>data;
