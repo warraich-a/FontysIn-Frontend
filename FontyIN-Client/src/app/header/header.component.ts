@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   searchText='';
 
-  userId: number = parseInt(localStorage.getItem("userId"));
+  userId: number = this.service.getUserIdOfLoggedIn();
   profileId : number;
   profiles : Profile[];
   constructor(private service: UserService,private profileService: ProfileService,
