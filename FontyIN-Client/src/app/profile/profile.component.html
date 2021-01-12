@@ -144,7 +144,7 @@
               </span>
             </thead>
             <tbody>
-              <tr id="test" *ngFor="let p of experiencesList">
+              <tr id="test" *ngFor="let p of data?.experiences">
 
                 <td class="font-italic">
                   <h3>{{p.title | uppercase}} </h3>
@@ -200,7 +200,7 @@
               </span>
             </thead>
             <tbody>
-              <tr id="test" *ngFor="let p of educationsList">
+              <tr id="test" *ngFor="let p of data?.educations">
                 <td>
                   <h3> {{p.school}} </h3>
                   {{p.degreeEducation}}, {{p.fieldStudy}} <br>
@@ -256,7 +256,7 @@
 
           <table class="table table-striped">
             <tbody>
-              <tr id="test" *ngFor="let s of skillsList">
+              <tr id="test" *ngFor="let s of data?.skills">
 
                 <td>{{s.name}}</td>
                 <div *ngIf="!sameUser; else isSameUser">

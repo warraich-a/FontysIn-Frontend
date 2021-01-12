@@ -112,6 +112,8 @@ import { UnexpectedErrorComponent } from './errors/unexpected-error/unexpected-e
 import { BadRequestComponent } from './errors/bad-request/bad-request.component';
 import { OfflineComponent } from './errors/offline/offline.component';
 import { InternalServerErrorComponent } from './errors/internal-server-error/internal-server-error.component';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
 // };
@@ -231,6 +233,13 @@ import { InternalServerErrorComponent } from './errors/internal-server-error/int
     MatSnackBarModule,
     BrowserAnimationsModule,
     NgbModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 2500,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    }),
     // PerfectScrollbarModule,
 
   ],

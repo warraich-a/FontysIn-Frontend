@@ -1,3 +1,4 @@
+import { WebsocketsService } from './../services/websocket/websockets.service';
 import { Conversation } from './../classes/Message/Conversation';
 import { MessageService } from './../services/message/message.service';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -31,13 +32,20 @@ export class MessagesComponent implements OnInit {
 	// @ViewChild('scrollable') private scrollable: ElementRef;
 	// private shouldScrollDown: boolean;
 
-
+	notifications: Array<Notification> = [];
 
 	constructor(private messageService: MessageService,
         private userService: UserService,
 		private router: Router,
 		private route: ActivatedRoute,
-		public dialog: MatDialog) { }
+		public dialog: MatDialog,
+		private WebsocketsService: WebsocketsService) {
+			this.WebsocketsService.connect();
+
+			// WebsocketsService.getState().subscribe((msg) => {
+			//   this.notifications.unshift({content: msg, senderId:});
+			// });
+		 }
 	
 		ngOnInit(): void {
 
