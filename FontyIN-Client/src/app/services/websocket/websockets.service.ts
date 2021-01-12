@@ -67,7 +67,7 @@ export class WebsocketsService {
     // id = message.substring(message.indexOf("/")+1,message.length);
     // if(parseInt(sender) == this.id) {
       console.log('message received: ' + message);
-      this.toastr.success('Hello world!', notification);
+      this.toastr.info('Hello world!', notification);
 
     this.state$.next(notification);
     //} 

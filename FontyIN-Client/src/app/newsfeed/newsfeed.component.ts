@@ -7,6 +7,7 @@ import { ProfileService } from '../services/profile/profile.service';
 import { FormControl, Validators } from '@angular/forms';
 import { PostValidator} from './post.validator';
 import { UserService} from '../services/user.service'
+import { ToastrService } from 'ngx-toastr';
 
 export interface Post {
   content: string;
@@ -29,7 +30,7 @@ export class NewsfeedComponent implements OnInit {
     
    });
 
-  constructor(private postService: PostsService, private profileService: ProfileService,private formBuilder: FormBuilder, private userService : UserService) { }
+  constructor(private postService: PostsService, private profileService: ProfileService,private formBuilder: FormBuilder, private userService : UserService,private toastr: ToastrService) { }
 
   
   userID = this.userService.getUserIdOfLoggedIn();
@@ -70,6 +71,8 @@ export class NewsfeedComponent implements OnInit {
     console.log(this.data);
     window.location.reload();
   }
+
+
 
   deletePost(id){
     this.postService.deletePost(id);
