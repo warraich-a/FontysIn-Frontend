@@ -5,6 +5,7 @@ import { User } from '../classes/Profile/User';
 import { ActivatedRoute } from '@angular/router';
 import { Resume, Experience, Education, Skill } from '../classes/Profile/Resume';
 import { ProfileService } from '../services/profile/profile.service';
+import { UserService } from '../services/user.service';
 export class Experience2{
   constructor( 
       public id: number,
@@ -77,7 +78,7 @@ useExist(){
 }
 
 
-  constructor(private profileService: ProfileService,private route: ActivatedRoute,) {
+  constructor(private service: UserService,private profileService: ProfileService,private route: ActivatedRoute,) {
     this.resume = JSON.parse(sessionStorage.getItem('resume')) || new Resume();
     if (!this.resume.experiences || this.resume.experiences.length === 0) {
       this.resume.experiences = [];
@@ -404,7 +405,7 @@ useExist(){
     this.resume.skills.push(new Skill());
   }
   ngOnInit(): void {
-    this.id = localStorage.getItem('userId');
+    this.id = this.service.getUserIdOfLoggedIn();
     
     this.profileId = +this.route.snapshot.paramMap.get('profileId');
     this.profileService.GetOneUser(this.id)
