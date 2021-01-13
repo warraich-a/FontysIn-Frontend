@@ -147,7 +147,8 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 			"conversationId": this.conversation.id,
 			"sender": this.currentUser?.id,
 			"reciever": this.friend?.id,
-			"content": f.value.message
+			"content": f.value.message,
+			"friendName":this.currentUser?.firstName
 		}
 		
 		var myJSON = JSON.stringify(msg);

@@ -52,14 +52,14 @@ export class WebsocketsService {
     if (!this.socket$){
       return;
     }
-    // console.log('message received: ' + message);
+    console.log('message received: ' + message);
 
     var obj = JSON. parse(message);
     
     // this.state$.next(message);
 
     // this.state$.next(message);
-    let reciever: string = obj.reciever;
+    let reciever: string = obj.friendName;
     let sender: string = obj.sender;
     
     let notification: string = obj.content;
@@ -67,7 +67,7 @@ export class WebsocketsService {
     // id = message.substring(message.indexOf("/")+1,message.length);
     // if(parseInt(sender) == this.id) {
       console.log('message received: ' + message);
-      this.toastr.info('Hello world!', notification);
+      this.toastr.success(reciever, notification);
 
     this.state$.next(notification);
     //} 
