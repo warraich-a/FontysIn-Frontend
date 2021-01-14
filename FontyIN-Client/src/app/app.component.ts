@@ -9,7 +9,7 @@ import { WebsocketsService } from '../app/services/websocket/websockets.service'
 })
 export class AppComponent {
   constructor(private WebsocketsService: WebsocketsService) { 
-  this.WebsocketsService.connect();
+  // this.WebsocketsService.connect();
 
   // WebsocketsService.getState().subscribe((msg) => {
   //   this.notifications.unshift({content: msg, senderId:});

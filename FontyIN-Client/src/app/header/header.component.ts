@@ -8,6 +8,7 @@ import { UserService } from '../services/user.service';
 import { forEachChild } from 'typescript';
 import { DialogAddProfileComponent } from '../profile/dialog-add-profile/dialog-add-profile.component';
 import { MatDialog } from '@angular/material/dialog';
+import { WebsocketsService } from '../services/websocket/websockets.service';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +25,9 @@ export class HeaderComponent implements OnInit {
   constructor(private service: UserService,private profileService: ProfileService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog,) { }
+    public dialog: MatDialog,private webSocketsService:WebsocketsService ) { 
+      this.webSocketsService.connect();
+    }
     users: UserDTO[];
     
     
