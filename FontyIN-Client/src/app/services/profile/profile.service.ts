@@ -226,7 +226,11 @@ export class ProfileService {
   public addNewUser(data){
     return this.httpClient.post('https://fontysin-backend.azurewebsites.net/users/new', data);
   }
-
+  public getData(userId, profileId){
+    this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '2');
+    console.log(this.httpOptions.headers);
+    return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/data', this.httpOptions)
+  }
   // public getPicture(){
   //   return this.httpClient.get('http://localhost:9090/upload/picture', this.httpOptions);
   // }
