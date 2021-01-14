@@ -9,7 +9,7 @@ import {EMPTY, Observable, Subject} from 'rxjs';
 import {BehaviorSubject} from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-const WS_ENDPOINT = 'ws://localhost:9090/ws/demo';
+const WS_ENDPOINT = 'ws://fontysin-backend.azurewebsites.net/ws/demo';
 
 @Injectable({
   providedIn: 'root'

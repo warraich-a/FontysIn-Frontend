@@ -39,7 +39,7 @@ export class PostsService {
    }
 
   public getNewsfeed(id){
-    return this.httpClient.get('http://localhost:9090/posts/newsfeed/'+id,this.httpOptions);
+    return this.httpClient.get('https://fontysin-backend.azurewebsites.net/posts/newsfeed/'+id,this.httpOptions);
    }
 
   public getPost(id){

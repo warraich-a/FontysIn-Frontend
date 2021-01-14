@@ -115,23 +115,7 @@ export class ProfileService {
       )
   }
 
-  // public addProfile(data, userId){
-  //   return this.httpClient.post('http://localhost:9090/users/' + userId + '/profiles/new', data).subscribe((data)=>
-  //   {
-     
-  //   },
-  //   (error: Response) => {
-  //     if(error.status === 409){
-  //       this._snackBar.open('Already Exist!!', 'End now', {
-  //         duration: 1000,
-  //       });
-  //       } 
-  //       else 
-  //       {
-  //         alert('error')
-  //       }
-  //   });
-  // }
+
 
     //delete data in profile page
     public deleteEducation(userId, profileId, educationId){
@@ -229,9 +213,7 @@ export class ProfileService {
   public getData(userId, profileId){
     this.httpOptions.headers = this.httpOptions.headers.set('visitorId', '2');
     console.log(this.httpOptions.headers);
-    return this.httpClient.get('http://localhost:9090/users/' + userId + '/profiles/' + profileId + '/data', this.httpOptions)
+    return this.httpClient.get('https://fontysin-backend.azurewebsites.net/users/' + userId + '/profiles/' + profileId + '/data', this.httpOptions)
   }
-  // public getPicture(){
-  //   return this.httpClient.get('http://localhost:9090/upload/picture', this.httpOptions);
-  // }
+
 }
