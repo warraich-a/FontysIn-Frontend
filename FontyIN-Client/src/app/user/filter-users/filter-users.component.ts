@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserDTO } from 'src/app/classes/Profile/UserDTO';
 import { FilterService } from 'src/app/services/filter/filter.service';
@@ -219,5 +219,19 @@ export class FilterUsersComponent implements OnInit {
   foundDataByInput(){
     return this.searchText;
   }
+
+  @ViewChild('scrollable') private scrollable: ElementRef;
+    disableScrollDown = false;
+
+  // Scroll
+  onScroll() {
+    let element = this.scrollable.nativeElement;
+    let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
+    if (this.disableScrollDown && atBottom) {
+        this.disableScrollDown = false;
+    } else {
+        this.disableScrollDown = true; 
+    }
+}
 
 }
