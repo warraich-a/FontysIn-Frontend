@@ -1,9 +1,6 @@
 import { UserService } from 'src/app/services/user.service';
 import { DialogChangeDpComponent } from './dialog-change-dp/dialog-change-dp.component';
 import { DialogAddSkillComponent } from './dialog-add-skill/dialog-add-skill.component';
-import { DeleteExperienceComponent } from './../delete-experience/delete-experience.component';
-import { DeleteEducationComponent } from './../delete-education/delete-education.component';
-import { DeleteSkillComponent } from './../delete-skill/delete-skill.component';
 import { UpdateProfileAboutComponent} from './../update-profile-about/update-profile-about.component';
 import { UpdateProfileEducationComponent} from './../update-profile-education/update-profile-education.component';
 import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
@@ -39,6 +36,9 @@ import { strict } from 'assert';
 import { stringify } from 'querystring';
 import {DomSanitizer} from '@angular/platform-browser';
 import { Data } from '../classes/Profile/Data';
+import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
+import { DeleteEducationComponent } from './delete-education/delete-education.component';
+import { DeleteExperienceComponent } from './delete-experience/delete-experience.component';
 
 
 @Component({

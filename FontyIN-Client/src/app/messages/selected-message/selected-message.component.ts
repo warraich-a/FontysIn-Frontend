@@ -4,10 +4,10 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
-import { DeleteConversationComponent } from 'src/app/delete-conversation/delete-conversation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { WebsocketsService } from './../../services/websocket/websockets.service';
+import { DeleteConversationComponent } from 'src/app/start-conversation/delete-conversation/delete-conversation.component';
 
 
 @Component({

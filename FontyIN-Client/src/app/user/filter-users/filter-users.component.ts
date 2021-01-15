@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../classes/Profile/User';
-import { UserDTO } from '../classes/Profile/UserDTO';
-import { FilterService } from '../services/filter/filter.service';
+import { UserDTO } from 'src/app/classes/Profile/UserDTO';
+import { FilterService } from 'src/app/services/filter/filter.service';
 
 @Component({
   selector: 'app-filter-users',
