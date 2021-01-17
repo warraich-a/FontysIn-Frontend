@@ -9,13 +9,13 @@ import {EMPTY, Observable, Subject} from 'rxjs';
 import {BehaviorSubject} from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-const WS_ENDPOINT = 'wss://fontysin-backend.azurewebsites.net/ws/demo';
+const WS_ENDPOINT = 'ws://localhost:9090/ws/demo';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketsService {
- 
+  id:number = this.userService.getUserIdOfLoggedIn();
   constructor(private userService:UserService,
     private toastr: ToastrService) {}
   private socket$: WebSocketSubject<any>;
@@ -26,11 +26,10 @@ export class WebsocketsService {
   }
 
   public connect(): void {
-    var id =  this.userService.getUserIdOfLoggedIn();
-    console.log(id);
+    console.log(this.id);
     if (!this.socket$ || this.socket$.closed) {
       this.socket$ = WebsocketsService.getNewWebSocket() as WebSocketSubject<any>;
-      var s = "id"+id;
+      var s = "id"+this.id;
       this.sendMessage(s);
       this.socket$.subscribe(
         msg => this.populateMessage(msg),
@@ -68,7 +67,7 @@ export class WebsocketsService {
     // id = message.substring(message.indexOf("/")+1,message.length);
     // if(parseInt(sender) == this.id) {
       console.log('message received: ' + message);
-      this.toastr.info(reciever, notification);
+      this.toastr.success(reciever, notification);
 
     this.state$.next(notification);
     //} 
