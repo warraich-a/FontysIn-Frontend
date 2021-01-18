@@ -16,7 +16,6 @@ import {PostDetailsComponent} from './post-details/post-details.component'
 
 
 import {UserSettingsComponent} from './user-settings/user-settings.component';
-import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import {LoginComponent} from './login/login.component';
 import { AuthGuard } from  './auth/auth.guard';
@@ -26,6 +25,7 @@ import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
 import { UnexpectedErrorComponent } from './errors/unexpected-error/unexpected-error.component';
 import { OfflineComponent } from './errors/offline/offline.component';
 import { InternalServerErrorComponent } from './errors/internal-server-error/internal-server-error.component';
+import { FilterUsersComponent } from './user/filter-users/filter-users.component';
 const routes: Routes = [
 	{
 	  path: '',

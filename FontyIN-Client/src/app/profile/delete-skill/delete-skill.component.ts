@@ -1,8 +1,6 @@
-import { ProfileService } from './../services/profile/profile.service';
-import { Skill } from './../classes/Profile/Skill';
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ProfileComponent } from '../profile/profile.component';
+import { ProfileService } from 'src/app/services/profile/profile.service';
 
 
 @Component({

@@ -19,10 +19,10 @@ export class UserService {
     })
   };
 
-  
   login(email, password){
    
     const body = email+":"+password;
+    // return this.httpClient.post('https://fontysin-backend.azurewebsites.net/users/login', body, {responseType: 'text'});
     return this.httpClient.post('http://localhost:9090/users/login', body, {responseType: 'text'});
    }
  

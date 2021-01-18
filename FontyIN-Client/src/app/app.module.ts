@@ -64,14 +64,10 @@ import { UpdateProfileExperienceComponent } from './update-profile-experience/up
 import { UpdateProfileAboutComponent } from './update-profile-about/update-profile-about.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
-import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
-import { DeleteExperienceComponent } from './delete-experience/delete-experience.component';
-import { DeleteEducationComponent } from './delete-education/delete-education.component';
 
 
 import { FilterPipe } from './pipes/filter.pipe';
 import { MaterialElevationDirective } from './directives/material-elevation.directive'; // -> imported filter pipe
-import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { A11yModule } from '@angular/cdk/a11y';
 
 import {MatTableModule} from '@angular/material/table';
@@ -100,7 +96,6 @@ import { LoginComponent } from './login/login.component';
 import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CommentUsernameComponent } from './comment-username/comment-username.component';
-import { DeleteConversationComponent } from './delete-conversation/delete-conversation.component';
 import { StartConversationComponent } from './start-conversation/start-conversation.component';
 import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
 
@@ -112,6 +107,13 @@ import { UnexpectedErrorComponent } from './errors/unexpected-error/unexpected-e
 import { BadRequestComponent } from './errors/bad-request/bad-request.component';
 import { OfflineComponent } from './errors/offline/offline.component';
 import { InternalServerErrorComponent } from './errors/internal-server-error/internal-server-error.component';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { DeleteSkillComponent } from './profile/delete-skill/delete-skill.component';
+import { DeleteEducationComponent } from './profile/delete-education/delete-education.component';
+import { DeleteExperienceComponent } from './profile/delete-experience/delete-experience.component';
+import { FilterUsersComponent } from './user/filter-users/filter-users.component';
+import { DeleteConversationComponent } from './start-conversation/delete-conversation/delete-conversation.component';
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   wheelPropagation: true
 // };
@@ -231,6 +233,13 @@ import { InternalServerErrorComponent } from './errors/internal-server-error/int
     MatSnackBarModule,
     BrowserAnimationsModule,
     NgbModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 2500,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    }),
     // PerfectScrollbarModule,
 
   ],

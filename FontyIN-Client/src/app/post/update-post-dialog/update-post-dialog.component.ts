@@ -7,7 +7,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
+import {UserService} from 'src/app/services/user.service';
 
 export interface Post {
   content: string;
@@ -26,7 +26,7 @@ export class UpdatePostDialogComponent implements OnInit {
 
   constructor(private postService: PostsService,private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UpdatePostDialogComponent>,
-               @Inject(MAT_DIALOG_DATA) public data: any) { }
+               @Inject(MAT_DIALOG_DATA) public data: any,private userService:UserService) { }
 
     postId = 0;
   post: Post;
@@ -60,15 +60,15 @@ export class UpdatePostDialogComponent implements OnInit {
         "content": this.newContent,
         "date": this.post.date,
         "id": this.post?.id,
-        "userId": localStorage.getItem("userId"),
-        "image": "assets/"+localStorage.getItem("userId")+this.uploadForm.get('profile').value.name
+        "userId": this.userService.getUserIdOfLoggedIn(),
+        "image": "assets/"+this.userService.getUserIdOfLoggedIn()+this.uploadForm.get('profile').value.name
         };
     } else{
       this.data = {
         "content": this.newContent,
         "date": this.post.date,
         "id": this.post?.id,
-        "userId": localStorage.getItem("userId"),
+        "userId": this.userService.getUserIdOfLoggedIn(),
         "image": this.post?.image
         };
     }

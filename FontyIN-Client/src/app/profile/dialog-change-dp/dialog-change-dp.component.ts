@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dialog-change-dp',
@@ -16,7 +17,8 @@ export class DialogChangeDpComponent implements OnInit {
   profileUrl : string;
   foundUser: User;
   uploadForm: FormGroup;
-  constructor(private profileService: ProfileService,  
+  constructor(private profileService: ProfileService,
+    private userService: UserService,  
     public dialogRef: MatDialogRef<DialogChangeDpComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar,
@@ -58,7 +60,7 @@ export class DialogChangeDpComponent implements OnInit {
     
   ngOnInit(): void {
     // this.userId = this.data.User.id;
-    this.userId = parseInt(localStorage.getItem("userId"));
+    this.userId = this.userService.getUserIdOfLoggedIn();
     this.profileService.getUser(this.userId).subscribe(response=>{
       this.foundUser=<User>response;
       this.profileUrl = this.foundUser.image;

@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Conversation } from '../classes/Message/Conversation';
@@ -25,12 +26,15 @@ export class StartConversationComponent implements OnInit {
     private messageService: MessageService,
     private filterService: FilterService,
     public dialogRef: MatDialogRef<StartConversationComponent>,
+    public userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
       console.log(data);
     }
 
+    userId:number = this.userService.getUserIdOfLoggedIn()
+
   ngOnInit(): void {
-    this.logId = localStorage.getItem('userId');
+    // this.logId = localStorage.getItem('userId'); 
   }
 
   //get user by type letters of his/her name
@@ -58,7 +62,7 @@ export class StartConversationComponent implements OnInit {
 
 
     let newConversation = {
-      firstUserId: this.logId,
+      firstUserId: this.userId,
       secondUserId: id
     }
 

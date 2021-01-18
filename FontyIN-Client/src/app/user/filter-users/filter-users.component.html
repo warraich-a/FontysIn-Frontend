@@ -14,7 +14,7 @@
         </mat-card-header>
     
         <mat-card-content>
-    
+     
           <p>
             <mat-radio-group aria-label="Select an option" [(ngModel)]="TypeSelection" (ngModelChange)="getUsersByType()"> 
               <br>
@@ -116,7 +116,33 @@
         </mat-card-header>
 
 
-          <mat-list>  
+        <div class="scroll-viewport" #scrollable (scroll)="onScroll()">  
+          <div id="testUser"  *ngFor="let user of users">
+              
+            <td class="font-italic"> 
+
+              <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
+
+                <div> 
+                  <img class="userImage" src="{{user.image}}" onerror="this.src='assets/placeholder.png'"> {{user.firstName}} {{user.lastName}}<br>
+                </div>              
+              </div>
+
+              <br>
+
+                Fontys University of Applied Sciences
+              
+              <br>
+              <br>
+              <hr class="filter-divider">
+              <!-- <mat-divider></mat-divider> -->
+              <br>
+            </td>
+
+          </div>
+        </div>
+
+          <!-- <mat-list>  
                
               <tr id="testUser"  *ngFor="let user of users">
             
@@ -141,7 +167,7 @@
 
               </tr>
             
-          </mat-list>
+          </mat-list> -->
 
         <mat-card-content>
 

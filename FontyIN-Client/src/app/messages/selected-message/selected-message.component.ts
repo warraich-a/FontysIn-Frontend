@@ -4,9 +4,10 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import * as moment from 'moment';
-import { DeleteConversationComponent } from 'src/app/delete-conversation/delete-conversation.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
+import { WebsocketsService } from './../../services/websocket/websockets.service';
+import { DeleteConversationComponent } from 'src/app/start-conversation/delete-conversation/delete-conversation.component';
 
 
 @Component({
@@ -32,7 +33,15 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
         private userService: UserService,
 		private router: Router,
 		private route: ActivatedRoute,
-		public dialog: MatDialog) { }
+		public dialog: MatDialog,
+		private WebsocketsService: WebsocketsService) { 
+			this.WebsocketsService.connect();
+
+			// WebsocketsService.getState().subscribe((msg) => {
+			//   this.notifications.unshift({content: msg, senderId:});
+			// });
+		 
+		}
 
   	ngOnInit(): void {
 		this.route.params
@@ -127,12 +136,24 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 
 	// Send message
 	submit(f) {
+		
 		let newMessage = {
 			conversationId: this.conversation.id,
 			sender: this.currentUser,
 			receiver: this.friend,
 			content: f.value.message
 		}
+		var msg = {
+			"conversationId": this.conversation.id,
+			"sender": this.currentUser?.id,
+			"reciever": this.friend?.id,
+			"content": f.value.message,
+			"friendName":this.currentUser?.firstName
+		}
+		
+		var myJSON = JSON.stringify(msg);
+  
+		this.WebsocketsService.sendMessage(myJSON);
 
 		this.messageService.create(newMessage)
 			.subscribe(() => {

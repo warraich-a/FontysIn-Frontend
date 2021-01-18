@@ -8,6 +8,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dialog-add-profile',
@@ -20,10 +21,11 @@ export class DialogAddProfileComponent implements OnInit {
               public dialogRef: MatDialogRef<DialogAddProfileComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private _snackBar: MatSnackBar,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
   profileToAdd: {};
   aboutToAdd : {};
-  userId: number = parseInt(localStorage.getItem('userId'));
+  userId: number = this.userService.getUserIdOfLoggedIn();
   //User = new User(1, "adsf");
   languages = [
     {name: "English"},

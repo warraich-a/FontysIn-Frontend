@@ -101,29 +101,24 @@ export class RegistrationComponent implements OnInit {
             })
   }
   login(email, password){
-    this.token = btoa(email+':'+password);
-      this.service.login(email, password)
-      .subscribe(
-        (res: any) => {
-          console.log(this.token);
-          this.user = <User>res;
-        localStorage.setItem('userToken', this.token);
-        localStorage.setItem('userId', this.user.id.toString());
-        
-        // location.reload();
-        console.log("testing loging -----------------");
-        console.log(this.user);
-        this.router.navigate(['posts']);
-        window.location.href = '/posts';
-        // this.delay();
-        },
-        (error: Response) => {
-          if(error.status === 404){
-            console.log("not found");
-            this.isLoginError = true;
-          }
+    this.service.login(email, password)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+      
+       localStorage.setItem('userToken', res);
+     
+       location.reload();
+      this.router.navigate(['/posts']);
+      window.location.href = '/posts';
+      },
+      (error: Response) => {
+        if(error.status === 404){
+          console.log("not found");
+          this.isLoginError = true;
+         }
         }
-    );
+  );
   }
     
   ngOnInit(): void {
