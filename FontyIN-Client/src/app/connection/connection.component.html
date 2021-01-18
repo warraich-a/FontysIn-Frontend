@@ -28,6 +28,9 @@
 					  <h3 class="connectionName">
 						{{ userId == contact.friend.id ? contact.user.firstName + ' ' + contact.user.lastName: contact.friend.firstName + ' ' + contact.friend.lastName}} 
 					  </h3>
+                      {{contact.user.profileId}}
+                        {{contact.friend.profileId}}
+
 					  <h4>Student at Fontys of Applied Sciences</h4>
 					<hr class="dividerConnections">
 
@@ -100,4 +103,6 @@
 			</div>
 		</mat-tab>
 	  </mat-tab-group>
+
+      {{ contacts | json }}
 </div>

@@ -18,10 +18,12 @@ export class HeaderComponent implements OnInit {
 
   searchText='';
 
-  userId: number = parseInt(localStorage.getItem("userId"));
+  userId: number = this.service.getUserIdOfLoggedIn();
+
   profileId : number;
   profiles : Profile[];
-  constructor(private service: UserService,private profileService: ProfileService,
+  constructor(private service: UserService,
+      private profileService: ProfileService,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,) { }
@@ -30,7 +32,7 @@ export class HeaderComponent implements OnInit {
     
     submit(){
       this.router.navigate(['users/',this.userId, 'profiles', this.profileId])
-      window.location.href = 'users/'+this.userId+'/profiles/'+this.profileId;
+    //   window.location.href = 'users/'+this.userId+'/profiles/'+this.profileId;
     }
     
     openDialogProfile(): void {

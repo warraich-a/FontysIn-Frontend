@@ -37,6 +37,7 @@ import { delay } from 'rxjs/operators';
 import { strict } from 'assert';
 import { stringify } from 'querystring';
 import {DomSanitizer} from '@angular/platform-browser';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -47,7 +48,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class ProfileComponent implements OnInit {
 
 
-  loggedInUser: number = parseInt(localStorage.getItem("userId"));
+  loggedInUser: number = this.userService.getUserIdOfLoggedIn();
   currentUser: UserDTO;
   profileUser: UserDTO;
   isConnected: boolean = false;
@@ -56,7 +57,7 @@ export class ProfileComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
 
-  userId : number = parseInt(localStorage.getItem("userId"));
+  userId : number = this.loggedInUser;
   profileId: number;
   
   allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
@@ -72,6 +73,7 @@ export class ProfileComponent implements OnInit {
   // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
               private contactService: ContactService,
+              private userService: UserService,
                private route: ActivatedRoute,
                public dialog: MatDialog,
                private _snackBar: MatSnackBar,
@@ -483,7 +485,7 @@ openSkillDialog() : void{
         
       }
       else{
-        this.profileUrl = +this.foundUser.image;
+        this.profileUrl = this.foundUser.image;
 
       }
       // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);

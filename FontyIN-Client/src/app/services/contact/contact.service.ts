@@ -25,7 +25,7 @@ export class ContactService extends DataService {
     }
 
   	getId() {
-		let id = this.userService.getUserIdOfLoggedIn()
+		let id = this.userService.getUserIdOfLoggedIn();
 
 		return id;
 	}

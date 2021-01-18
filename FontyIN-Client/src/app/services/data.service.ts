@@ -27,6 +27,8 @@ export class DataService {
    }
 
   getAll() {
+      console.log("Get all contacts " + this.url);
+      console.log(this.httpOptions);
     return this.http.get(this.url, this.httpOptions)
       .pipe(
         // transform this response object to an array of js objects
