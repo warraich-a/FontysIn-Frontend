@@ -20,8 +20,7 @@
 			
 			<div *ngFor="let contact of contacts | appFilter: searchText" class="connection">
 				<img class="item" 
-					src="{{userId == contact.friend.id ? contact.user.image: contact.friend.image}}"
-					onerror="this.src='assets/placeholder.png'">
+					src="../assets/profile-picture-circle-hd.png">
 				<div class="item connectionDesc" 
 					[routerLink]="['/users', userId == contact.friend.id ? contact.user.id: contact.friend.id, 'profiles', userId == contact.friend.id ? contact.user.profileId: contact.friend.profileId]">
 					  <h3 class="connectionName">
@@ -32,7 +31,7 @@
 					<hr class="dividerConnections">
 
 				</div>
-				<mat-icon 
+				<!-- <mat-icon 
 				  aria-hidden="false" 
 				  aria-label="Example chat icon" 
 				  [routerLink]="['/users', 1, '
@@ -42,7 +41,7 @@
 				  messages']"
 				  [matTooltipPosition]="position.value">
 				  chat
-				</mat-icon>
+				</mat-icon> -->
 				<mat-icon 
 				  aria-hidden="false" 
 				  aria-label="Example remove_circle_outline icon" 
@@ -67,8 +66,7 @@
 
 			<div *ngFor="let request of requests, let i = index" class="connection">
 				<img class="item" 
-					src="{{userId == request.friend.id ? request.user.image: request.friend.image}}"
-					onerror="this.src='assets/placeholder.png'">
+					src="../assets/profile-picture-circle-hd.png">
 				<div class="item connectionDesc">
 				  <h3 class="connectionName"
 					  [routerLink]="['/users', userId == request.friend.id ? request.user.id: request.friend.id, 'profiles', userId == request.friend.id ? request.user.profileId: request.friend.profileId]">

@@ -75,7 +75,6 @@ export class FilterUsersComponent implements OnInit {
   locationSelection: String;
   users: UserDTO[]; 
   user: UserDTO;
-
   
 
   combinedFilter(){
