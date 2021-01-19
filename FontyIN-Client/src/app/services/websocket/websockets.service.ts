@@ -9,7 +9,7 @@ import {EMPTY, Observable, Subject} from 'rxjs';
 import {BehaviorSubject} from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-const WS_ENDPOINT = 'wss://localhost:9090/ws/demo';
+const WS_ENDPOINT = 'ws://localhost:9090/ws/demo';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,7 @@ export class WebsocketsService {
     
     console.log(id);
     if (!this.socket$ || this.socket$.closed) {
+      console.log("CONECTION");
       this.socket$ = WebsocketsService.getNewWebSocket() as WebSocketSubject<any>;
       var s = "id"+id;
       this.sendMessage(s);
