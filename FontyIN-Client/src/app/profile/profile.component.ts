@@ -47,47 +47,46 @@ import { DeleteExperienceComponent } from './delete-experience/delete-experience
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+	// logged in user id in token
+	loggedInUserId: number = this.userService.getUserIdOfLoggedIn();
+	// the id of the user who owns the profile
+	userId : number;
+	currentUser: UserDTO;
+	profileUser: UserDTO;
+	
+	// Connection between logged in user and owner of profile
+	contact: Contact;
 
 
-  loggedInUser: number = this.userService.getUserIdOfLoggedIn();
-  currentUser: UserDTO;
-  profileUser: UserDTO;
-  isConnected: boolean = false;
-  isRequestSent: boolean = false;
-  isRequestReceived: boolean = false;
-  contacts: Contact[];
-  contact: Contact;
-
-  userId : number = this.userService.getUserIdOfLoggedIn();
-  profileId: number;
+	profileId: number;
   
-  allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
-  errorMsgEdu: boolean;
-  errorMsgExp: boolean;
-  errorMsgSki: boolean;
-  
-  uploadForm: FormGroup; 
-  @Input() expToAdd={};
-  selectedFile:File = null;
-  profileUrl: any;
-  data: Data;
-
+	allowedToSee = { class: 'text-danger', message: 'Sorry you cant see this!' }; 
+	errorMsgEdu: boolean;
+	errorMsgExp: boolean;
+	errorMsgSki: boolean;
+	
+	uploadForm: FormGroup; 
+	@Input() expToAdd={};
+	selectedFile:File = null;
+	profileUrl: any;
+	data: Data;
+	
   // console.log(dataToAdd);
   constructor(private profileService: ProfileService,
-              private contactService: ContactService,
-              private userService: UserService,
-               private route: ActivatedRoute,
-               public dialog: MatDialog,
-               private _snackBar: MatSnackBar,
-               private formBuilder: FormBuilder,
-               private sanitizer: DomSanitizer) { }
-            
+			  private contactService: ContactService,
+			  private userService: UserService,
+			   private route: ActivatedRoute,
+			   public dialog: MatDialog,
+			   private _snackBar: MatSnackBar,
+			   private formBuilder: FormBuilder,
+			   private sanitizer: DomSanitizer) { }
+			
   profileData: Profile[]; 
   educations: Object[];
   experiences: Experience[];
   skills : Object[];
   about: About[];
-             
+			 
 
   //profileData: Profile[];
   educationsList: Object[];
@@ -115,292 +114,287 @@ export class ProfileComponent implements OnInit {
   skill: Skill;
   experience: Experience;
   profile: Profile; 
-  anotherUserId: number 
   sameUser: boolean;
   
   years = [
-    {year : 2010},
-    {year : 2011},
-    {year : 2012},
-    {year : 2013},
-    {year : 2014},
-    {year : 2015}
-    
+	{year : 2010},
+	{year : 2011},
+	{year : 2012},
+	{year : 2013},
+	{year : 2014},
+	{year : 2015}
+	
 
   ]
   languages = [
-    {name: "English"},
-    {name: "French"},
-    {name: "Spanish"},
-    {name: "Urdu"}
+	{name: "English"},
+	{name: "French"},
+	{name: "Spanish"},
+	{name: "Urdu"}
   ]
 
   jobType = [
-    {name: "FullTime"},
-    {name: "PartTime"},
-    {name: "FreeLancer"}
+	{name: "FullTime"},
+	{name: "PartTime"},
+	{name: "FreeLancer"}
   ]
   
 
 onFileSelect(event) {
   if (event.target.files.length > 0) {
-    const file = event.target.files[0];
-    this.uploadForm.get('profile').setValue(file);
-    console.log("yes aadded")
+	const file = event.target.files[0];
+	this.uploadForm.get('profile').setValue(file);
+	console.log("yes aadded")
   }
 }
 
 
 openDialogDp(): void {
   const dialogRef = this.dialog.open(DialogChangeDpComponent, {
-    width: '50%',
-    data: {User: this.foundUser},
-    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
-    }) 
+	width: '50%',
+	data: {User: this.foundUser},
+	panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+	}) 
   dialogRef.afterClosed()
-    .subscribe(res => {
-    this.getAllExperience();  
+	.subscribe(res => {
+	this.getAllExperience();  
   });
 }
 
 openDialogProfile(): void {
   const dialogRef = this.dialog.open(DialogAddProfileComponent, {
-    width: '50%',
-    data: {User: this.foundUser},
-    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
-    }) 
+	width: '50%',
+	data: {User: this.foundUser},
+	panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+	}) 
   dialogRef.afterClosed()
-    .subscribe(res => {
-    this.getAllExperience();  
+	.subscribe(res => {
+	this.getAllExperience();  
   });
 }
 
 openDialogExperience(): void {
   const dialogRef = this.dialog.open(DialogAddExperienceComponent, {
-    width: '50%',
-    data: {User: this.foundUser, Profile: this.profileId},
-    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+	width: '50%',
+	data: {User: this.foundUser, Profile: this.profileId},
+	panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
 
   }); 
   dialogRef.afterClosed()
-    .subscribe(res => {
-    this.getAllExperience();  
+	.subscribe(res => {
+	this.getAllExperience();  
   });
 }
 openDialogEducation() : void{
   const dialogRef = this.dialog.open(DialogAddEducationComponent,{
-    width: '50%',
-    data: {User: this.foundUser,Profile: this.profileId},
-    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+	width: '50%',
+	data: {User: this.foundUser,Profile: this.profileId},
+	panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
 
   }); 
   dialogRef.afterClosed()
-    .subscribe(res => {
-    this.getAllEducation();  
+	.subscribe(res => {
+	this.getAllEducation();  
   });
 }
 openSkillDialog() : void{
   const dialogRef = this.dialog.open(DialogAddSkillComponent,{
-    maxWidth: '50%',
-    data: {User: this.foundUser,  Profile: this.profileId},
-    panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
+	maxWidth: '50%',
+	data: {User: this.foundUser,  Profile: this.profileId},
+	panelClass: ['custom-modalbox','animate__animated','animate__slideInLeft']
 
   }); 
   dialogRef.afterClosed()
-    .subscribe(res => {
-    this.getAllSkills();  
+	.subscribe(res => {
+	this.getAllSkills();  
   });
 }
 
   // get all skills 
   getAllSkills() {
-    this.profileService.getSkillsById(this.userId, this.profileId)
-    .subscribe(
-      data => {
-        this.skills = <Object[]>data;
-        this.ngOnInit();
-      }
-    )
+	this.profileService.getSkillsById(this.userId, this.profileId)
+	.subscribe(
+	  data => {
+		this.skills = <Object[]>data;
+		this.ngOnInit();
+	  }
+	)
   }
 
   //open dialog for skills
   openDialogSkill(skill: Skill): void {
-    console.log(skill);
-    const dialogRef = this.dialog.open(DeleteSkillComponent, {
-      maxWidth: '50%',
-      data: {skill: skill}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
+	console.log(skill);
+	const dialogRef = this.dialog.open(DeleteSkillComponent, {
+	  maxWidth: '50%',
+	  data: {skill: skill}
+	}); 
+	dialogRef.afterClosed()
+	  .subscribe(res => {
 
-        this.getAllSkills();  
-        this.ngOnInit();
-    });
+		this.getAllSkills();  
+		this.ngOnInit();
+	});
 
   }
 
   // get all Education
   getAllEducation() {
-    this.profileService.getEducationsById(this.userId, this.profileId)
-    .subscribe(
-      data => {
-        this.educations = <Education[]>data;
-        this.ngOnInit();
-      }
-    )
+	this.profileService.getEducationsById(this.userId, this.profileId)
+	.subscribe(
+	  data => {
+		this.educations = <Education[]>data;
+		this.ngOnInit();
+	  }
+	)
   }
 
   //open dialog for education
   openDialogEdu(education: Education): void {
-    console.log(education);
-    const dialogRef = this.dialog.open(DeleteEducationComponent, {
-      maxWidth: '50%',
-      data: {education: education}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
+	console.log(education);
+	const dialogRef = this.dialog.open(DeleteEducationComponent, {
+	  maxWidth: '50%',
+	  data: {education: education}
+	}); 
+	dialogRef.afterClosed()
+	  .subscribe(res => {
 
-        this.getAllEducation();  
-    });
+		this.getAllEducation();  
+	});
 
   }
 
   // get all Experience
   getAllExperience() {
-    this.profileService.getExperienceById(this.userId, this.profileId)
-    .subscribe(
-      data => {
-        this.experiences = <Experience[]>data;
-        this.ngOnInit();
-      }
-    )
+	this.profileService.getExperienceById(this.userId, this.profileId)
+	.subscribe(
+	  data => {
+		this.experiences = <Experience[]>data;
+		this.ngOnInit();
+	  }
+	)
   } 
 
   //open dialog for experience
   openDialogExp(experience: Experience): void {
-    console.log(experience);
-    const dialogRef = this.dialog.open(DeleteExperienceComponent, {
-      maxWidth: '50%',
-      data: {experience: experience}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
+	console.log(experience);
+	const dialogRef = this.dialog.open(DeleteExperienceComponent, {
+	  maxWidth: '50%',
+	  data: {experience: experience}
+	}); 
+	dialogRef.afterClosed()
+	  .subscribe(res => {
 
-        this.getAllExperience();  
-    });
+		this.getAllExperience();  
+	});
 
   }
 
   GetAllAbout(){
-    this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
-    {
-      this.about=<About[]>data;
-      this.ngOnInit();
-      console.log(this.about);
-      this.ngOnInit();
+	this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
+	{
+	  this.about=<About[]>data;
+	  this.ngOnInit();
+	  console.log(this.about);
+	  this.ngOnInit();
 
-    }); 
+	}); 
   }
 
   openDialogAbout(about: About): void {
   
-    const dialogRef = this.dialog.open(UpdateProfileAboutComponent, {
-      maxWidth: '50%',
-      data: {about: about}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
+	const dialogRef = this.dialog.open(UpdateProfileAboutComponent, {
+	  maxWidth: '50%',
+	  data: {about: about}
+	}); 
+	dialogRef.afterClosed()
+	  .subscribe(res => {
 
-        this.GetAllAbout();
-    });
+		this.GetAllAbout();
+	});
 
   }
   
   openDialogUpdateEdu(education: Education): void {
 
-    const dialogRef = this.dialog.open(UpdateProfileEducationComponent, {
-      maxWidth: '50%',
-      data: {education: education}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
+	const dialogRef = this.dialog.open(UpdateProfileEducationComponent, {
+	  maxWidth: '50%',
+	  data: {education: education}
+	}); 
+	dialogRef.afterClosed()
+	  .subscribe(res => {
 
-        this.getAllEducation(); 
-    });
+		this.getAllEducation(); 
+	});
 
   }
   openDialogUpdateExp(experience: Experience): void {
-    const dialogRef = this.dialog.open(UpdateProfileExperienceComponent, {
-      maxWidth: '50%',
-      data: {experience: experience}
-    }); 
-    dialogRef.afterClosed()
-      .subscribe(res => {
+	const dialogRef = this.dialog.open(UpdateProfileExperienceComponent, {
+	  maxWidth: '50%',
+	  data: {experience: experience}
+	}); 
+	dialogRef.afterClosed()
+	  .subscribe(res => {
 
-        this.getAllExperience();  
-    });
+		this.getAllExperience();  
+	});
 
   }
-
-  refresh(): void {
-  window.location.reload();
-  }
-
  
-       
+	   
 
   clickMethod(name: string) {
-    if(confirm("Are you sure to delete "+name)) {
-      console.log("Implement delete functionality here");
-    }
+	if(confirm("Are you sure to delete "+name)) {
+	  console.log("Implement delete functionality here");
+	}
   }
 
   CurrentProfile(idG){
    
-    var self = this;
-    this.profileData.forEach(function (value) {
+	var self = this;
+	this.profileData.forEach(function (value) {
    
-      if(value.id == idG){
-         self.currentProfile = value.language;
-        // console.log(this.tempProfile)
-      }
-    });
-    console.log("Language");
-    
-    console.log(this.currentProfile);
+	  if(value.id == idG){
+		 self.currentProfile = value.language;
+		// console.log(this.tempProfile)
+	  }
+	});
+	console.log("Language");
+	
+	console.log(this.currentProfile);
   }
   refreshProfile(){
 
-      this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
-    {
-      
-      this.aboutList=<Object[]>data;
-      console.log("About-----------------");
+	  this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
+	{
+	  
+	  this.aboutList=<Object[]>data;
+	  console.log("About-----------------");
 
-      console.log(this.aboutList);
-    }
-    );
-    this.profileService.getProfile(this.userId).
-    subscribe(
-      data=> {
-      this.profileData=<Profile[]>data;
-      console.log("Total profiles are")
-      console.log(this.profileData);
-    });
+	  console.log(this.aboutList);
+	}
+	);
+	this.profileService.getProfile(this.userId).
+	subscribe(
+	  data=> {
+	  this.profileData=<Profile[]>data;
+	  console.log("Total profiles are")
+	  console.log(this.profileData);
+	});
 
-    this.profileService.getData(this.userId, this.profileId).subscribe((respnse)=>
-    {
-     
-      this.errorMsgExp = false;
-      this.data=<Data>respnse;
-      // this.profileData = this.data.profiles;
-      this.CurrentProfile(this.profileId);
-      console.log("Full");
+	// get entire profile
+	this.profileService.getData(this.userId, this.profileId).subscribe((respnse)=>
+	{
+	 
+	  this.errorMsgExp = false;
+	  this.data=<Data>respnse;
+	  // this.profileData = this.data.profiles;
+	  this.CurrentProfile(this.profileId);
+	  console.log("Full");
 
-      console.log(this.data);
-    }
+	  console.log(this.data);
+	}
 
-    );
+	);
   
     var BASE64_MARKER = ';base64,';
 
@@ -418,345 +412,234 @@ openSkillDialog() : void{
     }
     let base64data;
 
-    this.profileService.getUser(this.userId)
-    .subscribe((data)=>
-    {
-      const mediaType = 'application/image';
-      this.foundUser=<User>data;
-      this.userFirstName = this.foundUser.firstName;
-      this.userLastName = this.foundUser.lastName;
-      this.profileUrl = "assets/profile-picture-circle-hd.png"
-    // var picture= this.foundUser.image;
+	this.profileService.getUser(this.userId)
+	.subscribe((data)=>
+	{
+	 
+	  this.foundUser=<User>data;
+	  this.userFirstName = this.foundUser.firstName;
+	  this.userLastName = this.foundUser.lastName;
+	  if(this.foundUser.image == ""){
+		this.profileUrl = "https://lh5.googleusercontent.com/proxy/HRnHradLWE7OZ2OZqlQI6puaWBYYxL0M9hK4zdYCyy64DowTsbZfWtzEt5PmlEbD_-lsEEJ2JpulUqQhJwX2lrx5q3sIT00R4IB6QZttREX8WGVztVqCJuHxKHA4Dhh2vRXOeIasK-8lN6Xq1rjE2dbq6ps=w1200-h630-p-k-no-nu";
+	  console.log(this.profileUrl);
+		
+	  }
+	  else{
+		this.profileUrl = "assets/profile-picture-circle-hd.png";
 
-     console.log(this.foundUser);
+	  }
+	  // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);
+	  // this.userImage = this.foundUser.userImage;
+	  console.log("Found User");
+	  console.log(this.foundUser);
+	  console.log("Found img");
+	  console.log(this.profileUrl);
 
-    // var reader = new FileReader();
-    //  reader.readAsDataURL(this.profileUrl); 
-    //  reader.onloadend = function() {
-    //     base64data = reader.result;      
-    //  }
-    //  this.profileUrl = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + base64data);
-
-      // const blob = new Blob([picture], { type: mediaType });
-      // const unsafeImg = URL.createObjectURL(blob);
-      // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-
-
-      // let objectURL = 'data:image/jpeg;base64,' + this.profileUrl;
-      // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-
-
-      // var unsafeImageUrl = URL.createObjectURL(<any>this.foundUser.image);
-      //   this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
-        // this.profileUrl = this.foundUser.image;
-        console.log("bloooooooooooooooooooooooob");
-        console.log(this.foundUser);
-
-      // if(this.foundUser.image == ""){
-      //   this.profileUrl = "https://lh5.googleusercontent.com/proxy/HRnHradLWE7OZ2OZqlQI6puaWBYYxL0M9hK4zdYCyy64DowTsbZfWtzEt5PmlEbD_-lsEEJ2JpulUqQhJwX2lrx5q3sIT00R4IB6QZttREX8WGVztVqCJuHxKHA4Dhh2vRXOeIasK-8lN6Xq1rjE2dbq6ps=w1200-h630-p-k-no-nu";
-      // console.log(this.profileUrl);
-        
-      // }
-      // else{
-      //  var unsafeImageUrl = URL.createObjectURL(this.foundUser.image);
-      //   this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
-      //   // this.profileUrl = this.foundUser.image;
-      //   console.log("bloooooooooooooooooooooooob");
-      //   console.log(this.profileUrl);
-      // }
-      // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);
-      // this.userImage = this.foundUser.userImage;
-      console.log("Found User");
-      console.log(this.foundUser);
-      console.log("Found img");
-      console.log(this.profileUrl);
-
-    });
+	});
   
    
 
-    // this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
-    //   {
-        
-    //     this.errorMsgEdu = false;
-    //     this.educationsList=<Object[]>data;
-    //     console.log(this.educationsList);
-    //     console.log("profile id");
-    //     console.log(this.profileId);
-    //     this.CurrentProfile(this.profileId);
-    //   }
-    // //   ,
-    // //   (error: Response) => {
-    // //     if(error.status === 404){
-    // //       this._snackBar.open('Id is wrong!!', 'End now', {
-    // //         duration: 1000,
-    // //       });
-    // //       }  else if(error.status === 401){
-    // //         console.log("sorry not sorry");
-    // //         this.errorMsgEdu = true;
-    // //       } 
-    // //   }
-    //   );
-    // this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
-    // {
-     
-    //   this.errorMsgExp = false;
-    //   this.experiencesList=<Object[]>data;
-    //   console.log(this.experiencesList);
-    // }
-    // // ,
-    // // (error: Response) => {
-    // //   if(error.status === 404){
-    // //     this._snackBar.open('Id is wrong!!', 'End now', {
-    // //       duration: 1000,
-    // //      });
-    // //    } else if(error.status === 401){
-    // //     console.log("sorry not sorry");
-    // //     this.errorMsgExp = true;
-    // //   }  
-    // // }
-    // );
-    // this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
-    // {
-    
-    //   this.errorMsgSki = false;
-    //   this.skillsList=<Object[]>data;
-    //   console.log(this.skillsList);
-    // }
-    // // ,
-    // // (error: Response) => {
-    // //   if(error.status === 404){
-    // //     this._snackBar.open('Id is wrong!!', 'End now', {
-    // //       duration: 1000,
-    // //      });
-    // //    }
-    // //    else if(error.status === 401){
-    // //      console.log("sorry not sorry");
-    // //      this.errorMsgSki = true;
-    // //    }
-    // // }
-    // );
-    // this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
-    // {
-      
-    //   this.aboutList=<Object[]>data;
-    //   console.log(this.aboutList);
-    // }
-    // // ,
-    // // (error: Response) => {
-    // //   if(error.status === 404){
-    // //     this._snackBar.open('Id is wrong!!', 'End now', {
-    // //       duration: 1000,
-    // //      });
-    // //    } 
-    // // }
-    // );
+	// this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
+	//   {
+		
+	//     this.errorMsgEdu = false;
+	//     this.educationsList=<Object[]>data;
+	//     console.log(this.educationsList);
+	//     console.log("profile id");
+	//     console.log(this.profileId);
+	//     this.CurrentProfile(this.profileId);
+	//   }
+	// //   ,
+	// //   (error: Response) => {
+	// //     if(error.status === 404){
+	// //       this._snackBar.open('Id is wrong!!', 'End now', {
+	// //         duration: 1000,
+	// //       });
+	// //       }  else if(error.status === 401){
+	// //         console.log("sorry not sorry");
+	// //         this.errorMsgEdu = true;
+	// //       } 
+	// //   }
+	//   );
+	// this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
+	// {
+	 
+	//   this.errorMsgExp = false;
+	//   this.experiencesList=<Object[]>data;
+	//   console.log(this.experiencesList);
+	// }
+	// // ,
+	// // (error: Response) => {
+	// //   if(error.status === 404){
+	// //     this._snackBar.open('Id is wrong!!', 'End now', {
+	// //       duration: 1000,
+	// //      });
+	// //    } else if(error.status === 401){
+	// //     console.log("sorry not sorry");
+	// //     this.errorMsgExp = true;
+	// //   }  
+	// // }
+	// );
+	// this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
+	// {
+	
+	//   this.errorMsgSki = false;
+	//   this.skillsList=<Object[]>data;
+	//   console.log(this.skillsList);
+	// }
+	// // ,
+	// // (error: Response) => {
+	// //   if(error.status === 404){
+	// //     this._snackBar.open('Id is wrong!!', 'End now', {
+	// //       duration: 1000,
+	// //      });
+	// //    }
+	// //    else if(error.status === 401){
+	// //      console.log("sorry not sorry");
+	// //      this.errorMsgSki = true;
+	// //    }
+	// // }
+	// );
+	// this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
+	// {
+	  
+	//   this.aboutList=<Object[]>data;
+	//   console.log(this.aboutList);
+	// }
+	// // ,
+	// // (error: Response) => {
+	// //   if(error.status === 404){
+	// //     this._snackBar.open('Id is wrong!!', 'End now', {
+	// //       duration: 1000,
+	// //      });
+	// //    } 
+	// // }
+	// );
   }
 
   url: string;
-    onSelectFile(event) { // called each time file input changes
-        if (event.target.files && event.target.files[0]) {
-          var reader = new FileReader();
+	onSelectFile(event) { // called each time file input changes
+		if (event.target.files && event.target.files[0]) {
+		  var reader = new FileReader();
 
-          reader.readAsDataURL(event.target.files[0]); // read file as data url
+		  reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-          reader.onload = (event: any) => { // called once readAsDataURL is completed
-            this.url = <string>event.target.result;
-            console.log("text for image");
-            console.log(this.url);
-          }
-        }
-    }
+		  reader.onload = (event: any) => { // called once readAsDataURL is completed
+			this.url = <string>event.target.result;
+			console.log("text for image");
+			console.log(this.url);
+		  }
+		}
+	}
 
 
   ngOnInit(): void {
-    
-    let profileUserId: number = +this.route.snapshot.paramMap.get('id');
-    this.anotherUserId = +this.route.snapshot.paramMap.get('id');
+	// Current open profile
+	// user id in url
+	this.userId = +this.route.snapshot.paramMap.get('id');
+	// profile id in url
+	this.profileId = +this.route.snapshot.paramMap.get('profileId');
 
-    console.log("Another User Profile id " + this.anotherUserId)
-    console.log("Your Profile id " + this.userId)
-    if(this.userId == this.anotherUserId){
-      this.sameUser = true;
-    }
+	if(this.userId == this.loggedInUserId){
+	  this.sameUser = true;
+	}
 
-    this.profileService.getUser(profileUserId)
-      .subscribe((data)=> {        
-        this.profileUser = <UserDTO>data;
+	this.profileService.getUser(this.userId)
+	  .subscribe((data)=> {        
+		this.profileUser = <UserDTO>data;
 
-        console.log("Profile user " + this.profileUser.profileId)
-      });
-      // this.profileService.getPicture().subscribe(response=>{
-      //   console.log("------------------");
-        
-      //   console.log(response);
+		console.log("Profile user " + this.profileUser.profileId)
+	  });
 
-      // });
-     
-      
-   //this.profileUser = +this.route.snapshot.paramMap.get('id');
-
-    this.userId = +this.route.snapshot.paramMap.get('id');
-    this.profileId = +this.route.snapshot.paramMap.get('profileId');
-
-    console.log(this.profileId);
-    console.log(this.userId);
-
-    console.log(this.profileUser);
+	
 
 
-    this.refreshProfile();
-    
-
-    // GET ALL CONTACTS
-    this.contactService.getAll()
-    .subscribe(
-      contacts => {
-        this.contacts = <Contact[]>contacts;
-
-        console.log("CONTACTS " + contacts);
-        if(this.contacts.length > 0) {
-       this.contacts.forEach(contact => {
-          // Logged in user sent request or other user sent request, status isAccepted true
-          if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) || (contact.user.id == this.profileUser?.id && contact.friend.id == this.loggedInUser)) && contact.isAccepted == true) {
-            this.isRequestSent = true;
-            this.isConnected = true;
-            this.contact = contact;
-            return;
-          }
-          // Logged in user sent request, status isAccepted false, status isAccepted false
-          else if(((contact.user.id == this.loggedInUser && contact.friend.id == this.profileUser?.id) && !contact.isAccepted)) {
-            this.isRequestSent = true;
-            this.isConnected = false;
-            this.contact = contact;
-
-            return;
-          }
-          else if(((contact.friend.id == this.loggedInUser && contact.user.id == this.profileUser?.id) && !contact.isAccepted)){
-            this.isRequestReceived = true;
-            this.isConnected = false;
-            this.contact = contact;
-
-            return;
-          }
-
-        });
-        }
-
-        this.getUserDTO();
+	this.refreshProfile();
 
 
-      }
-    )
-   
-    
+	// get logged in user
+	this.getUserDTO(this.loggedInUserId)
+		.subscribe((data)=> {
+			this.currentUser = <UserDTO>data;
+			console.log("current user " + this.currentUser.id)
+		});
+
+	// get owner of profile
+	this.getUserDTO(this.userId)
+		.subscribe((data)=> {
+			this.profileUser = <UserDTO>data;
+			console.log("profileUser " + this.profileUser.id)
+		});
+
+	// get connection between current user and profile user if there's one
+	this.getContact(this.userId);
+
   }
 
-  getUserDTO() {
-    this.profileService.getUser(this.loggedInUser)
-    .subscribe((data)=>
-    {
-      this.currentUser = <UserDTO>data;
-      console.log("CURRENT " + this.currentUser);
-    });
-  }
-
-    //deleting skill data
-    deleteSkill(){
-      this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
-      {
-        this.skillsList = <Object[]>data;
-        console.log(this.skillsList);
-      });
-    }
-  
-    //deleting experience data
-    deleteEducation(){
-      this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
-      {
-        this.educationsList = <Object[]>data;
-        console.log(this.educationsList);
-      });
-    }
-  
-    //deleting experience data
-    deleteExperience(experineceId){
-      this.profileService.deleteExperience(this.userId, this.profileId, experineceId).subscribe(data => {
-        console.log(data);
-      });
-    }
-
-//  constructor(private route: ActivatedRoute) {
-//     this.route.params.subscribe(params => console.log(params))
-//    }
-
-//  // educations: Education[];
-//   ngOnInit(): void {
-//     // this.profileService.getProfile().subscribe((data)=>
-//     // {
-//     //   console.log(data);
-//     //   t his.educations=<Education[]>data;
-//   // });
-
-
-
-          /*------------------------------------------------------ CONTACTS -------------------------------------------------------- */
-  getContacts() {
-    this.contactService.getAll()
-      .subscribe(
-        contacts => {
-          this.contacts = <Contact[]>contacts;
-        }
-      )
-  }
   
 
-  createContact() {
-    let user: UserDTO;
+	// get user
+	getUserDTO(userId: number) {
+		return this.profileService.getUser(userId)
+	}
+	
 
-    this.contacts.forEach(contact => {
-      if(contact.user.id == this.loggedInUser) {
-        user = contact.user;
-        return;
-      }
-      else if(contact.friend.id == this.loggedInUser) {
-        user = contact.friend;
-        return;
-      }
-    });
-
-    user = this.currentUser;
-
-    // get logged in user id from auth and friendId from url
-    let contact : {} = { user: user, friend: this.profileUser, isAccepted: false};
-
-    this.contactService.create(contact)
-      .subscribe(
-        newContact => {
-          this.isRequestSent = true;
-        }
-      )
-  }
-
-  // deleteContact() {
-  //   // get logged in user id from auth and contatcId from link
-  //   this.contactService.delete(1)
-  //     .subscribe();
-  // }
-
-    // ACCEPT REQUEST
-    acceptContact() {
-      this.contact.isAccepted = true;
+	//deleting skill data
+	deleteSkill(){
+	  this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
+	  {
+		this.skillsList = <Object[]>data;
+		console.log(this.skillsList);
+	  });
+	}
   
-      this.contactService.update(this.contact)
-        .subscribe(
-          updatedContact => {
-            this.isConnected = true;
-          }
-        )
-    }
- 
-   
-   
+	//deleting experience data
+	deleteEducation(){
+	  this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
+	  {
+		this.educationsList = <Object[]>data;
+		console.log(this.educationsList);
+	  });
+	}
+  
+	//deleting experience data
+	deleteExperience(experineceId){
+	  this.profileService.deleteExperience(this.userId, this.profileId, experineceId).subscribe(data => {
+		console.log(data);
+	  });
+	}
 
+
+
+		  /*------------------------------------------------------ CONTACTS -------------------------------------------------------- */
+	// get connection between current user and profile user if there's one
+	getContact(userId: number) {
+		this.contactService.getContact(userId)
+			.subscribe((data) => {
+				this.contact = <Contact>data;
+
+				console.log("CONNNNN " + this.contact);
+			})
+	}
+
+  	createContact() {
+		// get logged in user id from auth and friendId from url
+		let contact : {} = { user: this.currentUser, friend: this.profileUser, isAccepted: false};
+	
+		this.contactService.create(contact)
+		  	.subscribe( () => {
+				this.getContact(this.userId);
+		  	})
+  	}
+
+
+	// ACCEPT REQUEST
+	acceptContact() {
+		this.contact.isAccepted = true;
+  
+		this.contactService.update(this.contact)
+			.subscribe( () => {
+				this.getContact(this.userId);
+		  	})
+	}
 }

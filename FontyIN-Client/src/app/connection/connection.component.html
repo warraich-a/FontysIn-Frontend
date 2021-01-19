@@ -1,5 +1,4 @@
 <div class="container border my-5" appMaterialElevation [defaultElevation]="defaultElevation" [raisedElevation]="raisedElevation">
-	<!-- <h1 id="heading">My Connections ({{ contacts?.length }})</h1> -->
 	<mat-tab-group animationDuration="1000ms">
 		<mat-tab label="My Connections">
   
@@ -28,7 +27,8 @@
 					  <h3 class="connectionName">
 						{{ userId == contact.friend.id ? contact.user.firstName + ' ' + contact.user.lastName: contact.friend.firstName + ' ' + contact.friend.lastName}} 
 					  </h3>
-					  <h4>Student at Fontys of Applied Sciences</h4>
+
+					  <!-- <h4>Student at Fontys of Applied Sciences</h4> -->
 					<hr class="dividerConnections">
 
 				</div>

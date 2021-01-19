@@ -91,7 +91,7 @@ export class PostComponent implements OnInit {
       "userId": this.userId
       };
     this.postService.newComment(<JSON>this.commentData);
-    window.location.reload();
+    
     
   }
 
@@ -168,6 +168,7 @@ export class PostComponent implements OnInit {
    this.checkIds();
    this.postService.getCommentsByPostId(this.id)
    .subscribe((data)=>{
+    console.log("comments");
    console.log(data);
     this.comments = <Comment[]>data;
     });

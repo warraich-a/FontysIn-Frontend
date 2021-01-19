@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from '../user.service';
 
+// const url = 'https://fontysin-backend.azurewebsites.net/users/';
+const url = 'http://localhost:9090/users/';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +13,10 @@ import { UserService } from '../user.service';
 export class MessageService extends DataService {
   info = new BehaviorSubject('information');
 
+
     constructor(http: HttpClient, 
                 private userService: UserService) {
-        super('https://fontysin-backend.azurewebsites.net/users/' + userService.getUserIdOfLoggedIn() + '/messages', http);
+        super(url + userService.getUserIdOfLoggedIn() + '/messages', http);
     }
 
     getId() {
@@ -24,12 +27,12 @@ export class MessageService extends DataService {
 
   //delete conversation in messaging page
   public deleteConversation(userId, conversationId){
-    return this.http.delete('https://fontysin-backend.azurewebsites.net/users/1/messages/user/' + this.getId() + '/conversation/' + conversationId);
+    return this.http.delete(url + '1/messages/user/' + this.getId() + '/conversation/' + conversationId);
   }
 
   //start new conversation with new contact
   public startConversation(data){
-    return this.http.post('https://fontysin-backend.azurewebsites.net/users/1/messages/newConversation/', data).toPromise().then(data => {
+    return this.http.post(url + '1/messages/newConversation/', data).toPromise().then(data => {
       console.log("In the message service: " + data);
     });   
   }

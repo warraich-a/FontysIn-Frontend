@@ -36,7 +36,7 @@ export class UpdateProfileExperienceComponent  {
   id: number;
   notification = null; 
   constructor( private service: ProfileService,  public dialogRef: MatDialogRef<UpdateProfileExperienceComponent>,@Inject(MAT_DIALOG_DATA) public data: any) { }
-  experience = new Experience(1, 1, "Kassa medewerker", "Shell", "Fulltime", "Idk", 1999, 2000,  "Working at gas station" )
+  experience = new Experience(1, 1, "", "", "", "", 1999, 2000,  "" )
   ngOnInit(): void {
 
     this.id = this.data.experience.id;

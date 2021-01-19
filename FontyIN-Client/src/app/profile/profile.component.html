@@ -17,33 +17,37 @@
     
     </div>  
 
+    <!-- {{ contact.user.id | json }} -->
+<br>
+<!-- {{ contact.friend.id | json }} -->
+
 
     <div class="container big-container border clearfix mat-elevation-z3">
       <div class="float-right">
         <!-- Connect button -->
-        <ng-container *ngIf="loggedInUser != profileUser?.id">
+        <ng-container *ngIf="loggedInUserId != userId">
           <button mat-raised-button
                   id="contact"
-                  *ngIf="isConnected"
+                  *ngIf="contact?.user != null && contact?.friend != null && contact?.isAccepted == true"
                   class="float-right">
             Connected
           </button>
           <button mat-raised-button
                   id="contact"
-                  *ngIf="!isConnected && isRequestSent"
+                  *ngIf="contact?.user?.id == loggedInUserId && contact?.isAccepted == false"
                   class="float-right">
             Request sent
           </button>
           <button mat-raised-button
                   id="contact"
-                  *ngIf="!isConnected && !isRequestSent && !isRequestReceived"
+                  *ngIf="contact?.user == null && contact?.friend == null"
                   (click)="createContact()"
                   class="float-right">
             Connect
           </button>
           <button mat-raised-button
                   id="contact"
-                  *ngIf="!isConnected && isRequestReceived"
+                  *ngIf="contact?.friend?.id == loggedInUserId && contact?.isAccepted == false"
                   (click)="acceptContact()"
                   class="float-right">
             Accept

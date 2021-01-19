@@ -56,15 +56,15 @@ const routes: Routes = [
 	  canActivate: [ AuthGuard ]
 	},
 	  {
-		path: 'users/:id/connections',
+		path: 'connections',
 		component: ConnectionComponent,
 		canActivate: [ AuthGuard ]
 	  },
-	  {
-		path: 'users/:id/messages',
-		component: HomeComponent,
-		canActivate: [ AuthGuard ] // MessageComponent
-	},
+	//   {
+	// 	path: 'users/:id/messages',
+	// 	component: HomeComponent,
+	// 	canActivate: [ AuthGuard ] // MessageComponent
+	// },
 	{
 	  path: 'settings',
 	  component: UserSettingsComponent,

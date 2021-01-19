@@ -51,8 +51,8 @@ export class ConnectionComponent implements OnInit {
     this.contactService.getAcceptedContacts()
     .subscribe(
       contacts => {
-        console.log(contacts);
         this.contacts = <Contact[]>contacts;
+        console.log("All contacts " + this.contacts);
       }
     )
   }
