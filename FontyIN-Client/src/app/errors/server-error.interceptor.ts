@@ -50,9 +50,9 @@ export class ServerErrorInterceptor implements HttpInterceptor {
 							else if(error.status == 500) { // Internal server error
 								this.router.navigate(['internal-server-error']);
 							}
-							else if(error.status == 0) { // Unexpected error (Server is down)
-								this.router.navigate(['unexpected-error']);
-							}
+							// else if(error.status == 0) { // Unexpected error (Server is down)
+							// 	this.router.navigate(['unexpected-error']);
+							// }
 							else { // other
 								let message = errorService.getServerMessage(error);
 								notifier.showError(message);

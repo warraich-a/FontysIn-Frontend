@@ -47,4 +47,15 @@ export class ContactService extends DataService {
 		  map(response => response)
 		)
 	}
+
+
+    // Get contact between current user and profile user
+    getContact(profileUserId: number) {
+        let currentUserId =  this.getId();
+
+        return this.http.get('http://localhost:9090/users/' + this.getId() + '/contacts/' + profileUserId, this.httpOptions)
+		.pipe(
+		  map(response => response)
+		)
+    }
 }
