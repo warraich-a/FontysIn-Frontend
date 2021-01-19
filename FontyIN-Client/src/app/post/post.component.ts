@@ -91,7 +91,7 @@ export class PostComponent implements OnInit {
       "userId": this.userId
       };
     this.postService.newComment(<JSON>this.commentData);
-    
+    window.location.reload();
     
   }
 
