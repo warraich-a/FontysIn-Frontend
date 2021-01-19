@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import jwt_decode from 'jwt-decode';
+
+// const url = 'https://fontysin-backend.azurewebsites.net/users/';
+const url = 'http://localhost:9090/users/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,8 +26,7 @@ export class UserService {
   login(email, password){
    
     const body = email+":"+password;
-    // return this.httpClient.post('https://fontysin-backend.azurewebsites.net/users/login', body, {responseType: 'text'});
-    return this.httpClient.post('http://localhost:9090/users/login', body, {responseType: 'text'});
+    return this.httpClient.post(url + 'login', body, {responseType: 'text'});
    }
  
    logout(){
