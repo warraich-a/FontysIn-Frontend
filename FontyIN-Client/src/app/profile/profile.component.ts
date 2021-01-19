@@ -402,25 +402,68 @@ openSkillDialog() : void{
 
     );
   
+    var BASE64_MARKER = ';base64,';
 
-  
+    function convertDataURIToBinary(dataURI) {
+      var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+      var base64 = dataURI.substring(base64Index);
+      var raw = window.atob(base64);
+      var rawLength = raw.length;
+      var array = new Uint8Array(new ArrayBuffer(rawLength));
+    
+      for(let i = 0; i < rawLength; i++) {
+        array[i] = raw.charCodeAt(i);
+      }
+      return array;
+    }
+    let base64data;
 
     this.profileService.getUser(this.userId)
     .subscribe((data)=>
     {
-     
+      const mediaType = 'application/image';
       this.foundUser=<User>data;
       this.userFirstName = this.foundUser.firstName;
       this.userLastName = this.foundUser.lastName;
-      if(this.foundUser.image == ""){
-        this.profileUrl = "https://lh5.googleusercontent.com/proxy/HRnHradLWE7OZ2OZqlQI6puaWBYYxL0M9hK4zdYCyy64DowTsbZfWtzEt5PmlEbD_-lsEEJ2JpulUqQhJwX2lrx5q3sIT00R4IB6QZttREX8WGVztVqCJuHxKHA4Dhh2vRXOeIasK-8lN6Xq1rjE2dbq6ps=w1200-h630-p-k-no-nu";
-      console.log(this.profileUrl);
-        
-      }
-      else{
-        this.profileUrl = this.foundUser.image;
+      this.profileUrl = "assets/profile-picture-circle-hd.png"
+    // var picture= this.foundUser.image;
 
-      }
+     console.log(this.foundUser);
+
+    // var reader = new FileReader();
+    //  reader.readAsDataURL(this.profileUrl); 
+    //  reader.onloadend = function() {
+    //     base64data = reader.result;      
+    //  }
+    //  this.profileUrl = this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + base64data);
+
+      // const blob = new Blob([picture], { type: mediaType });
+      // const unsafeImg = URL.createObjectURL(blob);
+      // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+
+
+      // let objectURL = 'data:image/jpeg;base64,' + this.profileUrl;
+      // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+
+
+      // var unsafeImageUrl = URL.createObjectURL(<any>this.foundUser.image);
+      //   this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
+        // this.profileUrl = this.foundUser.image;
+        console.log("bloooooooooooooooooooooooob");
+        console.log(this.foundUser);
+
+      // if(this.foundUser.image == ""){
+      //   this.profileUrl = "https://lh5.googleusercontent.com/proxy/HRnHradLWE7OZ2OZqlQI6puaWBYYxL0M9hK4zdYCyy64DowTsbZfWtzEt5PmlEbD_-lsEEJ2JpulUqQhJwX2lrx5q3sIT00R4IB6QZttREX8WGVztVqCJuHxKHA4Dhh2vRXOeIasK-8lN6Xq1rjE2dbq6ps=w1200-h630-p-k-no-nu";
+      // console.log(this.profileUrl);
+        
+      // }
+      // else{
+      //  var unsafeImageUrl = URL.createObjectURL(this.foundUser.image);
+      //   this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(unsafeImageUrl);
+      //   // this.profileUrl = this.foundUser.image;
+      //   console.log("bloooooooooooooooooooooooob");
+      //   console.log(this.profileUrl);
+      // }
       // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);
       // this.userImage = this.foundUser.userImage;
       console.log("Found User");

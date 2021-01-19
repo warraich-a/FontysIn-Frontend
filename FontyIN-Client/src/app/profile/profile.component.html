@@ -70,9 +70,11 @@
             <div *ngIf="!sameUser; else isSameUser">
              <!-- empty because this is another user -->
              <img width="100%" src="{{profileUrl}}" class="zoom">
+             <!-- <img width="100%" src="data:image/jpeg;base64, {{profileUrl}}" alt="base64 image" class="zoom"> -->
             </div>
             <ng-template #isSameUser>
-              <img width="100%" src="{{profileUrl}}" (click)="openDialogDp()" class="zoom"> 
+              <img width="100%"  src="{{profileUrl}}" (click)="openDialogDp()" class="zoom"> 
+              
             </ng-template>
            
           </ul>
