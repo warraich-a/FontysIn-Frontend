@@ -72,7 +72,7 @@ export class PostsService {
   }
 
   public getCommentsByPostId(id){
-    return this.httpClient.get(url +id, this.httpOptions);
+    return this.httpClient.get(commentsUrl+'post/' +id, this.httpOptions);
   }
   
   public uploadPicture(userId, data){

@@ -72,10 +72,9 @@ export class UpdatePostDialogComponent implements OnInit {
         "image": this.post?.image
         };
     }
-    console.log(this.data);
-    console.log(this.postId);
-    this.postService.updatePost(<JSON>this.data,this.post?.id);
     
+    this.postService.updatePost(<JSON>this.data,this.post?.id);
+    window.location.reload();
      
     
   }
