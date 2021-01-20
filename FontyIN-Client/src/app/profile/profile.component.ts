@@ -425,7 +425,7 @@ openSkillDialog() : void{
 		
 	  }
 	  else{
-		this.profileUrl = "assets/profile-picture-circle-hd.png";
+		this.profileUrl = this.foundUser.image;
 
 	  }
 	  // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);

@@ -1,5 +1,6 @@
 <img class="firend-img"
-    src="../../../assets/profile-picture-circle-hd.png">
+    [src]="friend?.image"
+    onerror="this.src='assets/placeholder.png'">
 <mat-icon 
         class="float-right"
         aria-hidden="false" 

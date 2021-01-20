@@ -23,7 +23,7 @@
               "src/favicon.ico",
               "src/assets",
               {
-                "glob": "**/*", "input": "../../fontysin-semester-3/FontysIN/src/main/java/service/images/", "output": "./assets/"
+                "glob": "**/*", "input": "../../fontysin-semester-3/FontysIN/src/images/", "output": "./assets/"
               }
             ],
             "styles": [

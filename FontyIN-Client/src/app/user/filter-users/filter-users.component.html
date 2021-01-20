@@ -124,7 +124,7 @@
               <div [routerLink]="['/users', user.id, 'profiles', user.profileId]" >
 
                 <div> 
-                  <img class="userImage" src="../assets/profile-picture-circle-hd.png" onerror="this.src='assets/placeholder.png'"> {{user.firstName}} {{user.lastName}}<br>
+                  <img class="userImage" src="{{user.image}}" onerror="this.src='assets/placeholder.png'"> {{user.firstName}} {{user.lastName}}<br>
                 </div>              
               </div>
 

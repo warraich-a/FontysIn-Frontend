@@ -26,7 +26,9 @@
                     <div class="messages" (click)="onSelected(conversation, i)" [class.active]="selectedIndex == i">
                         <!-- Loop -->
                         <img class="conversation-img" 
-                            src="../../assets/profile-picture-circle-hd.png">
+						[src]="userId != conversation.firstUser.id ? conversation.firstUser.image : conversation.secondUser.image"
+						onerror="this.src='assets/placeholder.png'">
+
                         <div class="firend-desc message-item">
                             <h3 class="friend-name">
                                 {{ userId != conversation.firstUser.id ? conversation.firstUser.firstName + ' ' + conversation.firstUser.lastName :   conversation.secondUser.firstName + ' ' + conversation.secondUser.lastName }}
