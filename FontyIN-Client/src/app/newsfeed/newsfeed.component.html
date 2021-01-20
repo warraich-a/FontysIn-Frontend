@@ -25,10 +25,10 @@
             <div>
                 <input style="display: none;" type="file" name="profile" (change)="onFileSelect($event)" #selectPicture />
             </div>
-            <div class="buttons">
+            <!-- <div class="buttons">
                 <button class="uploadBtn" type="button" rounded="true" (click)="selectPicture.click()"></button>
                 
-            </div>
+            </div> -->
             <br><br>
             <div style="text-align: center;">
                 <div *ngIf="lenImg()"> <a style="float: right;" (click)="closeImg()">x</a></div>
