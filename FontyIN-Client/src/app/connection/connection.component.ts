@@ -1,5 +1,5 @@
-import { Contact } from '../classes/Contact';
-import { DeleteConnectionComponent } from './../delete-connection/delete-connection.component';
+import { Contact } from '../classes/Contact/Contact';
+import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
 import { ContactService } from './../services/contact/contact.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
@@ -40,19 +40,12 @@ export class ConnectionComponent implements OnInit {
  
   }
 
-  // GO TO MESSAGES
-  message() {
-    // navigate to message with query param username
-  }
-
-
   // GET CONTACTS
   getAcceptedContacts() {
     this.contactService.getAcceptedContacts()
     .subscribe(
       contacts => {
         this.contacts = <Contact[]>contacts;
-        console.log("All contacts " + this.contacts);
       }
     )
   }
@@ -63,8 +56,6 @@ export class ConnectionComponent implements OnInit {
       this.contactService.getContactRequests()
       .subscribe(requests => {
         this.requests = <Contact[]>requests;
-
-        console.log("Requests " + this.requests);
       })
   }
 
@@ -89,8 +80,6 @@ export class ConnectionComponent implements OnInit {
     this.contactService.delete(contact.id)
       .subscribe(
         updatedContact => {
-          console.log(updatedContact);
-
           this.getRequests();
         }
       )
@@ -106,9 +95,6 @@ export class ConnectionComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe(result => {
-        // empty input
-        // this.searchForm.reset('');
-
         this.getAcceptedContacts();  
     });
   }

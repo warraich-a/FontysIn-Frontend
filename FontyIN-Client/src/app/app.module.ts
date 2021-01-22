@@ -63,7 +63,7 @@ import { UpdateProfileEducationComponent } from './update-profile-education/upda
 import { UpdateProfileExperienceComponent } from './update-profile-experience/update-profile-experience.component';
 import { UpdateProfileAboutComponent } from './update-profile-about/update-profile-about.component';
 import { ConnectionComponent } from './connection/connection.component';
-import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
+import { DeleteConnectionComponent } from './connection/delete-connection/delete-connection.component';
 
 
 import { FilterPipe } from './pipes/filter.pipe';
@@ -89,9 +89,6 @@ import { NewsfeedComponent } from './newsfeed/newsfeed.component';
 import { MessagesComponent } from './messages/messages.component';
 import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { LoginComponent } from './login/login.component';
 import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -114,9 +111,6 @@ import { DeleteEducationComponent } from './profile/delete-education/delete-educ
 import { DeleteExperienceComponent } from './profile/delete-experience/delete-experience.component';
 import { FilterUsersComponent } from './user/filter-users/filter-users.component';
 import { DeleteConversationComponent } from './start-conversation/delete-conversation/delete-conversation.component';
-// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-//   wheelPropagation: true
-// };
 
 @NgModule({
   declarations: [
@@ -140,7 +134,6 @@ import { DeleteConversationComponent } from './start-conversation/delete-convers
     DeleteExperienceComponent,
     FilterUsersComponent,
     ProfileComponent, 
-    // UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,
     DialogAddProfileComponent,
@@ -181,7 +174,6 @@ import { DeleteConversationComponent } from './start-conversation/delete-convers
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
-    // MatAutocompleteModule,
     MatTabsModule,
     MatTooltipModule,
     MatBadgeModule,
@@ -240,8 +232,6 @@ import { DeleteConversationComponent } from './start-conversation/delete-convers
       progressAnimation: 'increasing',
       preventDuplicates: true
     }),
-    // PerfectScrollbarModule,
-
   ],
   providers: [
     DataService,
@@ -253,10 +243,6 @@ import { DeleteConversationComponent } from './start-conversation/delete-convers
         useClass: ServerErrorInterceptor,
         multi: true
     }
-    //     {
-    //   provide: PERFECT_SCROLLBAR_CONFIG,
-    //   useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    // }
   ],
   bootstrap: [AppComponent]
 })

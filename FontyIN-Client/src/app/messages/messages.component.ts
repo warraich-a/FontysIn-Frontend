@@ -29,9 +29,6 @@ export class MessagesComponent implements OnInit {
 
     userId:number = this.userService.getUserIdOfLoggedIn();
 
-	// @ViewChild('scrollable') private scrollable: ElementRef;
-	// private shouldScrollDown: boolean;
-
 	notifications: Array<Notification> = [];
 
 	constructor(private messageService: MessageService,
@@ -41,10 +38,6 @@ export class MessagesComponent implements OnInit {
 		public dialog: MatDialog,
 		private WebsocketsService: WebsocketsService) {
 			this.WebsocketsService.connect();
-
-			// WebsocketsService.getState().subscribe((msg) => {
-			//   this.notifications.unshift({content: msg, senderId:});
-			// });
 		 }
 	
 		ngOnInit(): void {
@@ -91,9 +84,6 @@ export class MessagesComponent implements OnInit {
 			dialogRef.afterClosed()
 			.subscribe(res => {
 				this.ngOnInit()
-
-                // Show last conversation
-                // this.router.navigate([this.conversations[this.conversations.length - 1].id], {relativeTo: this.route});
 			});
 
 	}

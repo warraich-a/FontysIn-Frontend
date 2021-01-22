@@ -26,7 +26,6 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 	@ViewChild('scrollable') private scrollable: ElementRef;
     disableScrollDown = false;
 
-
 	position = new FormControl('below');
 
 	constructor(private messageService: MessageService,
@@ -36,11 +35,6 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 		public dialog: MatDialog,
 		private WebsocketsService: WebsocketsService) { 
 			this.WebsocketsService.connect();
-
-			// WebsocketsService.getState().subscribe((msg) => {
-			//   this.notifications.unshift({content: msg, senderId:});
-			// });
-		 
 		}
 
   	ngOnInit(): void {
@@ -95,8 +89,6 @@ export class SelectedMessageComponent implements OnInit, AfterViewChecked {
 		this.messageService.get(this.id)
 			.subscribe((data) => {
 				this.conversation = <Conversation>data;
-
-                // console.log("CON " + this.conversation.firstUser.id + " " + this.conversation.secondUser.id)
 
                 if(this.conversation.messages.length > 0) {
                     // Get users

@@ -1,8 +1,6 @@
 import { Component, Inject, InjectionToken } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ContactService } from '../services/contact/contact.service';
-
-// expect const DIALOG_DATA = new InjectionToken('DIALOG_DATA');
+import { ContactService } from '../../services/contact/contact.service';
 
 @Component({
   selector: 'app-delete-connection',
@@ -16,7 +14,6 @@ export class DeleteConnectionComponent {
     private contactService: ContactService,
     public dialogRef: MatDialogRef<DeleteConnectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log("Data " + data.connectionId)
     }
 
   onNoClick(): void {
@@ -27,9 +24,6 @@ export class DeleteConnectionComponent {
 
   delete() {
     // Delete connection
-    console.log("DELETING ID: " + this.data.connection);
-    console.log("DELETING ID: " + this.data.connection.firstName);
-
     this.contactService.delete(this.data.connection.id)
     .subscribe();
 

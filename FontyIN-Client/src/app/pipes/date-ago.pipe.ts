@@ -14,9 +14,6 @@ export class DateAgoPipe implements PipeTransform {
         if (value) {
             const seconds = Math.floor((+new Date() - +new Date(value)) / 1000);
             if(seconds > 86400) { // bigger than a day
-                // value = 
-                // value = new Date().toISOString().slice(0,10);
-                // value = moment(value, "MM-DD-YYYY");
                 value = moment(value).format('ll');
 
                 return value;
@@ -41,9 +38,6 @@ export class DateAgoPipe implements PipeTransform {
                     } else {
                         return counter + ' ' + i + 's ago'; // plural (2 days ago)
                     }
-                
-
-
             }
         }
         return value;

@@ -6,7 +6,7 @@ import { UpdateProfileEducationComponent} from './../update-profile-education/up
 import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { DialogAddProfileComponent } from './dialog-add-profile/dialog-add-profile.component';
-import { Contact } from '../classes/Contact';
+import { Contact } from '../classes/Contact/Contact';
 import { Profile } from './../classes/Profile/Profile';
 import { ContactService } from '../services/contact/contact.service';
 import { Experience } from './../classes/Profile/Experience';
@@ -16,25 +16,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../services/profile/profile.service';
 import { About } from '../classes/Profile/About';
 import { Skill } from '../classes/Profile/Skill';
-import { HttpHeaders } from '@angular/common/http';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { User } from '../classes/Profile/User';
-import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, interval, Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
 import { DialogAddExperienceComponent } from './dialog-add-experience/dialog-add-experience.component';
 import { DialogAddEducationComponent } from './dialog-add-education/dialog-add-education.component';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { delay } from 'rxjs/operators';
-import { strict } from 'assert';
-import { stringify } from 'querystring';
-import {DomSanitizer} from '@angular/platform-browser';
+import {  FormGroup } from '@angular/forms';
 import { Data } from '../classes/Profile/Data';
 import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
 import { DeleteEducationComponent } from './delete-education/delete-education.component';
@@ -76,10 +62,7 @@ export class ProfileComponent implements OnInit {
 			  private contactService: ContactService,
 			  private userService: UserService,
 			   private route: ActivatedRoute,
-			   public dialog: MatDialog,
-			   private _snackBar: MatSnackBar,
-			   private formBuilder: FormBuilder,
-			   private sanitizer: DomSanitizer) { }
+			   public dialog: MatDialog) { }
 			
   profileData: Profile[]; 
   educations: Object[];
@@ -427,13 +410,7 @@ openSkillDialog() : void{
 	  else{
 		this.profileUrl = this.foundUser.image;
 
-	  }
-	  // this.profileUrl = this.sanitizer.bypassSecurityTrustUrl(this.profileUrl);
-	  // this.userImage = this.foundUser.userImage;
-	  console.log("Found User");
-	  console.log(this.foundUser);
-	  console.log("Found img");
-	  console.log(this.profileUrl);
+      }
 
 	});
   
@@ -526,8 +503,6 @@ openSkillDialog() : void{
 
 		  reader.onload = (event: any) => { // called once readAsDataURL is completed
 			this.url = <string>event.target.result;
-			console.log("text for image");
-			console.log(this.url);
 		  }
 		}
 	}
@@ -547,8 +522,6 @@ openSkillDialog() : void{
 	this.profileService.getUser(this.userId)
 	  .subscribe((data)=> {        
 		this.profileUser = <UserDTO>data;
-
-		console.log("Profile user " + this.profileUser.profileId)
 	  });
 
 	
@@ -561,14 +534,12 @@ openSkillDialog() : void{
 	this.getUserDTO(this.loggedInUserId)
 		.subscribe((data)=> {
 			this.currentUser = <UserDTO>data;
-			console.log("current user " + this.currentUser.id)
 		});
 
 	// get owner of profile
 	this.getUserDTO(this.userId)
 		.subscribe((data)=> {
 			this.profileUser = <UserDTO>data;
-			console.log("profileUser " + this.profileUser.id)
 		});
 
 	// get connection between current user and profile user if there's one
@@ -617,8 +588,6 @@ openSkillDialog() : void{
 		this.contactService.getContact(userId)
 			.subscribe((data) => {
 				this.contact = <Contact>data;
-
-				console.log("CONNNNN " + this.contact);
 			})
 	}
 

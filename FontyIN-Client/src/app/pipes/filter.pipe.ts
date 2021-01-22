@@ -25,9 +25,7 @@ export class FilterPipe implements PipeTransform {
 
     return items.filter(it => {
       let user = it.user.id == userId ? it.friend: it.user;
-      // if(loggedInUser)
       let fullName = user.firstName + ' ' + user.lastName;
-      console.log(fullName);
       return fullName.toString().toLowerCase().indexOf(searchText) >= 0;
     });
   }

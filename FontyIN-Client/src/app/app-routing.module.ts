@@ -60,11 +60,6 @@ const routes: Routes = [
 		component: ConnectionComponent,
 		canActivate: [ AuthGuard ]
 	  },
-	//   {
-	// 	path: 'users/:id/messages',
-	// 	component: HomeComponent,
-	// 	canActivate: [ AuthGuard ] // MessageComponent
-	// },
 	{
 	  path: 'settings',
 	  component: UserSettingsComponent,
