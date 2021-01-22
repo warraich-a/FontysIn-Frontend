@@ -19,7 +19,6 @@ export class StartConversationComponent implements OnInit {
   user: UserDTO;
   conversation: Conversation;
   conversationDTO: ConversationDTO; 
-  logId: string;
 
   
   constructor(
@@ -34,7 +33,6 @@ export class StartConversationComponent implements OnInit {
     userId:number = this.userService.getUserIdOfLoggedIn()
 
   ngOnInit(): void {
-    // this.logId = localStorage.getItem('userId'); 
   }
 
   //get user by type letters of his/her name
@@ -57,9 +55,6 @@ export class StartConversationComponent implements OnInit {
 
   // Send message
 	startNewConversation(id: number) {
-    
-    console.log("In start conversation method --- second user=  " + id + "first user id= " + this.logId);
-
 
     let newConversation = {
       firstUserId: this.userId,

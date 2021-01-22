@@ -50,8 +50,7 @@ export class NewsfeedComponent implements OnInit {
     this.postService.uploadPicture(this.userService.getUserIdOfLoggedIn(), formData).subscribe((data)=>
     { 
         this.postUrl =<string> data;
-        console.log("data");
-        console.log(this.postUrl);
+     
     });
     this.data = {
       "content": this.content,
@@ -68,7 +67,7 @@ export class NewsfeedComponent implements OnInit {
       };
    }
     this.postService.newPost(<JSON>this.data);
-    console.log(this.data);
+
     window.location.reload();
   }
 
@@ -127,10 +126,9 @@ export class NewsfeedComponent implements OnInit {
     });
     this.postService.getNewsfeed(this.userService.getUserIdOfLoggedIn())
      .subscribe((data)=>{
-     console.log(data);
+
       this.allposts = <Post[]> data;
-      console.log("posts");
-    console.log(this.allposts);
+      
    });
    
 

@@ -54,8 +54,6 @@ export class FilterUsersComponent implements OnInit {
   StudentDisabled: boolean;
   EmployeeDisabled: boolean;
 
-  loggedInUser: number = 3;
-
   constructor(private filterService: FilterService,
               private route: ActivatedRoute) { 
                 this.StudentDisabled = false;
