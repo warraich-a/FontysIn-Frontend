@@ -41,7 +41,6 @@ export class RegistrationComponent implements OnInit {
     private service: UserService) { }
 
     public inputValidator(event: any) {
-      //console.log(event.target.value);
       const pattern = /^[a-zA-Z]*$/;   
       //let inputChar = String.fromCharCode(event.charCode)
       if (!pattern.test(event.target.value)) {
@@ -52,59 +51,45 @@ export class RegistrationComponent implements OnInit {
     }
 
   onSubmitRegistration(data){
-    console.log(data);
-    // this.newAddressToAdd = {
-    //   "streetName": data.streetName,
-    //   "houseNumber": data.houseNr,
-    //   "city": data.city,
-    //   "zipCode": data.zipcode
-    // }
-    // this.profileService.addAddress(<JSON>this.newAddressToAdd)
-    //   .subscribe(
-        // newAddress => {
-        //   {
-            this.newUser ={
-              "departmentId": data.department,
-              "email": data.email,
-              "firstName": data.firstName,
-              "img": "",
-              "lastName": data.lastName,
-              "locationId": data.fontysLocation,
-              "password": data.password,
-              "userNumber": data.userNumber,
-              "userType": data.employementType
-            }
-            this.profileService.addNewUser(<JSON>this.newUser).subscribe(response=>{
-              this._snackBar.open('Congratulations, You are now FontysIN user', 'End now', {
-                duration: 2000,
-              });
-              
-              // this.router.navigate(['']),
-              this.foundUser = <User>response;
-              console.log(this.foundUser);
+      this.newUser ={
+        "departmentId": data.department,
+        "email": data.email,
+        "firstName": data.firstName,
+        "img": "",
+        "lastName": data.lastName,
+        "locationId": data.fontysLocation,
+        "password": data.password,
+        "userNumber": data.userNumber,
+        "userType": data.employementType
+      }
+      this.profileService.addNewUser(<JSON>this.newUser).subscribe(response=>{
+        this._snackBar.open('Congratulations, You are now FontysIN user', 'End now', {
+          duration: 2000,
+        });
+        
+        this.foundUser = <User>response;
 
-              this.login(data.email, data.password);
+        this.login(data.email, data.password);
 
-              
-            },
-            (error: Response) => {
-              if(error.status === 409){
-                  this._snackBar.open('This user already exists', 'End now', {
-                    duration: 3000,
-                  });
-                }
-                else{
-                  this._snackBar.open('Wrong data provided', 'End now', {
-                    duration: 3000,
-                  });
-                } 
-            })
+        
+      },
+      (error: Response) => {
+        if(error.status === 409){
+            this._snackBar.open('This user already exists', 'End now', {
+              duration: 3000,
+            });
+          }
+          else{
+            this._snackBar.open('Wrong data provided', 'End now', {
+              duration: 3000,
+            });
+          } 
+      })
   }
   login(email, password){
     this.service.login(email, password)
     .subscribe(
       (res: any) => {
-        console.log(res);
       
        localStorage.setItem('userToken', res);
      
@@ -114,7 +99,6 @@ export class RegistrationComponent implements OnInit {
       },
       (error: Response) => {
         if(error.status === 404){
-          console.log("not found");
           this.isLoginError = true;
          }
         }
@@ -124,12 +108,10 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.getFontysLocations().subscribe(response=>{
       this.fontysLocations = <Object[]>response;
-      console.log(this.fontysLocations);
     })
 
     this.profileService.getFontysDepartments().subscribe(response=>{
       this.departments = <Object[]>response;
-      console.log(this.departments);
     })
   }
 

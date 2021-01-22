@@ -48,9 +48,6 @@ export class DialogAddExperienceComponent implements OnInit {
     this.userId = this.data.User.id;
     this.profileId = this.data.Profile;
 
-    console.log(this.userId);
-    console.log(this.profileId);
-
   }
   onSubmitExperience(data){
    

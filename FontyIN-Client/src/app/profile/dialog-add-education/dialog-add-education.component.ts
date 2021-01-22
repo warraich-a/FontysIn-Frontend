@@ -40,9 +40,6 @@ export class DialogAddEducationComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.data.User.id;
     this.profileId = this.data.Profile;
-
-    console.log(this.userId);
-    console.log(this.profileId);
   }
 
   onSubmitEducation(data)
