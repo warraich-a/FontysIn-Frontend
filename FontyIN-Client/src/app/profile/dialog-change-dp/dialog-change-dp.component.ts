@@ -43,12 +43,8 @@ export class DialogChangeDpComponent implements OnInit {
      this.profileService.uploadPicture(this.userId, formData).subscribe((data)=>
      { 
          this.profileUrl =<string> data;
-         console.log("data");
-         console.log(this.profileUrl);
      },
      (error: Response) => {
-       console.log("Error");
-       console.log(error);
        if(error.status === 409){
            this._snackBar.open('Already Exist!!', 'End now', {
              duration: 1000,
@@ -65,8 +61,7 @@ export class DialogChangeDpComponent implements OnInit {
       this.foundUser=<User>response;
       this.profileUrl = this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
-      console.log("Found User");
-      console.log(this.foundUser);
+
     });
     this.uploadForm = this.formBuilder.group({
       profile: ['']

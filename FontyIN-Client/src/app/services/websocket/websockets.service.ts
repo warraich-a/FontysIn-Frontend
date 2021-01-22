@@ -29,7 +29,7 @@ export class WebsocketsService {
     
     console.log(id);
     if (!this.socket$ || this.socket$.closed) {
-      console.log("CONECTION");
+
       this.socket$ = WebsocketsService.getNewWebSocket() as WebSocketSubject<any>;
       var s = "id"+id;
       this.sendMessage(s);
@@ -42,7 +42,7 @@ export class WebsocketsService {
         },
         // Called if WebSocket API signals some kind of error
         () => {
-          console.log('complete');
+         
           this.socket$ = null;
         }
         // Called when connection is closed (for whatever reason)
@@ -54,7 +54,7 @@ export class WebsocketsService {
     if (!this.socket$){
       return;
     }
-    console.log('message received: ' + message);
+   
 
     var obj = JSON. parse(message);
     
@@ -65,10 +65,10 @@ export class WebsocketsService {
     let sender: string = obj.sender;
     
     let notification: string = obj.content;
-    console.log('patient Id: ' + sender);
+   
     // id = message.substring(message.indexOf("/")+1,message.length);
     // if(parseInt(sender) == this.id) {
-      console.log('message received: ' + message);
+     
       this.toastr.success(reciever, notification);
 
     this.state$.next(notification);
@@ -83,7 +83,7 @@ export class WebsocketsService {
     if (!this.socket$){
       return;
     }
-    console.log('message: ' + msg);
+  
     this.socket$.next(msg);
   }
 

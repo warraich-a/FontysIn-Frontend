@@ -27,9 +27,6 @@ export class DialogAddSkillComponent implements OnInit {
     ngOnInit(): void {
       this.userId = this.data.User.id;
       this.profileId = this.data.Profile;
-  
-      console.log(this.userId);
-      console.log(this.profileId);
     }
     onSubmitSkill(data)
     {

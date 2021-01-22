@@ -96,15 +96,13 @@ export class PostComponent implements OnInit {
   }
 
   checkIds(){
-    console.log("compare to ids");
-    console.log(this.userId);
-    console.log( this.post?.userId);
+    
     if( this.userId == this.post?.userId){
       this.checked = true;
     } else {
       this.checked = false;
     }
-    console.log(this.checked);
+    
   }
 
   createPost() {
@@ -168,14 +166,13 @@ export class PostComponent implements OnInit {
    this.checkIds();
    this.postService.getCommentsByPostId(this.id)
    .subscribe((data)=>{
-    console.log("comments");
-   console.log(data);
+    
     this.comments = <Comment[]>data;
     });
     this.profileService.getUser(this.post.userId)
     .subscribe((data)=>
     {
-      console.log(data);
+      
       this.user=<User>data;
 
     });

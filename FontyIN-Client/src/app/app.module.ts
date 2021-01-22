@@ -59,9 +59,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
 
 import { HeaderComponent } from './header/header.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
-import { UpdateProfileEducationComponent } from './update-profile-education/update-profile-education.component';
-import { UpdateProfileExperienceComponent } from './update-profile-experience/update-profile-experience.component';
-import { UpdateProfileAboutComponent } from './update-profile-about/update-profile-about.component';
+import { UpdateProfileEducationComponent } from './profile/update-profile-education/update-profile-education.component';
+import { UpdateProfileExperienceComponent } from './profile/update-profile-experience/update-profile-experience.component';
+import { UpdateProfileAboutComponent } from './profile/update-profile-about/update-profile-about.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { DeleteConnectionComponent } from './connection/delete-connection/delete-connection.component';
 

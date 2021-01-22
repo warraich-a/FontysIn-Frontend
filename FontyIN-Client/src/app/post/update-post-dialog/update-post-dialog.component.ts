@@ -37,7 +37,7 @@ export class UpdatePostDialogComponent implements OnInit {
 
   saveVal(item){
     this.newContent = item.target.value;
-    console.log(this.newContent);
+    
   }
 
   updatePost(){
@@ -49,12 +49,11 @@ export class UpdatePostDialogComponent implements OnInit {
    { 
     
        this.postUrl =<string> data;
-       console.log("data");
-    console.log(this.postUrl);
+       
        
    });
 
-    console.log(this.lenImg());
+    
     if(this.lenImg()){
       this.data = {
         "content": this.newContent,
@@ -115,7 +114,7 @@ export class UpdatePostDialogComponent implements OnInit {
    
     this.post = this.data.p;
     this.newContent = this.post.content;
-    console.log(this.post);
+
     this.uploadForm = this.formBuilder.group({
       profile: ['']
     });

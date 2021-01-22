@@ -47,28 +47,27 @@ export class NewsfeedComponent implements OnInit {
    
 
    if(this.uploadForm.get('profile').value.name != null){
-    this.postService.uploadPicture(this.userId, formData).subscribe((data)=>
+    this.postService.uploadPicture(this.userService.getUserIdOfLoggedIn(), formData).subscribe((data)=>
     { 
         this.postUrl =<string> data;
-        console.log("data");
-        console.log(this.postUrl);
+     
     });
     this.data = {
       "content": this.content,
       "id": 5,
-      "userId": this.userID,
-      "image": "assets/"+this.userId+this.uploadForm.get('profile').value.name
+      "userId": this.userService.getUserIdOfLoggedIn(),
+      "image": "assets/"+this.userService.getUserIdOfLoggedIn()+this.uploadForm.get('profile').value.name
       };
    } else {
     this.data = {
       "content": this.content,
       "id": 5,
-      "userId": this.userID,
+      "userId": this.userService.getUserIdOfLoggedIn(),
       "image": ""
       };
    }
     this.postService.newPost(<JSON>this.data);
-    console.log(this.data);
+
     window.location.reload();
   }
 
@@ -121,16 +120,15 @@ export class NewsfeedComponent implements OnInit {
 
   ngOnInit(): void {
   
-    this.userId = parseInt(localStorage.getItem("userId"));
+    this.userId = this.userService.getUserIdOfLoggedIn();
     this.uploadForm = this.formBuilder.group({
       profile: ['']
     });
-    this.postService.getNewsfeed(this.userID)
+    this.postService.getNewsfeed(this.userService.getUserIdOfLoggedIn())
      .subscribe((data)=>{
-     console.log(data);
+
       this.allposts = <Post[]> data;
-      console.log("posts");
-    console.log(this.allposts);
+      
    });
    
 

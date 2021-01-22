@@ -1,9 +1,9 @@
 import { UserService } from 'src/app/services/user.service';
 import { DialogChangeDpComponent } from './dialog-change-dp/dialog-change-dp.component';
 import { DialogAddSkillComponent } from './dialog-add-skill/dialog-add-skill.component';
-import { UpdateProfileAboutComponent} from './../update-profile-about/update-profile-about.component';
-import { UpdateProfileEducationComponent} from './../update-profile-education/update-profile-education.component';
-import { UpdateProfileExperienceComponent} from './../update-profile-experience/update-profile-experience.component';
+import { UpdateProfileAboutComponent} from './update-profile-about/update-profile-about.component';
+import { UpdateProfileEducationComponent} from './update-profile-education/update-profile-education.component';
+import { UpdateProfileExperienceComponent} from './update-profile-experience/update-profile-experience.component';
 import { UserDTO } from './../classes/Profile/UserDTO';
 import { DialogAddProfileComponent } from './dialog-add-profile/dialog-add-profile.component';
 import { Contact } from '../classes/Contact/Contact';
@@ -127,7 +127,7 @@ onFileSelect(event) {
   if (event.target.files.length > 0) {
 	const file = event.target.files[0];
 	this.uploadForm.get('profile').setValue(file);
-	console.log("yes aadded")
+
   }
 }
 
@@ -140,7 +140,7 @@ openDialogDp(): void {
 	}) 
   dialogRef.afterClosed()
 	.subscribe(res => {
-	this.getAllExperience();  
+	this.refreshProfile();  
   });
 }
 
@@ -152,7 +152,7 @@ openDialogProfile(): void {
 	}) 
   dialogRef.afterClosed()
 	.subscribe(res => {
-	this.getAllExperience();  
+	this.refreshProfile();  
   });
 }
 
@@ -165,7 +165,7 @@ openDialogExperience(): void {
   }); 
   dialogRef.afterClosed()
 	.subscribe(res => {
-	this.getAllExperience();  
+	this.refreshProfile();  
   });
 }
 openDialogEducation() : void{
@@ -177,7 +177,7 @@ openDialogEducation() : void{
   }); 
   dialogRef.afterClosed()
 	.subscribe(res => {
-	this.getAllEducation();  
+	this.refreshProfile();  
   });
 }
 openSkillDialog() : void{
@@ -189,20 +189,20 @@ openSkillDialog() : void{
   }); 
   dialogRef.afterClosed()
 	.subscribe(res => {
-	this.getAllSkills();  
+	this.refreshProfile();  
   });
 }
 
-  // get all skills 
-  getAllSkills() {
-	this.profileService.getSkillsById(this.userId, this.profileId)
-	.subscribe(
-	  data => {
-		this.skills = <Object[]>data;
-		this.ngOnInit();
-	  }
-	)
-  }
+//   // get all skills 
+//   getAllSkills() {
+// 	this.profileService.getSkillsById(this.userId, this.profileId)
+// 	.subscribe(
+// 	  data => {
+// 		this.skills = <Object[]>data;
+// 		this.ngOnInit();
+// 	  }
+// 	)
+//   }
 
   //open dialog for skills
   openDialogSkill(skill: Skill): void {
@@ -214,22 +214,22 @@ openSkillDialog() : void{
 	dialogRef.afterClosed()
 	  .subscribe(res => {
 
-		this.getAllSkills();  
+		this.refreshProfile();  
 		this.ngOnInit();
 	});
 
   }
 
   // get all Education
-  getAllEducation() {
-	this.profileService.getEducationsById(this.userId, this.profileId)
-	.subscribe(
-	  data => {
-		this.educations = <Education[]>data;
-		this.ngOnInit();
-	  }
-	)
-  }
+//   getAllEducation() {
+// 	this.profileService.getEducationsById(this.userId, this.profileId)
+// 	.subscribe(
+// 	  data => {
+// 		this.educations = <Education[]>data;
+// 		this.ngOnInit();
+// 	  }
+// 	)
+//   }
 
   //open dialog for education
   openDialogEdu(education: Education): void {
@@ -241,21 +241,21 @@ openSkillDialog() : void{
 	dialogRef.afterClosed()
 	  .subscribe(res => {
 
-		this.getAllEducation();  
+		this.refreshProfile();  
 	});
 
   }
 
-  // get all Experience
-  getAllExperience() {
-	this.profileService.getExperienceById(this.userId, this.profileId)
-	.subscribe(
-	  data => {
-		this.experiences = <Experience[]>data;
-		this.ngOnInit();
-	  }
-	)
-  } 
+//   // get all Experience
+//   getAllExperience() {
+// 	this.profileService.getExperienceById(this.userId, this.profileId)
+// 	.subscribe(
+// 	  data => {
+// 		this.experiences = <Experience[]>data;
+// 		this.ngOnInit();
+// 	  }
+// 	)
+//   } 
 
   //open dialog for experience
   openDialogExp(experience: Experience): void {
@@ -267,7 +267,7 @@ openSkillDialog() : void{
 	dialogRef.afterClosed()
 	  .subscribe(res => {
 
-		this.getAllExperience();  
+		this.refreshProfile();  
 	});
 
   }
@@ -277,7 +277,7 @@ openSkillDialog() : void{
 	{
 	  this.about=<About[]>data;
 	  this.ngOnInit();
-	  console.log(this.about);
+	 
 	  this.ngOnInit();
 
 	}); 
@@ -306,7 +306,7 @@ openSkillDialog() : void{
 	dialogRef.afterClosed()
 	  .subscribe(res => {
 
-		this.getAllEducation(); 
+		this.refreshProfile(); 
 	});
 
   }
@@ -318,7 +318,7 @@ openSkillDialog() : void{
 	dialogRef.afterClosed()
 	  .subscribe(res => {
 
-		this.getAllExperience();  
+		this.refreshProfile();  
 	});
 
   }
@@ -327,7 +327,7 @@ openSkillDialog() : void{
 
   clickMethod(name: string) {
 	if(confirm("Are you sure to delete "+name)) {
-	  console.log("Implement delete functionality here");
+	
 	}
   }
 
@@ -341,9 +341,7 @@ openSkillDialog() : void{
 		// console.log(this.tempProfile)
 	  }
 	});
-	console.log("Language");
-	
-	console.log(this.currentProfile);
+
   }
   refreshProfile(){
 
@@ -351,17 +349,14 @@ openSkillDialog() : void{
 	{
 	  
 	  this.aboutList=<Object[]>data;
-	  console.log("About-----------------");
-
-	  console.log(this.aboutList);
+	
 	}
 	);
 	this.profileService.getProfile(this.userId).
 	subscribe(
 	  data=> {
 	  this.profileData=<Profile[]>data;
-	  console.log("Total profiles are")
-	  console.log(this.profileData);
+
 	});
 
 	// get entire profile
@@ -372,9 +367,7 @@ openSkillDialog() : void{
 	  this.data=<Data>respnse;
 	  // this.profileData = this.data.profiles;
 	  this.CurrentProfile(this.profileId);
-	  console.log("Full");
-
-	  console.log(this.data);
+	
 	}
 
 	);
@@ -393,8 +386,7 @@ openSkillDialog() : void{
       }
       return array;
     }
-    let base64data;
-
+   
 	this.profileService.getUser(this.userId)
 	.subscribe((data)=>
 	{
@@ -402,96 +394,11 @@ openSkillDialog() : void{
 	  this.foundUser=<User>data;
 	  this.userFirstName = this.foundUser.firstName;
 	  this.userLastName = this.foundUser.lastName; 
-	  if(this.foundUser.image == ""){
-		this.profileUrl = "https://lh5.googleusercontent.com/proxy/HRnHradLWE7OZ2OZqlQI6puaWBYYxL0M9hK4zdYCyy64DowTsbZfWtzEt5PmlEbD_-lsEEJ2JpulUqQhJwX2lrx5q3sIT00R4IB6QZttREX8WGVztVqCJuHxKHA4Dhh2vRXOeIasK-8lN6Xq1rjE2dbq6ps=w1200-h630-p-k-no-nu";
-	  console.log(this.profileUrl);
-		
-	  }
-	  else{
-		this.profileUrl = this.foundUser.image;
-
-      }
+	  this.profileUrl = this.foundUser.image;
 
 	});
   
    
-
-	// this.profileService.getEducationsById(this.userId, this.profileId).subscribe((data)=>
-	//   {
-		
-	//     this.errorMsgEdu = false;
-	//     this.educationsList=<Object[]>data;
-	//     console.log(this.educationsList);
-	//     console.log("profile id");
-	//     console.log(this.profileId);
-	//     this.CurrentProfile(this.profileId);
-	//   }
-	// //   ,
-	// //   (error: Response) => {
-	// //     if(error.status === 404){
-	// //       this._snackBar.open('Id is wrong!!', 'End now', {
-	// //         duration: 1000,
-	// //       });
-	// //       }  else if(error.status === 401){
-	// //         console.log("sorry not sorry");
-	// //         this.errorMsgEdu = true;
-	// //       } 
-	// //   }
-	//   );
-	// this.profileService.getExperienceById(this.userId, this.profileId).subscribe((data)=>
-	// {
-	 
-	//   this.errorMsgExp = false;
-	//   this.experiencesList=<Object[]>data;
-	//   console.log(this.experiencesList);
-	// }
-	// // ,
-	// // (error: Response) => {
-	// //   if(error.status === 404){
-	// //     this._snackBar.open('Id is wrong!!', 'End now', {
-	// //       duration: 1000,
-	// //      });
-	// //    } else if(error.status === 401){
-	// //     console.log("sorry not sorry");
-	// //     this.errorMsgExp = true;
-	// //   }  
-	// // }
-	// );
-	// this.profileService.getSkillsById(this.userId, this.profileId).subscribe((data)=>
-	// {
-	
-	//   this.errorMsgSki = false;
-	//   this.skillsList=<Object[]>data;
-	//   console.log(this.skillsList);
-	// }
-	// // ,
-	// // (error: Response) => {
-	// //   if(error.status === 404){
-	// //     this._snackBar.open('Id is wrong!!', 'End now', {
-	// //       duration: 1000,
-	// //      });
-	// //    }
-	// //    else if(error.status === 401){
-	// //      console.log("sorry not sorry");
-	// //      this.errorMsgSki = true;
-	// //    }
-	// // }
-	// );
-	// this.profileService.getAboutById(this.userId, this.profileId).subscribe((data)=>
-	// {
-	  
-	//   this.aboutList=<Object[]>data;
-	//   console.log(this.aboutList);
-	// }
-	// // ,
-	// // (error: Response) => {
-	// //   if(error.status === 404){
-	// //     this._snackBar.open('Id is wrong!!', 'End now', {
-	// //       duration: 1000,
-	// //      });
-	// //    } 
-	// // }
-	// );
   }
 
   url: string;
@@ -503,6 +410,7 @@ openSkillDialog() : void{
 
 		  reader.onload = (event: any) => { // called once readAsDataURL is completed
 			this.url = <string>event.target.result;
+		
 		  }
 		}
 	}
@@ -560,7 +468,7 @@ openSkillDialog() : void{
 	  this.profileService.deleteSkill(this.profile.userId, this.skill.profileId, this.skill.id).subscribe((data)=>
 	  {
 		this.skillsList = <Object[]>data;
-		console.log(this.skillsList);
+	
 	  });
 	}
   
@@ -569,14 +477,14 @@ openSkillDialog() : void{
 	  this.profileService.deleteEducation(this.profile.userId, this.education.profileId, this.education.id).subscribe((data)=>
 	  {
 		this.educationsList = <Object[]>data;
-		console.log(this.educationsList);
+	
 	  });
 	}
   
 	//deleting experience data
 	deleteExperience(experineceId){
 	  this.profileService.deleteExperience(this.userId, this.profileId, experineceId).subscribe(data => {
-		console.log(data);
+	
 	  });
 	}
 
