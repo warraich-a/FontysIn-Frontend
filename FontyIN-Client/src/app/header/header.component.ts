@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
     });
     this.profileService.getAllUsers().subscribe(data =>{
       this.users=<UserDTO[]>data;
-      console.log(data);
+     
     });
   }
   logout(){

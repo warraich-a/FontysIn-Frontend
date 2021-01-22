@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { employmentType } from 'src/app/classes/Profile/EmploymentType';
 import { Experience } from 'src/app/classes/Profile/Experience';
 import { ProfileService } from 'src/app/services/profile/profile.service';
-import { UpdateProfileExperienceComponent } from 'src/app/update-profile-experience/update-profile-experience.component';
 
 @Component({
   selector: 'app-dialog-add-experience',

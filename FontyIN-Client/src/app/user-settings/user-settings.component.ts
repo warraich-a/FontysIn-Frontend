@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
-import { Address } from '../classes/Profile/Address';
 import { privacy } from '../classes/Profile/Privacy';
 
 import { ProfileService } from '../services/profile/profile.service';
@@ -25,10 +24,8 @@ export class UserSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = localStorage.getItem('userId');
-
     this.service.GetOnePrivacy()
     .subscribe((data)=>{
-      console.log(data);
     this.privacy = <privacy>data;
     if(this.privacy.hideFromSearch){
       this.isChecked = false;
@@ -46,7 +43,6 @@ showNotificationP() {
 
 updatePrivacy(){
   this.hideEverything();
-  console.log(this.privacy);
   this.service.updatePrivacy(this.privacy).subscribe(
     (res: any) => {
       this.showNotificationP();

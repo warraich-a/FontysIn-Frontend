@@ -147,9 +147,7 @@ export class ProfileService {
     public GetOneAbout(id){
       return this.httpClient.get(url + 'profile/about/' + id, this.httpOptions);
     }
-    public GetOneAddress(id){
-      return this.httpClient.get(url + 'address/' + id, this.httpOptions);
-    }
+  
     public GetOneUser(id){
       return this.httpClient.get(url + 'user/' + id, this.httpOptions);
     }
@@ -167,12 +165,6 @@ export class ProfileService {
     return this.httpClient.put(url + 'profile/about/' + id, model, this.httpOptions);
   }
 
-  updateAddress(model, id) {
-    return this.httpClient.put(url + 'address/' + id, model, this.httpOptions);
-  }
-  updatePhoneNumber(model, id) {
-    return this.httpClient.put(url + id, model, this.httpOptions);
-  }
   public GetOnePrivacy(){
     return this.httpClient.get(url + 'privacy/me', this.httpOptions);
   }
@@ -191,9 +183,6 @@ export class ProfileService {
 
   public getFontysDepartments(){
     return this.httpClient.get(url + 'fontysDepartments');
-  }
-  public addAddress(data){
-    return this.httpClient.post(url + 'newAddress', data);
   }
 
   public addNewUser(data){
