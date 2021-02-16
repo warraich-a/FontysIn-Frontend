@@ -5,17 +5,17 @@ export class User {
     firstName: string;
     lastName: string;
     userEmail: string;
+    email:string;
     password: string;; 
     phoneNumbar: string;; 
     addressId: number;
     locationId: number;
     departmentId: number; 
-    userNumber: string;; 
-    img: string;; 
+    userNumber: string; 
+    image: string;
     userType: UserType;
     
     constructor(
-        public id: number,
-        public userPhoneNumber: string,
+        public id: number
     ) {  }
 }

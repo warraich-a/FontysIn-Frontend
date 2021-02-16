@@ -1,4 +1,8 @@
 /* CONNECTION */
+.container {
+    background: white;
+}
+
 .mat-list-base .mat-list-item {
     height: 180px;
 }
@@ -47,6 +51,7 @@
 /* Connection image */
 img.item {
     width: 120px;
+    border-radius: 50%;
 }
 
 /* Connection name */

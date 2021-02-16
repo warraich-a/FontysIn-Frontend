@@ -1,8 +1,9 @@
+import { MessageService } from './services/message/message.service';
 import { AddInformationComponent } from './profile/add-information/add-information.component';
 import { DataService } from './services/data.service';
 import { ContactService } from './services/contact/contact.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -58,26 +59,22 @@ import {OverlayModule} from '@angular/cdk/overlay';
 
 import { HeaderComponent } from './header/header.component';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
-import { UpdateProfileEducationComponent } from './update-profile-education/update-profile-education.component';
-import { UpdateProfileExperienceComponent } from './update-profile-experience/update-profile-experience.component';
-import { UpdateProfileAboutComponent } from './update-profile-about/update-profile-about.component';
+import { UpdateProfileEducationComponent } from './profile/update-profile-education/update-profile-education.component';
+import { UpdateProfileExperienceComponent } from './profile/update-profile-experience/update-profile-experience.component';
+import { UpdateProfileAboutComponent } from './profile/update-profile-about/update-profile-about.component';
 import { ConnectionComponent } from './connection/connection.component';
-import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
-import { DeleteSkillComponent } from './delete-skill/delete-skill.component';
-import { DeleteExperienceComponent } from './delete-experience/delete-experience.component';
-import { DeleteEducationComponent } from './delete-education/delete-education.component';
+import { DeleteConnectionComponent } from './connection/delete-connection/delete-connection.component';
 
 
 import { FilterPipe } from './pipes/filter.pipe';
 import { MaterialElevationDirective } from './directives/material-elevation.directive'; // -> imported filter pipe
-import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { A11yModule } from '@angular/cdk/a11y';
 
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -89,9 +86,31 @@ import { DialogAddEducationComponent } from './profile/dialog-add-education/dial
 import { DialogAddSkillComponent } from './profile/dialog-add-skill/dialog-add-skill.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
+import { MessagesComponent } from './messages/messages.component';
+import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import { LoginComponent } from './login/login.component';
 import { DialogChangeDpComponent } from './profile/dialog-change-dp/dialog-change-dp.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { CommentUsernameComponent } from './comment-username/comment-username.component';
+import { StartConversationComponent } from './start-conversation/start-conversation.component';
+import { UpdatePostDialogComponent } from './post/update-post-dialog/update-post-dialog.component';
 
+import {CvBuilderComponent} from  './cv-builder/cv-builder.component';
+import { ServerErrorInterceptor } from './errors/server-error.interceptor';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
+import { UnexpectedErrorComponent } from './errors/unexpected-error/unexpected-error.component';
+import { BadRequestComponent } from './errors/bad-request/bad-request.component';
+import { OfflineComponent } from './errors/offline/offline.component';
+import { InternalServerErrorComponent } from './errors/internal-server-error/internal-server-error.component';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
+import { DeleteSkillComponent } from './profile/delete-skill/delete-skill.component';
+import { DeleteEducationComponent } from './profile/delete-education/delete-education.component';
+import { DeleteExperienceComponent } from './profile/delete-experience/delete-experience.component';
+import { FilterUsersComponent } from './user/filter-users/filter-users.component';
+import { DeleteConversationComponent } from './start-conversation/delete-conversation/delete-conversation.component';
 
 @NgModule({
   declarations: [
@@ -115,7 +134,6 @@ import { RegistrationComponent } from './registration/registration.component';
     DeleteExperienceComponent,
     FilterUsersComponent,
     ProfileComponent, 
-    // UpdateProfileComponent,
     PostComponent,
     AddInformationComponent,
     DialogAddProfileComponent,
@@ -124,8 +142,17 @@ import { RegistrationComponent } from './registration/registration.component';
     DialogAddSkillComponent,
     SearchPipe,
     NewsfeedComponent,
+    MessagesComponent,
+    SelectedMessageComponent,
+    DateAgoPipe,
+    LoginComponent,    
     DialogChangeDpComponent,
-    RegistrationComponent,    
+    RegistrationComponent,
+    CommentUsernameComponent,
+    DeleteConversationComponent,
+    StartConversationComponent,
+    UpdatePostDialogComponent,    
+    CvBuilderComponent, NotFoundComponent, ForbiddenComponent, UnexpectedErrorComponent, BadRequestComponent, OfflineComponent, InternalServerErrorComponent,    
  
   ],
   entryComponents:[DialogAddProfileComponent],
@@ -147,7 +174,6 @@ import { RegistrationComponent } from './registration/registration.component';
     MatIconModule,
     MatDialogModule,
     MatFormFieldModule,
-    // MatAutocompleteModule,
     MatTabsModule,
     MatTooltipModule,
     MatBadgeModule,
@@ -198,13 +224,25 @@ import { RegistrationComponent } from './registration/registration.component';
     MatDialogModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    CommonModule,
+    ToastrModule.forRoot({
+      timeOut: 2500,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true
+    }),
   ],
   providers: [
     DataService,
     ContactService,
     FormsModule,
-    
+    MessageService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ServerErrorInterceptor,
+        multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

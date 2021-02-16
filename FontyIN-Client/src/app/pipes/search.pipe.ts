@@ -20,19 +20,11 @@ export class SearchPipe implements PipeTransform {
       return items;
     }
     searchText = searchText.toString().toLowerCase();
-    console.log(searchText);
 
-    // return items.filter(it => {
-    //   let fullName = it.firstName + ' ' + it.lastName;
-    //   console.log(fullName.toString().toLowerCase());
-    //   return fullName.toString().toLowerCase().indexOf(searchText) == 0;
-    // });
-
-    let user = items.filter(it => {
-        let fullName = it.firstName + ' ' + it.lastName;
-        return fullName.toString().toLowerCase().indexOf(searchText) == 0;
-      })
-      console.log(user);
+  return items.filter(it => {
+      let fullName = it.firstName + ' ' + it.lastName;
+      return fullName.toString().toLowerCase().indexOf(searchText) >= 0;
+    });
   }
 
 }

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dialog-change-dp',
@@ -16,7 +17,8 @@ export class DialogChangeDpComponent implements OnInit {
   profileUrl : string;
   foundUser: User;
   uploadForm: FormGroup;
-  constructor(private profileService: ProfileService,  
+  constructor(private profileService: ProfileService,
+    private userService: UserService,  
     public dialogRef: MatDialogRef<DialogChangeDpComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _snackBar: MatSnackBar,
@@ -40,13 +42,9 @@ export class DialogChangeDpComponent implements OnInit {
     
      this.profileService.uploadPicture(this.userId, formData).subscribe((data)=>
      { 
-         this.profileUrl = data;
-         console.log("data");
-         console.log(this.profileUrl);
+         this.profileUrl =<string> data;
      },
      (error: Response) => {
-       console.log("Error");
-       console.log(error);
        if(error.status === 409){
            this._snackBar.open('Already Exist!!', 'End now', {
              duration: 1000,
@@ -57,13 +55,13 @@ export class DialogChangeDpComponent implements OnInit {
     
     
   ngOnInit(): void {
-    this.userId = this.data.User.id;
-    this.profileService.getUserById(this.userId).subscribe(response=>{
+    // this.userId = this.data.User.id;
+    this.userId = this.userService.getUserIdOfLoggedIn();
+    this.profileService.getUser(this.userId).subscribe(response=>{
       this.foundUser=<User>response;
-      this.profileUrl = this.foundUser.img;
+      this.profileUrl = this.foundUser.image;
       // this.userImage = this.foundUser.userImage;
-      console.log("Found User");
-      console.log(this.foundUser);
+
     });
     this.uploadForm = this.formBuilder.group({
       profile: ['']

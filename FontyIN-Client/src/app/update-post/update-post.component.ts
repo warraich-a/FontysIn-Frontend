@@ -31,13 +31,13 @@ export class UpdatePostComponent implements OnInit {
   updatePost(){
     this.data = {
       "content": this.newContent,
-      "date": "2020-10-06",
+      "date": this.post.date,
       "id": this.postId,
-      "userId": 1
+      "userId": localStorage.getItem("userId")
       };
     this.postService.updatePost(<JSON>this.data,this.postId);
 
-    this.routes.navigate(['/posts']);
+     this.routes.navigate(['/posts']);
     
   }
 

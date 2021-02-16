@@ -11,23 +11,21 @@
             (change)="onFileSelect($event)"
             class="select-profile-picture" 
             #selectPicture/>
-                
-            <button 
+          </div> 
+            <div class="buttons">
+              <button 
                 mdbBtn 
                 type="button"  
                 rounded="true" 
-                (click) = "selectPicture.click()"> 
-                
-                Change Picture
+                (click) = "selectPicture.click()">  Change Picture
             </button>
-            <button 
-            mdbBtn 
-            type="submit"  
-            rounded="true" 
-            id="submitButton"> submit
-        </button>
-
-        </div>
+              <button 
+                mdbBtn 
+                type="submit"  
+                rounded="true" 
+                id="submitButton"> submit
+            </button>
+            </div>      
         
        
       </form>

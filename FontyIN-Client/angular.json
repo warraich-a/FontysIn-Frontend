@@ -21,9 +21,13 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*", "input": "../../fontysin-semester-3/FontysIN/src/images/", "output": "./assets/"
+              }
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
@@ -33,7 +37,8 @@
               "./node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
               "./node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "./node_modules/animate.css/animate.css",
-              "src/styles.css"
+              "src/styles.css",
+                "src/theme.scss"
             ],
             "scripts": [
               "./node_modules/chart.js/dist/Chart.js",
@@ -97,7 +102,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets"           
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",

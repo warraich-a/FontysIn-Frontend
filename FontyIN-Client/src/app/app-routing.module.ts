@@ -1,3 +1,7 @@
+import { BadRequestComponent } from './errors/bad-request/bad-request.component';
+import { DialogAddProfileComponent } from './profile/dialog-add-profile/dialog-add-profile.component';
+import { SelectedMessageComponent } from './messages/selected-message/selected-message.component';
+import { MessagesComponent } from './messages/messages.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ConnectionComponent } from './connection/connection.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -12,69 +16,105 @@ import {PostDetailsComponent} from './post-details/post-details.component'
 
 
 import {UserSettingsComponent} from './user-settings/user-settings.component';
-import { UpdateProfileEducationComponent} from './update-profile-education/update-profile-education.component';
-import { UpdateProfileExperienceComponent} from './update-profile-experience/update-profile-experience.component';
-import { UpdateProfileAboutComponent} from './update-profile-about/update-profile-about.component';
-import { FilterUsersComponent } from './filter-users/filter-users.component';
 import { NewsfeedComponent } from './newsfeed/newsfeed.component';
-
-
-const routes: Routes = [{
-  path: '',
-  component: HomeComponent
-},
-{
-  path: 'profile',
-  component: UserComponent
-},
-{
-  path: 'education/:id',
-  component: UpdateProfileEducationComponent
-},
-{
-  path: 'experience/:id',
-  component: UpdateProfileExperienceComponent
-},
-{
-  path: 'about/:id',
-  component: UpdateProfileAboutComponent
-},
-{
-  path: 'users/:id/profiles/:profileId', 
-  component: ProfileComponent
-},{
-  path: 'posts', 
-  component: NewsfeedComponent
-},
-{
-  path: 'update-post/:id',
-  component: UpdatePostComponent
-},
-{
-  path: 'post/:id',
-  component: PostDetailsComponent
-},
-  {
-    path: 'users/:id/connections',
-    component: ConnectionComponent
-  },
-  {
-    path: 'users/:id/messages',
-    component: HomeComponent // MessageComponent
-},
-{
-  path: 'settings',
-  component: UserSettingsComponent
-},
-
-{
-  path: 'users/filter',
-  component: FilterUsersComponent
-},
-{
-  path:'register', 
-  component: RegistrationComponent
-},
+import {LoginComponent} from './login/login.component';
+import { AuthGuard } from  './auth/auth.guard';
+import {CvBuilderComponent} from './cv-builder/cv-builder.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ForbiddenComponent } from './errors/forbidden/forbidden.component';
+import { UnexpectedErrorComponent } from './errors/unexpected-error/unexpected-error.component';
+import { OfflineComponent } from './errors/offline/offline.component';
+import { InternalServerErrorComponent } from './errors/internal-server-error/internal-server-error.component';
+import { FilterUsersComponent } from './user/filter-users/filter-users.component';
+const routes: Routes = [
+	{
+	  path: '',
+	  component: LoginComponent
+	},
+	{
+	  path: 'export/:profileId',
+	  component: CvBuilderComponent,
+	  //canActivate: [ AuthGuard ]
+	},
+	{
+	  path: 'users/:id/profiles/:profileId', 
+	  component: ProfileComponent,
+	  canActivate: [ AuthGuard ]
+	},{
+	  path: 'posts', 
+	  component: NewsfeedComponent,
+	  canActivate: [ AuthGuard ]
+	},
+	{
+	  path: 'update-post/:id',
+	  component: UpdatePostComponent,
+	  canActivate: [ AuthGuard ]
+	},
+	{
+	  path: 'post/:id',
+	  component: PostDetailsComponent,
+	  canActivate: [ AuthGuard ]
+	},
+	  {
+		path: 'connections',
+		component: ConnectionComponent,
+		canActivate: [ AuthGuard ]
+	  },
+	{
+	  path: 'settings',
+	  component: UserSettingsComponent,
+	  canActivate: [ AuthGuard ]
+	},
+	{
+	  path: 'users/filter',
+	  component: FilterUsersComponent,
+	  canActivate: [ AuthGuard ]
+	},
+	{
+	  path:'register', 
+	  component: RegistrationComponent
+	},
+	{
+	  path: 'messages',
+	  component: MessagesComponent,
+		children: [
+			{
+				path: ':conversationId',
+				component: SelectedMessageComponent,
+				canActivate: [ AuthGuard ]
+			}
+		],
+		canActivate: [ AuthGuard ]
+	},
+	{
+	  path: 'addProfile',
+	  component: DialogAddProfileComponent,
+	  canActivate: [ AuthGuard ]
+	},
+	{
+		path: 'forbidden',
+		component: ForbiddenComponent,
+	},
+	{
+		path: 'unexpected-error',
+		component: UnexpectedErrorComponent,
+	},
+	{
+		path: 'bad-request',
+		component: BadRequestComponent,
+	},
+	{
+		path: 'offline',
+		component: OfflineComponent
+	},
+	{
+		path: 'internal-server-error',
+		component: InternalServerErrorComponent
+	},
+	{
+		path: '**',
+		component: NotFoundComponent
+	}
 ]
 
 

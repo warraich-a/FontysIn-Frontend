@@ -1,10 +1,11 @@
-import { Contact } from './../classes/Profile/Contact';
-import { DeleteConnectionComponent } from './../delete-connection/delete-connection.component';
+import { Contact } from '../classes/Contact/Contact';
+import { DeleteConnectionComponent } from './delete-connection/delete-connection.component';
 import { ContactService } from './../services/contact/contact.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/Profile/User';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-connection',
@@ -14,7 +15,7 @@ import { FormControl } from '@angular/forms';
 export class ConnectionComponent implements OnInit {
   searchText = '';
 
-  loggedInUser = 1;
+  userId:number = this.userService.getUserIdOfLoggedIn();
   contacts: Contact[];
   requests: Contact[];
 
@@ -26,6 +27,7 @@ export class ConnectionComponent implements OnInit {
 
 
   constructor(private contactService: ContactService,
+              private userService: UserService,
               private dialog: MatDialog
     ) { }
 
@@ -38,19 +40,11 @@ export class ConnectionComponent implements OnInit {
  
   }
 
-  // GO TO MESSAGES
-  message() {
-    // navigate to message with query param username
-  }
-
-
   // GET CONTACTS
   getAcceptedContacts() {
     this.contactService.getAcceptedContacts()
     .subscribe(
       contacts => {
-        console.log("All connections")
-        console.log(contacts);
         this.contacts = <Contact[]>contacts;
       }
     )
@@ -86,8 +80,6 @@ export class ConnectionComponent implements OnInit {
     this.contactService.delete(contact.id)
       .subscribe(
         updatedContact => {
-          console.log(updatedContact);
-
           this.getRequests();
         }
       )
@@ -103,9 +95,6 @@ export class ConnectionComponent implements OnInit {
 
     dialogRef.afterClosed()
       .subscribe(result => {
-        // empty input
-        // this.searchForm.reset('');
-
         this.getAcceptedContacts();  
     });
   }
